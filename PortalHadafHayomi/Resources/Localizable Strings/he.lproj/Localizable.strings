@@ -1,0 +1,485 @@
+/*
+  Localizable.strings
+  PortalHadafHayomi
+
+  Created by Binyamin on 28/11/2017.
+  Copyright © 2017 Binyamin Trachtman. All rights reserved.
+*/
+
+//General
+
+"st_portal_hadaf_hayomi" = "פורטל הדף היומי";
+"st_download" = "הורד";
+
+"st_delete" = "מחק";
+"st_cancel" = "בטל";
+"st_ok" = "אשר";
+"st_settings" = "הגדרות";
+"st_select" = "בחר";
+"st_error" = "תקלה";
+"st_search" = "חפש";
+"st_system_loading_messgae" = "המערכת טוענת את הנתונים...";
+"st_text" = "טקסט";
+"st_masechet" = "מסכת";
+"st_from" = "מ -";
+"st_to" = "ל -";
+"st_all" = "הכל";
+"st_talmud" = "גמרא";
+"st_rashi" = "רש׳׳י";
+"st_tosafot" = "תוס׳";
+"st_map" = "מפה";
+"st_list" = "רשימה";
+"st_save" = "שמור";
+"st_close" = "סגור";
+"st_category" = "קטגוריה";
+"st_header_only" = "חיפוש בכותרת בלבד";
+"st_publisher" = "מפרסם";
+"st_hide" = "הסתר";
+"st_from_page" = "מדף";
+"st_general_system_error" = "המערכת נתקלה בבעיה \n אנא נסו מאוחר יותר";
+"st_search_no_results_message" = "לא נמצאו תוצאות עבור החיפוש המבוקש";
+"st_try_agin_later" = "אנא נסה שוב מאוחר יותר";
+"st_try_again" = "נסה שוב";
+"st_continue" = "המשך";
+"st_loading_data_error" = "תקלה בטעינת הנתונים";
+"st_try_again" = "נסה שוב";
+"st_return_to_previous_page" = "חזור לדף הקודם";
+"st_default" = "ברירת מחדל";
+"st_send" = "שלח";
+"st_attachment" = "קובץ מצורף";
+"st_return" = "חזור";
+"st_alert" = "התראה";
+"st_dont_show_again" = "אל תציג שוב";
+
+//Home Page
+"st_talmud_completion_today" = "היום סיום הש׳׳ס";
+"st_talmud_completion_tomorrow" = "עוד יום אחד לסיום הש׳׳ס";
+"st_talmud_completion_2days" = "עוד יומיים לסיום הש׳׳ס";
+"st_talmud_completion_3days" = "עוד שלושה ימים לסיום הש״ס";
+"st_talmud_completion_multiple" = "עוד %@ לסיום הש׳׳ס";
+
+"Home_page" = "דף הבית";
+"Talmud" = "תלמוד";
+"Audio Lessons" = "שיעורים";
+"Video Lesson" = "שיעור חי";
+"Home" = "עמוד הבית";
+"Contents" = "תכנים";
+"Forums" = "פורום";
+"Calendar" = "לוח שנה";
+"Page Summary" = "הדף בקצרה";
+"Aramic Dictoianry" = "מילון";
+"Accessories" = "עזרי לימוד";
+"Lesson Map" = "מפת שיעורים";
+"Maschet Complition" = "סיום מסכת";
+"Surveys" = "סקרים";
+"Search In Talmud" = "חיפוש בש׳׳ס";
+"Chavruta" = "מצא חברותא";
+"The_Daf_Yomi_Project" = "מפעל\nהדף היומי";
+"ContactUs" = "צור קשר";
+"Q&A" = "שו׳׳ת הדף היומי";
+"Search" = "חיפוש";
+"qus" = "שו׳׳ת";
+"Chavrusa" = "מצא חברותא";
+
+"About" = "אודות";
+"Share" = "שתף";
+"Contact" = "צור קשר";
+"Rate_Us" = "דרג אותנו";
+
+"donations" = "תרומות";
+
+"kortove" = "קורטוב";
+"gorgeret" = "גורגרת";
+"zait" = "זית";
+"kotevet" = "כותבת";
+"ochla" = "עוכלא";
+"shminit" = "שמינית";
+"beytza" = "ביצה";
+"reviet" = "רביעית";
+"pratz" = "פרס";
+"litra" = "ליטרא";
+"log" = "לוג";
+"rova" = "רובע";
+"kav" = "קב";
+"omer" = "עומר";
+"hin" = "הין";
+"seia" = "סאה";
+"eyfa" = "איפה";
+"letech" = "לתך";
+"kor" = "כור";
+
+"etzba" = "אצבע (אגודל)";
+"tefach" = "טפח";
+"sit" = "סיט";
+"zeret" = "זרת";
+"ama" = "אמה";
+"ris" = "ריס";
+"mil" = "מיל";
+"hilochShah" = "הילוך שעה";
+"parsa" = "פרסה";
+
+"baitRova" = "בית רובע";
+"baitKav" = "בית קב";
+"baitSeia" = "בית סאה";
+"baitSatim" = "בית סאתיים";
+"baitKor" = "בית כור";
+
+"prota" = "פרוטה";
+"isar" = "איסר";
+"pondiun" = "פונדיון";
+"mea" = "מאה";
+"trapic" = "טרפיק";
+"dinar" = "דינר";
+"shekel" = "שקל";
+"sela" = "סלע";
+"darkon" = "דרכון";
+"mane" = "מנה";
+
+"meter" = "מטר";
+"centimeter" = "סנטימטר";
+"millimeter" = "מילימטר";
+"kilometer" = "קילומטר";
+"mile" = "מייל";
+"yard" = "ירד";
+"inch" = "אינצ׳";
+"foot" = "רגל";
+
+"liter" = "ליטר";
+"gallon" = "גלון";
+"kilogram" = "קילוגרם";
+"gram" = "גרם";
+"pound" = "פאונד";
+"cubicCentimeter" = "סמ״ק";
+
+"dunam" = "דונם";
+"acre" = "אייקר";
+"squareMetre" = "מטר רבוע";
+"squareFoot" = "רגל רבוע";
+
+//Settings
+"st_Auto_Lock" = "נעילה אוטומטית";
+"st_Counter_Display" = "תצוגת מונה ימים";
+"st_Default_Page_Type" ="תצוגת תלמוד - ברירת מחדל";
+"st_Saved_Pages" = "דפים שנשמרו";
+"st_Saved_Lessons" = "שיעורים שנשמרו";
+"st_Default_Magid_Shiour" = "מגיד שיעור";
+"st_Daily_Reminder" = "תזכורת יומית";
+"st_no_saved_pages_message_label" = "לא נמצאו דפים שמורים";
+"st_no_saved_lessons_message_label" = "לא נמצאו שעורים שמורים";
+"st_Default_MenuItem" = "האפליקציה תיפתח %@";
+"st_My_Pages" = "הדפים שלי";
+"st_Languages" = "שפות";
+"st_set_reminder_time_button_title" = "לחץ כאן לשינוי שעת התראה";
+"st_select_talmud_display_type" = "בחר תצוגת תלמוד";
+"st_select_maggid_shiur" = "בחר מגיד שיעור";
+"st_saved_pages" = "דפים שנשמרו";
+"st_saved_lessons" = "שיעורים שנשמרו";
+"st_select_opening_page" = "בחר דף פתיחה";
+"st_select_language" = "בחר שפה";
+"st_language_changed_alert_title" = "Language Changed";
+"st_language_changed_alert_message" = "Relaunch the app for the language to be applied";
+"st_at_home_page" = "בדף הבית";
+"st_at_page" = "בדף ה%@";
+"st_Donation" = "תרומה";
+"st_Donation_description" = "תרומות עבור אחזקת ותפעול האתר והאפליקציה יתקבלו בברכה";
+"st_donation_page_link" = "http://daf-yomi.com/mobile/content.aspx?id=270";
+"st_Lesson_Skip_Interval" = "משך זמן דילוג בנגן";
+
+"st_Auto_Lock_description" = "מנע כיבוי המסך בזמן שהאפליקציה פועלת";
+"st_Default_Page_Type_description" = "קבע את סוג תצוגת הדפים בתלמוד כברירת מחדל";
+"st_Counter_Display_description" = "הצגת מונה ימים לסיום הש׳׳ס בדף הבית";
+"st_Saved_Pages_description" = "ניהול הדפים שנשמרו במכשירך";
+"st_Saved_Lessons_description" = "ניהול השיעורים שנשמרו במכשירך";
+"st_Default_Magid_Shiour_description" = "בחר את מגיד השיעור המועדף עליך";
+"st_Daily_Reminder_description" = "תזכורת יומית בשעה %@";
+"st_Default_MenuItem_description" = "דף התוכן בו הינך מעוניין שהאפליקציה תציג בפתיחה";
+"st_My_Pages_description" = "רשימת הדפים שנלמדו";
+"st_Languages_title" = "שפה - %@";
+"st_Languages_description" = "";
+"st_cancel_reminder_message" = "(לביטול התזכורות יש להיכנס להגדרות)";
+"st_allow_notifications_title" = "אפשר קבלת נוטיפיקציות";
+"st_allow_notifications_message" = "יש ליהכנס להגדרות ולאפשר קבלת הודעות על מנת לקבל את התזכורות";
+"st_reminder" = "תזכורת";
+"st_reminder_message" = "המערכת תשלח לך תזכורת בכל יום בשעה %@";
+"st_speed_rate" = "מהירות שמע";
+"st_remove_pages_title" = "מחק דפים";
+"st_remove_pages_message" = "נבחרו %i דפים למחיקה";
+"st_remove_pages_title" = "Remove Pages";
+"st_remove_pages_message" = "%i pages selected.";
+"st_Lesson_skip_time_interval_title" = "משך זמן דילוג בנגן %@ שניות";
+"st_Lesson_Skip_Interval_description" = "בחירה של משך זמן דילוג קדימה/אחורה בנגן";
+"selectedLessonSkipInterval" = "משך זמן דילוג בנגן";
+
+//Talmud page
+"st_display_palyer" = "הצג נגן";
+"st_hide_palyer" = "הסתר נגן";
+"st_todays_page" = "הדף היומי";
+"st_select_page" = "בחר דף";
+"st_select_display" = "בחר תצוגה";
+"st_select_lesson" = "בחר שיעור";
+"st_all_pages" = "כל הדפים";
+"st_saved_pages" = "דפים שנשמרו";
+"st_pages_learned" = "דפים שנלמדו";
+"st_pages_with_comments" = "דפים עם הארות";
+"st_show_all_pages" = "כל הדפים";
+"st_show_saved_pages" = "דפים שנשמרו";
+"st_search_value_error_title" = "Value Not Found";
+"st_search_value_error_message" = "המערכת לא הצליחה לאתר את הערך המבוקש";
+"st_loading_masechet" = "טוען מסכת";
+"st_lesson_hour" = "משעה";
+"st_to_page" = "לדף";
+"st_Max_Pages_Per_Downlaod" = "מקסימום דפים לכל הורדה";
+
+//Lessons Page
+"st_lessons" = "שיעורים";
+"st_lesson_not_found" = "השיעור לא נמצא";
+"st_all_essons" = "כל השיעורים";
+"st_last_played_lessons" = "שיעורים אחרונים";
+"st_saved_lessons" = "שיעורים שנשמרו";
+"st_sort_by_masechtot" = "מיין לפי מסכתות";
+"st_sort_by_magid_shiour" = "מיין לפי מגידי שיעור";
+"st_all_media_type" = "כל סוגי  המדיה";
+"st_audio_lessons" = "שיעורי שמע";
+"st_video_lessons" = "שיעורי וידאו";
+"st_move_to_todays_page" = "לדף\nהיומי";
+"st_saved_lessons_not_found" = "לא נמצאו דפים שמורים";
+"st_show_all_lessons" = "עבור לכלל השיעורים";
+"st_lesson_downlad_error_message" = "המערכת נתקלה בבעיה בעת הורדת השיעור המבוקש\n אנא נסו מאוחר יותר";
+"st_lesson_not_found_message" = "השיעור לא נמצא\n אנא נסו במועד מאוחר יותר.";
+"st_delete_lessons_alert_title" = "מחק שיעורים";
+"st_delete_lessons_alert_message" = "נבחרו %@ שיעורים";
+"st_lesson_not_found_message" = "לא נמצאו שיעורים של %@ על הדף הנבחר";
+"st_delete_lesson_alert_title" = "מחיקת שיעור";
+"st_delete_lesson_alert_message" = "האם למחוק את השיעור של %@ על מסכת %@ דף %@ ?";
+"st_change_lesson_alert_message" = "האם הינך מעוניין לעבור לשיעור של %@ על מסכת %@ דף %@?";
+"st_move_to_selected_lesson" = "עבור לשיעור המבוקש";
+"st_stay_at_current_lesson" = "השאר בשיעור הנוכחי";
+
+//Lessons Map page
+"st_lessons_map" = "מפת שיעורים";
+"st_lesson_address" = "כתובת השיעור";
+"st_lesson_location" = "מיקום השיעור";
+"st_lesson_time" = "שעת השיעור";
+"st_additional_info" = "פרטים נוספים";
+"st_email_info_label" = "נא להקליד כתובת דוא״ל מדוייקת כדי שההודעה תאושר לפרסום.\nכתובת דוא״ל זו לא תפורסם באתר.";
+"st_added_lesson_success_alert_title" = "השיעור נוסף בהצלחה";
+"st_added_lesson_success_alert_message" = "השיעור יפורסם לאחר שיאושר על ידי הנהלת האתר";
+"st_added_lesson_failure_alert_message" = "תקלה בהוספת השיעור";
+"st_update_Info" = "עדכן נתונים";
+"st_lesson_location" = "מקום השיעור";
+"st_missing_lesson_time" = "את שעת השיעור";
+"st_valid_email" = "כתובת אימייל תקינה";
+"st_missing_field_alert_message" = "נא להזין %@";
+"st_missing_field_alert_title" = "חסרים שדות חובה";
+"st_add_venue" = "הוספת שיעור";
+"st_map_location" = "מקום השיעור";
+
+
+// Articles
+"st_all_categories" = "כל הקטגוריות";
+"st_learn_and_understand" = "ללמוד ולהבין";
+"st_deepen" = "להעמיק";
+"st_sharpen" = "להתחדד";
+"st_expand" = "להרחיב";
+"st_page_articles" = "מאמרים על הדף";
+"st_recommended_books" = "ספרים מומלצים";
+"st_search_page" = "בחר דף";
+"st_advanced_search" = "חיפוש מתקדם";
+"st_search_categorys" = "חיפוש בתכנים";
+"st_value_not_found_title" = "ערך לא נמצא";
+"st_value_not_found" = "המערכת לא הצליחה לאתר את הערך המבוקש";
+
+//Forum
+"st_Forums" = "פורום";
+"st_forums" = "פורום";
+"st_forum" = "פורום";
+"st_search_fourm" = "חפש בפורום";
+"st_view_discussion" = "הצג דיון";
+"st_login" = "התחבר";
+"st_logout" = "התנתק";
+"st_add_message" = "הוספת  הודעה";
+"st_user_title" = "שלום %@";
+"st_masechet_and_page_title" = "";
+"st_masechet_and_page_textField_display" = "מסכת %@ דף %@";
+"st_fourm_login_required_title" = "נצרכת הרשמה";
+"st_fourm_login_required_message" = "עליך להיות רשום על מנת להעלות הודעות";
+"st_fourm_error_missing_Info" = "חובה למלא כותרת ותוכן";
+"st_fourm_did_add_message" = "ההודעה נוספה בהצלחה";
+
+//Fourm Add Message
+"st_add_message_title" = "הוספת הודעה";
+"st_message_title_label" = "כותרת ההודעה";
+"st_message_content_label" = "תוכן ההודעה";
+"st_masecht_and_page_label" = "בחר מסכת ודף";
+"st_selected_masechet" = "בחירת מסכת ודף";
+"st_selected_discussion" = "הדיון הנבחר";
+
+//Login
+"st_username" = "שם משתמש";
+"st_password" = "סיסמא";
+"st_forgot_password" = "שכחתי סיסמא";
+"st_signin" = "הירשם";
+"st_login" = "התחבר";
+"st_tryAgin" = "נסה שוב";
+"st_logout_alert_title" = "התנתק";
+"st_logout_alert_message" = "האם ברצונך להתנתק מהמערכת";
+"st_missing_filed" = "מידע חסר";
+"st_missing_userName" = "אנא הזן שם משתשמש";
+"st_password_send_to_mail" = "הסיסמא תשלח לכתובת האימייל שאיתה נרשמת תוך מספר דקות";
+"st_forgot_password_recovery_error" = "שיחזור סיסמא נכשל, אנא נסה שנית";
+"st_re_enter_password" = "אימות סיסמא";
+"st_first_name" = "שם פרטי";
+"st_last_name" = "שם משפחה";
+"st_email" = "כתובת מייל";
+"st_not_matching_passwords" = "סיסמאות לא תואמות";
+
+
+//Page Summary
+"st_page_summary" = "הדף בקצרה";
+"st_page_summary_download_error" = "תקלה בטעינת הדף";
+"st_page_summary_empty_error" = "לא נמצא תקציר לדף זה";
+
+//Accessories
+"history_of_chazal" = "תולדות חכמים";
+"concepts_and_values" =  "מושגים וערכים";
+"talmudic_terms" = "מונחים תלמודיים";
+"lazay_rashi" = "אוצר לעזי רש׳׳י";
+"acronyms" = "ראשי תיבות";
+"measurements" = "מידות ושיעורים";
+"by_moshe_katan" = "מאת משה קטן";
+
+//Search
+"st_talmud_search" = "חיפוש בש׳׳ס";
+"st_exact_search" = "חיפוש מדויק";
+"st_search_in" = "חפש ב";
+"st_last_searches" = "חיפושים אחרונים";
+"st_words_list" = "רשימת מילים";
+"st_all_masechtot" = "כל המסכתות";
+"st_all_search_optoins" = "גמרא, רש׳׳י ותוס׳";
+
+//Map
+"st_show_on_map" = "הצג במפה";
+"st_region" = "אזור";
+"st_city" = "יישוב";
+"st_location" = "מיקום";
+"st_address" = "כתובת";
+"st_house_number" = "מס׳ בית";
+"st_time" = "שעה";
+"st_maggid_shiour" = "מגיד שיעור";
+"st_email" = "מייל";
+"st_additional_information" = "מידע נוסף";
+
+//Siyum
+"Endings for Talmud" = "";
+"st_talmudic_endings" = "סיומי מסכת";
+
+//Chavrusa
+"st_find_chavrusa" = "מצא חברותא";
+"st_location" = "יישוב";
+"st_all_locations" = "כל היישובים";
+"st_country" = "מדינה";
+"st_all_countries" = "כל המדינות";
+"st_area" = "אזור";
+"st_all_areas" = "כל האזורים";
+"st_free_text" = "טקסט חופשי";
+"st_connect_button" = "לחץ לפניה";
+"st_return_to_search_page" = "חזור לדף החיפוש";
+"st_select_country" = "בחר מדינה";
+"st_select_area" = "בחר אזור";
+"st_select_city" = "בחר עיר";
+
+//Calendar
+"st_calendar" = "לוח שנה";
+"st_hebrew_dates" = "תאריכים עבריים";
+"st_gregorian_dates" = "תאריכים לועזיים";
+"st_sunday" = "ראשון";
+"st_monday" = "שני";
+"st_tuesday" = "שלישי";
+"st_wednesday" = "רביעי";
+"st_thursday" = "חמישי";
+"st_friday" = "שישי";
+"st_saturday" = "שבת";
+"st_add_comment" = "לחץ כאן על מנת להוסיף תוכן";
+"st_delete_comment_alert_title" = "מחק הודעה";
+"st_delete_comment_alert_message" = "האם הנך מעוניין למחוק את ההודעה בתאריך המבוקש?";
+"st_add_mark" = "סמן כנלמד";
+"st_remove_mark" = "הסר סימון";
+"st_gregorian_calendar" = "לוח שנה לועזי";
+"st_hebrew_calendar" = "לוח שנה עברי";
+
+//Q&A
+"st_daf_hayomi_qa" = "שו׳׳ת הדף היומי";
+"st_learning_guidance" = "הדרכה בלימוד";
+"st_learning_determination" = "קביעות בלימוד";
+"st_masechet_ending" = "סיום מסכת";
+"st_general_qa" = "שאלות כלליות";
+"st_ask_a_question" = "שאל שאלה";
+"st_the_daf_yomi_qa_book" = "ספר שו׳׳ת הדף היומי";
+
+//Surveys
+"st_survey" = "סקר";
+"st_surveys" = "סקרים";
+"st_show_previous_surveys" =  "הצג סקרים קודמים";
+
+//Notes
+"st_delete_message_alert_message" = "האם למחוק את ההודעה על %@ ?";
+
+//Donation
+"st_donatoin_browser_alert_title" = "תודה על עזרכתם";
+"st_donatoin_browser_alert_message" = "המערכת תפנה אתכם לדפדפן על מנת להציג בפניכם את דף התרומה";
+
+//About
+"st_about" = "אודות";
+"st_regulations" = "תקנון";
+"st_messages" = "הודעות";
+
+//Calculator
+"st_calculator" = "מחשבון מידות";
+
+//The_Daf_Yomi_Project
+"st_The_Daf_Yomi_Project" = "מפעל הדף היומי";
+
+//Siyum
+"st_Maschet_Complition" = "סיום הש׳׳ס";
+
+//Measurments
+"st_quantity" = "כמות";
+"st_convert" = "המר מ -";
+"st_area" = "שטח";
+"st_volume" = "נפח";
+"st_weight" = "משקל";
+"st_length" = "אורך";
+"st_rate" = "שיעור";
+"st_rabbi_chaim_naeh" = "ר׳ חיים נאה";
+"st_chazonIsh" = "חזון אי׳׳ש";
+"st_rambam" = "הרמב״ם";
+"st_rate_method" = "שיעור %@";
+"st_from_value" = "מערך";
+"st_to_value" = "לערך";
+"st_measurements_calculator_title" = "מחשבון מידות";
+"st_measurements_calculator_subtitle" = "מחשבון להמרת מידות תלמודיות";
+"st_mitzvot_quantity_title" = "שיעורי המצוות";
+"st_mitzvot_quantity_subtitle" = "ר׳ חיים נאה";
+"st_comparison_table_title" = "טבלת שיעורי המצוות";
+"st_comparison_table_subtitle" = "טבלת השוואה למידות בהלכה לפי פסקי החזון איש ופסקי ר׳ חיים";
+"st_milin_value_title" = "ערך מילין";
+"st_milin_value_subtitle" = "אנציקלופדיה למטבעות משקלות ומידות בספרות התלמודית (חיים יעקב שעפטיל)";
+"st_torah_measurements_title" = "מידות ומשקלות של תורה";
+"st_torah_measurements_subtitle" = "יעקב גרשון וייס";
+"st_hidorai_measurments_title" = "ספר הידורי המידות";
+"st_hidorai_measurments_subtitle" = "שיעורי כזית רביעית אמה ושאר מידות ושיעורי תורה (הרב הדר יהודה מרגולין";
+"st_rambam_measurements_title" = "מידות בפירוש המשנה לרמב׳׳ם";
+"st_rambam_measurements_subtitle" = "מידות ושיעורי תורה בפירוש המשנה לרמב׳׳ם (דרור פיקסלר)";
+"st_measurments_ratio_title" = "היחס בין המטבות";
+"st_measurments_ratio_subtitle" = "הראל שפירא";
+"st_volume_ratio_title" = "היחס בין מידות הנפח";
+"st_volume_ratio_subtitle" = "הראל שפירא";
+"st_detailed_measurements_table_title" = "טבלת מידות מקיפה";
+"st_detailed_measurements_table_subtitle" = "טבלה מקיפה של מידות ושיעורי חז׳׳ל (הרה׳׳ג ר׳ נחום מנשה ויספיש";
+"st_measurements_table_title" = "טבלת מידות ושיעורים";
+"st_measurements_table_subtitle" = "אתר שטייגן";
+"st_torah_weights_title" = "מידות ומשקלים תורניים";
+"st_torah_weights_subtitle" = "ניסים סוויד";
+"st_wiki_measurements_title" = "מידות בויקיפדיה";
+"st_wiki_measurements_subtitle" = "ערך ׳מידות ומשקלות תורניים׳ בויקפדיה";
+"st_convert_arrow_directrion_label" = "<<";

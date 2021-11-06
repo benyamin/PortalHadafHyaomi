@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "TalmudPagePickerView.showSavedPages():TalmudPagePickerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TalmudPagePickerView.addPicker():TalmudPagePickerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DownloadSiriInstructions.onFailWithError(_:):DownloadSiriInstructions.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in DownloadSiriInstructions.downlaodFile(_:folderName:queue:completionOperation:):DownloadSiriInstructions.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TalmudViewController.togglePagePickerViewDisplay():TalmudViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "talmudPagePickerView.selectedPage">
+            </PersistentString>
+            <PersistentString
+               value = "talmudPagePickerView.selectedPageSide">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PageSummaryViewController.pickerView(_:viewForRow:forComponent:reusing:):PageSummaryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedMasechetSummary">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GetSteinsaltzPageProcess.getPageByIndex(_:):GetSteinsaltzPageProcess.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TalmudPagePickerView.showAllPages():TalmudPagePickerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SettableItemCell.infoButtonClicked(_:):SettableItemCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIApplication.shared.keyWindow">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in GetSettingsProcess.runWebServiceWithRequest(_:):GetSettingsProcess.swift">
+      </ContextState>
+      <ContextState
+         contextName = "start:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.supe">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UIView.getConstrintForAttribute(_:):UIView+Extras.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "constraint.firstAttribute">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MSBaseViewController.backButtonClicked(_:):MSBaseViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

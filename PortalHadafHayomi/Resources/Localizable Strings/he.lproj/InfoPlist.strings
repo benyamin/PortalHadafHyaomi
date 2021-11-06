@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  PortalHadafHayomi
+
+  Created by Binyamin Trachtman on 20/03/2019.
+  Copyright © 2019 Binyamin Trachtman. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "הדף היומי";
+//"UILaunchStoryboardName" = "LaunchScreen_he";

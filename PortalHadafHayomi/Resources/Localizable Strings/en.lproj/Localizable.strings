@@ -1,0 +1,497 @@
+/* 
+  Localizable.strings
+  PortalHadafHayomi
+
+  Created by Binyamin on 28/11/2017.
+  Copyright © 2017 Binyamin Trachtman. All rights reserved.
+*/
+
+//General
+
+/*
+ Localizable.strings
+ PortalHadafHayomi
+ 
+ Created by Binyamin on 28/11/2017.
+ Copyright © 2017 Binyamin Trachtman. All rights reserved.
+ */
+
+//General
+"st_portal_hadaf_hayomi" = "Portal Hadaf Hayomi";
+"st_delete" = "Delete";
+"st_cancel" = "Cancel";
+"st_ok" = "Ok";
+"st_settings" = "Settings";
+"st_select" = "Select";
+"st_error" = "Error";
+"st_search" = "Search";
+"st_system_loading_messgae" = "System is loading data...";
+"st_text" = "Text";
+"st_masechet" = "Masechet";
+"st_from" = "From";
+"st_to" = "to";
+"st_all" = "All";
+"st_talmud" = "Talmud";
+"st_rashi" = "Rashi";
+"st_tosafot" = "Tosafot";
+"st_map" = "Map";
+"st_list" = "List";
+"st_save" = "Save";
+"st_close" = "Close";
+"st_category" = "Category";
+"st_header_only" = "Header Only";
+"st_publisher" = "Publisher";
+"st_hide" = "Hide";
+"st_from_page" = "From Page";
+"st_general_system_error" = "The system encountered a problem\nPlease try later";
+"st_search_no_results_message" = "No results found for the required value";
+"st_try_agin_later" = "Please try agin later";
+"st_try_again" = "Try Again";
+"st_continue" = "Continue";
+"st_loading_data_error" = "Failed to load data";
+"st_try_again" = "Try Again";
+"st_return_to_previous_page" = "Return to previous page";
+"st_return" = "Return";
+"st_default" = "Default";
+"st_send" = "Send";
+"st_alert" = "Alert";
+"st_dont_show_again" = "Don't show again";
+
+"st_launch_language_selection_title" = "Application Language display";
+"st_launch_language_selection_message" = "Please select the app language.\nYou can change the language at any time throw the settings page in the application";
+"st_local_language" = "English";
+"st_hebrew_language" = "עברית";
+"st_download" = "Download";
+
+//Home Page
+"st_talmud_completion_today" = "Today we complete the Talmud";
+"st_talmud_completion_tomorrow" = "Tomorrow we complete the Talmud";
+"st_talmud_completion_2days" = "In two days we complete the Talmud";
+"st_talmud_completion_3days" = "In three days we complete the Talmud";
+"st_talmud_completion_multiple" = "Another %@ days we complete the Talmud";
+
+
+"Home_page" = "Home Page";
+"Talmud" = "Talmud";
+"Audio Lessons" = "Lessons";
+"Video Lesson" = "Video Lessons";
+"Home" = "Home Page";
+"Contents" = "Contents";
+"Forums" = "Forum";
+"Calendar" = "Calendar";
+"Page Summary" = "Page Summary";
+"Aramic Dictoianry" = "Dictionary";
+"Accessories" = "Accessories";
+"Lesson Map" = "Lessons Map";
+"Maschet Complition" = "Siyum";
+"Surveys" = "Surveys";
+"Search In Talmud" = "Talmud Search";
+"Chavruta" = "Find Chavruta";
+"The_Daf_Yomi_Project" = "Daf Yomi Project";
+"ContactUs" = "Contact us";
+"Q&A" = "QA";
+"Search" = "Search";
+"qus" = "QA";
+"Chavrusa" = "Find Chavruta";
+
+"About" = "About";
+"Share" = "Share";
+"Contect" = "Contact Us";
+"Rate_Us" = "Rate Us";
+
+"donations" = "Donations";
+
+"kortove" = "Kortove";
+"gorgeret" = "Gorgeret";
+"zait" = "Zait";
+"kotevet" = "Kotevet";
+"ochla" = "Ochla";
+"shminit" = "Shminit";
+"beytza" = "Beytza";
+"reviet" = "Reviet";
+"pratz" = "Pratz";
+"litra" = "Litra";
+"log" = "Log";
+"rova" = "Rova";
+"kav" = "Kav";
+"omer" = "Omer";
+"hin" = "Hin";
+"seia" = "Seih";
+"eyfa" = "Eyfa";
+"letech" = "Letech";
+"kor" = "Kor";
+
+"etzba" = "Finger (Thumb)";
+"tefach" = "Tefach";
+"sit" = "Sit";
+"zeret" = "Zeret";
+"ama" = "Ama";
+"ris" = "Ris";
+"mil" = "Mil";
+"hilochShah" = "hour walk";
+"parsa" = "Parsa";
+
+"baitRova" = "Bait Rova";
+"baitKav" = "Bait Kav";
+"baitSeia" = "Bait Seia";
+"baitSatim" = "Bait Satim";
+"baitKor" = "Bait Kor";
+
+"prota" = "Prota";
+"isar" = "Isar";
+"pondiun" = "Pondiun";
+"mea" = "Mea";
+"trapic" = "Trapic";
+"dinar" = "Dinar";
+"shekel" = "Shekel";
+"sela" = "Sela";
+"darkon" = "Darkon";
+"mane" = "Mane";
+
+"meter" = "Meter";
+"centimeter" = "Centimeter";
+"millimeter" = "Millimeter";
+"kilometer" = "Kilometer";
+"mile" = "Mile";
+"yard" = "Yard";
+"inch" = "Inch";
+"foot" = "Foot";
+
+"liter" = "Liter";
+"gallon" = "Galon";
+"kilogram" = "Kilogram";
+"gram" = "Gram";
+"pound" = "Pound";
+"cubicCentimeter" = "cubic Centimeter";
+
+"dunam" = "Dunam";
+"acre" = "Acre";
+"squareMetre" = "Square Metre";
+"squareFoot" = "Square Foot";
+
+//Settings
+"st_Auto_Lock" = "Auto Lock";
+"st_Counter_Display" = "Day Counter Dispaly";
+"st_Default_Page_Type" = "Page Dispaly Type - Default";
+"st_Saved_Pages" = "Saved Pages";
+"st_Saved_Lessons" = "Saved Lessons";
+"st_Default_Magid_Shiour" = "Magid Shiour";
+"st_Daily_Reminder" = "Daily Reminder";
+"st_no_saved_pages_message_label" = "Saved Pages, Not found";
+"st_no_saved_lessons_message_label" = "Saved Lessons, Not found";
+"st_Default_MenuItem" = "The applicatoin will open %@";
+"st_My_Pages" = "My Pages";
+"st_Languages" = "Languages";
+"st_set_reminder_time_button_title" = "Select reminder time";
+"st_select_talmud_display_type" = "Select Talmud Display";
+"st_select_maggid_shiur" = "Select Maggid Shiur";
+"st_saved_pages" = "Saved Pages";
+"st_saved_lessons" = "Saved Lessons";
+"st_select_opening_page" = "Select opening page";
+"st_select_language" = "Select Language";
+"st_language_changed_alert_title" = "השפה שונתה";
+"st_language_changed_alert_message" = "הפעל את האפליקציה מחדש על מנת שהשינוי יתבצע";
+"st_at_home_page" = "at Home Page";
+"st_at_page" = "at %@ page";
+"st_Donation" = "Donation";
+"st_Donation_description" = "Donations for maintenance and operation of the site and application are welcome";
+"st_donation_page_link" = "http://daf-yomi.com/mobile/content.aspx?id=352";
+
+"st_Auto_Lock_description" = "Prevent the screen from turning off while the app is running";
+"st_Default_Page_Type_description" = "Set Default page display type";
+"st_Counter_Display_description" = "Display Day counter to 'Siyum Hashas' in the Home page";
+"st_Saved_Pages_description" = "Manager saved pages on your device";
+"st_Saved_Lessons_description" = "Manager saved lessons on your device";
+"st_Default_Magid_Shiour_description" = "Select Default Maggid Shiur";
+"st_Daily_Reminder_description" = "Daily reminder at %@";
+"st_Default_MenuItem_description" = "The content page you want the app to show at the opening";
+"st_My_Pages_description" = "My pages";
+"st_Languages_title" = "Language - %@";
+"st_Languages_description" = "";
+"st_cancel_reminder_message" = "(for cancelling the reminder, enter the settings page)";
+"st_allow_notifications_title" = "Allow Notifications";
+"st_allow_notifications_message" = "You need to enter the settings on your device and allow notifications";
+"st_reminder" = "Reminder";
+"st_reminder_message" = "The system will send you a reminder each day at %@";
+"st_speed_rate" = "Speed Rate";
+"st_remove_pages_title" = "Remove Pages";
+"st_remove_pages_message" = "%i pages selected.";
+"st_Lesson_skip_time_interval_title" = "Player Jump Duration %@ seconds";
+"st_Lesson_Skip_Interval" = "Player Jump Duration";
+"st_Lesson_Skip_Interval_description" = "";
+"selectedLessonSkipInterval" = "Player Jump Duration";
+
+//Talmud page
+"st_display_palyer" = "Show player";
+"st_hide_palyer" = "Hide player";
+"st_todays_page" = "Today's page";
+"st_select_page" = "Select page";
+"st_select_display" = "Display type";
+"st_select_lesson" = "Select lesson";
+"st_all_pages" = "All pages";
+"st_saved_pages" = "Saved Pages";
+"st_pages_learned" = "Pages learned";
+"st_pages_with_comments" = "Pages with comments";
+"st_show_all_pages" = "All pages";
+"st_show_saved_pages" = "Saved pages";
+"st_search_value_error_title" = "value not found";
+"st_search_value_error_message" = "The system could not find the requested value";
+"st_loading_masechet" = "Loading masechet";
+"st_lesson_hour" = "from";
+"st_Max_Pages_Per_Downlaod" = "Max Pages Per Downlaod";
+
+//Lessons Page
+"st_lessons" = "Lessons";
+"st_lesson_not_found" = "Lesson not found";
+"st_all_essons" = "All Lessons";
+"st_last_played_lessons" = "Last Played";
+"st_saved_lessons" = "Saved Lessons";
+"st_sort_by_masechtot" = "Sort by masechet";
+"st_sort_by_magid_shiour" = "Sort by Magid Shiour";
+"st_all_media_type" = "All Media";
+"st_audio_lessons" = "Audio Lessons";
+"st_video_lessons" = "Video Lessons";
+"st_move_to_todays_page" = "Today's page";
+"st_saved_lessons_not_found" = "No saved lessons found";
+"st_show_all_lessons" = "Show all lessons";
+"st_lesson_downlad_error_message" = "The system encountered a problem while downloading the lesson\nPlease try again later";
+"st_lesson_not_found_message" = "Required lesson not found\nPlease try again later.";
+"st_delete_lessons_alert_title" = "Delete Lessons";
+"st_delete_lessons_alert_message" = "%i lessons were chosen";
+"st_lesson_not_found_message" = "No lessons of %@ were found on the selected page";
+"st_delete_lesson_alert_title" = "Delete Lesson";
+"st_delete_lesson_alert_message" = "Delete lesson of %@ on Masechet %@ page %@ ?";
+"st_change_lesson_alert_message" = "Do you wish to move to lesson of %@ on masehcet %@ page %@?";
+"st_move_to_selected_lesson" = "Move";
+"st_stay_at_current_lesson" = "Stay";
+
+
+
+//Lessons Map page
+"st_lessons_map" = "Lessons map";
+"st_lesson_location" = "Lesson Venue";
+"st_lesson_address" = "Lesson Address";
+"st_lesson_time" = "Lesson time";
+"st_additional_info" = "Additional Info";
+"st_email_info_label" = "Please type a valid Email addres for the message to be published (The Email will not be published within the website).";
+"st_added_lesson_success_alert_title" = "Lesson added successfully";
+"st_added_lesson_success_alert_message" = "The lesson will be published after being approved by the site's management";
+"st_added_lesson_failure_alert_message" = "Failed to add lesson";
+"st_update_Info" = "Fix information";
+"st_lesson_location" = "Lesson location";
+"st_missing_lesson_time" = "Lesson time";
+"st_valid_email" = "Valid Email";
+"st_missing_field_alert_message" = "Please enter %@";
+"st_missing_field_alert_title" = "Missing mandatory fields";
+"st_add_venue" = "Add Lesson";
+"st_attachment" = "Attachment";
+"st_map_location" = "Location";
+
+// Articles
+"st_all_categories" = "All Categories";
+"st_learn_and_understand" = "Learn and understand";
+"st_deepen" = "Deepen";
+"st_sharpen" = "Sharpen";
+"st_expand" = "Expand";
+"st_page_articles" = "Page articles";
+"st_recommended_books" = "Recommended books";
+"st_search_page" = "Search Page";
+"st_advanced_search" = "Advanced Search";
+"st_search_categorys" = "Advanced Search";
+"st_value_not_found_title" = "Value Not Found";
+"st_value_not_found_message" = "The system could not find the requested value";
+
+//Forum
+"st_Forums" = "Forum";
+"st_forums" = "Forum";
+"st_forum" = "Forum";
+"st_search_fourm" = "Search In Forum";
+"st_view_discussion" = "View Discussoin";
+"st_login" = "Login";
+"st_logout" = "Logout";
+"st_add_message" = "Add Message";
+"st_user_title" = "Hi %@";
+"st_fourm_login_required_title" = "Signin Required";
+"st_fourm_login_required_message" = "Only רegistered users can post messages";
+"st_fourm_error_missing_Info" = "Must complete title and content";
+"st_fourm_did_add_message" = "Message was successfully added";
+
+//Fourm Add Message
+"st_add_message_title" = "Add Message";
+"st_message_title_label" = "Message Title";
+"st_message_content_label" = "Message Content";
+"st_masecht_and_page_label" = "Select Masechet And Page";
+"st_selected_masechet" = "Selected Masechet";
+"st_selected_discussion" = "Selected Discussion";
+
+//Login
+"st_username" = "User Name";
+"st_password" = "Password";
+"st_forgot_password" = "Forgot Password";
+"st_signin" = "Signin";
+"st_login" = "Login";
+"st_tryAgin" = "Try Agin";
+"st_logout_alert_title" = "Logout";
+"st_logout_alert_message" = "Are you sure you want to log out";
+"st_missing_filed" = "Missing Ifno";
+"st_missing_userName" = "Please enter user name";
+"st_password_send_to_mail" = "Your password will be sent to the email address you regested with.";
+"st_forgot_password_recovery_error" = "Passwrod recovery failed, please try agin";
+"st_re_enter_password" = "Verify Password";
+"st_first_name" = "First Name";
+"st_last_name" = "Last Name";
+"st_email" = "Email";
+"st_not_matching_passwords" = "Incompatible passwords";
+
+//Page Summary
+"st_page_summary" = "Page Summary";
+"st_page_summary_download_error" = "Failed to load page";
+"st_page_summary_empty_error" = "No summary found for this page";
+
+//Accessories
+"history_of_chazal" = "History of Chazal";
+"concepts_and_values" = "Concepts and values";
+"talmudic_terms" = "Talmudic terms";
+"lazay_rashi" = "La'azey Rashi";
+"acronyms" = "Acronyms";
+"measurements" = "Measurements";
+"by_moshe_katan" = "By Moshe Katan";
+
+//Search
+"st_talmud_search" = "Talmud Search";
+"st_exact_search" = "Exact search";
+"st_search_in" = "Search in";
+"st_last_searches" = "Last searches";
+"st_words_list" = "Words list";
+"st_all_masechtot" = "All Masechtot";
+"st_all_search_optoins" = "Talmud, Rashi and Tosafot";
+
+//Map
+"st_show_on_map" = "Show on map";
+"st_region" = "Region";
+"st_city" = "City";
+"st_location" = "Location";
+"st_address" = "Address";
+"st_house_number" = "Number";
+"st_time" = "Time";
+"st_maggid_shiour" = "Magid Shiour";
+"st_email" = "Email";
+"st_additional_information" = "Additional Information";
+
+//Siyum
+"Endings for Talmud" = "";
+"st_talmudic_endings" = "Talmudic Endings";
+
+//Chavrusa
+"st_find_chavrusa" = "Find Chavruta";
+"st_location" = "Location";
+"st_all_locations" = "All locations";
+"st_country" = "Country";
+"st_all_countries" = "All Countries";
+"st_area" = "Area";
+"st_all_areas" = "All areas";
+"st_free_text" = "Free text";
+"st_connect_button" = "Connect";
+"st_return_to_search_page" = "Return";
+"st_select_country" = "Select Country";
+"st_select_area" = "Select Area";
+"st_select_city" = "Select City";
+
+//Calendar
+"st_calendar" = "Calendar";
+"st_hebrew_dates" = "Hebrew Dates";
+"st_gregorian_dates" = "Gregorian Dates";
+"st_sunday" = "Sunday";
+"st_monday" = "Monday";
+"st_tuesday" = "Tuesday";
+"st_wednesday" = "Wednesday";
+"st_thursday" = "Thursday";
+"st_friday" = "Friday";
+"st_saturday" = "Saturday";
+"st_add_comment" = "For adding a comment click here";
+"st_delete_comment_alert_title" = "Delete comment";
+"st_delete_comment_alert_message" = "Are you sure you want to delete the comment at the desire date?";
+"st_add_mark" = "Add Mark";
+"st_remove_mark" = "Remove Mark";
+"st_gregorian_calendar" = "Gregorian Calendar";
+"st_hebrew_calendar" = "Hebrew Calendar";
+
+//Q&A
+"st_daf_hayomi_qa" = "Daf Hayomi Q and A";
+"st_learning_guidance" = "Learning Guidance";
+"st_learning_determination" = "Learning Determination";
+"st_masechet_ending" = "Masechet Ending";
+"st_general_qa" = "General Q and A";
+"st_ask_a_question" = "Ask A Question";
+"st_the_daf_yomi_qa_book" = "The Daf Yomi Q and A Book";
+
+//Surveys
+"st_survey" = "Survey";
+"st_surveys" = "Surveys";
+"st_show_previous_surveys" =  "Show Previous Surveys";
+
+//Notes
+"st_delete_message_alert_message" = "Delete message on %@ ?";
+
+//Donation
+"st_donatoin_browser_alert_title" = "Thank you for your help";
+"st_donatoin_browser_alert_message" = "The system will direct you to the browser in order to present you with the donation page";
+
+//About
+"st_about" = "About";
+"st_regulations" = "Terms";
+"st_messages" = "Messages";
+
+//Calculator
+"st_calculator" = "Calculator";
+
+//The_Daf_Yomi_Project
+"st_The_Daf_Yomi_Project" = "The Daf Hayomi Project";
+
+//Siyum
+"st_Maschet_Complition" = "Siyum";
+
+//Measurments
+"st_quantity" = "Quantity";
+"st_convert" = "Convert -";
+"st_area" = "Area";
+"st_volume" = "Volume";
+"st_weight" = "Weight";
+"st_length" = "Length";
+"st_rate" = "Rate";
+"st_from_value" = "From Value";
+"st_rabbi_chaim_naeh" = "Rabbi Chaim Naeh";
+"st_chazonIsh" = "Chazon Ish";
+"st_rambam" = "Rambam";
+"st_rate_method" = "%@ rate";
+
+"st_to_value" = "To Value";
+"st_measurements_calculator_title" = "Measurements Calculator";
+"st_measurements_calculator_subtitle" = "Talmudic measurements calculator";
+"st_mitzvot_quantity_title" = "Mitzvot Quantity";
+"st_mitzvot_quantity_subtitle" = "Rabbi Chaim Naeh";
+"st_comparison_table_title" = "Mitzvot Quantity Table";
+"st_comparison_table_subtitle" = "Comparison table for halakhic measures according to the Chazon Ish and Rabbi Chaim Naeh";
+"st_milin_value_title" = "Milin Value";
+"st_milin_value_subtitle" = "Encyclopaedia of Coins and Measures in Talmudic Literature (Chaim Yakov Shaftil)";
+"st_torah_measurements_title" = "Torah Measurements";
+"st_torah_measurements_subtitle" = "Yakov Gershon Weiss";
+"st_hidorai_measurments_title" = "The Measurments Book";
+"st_hidorai_measurments_subtitle" = "Torah Measurements and quantities (Rabbi Hadar Yehuda Margolin)";
+"st_rambam_measurements_title" = "Rambam Measurements";
+"st_rambam_measurements_subtitle" = "Measurements and quantities in the Rambam Mishna (Dror Fiksler)";
+"st_measurments_ratio_title" = "Currencies Ratio";
+"st_measurments_ratio_subtitle" = "Harel Shapira";
+"st_volume_ratio_title" = "Volume Ratio";
+"st_volume_ratio_subtitle" = "Harel Shapira";
+"st_detailed_measurements_table_title" = "Detailed Measurements Table";
+"st_detailed_measurements_table_subtitle" = "Rabbi Nachum Menashe Weisfish";
+"st_measurements_table_title" = "Measurements Table";
+"st_measurements_table_subtitle" = "'Steigen' Website";
+"st_torah_weights_title" = "Torah Weights And Measurements";
+"st_torah_weights_subtitle" = "Nissim Swede";
+"st_wiki_measurements_title" = "Wiki Measurements";
+"st_wiki_measurements_subtitle" = "Wiki Torah Measurements and quantities";
+"st_convert_arrow_directrion_label" = ">>";
+
+

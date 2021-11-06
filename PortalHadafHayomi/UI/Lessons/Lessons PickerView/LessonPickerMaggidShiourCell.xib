@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Brosh-Medium.ttf">
+            <string>BroshMF</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="iN0-l3-epB" customClass="LessonPickerMaggidShiourCell" customModule="PortalHadafHayomi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vXZ-Yh-HCN">
+                    <rect key="frame" x="8" y="13.5" width="84" height="18.5"/>
+                    <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
+                    <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmp-PH-Bvm">
+                    <rect key="frame" x="51" y="33" width="33" height="15"/>
+                    <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="14"/>
+                    <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="vmp-PH-Bvm" secondAttribute="bottom" constant="2" id="0QH-qI-ReS"/>
+                <constraint firstItem="vmp-PH-Bvm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="34p-4U-9RK"/>
+                <constraint firstItem="vmp-PH-Bvm" firstAttribute="top" secondItem="vXZ-Yh-HCN" secondAttribute="bottom" constant="1" id="UZF-Td-jgX"/>
+                <constraint firstItem="vXZ-Yh-HCN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Vdx-Xk-hns"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="vmp-PH-Bvm" secondAttribute="trailing" constant="16" id="gZM-Ui-Fqm"/>
+                <constraint firstItem="vXZ-Yh-HCN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="13.5" id="hvD-rz-90I"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="vXZ-Yh-HCN" secondAttribute="trailing" constant="8" id="p5C-9U-fvu"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="subTitleLabel" destination="vmp-PH-Bvm" id="SuE-1a-5uV"/>
+                <outlet property="titleLabel" destination="vXZ-Yh-HCN" id="SCl-Ve-VYN"/>
+                <outlet property="titleLabelLeadingConstriant" destination="Vdx-Xk-hns" id="iBQ-1q-BfT"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="126"/>
+        </view>
+    </objects>
+</document>

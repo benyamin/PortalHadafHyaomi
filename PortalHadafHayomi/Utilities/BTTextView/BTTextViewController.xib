@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Brosh-Medium.ttf">
+            <string>BroshMF</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BTTextViewController" customModule="PortalHadafHayomi" customModuleProvider="target">
+            <connections>
+                <outlet property="backButton" destination="S0r-xm-xdU" id="qFh-pN-IRl"/>
+                <outlet property="textView" destination="d02-G6-YJx" id="FW2-GR-6ge"/>
+                <outlet property="topBarTitleLabel" destination="HVW-9j-F2N" id="Ipl-SV-MJg"/>
+                <outlet property="topBarView" destination="DG3-vI-bK6" id="ErY-AQ-Bys"/>
+                <outlet property="view" destination="hP4-Fh-FP8" id="a5h-Mk-fd1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="hP4-Fh-FP8" customClass="BTTextView" customModule="PortalHadafHayomi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DG3-vI-bK6">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="topBar750.png" translatesAutoresizingMaskIntoConstraints="NO" id="22r-nF-6eT">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="HVW-9j-F2N">
+                            <rect key="frame" x="41" y="33" width="293" height="26"/>
+                            <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
+                            <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0r-xm-xdU">
+                            <rect key="frame" x="0.0" y="27.5" width="33" height="33"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="33" id="Rvq-Ef-AAe"/>
+                                <constraint firstAttribute="width" constant="33" id="iB1-fX-29q"/>
+                            </constraints>
+                            <state key="normal" image="backButton.png"/>
+                            <connections>
+                                <action selector="backButtonClicked:" destination="-1" eventType="touchUpInside" id="Gd6-Xh-EV8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="7CD-l1-NI7"/>
+                        <constraint firstItem="HVW-9j-F2N" firstAttribute="centerX" secondItem="DG3-vI-bK6" secondAttribute="centerX" id="DUy-9G-Vqz"/>
+                        <constraint firstItem="S0r-xm-xdU" firstAttribute="leading" secondItem="DG3-vI-bK6" secondAttribute="leading" id="FeO-1L-lKJ"/>
+                        <constraint firstAttribute="bottom" secondItem="22r-nF-6eT" secondAttribute="bottom" id="U6U-sq-Vv8"/>
+                        <constraint firstAttribute="bottom" secondItem="S0r-xm-xdU" secondAttribute="bottom" constant="9.5" id="eaQ-8a-b7J"/>
+                        <constraint firstAttribute="bottom" secondItem="HVW-9j-F2N" secondAttribute="bottom" constant="11" id="kRh-c4-szk"/>
+                        <constraint firstItem="22r-nF-6eT" firstAttribute="leading" secondItem="DG3-vI-bK6" secondAttribute="leading" id="kaC-wk-rmd"/>
+                        <constraint firstItem="HVW-9j-F2N" firstAttribute="leading" secondItem="S0r-xm-xdU" secondAttribute="trailing" constant="8" id="kmt-nX-Atd"/>
+                        <constraint firstItem="22r-nF-6eT" firstAttribute="top" secondItem="DG3-vI-bK6" secondAttribute="top" id="pNc-7L-6JF"/>
+                        <constraint firstAttribute="trailing" secondItem="22r-nF-6eT" secondAttribute="trailing" id="xUF-Kv-PcD"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d02-G6-YJx">
+                    <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="d02-G6-YJx" firstAttribute="leading" secondItem="hP4-Fh-FP8" secondAttribute="leading" id="Lwl-qI-sdB"/>
+                <constraint firstItem="d02-G6-YJx" firstAttribute="top" secondItem="DG3-vI-bK6" secondAttribute="bottom" id="TC5-Yu-BFK"/>
+                <constraint firstAttribute="trailing" secondItem="DG3-vI-bK6" secondAttribute="trailing" id="a0t-0X-nXq"/>
+                <constraint firstAttribute="bottom" secondItem="d02-G6-YJx" secondAttribute="bottom" id="awx-vT-fUW"/>
+                <constraint firstItem="DG3-vI-bK6" firstAttribute="leading" secondItem="hP4-Fh-FP8" secondAttribute="leading" id="cCl-id-eNR"/>
+                <constraint firstAttribute="trailing" secondItem="d02-G6-YJx" secondAttribute="trailing" id="lJv-5b-Jm9"/>
+                <constraint firstItem="DG3-vI-bK6" firstAttribute="top" secondItem="hP4-Fh-FP8" secondAttribute="top" id="woA-SZ-ABT"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="QW4-Hd-EgL"/>
+            <point key="canvasLocation" x="60" y="72"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backButton.png" width="99" height="99"/>
+        <image name="topBar750.png" width="750" height="120"/>
+    </resources>
+</document>
