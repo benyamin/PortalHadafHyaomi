@@ -81,6 +81,22 @@ class GetUserSettingsProcess: MSBaseProcess
                                  "title":"App_Open_Speech_Notificatoin",
                                  "type":"Bool"])
         
+        setableItemsInfo.append(["key":"SaveLastDisplayPage",
+                                 "title":"save_last_displayed_page",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"SaveLastLesson",
+                                 "title":"save_last_lesson",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"SaveLastSelectedPageInArticles",
+                                 "title":"save_last_selected_page_in_articles",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"SaveLasteSlectedPageInPageSummary",
+                                 "title":"save_last_selected_page_in_page_summary",
+                                 "type":"Bool"])
+        
        // setableItemsInfo.append(["key":"MyPages",
        //                          "title":"My_Pages",
        //                          "type":"Selection"])

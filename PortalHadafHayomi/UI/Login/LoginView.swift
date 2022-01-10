@@ -13,7 +13,7 @@ private enum DisplayState {
     case signup
 }
 
-class LoginView: UIView {
+class LoginView: UIView, UITextFieldDelegate {
 
     @IBOutlet weak var contentView:UIView!
     @IBOutlet weak var signinAdditioalDataContentView:UIView!
@@ -39,6 +39,7 @@ class LoginView: UIView {
     
     
     var onLoggedUser:((_ user:User) -> Void)?
+    var onDismiss:(() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -242,5 +243,12 @@ class LoginView: UIView {
                 })
             }
         })
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
     }
 }

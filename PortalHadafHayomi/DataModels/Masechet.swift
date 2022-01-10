@@ -190,7 +190,10 @@ class Masechet:DataObject
     
     func getPageByIndex(_ index:String) -> Page?
     {
-        let pageIndex = Int((Double(index)! - 3.0) / 2.0)
+        var pageIndex = Int((Double(index)! - 3.0) / 2.0)
+        if pageIndex < 0 {
+            pageIndex = 0
+        }
         
         if  pageIndex < self.pages.count
         {

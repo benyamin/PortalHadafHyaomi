@@ -353,7 +353,6 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
-        
     }
            
 }

@@ -84,7 +84,10 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let lastViewdPageSummary = UserDefaults.standard.object(forKey: "lastViewdPageSummary") as? [String:Int]
+        let dispalyLastPageViewed = UserDefaults.standard.object(forKey: "setableItem_SaveLasteSlectedPageInPageSummary") as? Bool ?? true
+        
+        if dispalyLastPageViewed
+            ,let lastViewdPageSummary = UserDefaults.standard.object(forKey: "lastViewdPageSummary") as? [String:Int]
             ,let selectedMasechetIndex = lastViewdPageSummary["selectedMasechetIndex"]
             ,let selectedPageIndex =  lastViewdPageSummary["selectedPageIndex"]
         {
@@ -164,8 +167,13 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     func scrollViewDidStop()
     {
         self.pageSummaryCollectoinView?.scrollToNearestVisibleCell()
+        
+        if let selectedpageSummaryIndex = self.pageSummaryCollectoinView?.centerRowIndex()
+            ,let pageSummary = self.pageSummaries?[selectedpageSummaryIndex]
+            ,let masechet =  pageSummary.maseceht{
+            self.saveViewedPage(selectedPageIndex: pageSummary.pageIndex, masechet: masechet)
+        }
     }
-    
     
     //MARK: - UITextFieldDelegate
     
@@ -300,13 +308,17 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
                  
                  self.selectPage(pageSummary: pageSummary)
         }
-      
-        UserDefaults.standard.set(
-            ["selectedMasechetIndex":(self.masechtot.index(of: selectedMasechet) ?? 0),
-             "selectedPageIndex":selectedPageIndex]
-            , forKey: "lastViewdPageSummary")
-        UserDefaults.standard.synchronize()
-     
+    
+        self.saveViewedPage(selectedPageIndex: selectedPageIndex, masechet: selectedMasechet)
+    }
+    
+    func saveViewedPage(selectedPageIndex:Int, masechet:Masechet){
+        
+          UserDefaults.standard.set(
+              ["selectedMasechetIndex":(self.masechtot.index(of: masechet) ?? 0),
+               "selectedPageIndex":selectedPageIndex]
+              , forKey: "lastViewdPageSummary")
+          UserDefaults.standard.synchronize()
     }
 
     func scrollToTodaysPage()

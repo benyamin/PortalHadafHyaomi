@@ -60,7 +60,20 @@ class FourmUserInfoView: UIView {
             loginView.onLoggedUser = {(user) in
                 HadafHayomiManager.sharedManager.logedInUser = user
                 self.updateUI()
+                
+                loginView.onLoggedUser = nil
+                loginView.onDismiss = nil
+                
                 popupView?.dismiss()
+            }
+            
+            loginView.onDismiss = {
+                
+                loginView.onLoggedUser = nil
+                loginView.onDismiss = nil
+                
+                popupView?.dismiss()
+                
             }
             popupView = BTPopUpView.show(view: loginView, onComplete:{ })
         }

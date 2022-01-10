@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,7 +27,7 @@
                                 <color key="backgroundColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FourmDiscussionTableCell" rowHeight="146" id="GEJ-Ut-dgT" customClass="FourmDiscussionTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="146"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="146"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GEJ-Ut-dgT" id="YkR-HZ-z26">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="146"/>
@@ -64,7 +65,7 @@
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sP-l9-Hc1">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sP-l9-Hc1">
                                                             <rect key="frame" x="8" y="3" width="106" height="29"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="15"/>
                                                             <state key="normal" title="View Discussions"/>
@@ -78,7 +79,7 @@
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OS-rn-pJj">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OS-rn-pJj">
                                                             <rect key="frame" x="277" y="48.5" width="58" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="22G-8Z-ANw"/>
@@ -135,7 +136,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingDataTableCell" rowHeight="80" id="ddf-2p-HIa" customClass="LoadingDataTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="174" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="190.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ddf-2p-HIa" id="H1v-pp-TsF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
@@ -197,7 +198,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSP-wx-1dh" customClass="FourmUserInfoView" customModule="PortalHadafHayomi" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="70" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UW-md-pIF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UW-md-pIF">
                                         <rect key="frame" x="333" y="7" width="34" height="30"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הירשם"/>
@@ -218,7 +219,7 @@
                                             <constraint firstAttribute="height" constant="1" id="BRe-EX-xcS"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLP-s3-MVW">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLP-s3-MVW">
                                         <rect key="frame" x="247" y="7" width="70" height="30"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הוספת הודעה"/>
@@ -227,7 +228,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="6UW-md-pIF" secondAttribute="trailing" constant="8" id="6hi-P6-lbA"/>
                                     <constraint firstAttribute="trailing" secondItem="7vG-fe-9a2" secondAttribute="trailing" id="DiL-9H-85w"/>
@@ -256,7 +257,7 @@
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m24-ag-gyh">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m24-ag-gyh">
                                         <rect key="frame" x="307" y="8" width="60" height="30"/>
                                         <color key="backgroundColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -301,6 +302,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="h05-A6-pne"/>
                         <color key="backgroundColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="V2M-UP-woT" secondAttribute="trailing" id="61V-tV-owg"/>
@@ -317,7 +319,6 @@
                             <constraint firstItem="Yed-c3-NK0" firstAttribute="top" secondItem="Pnk-ba-RWD" secondAttribute="top" id="yXE-tX-msH"/>
                             <constraint firstItem="V2M-UP-woT" firstAttribute="leading" secondItem="Pnk-ba-RWD" secondAttribute="leading" id="zXc-uG-9gq"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="h05-A6-pne"/>
                     </view>
                     <connections>
                         <outlet property="discussionsTableView" destination="AfT-kx-oWk" id="nna-Lc-eDd"/>
@@ -386,7 +387,7 @@
                                 <color key="backgroundColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FourmDiscussionTableCell" rowHeight="130" id="08z-04-aMX" customClass="FourmDiscussionTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="130"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="08z-04-aMX" id="h0w-Ra-7KL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
@@ -421,7 +422,7 @@
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIp-gF-Se2">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIp-gF-Se2">
                                                             <rect key="frame" x="8" y="4" width="56" height="29"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="15"/>
                                                             <state key="normal" title="הצג תגובות"/>
@@ -467,7 +468,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingDataTableCell" rowHeight="80" id="wbA-pw-IDw" customClass="LoadingDataTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="158" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="174.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wbA-pw-IDw" id="U0o-em-a8Z">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
@@ -502,7 +503,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="62O-s0-pEQ" customClass="FourmUserInfoView" customModule="PortalHadafHayomi" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="80" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Li-z3-Y1V">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Li-z3-Y1V">
                                         <rect key="frame" x="333" y="7" width="34" height="30"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הירשם"/>
@@ -523,7 +524,7 @@
                                             <constraint firstAttribute="height" constant="1" id="YUV-lo-2wk"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g83-IV-bPh">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g83-IV-bPh">
                                         <rect key="frame" x="247" y="7" width="70" height="30"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הוספת הודעה"/>
@@ -532,7 +533,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="wPn-J0-oaj" firstAttribute="leading" secondItem="62O-s0-pEQ" secondAttribute="leading" constant="8" id="0q8-Ne-rmr"/>
                                     <constraint firstAttribute="trailing" secondItem="7qM-7p-hAu" secondAttribute="trailing" id="Ay0-VW-G86"/>
@@ -553,6 +554,7 @@
                                 </connections>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="DD9-hq-puv"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4nv-pj-2M7" firstAttribute="leading" secondItem="zod-OD-ltt" secondAttribute="leading" id="7I7-A7-j8Q"/>
@@ -568,7 +570,6 @@
                             <constraint firstItem="62O-s0-pEQ" firstAttribute="top" secondItem="05A-WL-7Ac" secondAttribute="bottom" id="jic-xI-rkU"/>
                             <constraint firstItem="05A-WL-7Ac" firstAttribute="leading" secondItem="zod-OD-ltt" secondAttribute="leading" id="spT-N4-PgM"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="DD9-hq-puv"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Ut8-X4-NUP" id="XvV-eq-qhA"/>
@@ -671,9 +672,9 @@
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rUu-yi-mgq">
                                 <rect key="frame" x="16" y="289" width="343" height="179"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="scrollIndicatorInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
@@ -743,7 +744,7 @@
                                     <constraint firstItem="df5-BV-XZl" firstAttribute="leading" secondItem="Ahm-hP-qGM" secondAttribute="leading" id="xAk-bN-57f"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x92-GN-KJi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x92-GN-KJi">
                                 <rect key="frame" x="127.5" y="484" width="120" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="V3n-94-geS"/>
@@ -756,6 +757,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Nvn-Zp-aWZ"/>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Nvn-Zp-aWZ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7yl-qa-zQt" secondAttribute="trailing" constant="16" id="0Ea-vL-NVO"/>
@@ -777,7 +779,7 @@
                             <constraint firstItem="Ahm-hP-qGM" firstAttribute="top" secondItem="x92-GN-KJi" secondAttribute="bottom" priority="750" constant="16" id="ZPc-Jo-Fey"/>
                             <constraint firstItem="zj0-DS-MVW" firstAttribute="top" secondItem="v7R-of-5A1" secondAttribute="bottom" constant="4" id="aZy-UM-5cp"/>
                             <constraint firstItem="7yl-qa-zQt" firstAttribute="leading" secondItem="Nvn-Zp-aWZ" secondAttribute="leading" constant="16" id="bY6-wY-N4z"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="x92-GN-KJi" secondAttribute="bottom" priority="500" constant="200" id="dCI-UJ-cwE"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="x92-GN-KJi" secondAttribute="bottom" priority="500" constant="260" id="dCI-UJ-cwE"/>
                             <constraint firstItem="Nvn-Zp-aWZ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lr6-R8-G3L" secondAttribute="trailing" constant="16" id="enI-4Y-gwi"/>
                             <constraint firstItem="gj7-Em-IQk" firstAttribute="top" secondItem="lr6-R8-G3L" secondAttribute="bottom" constant="4" id="lCv-6w-OTK"/>
                             <constraint firstItem="Nvn-Zp-aWZ" firstAttribute="bottom" secondItem="Ahm-hP-qGM" secondAttribute="bottom" id="msK-X1-Nwe"/>
@@ -788,7 +790,6 @@
                             <constraint firstItem="7yl-qa-zQt" firstAttribute="top" secondItem="gj7-Em-IQk" secondAttribute="bottom" constant="24" id="vAO-mA-gjc"/>
                             <constraint firstItem="LRM-xL-KZj" firstAttribute="bottom" secondItem="v7R-of-5A1" secondAttribute="bottom" id="xej-LL-G8c"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Nvn-Zp-aWZ"/>
                     </view>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
@@ -815,5 +816,11 @@
     <resources>
         <image name="backButton.png" width="99" height="99"/>
         <image name="topBar750.png" width="750" height="120"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

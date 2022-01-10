@@ -209,6 +209,14 @@
 "st_Lesson_skip_time_interval_title" = "משך זמן דילוג בנגן %@ שניות";
 "st_Lesson_Skip_Interval_description" = "בחירה של משך זמן דילוג קדימה/אחורה בנגן";
 "selectedLessonSkipInterval" = "משך זמן דילוג בנגן";
+"st_save_last_displayed_page" = "שמור דף אחרו שנצפה";
+"st_save_last_displayed_page_description" = "שמור את הדף האחרון בו אחזתי ב״תלמוד״ לכניסה חוזרת";
+"st_save_last_lesson" = "שמור שיעור אחרון";
+"st_save_last_lesson_description" = "הצג שיעור שמע אחרון לו האזנתי";
+"st_save_last_selected_page_in_articles" = "שמור דף אחרון שנבחר ב״תכנים״";
+"st_save_last_selected_page_in_articles_description" = "שמור את הדף האחרון שנבר ב״תכנים״ לכניסה חוזרת";
+"st_save_last_selected_page_in_page_summary" = "שמור דף נבחר אחרון ב״הדף בקצה״";
+"st_save_last_selected_page_in_page_summary_description" = "שמור את דף לוח השנה האחרון שהוצג במסך ״הדף בקצרה״ לכניסה חוזרת";
 
 //Talmud page
 "st_display_palyer" = "הצג נגן";

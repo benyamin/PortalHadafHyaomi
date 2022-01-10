@@ -54,6 +54,22 @@ class GetSettingsProcess: MSBaseProcess
         setableItemsInfo.append(["key":"SpeechActivatoin",
                                  "title":"Speech_Activatoin",
                                  "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"SaveLastDisplayPage",
+                                 "title":"save_last_displayed_page",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"saveLastLesson",
+                                 "title":"save_last_lesson",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"saveLastSelectedPageInArticles",
+                                 "title":"save_last_selected_page_in_articles",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"saveLasteSlectedPageInPageSummary",
+                                 "title":"save_last_selected_page_in_page_summary",
+                                 "type":"Bool"])
       
      
         /*
