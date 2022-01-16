@@ -41,10 +41,22 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
         super.viewDidLoad()
         
         self.articalesCategorysTableView.isHidden = true
+                
+        let dispalyLastPageViewed = UserDefaults.standard.object(forKey: "setableItem_SaveLastSelectedPageInArticles") as? Bool ?? true
         
-        let todaysMaschet = HadafHayomiManager.sharedManager.todaysMaschet!
-        let todaysPage = HadafHayomiManager.sharedManager.todaysPage!
-        self.getArticalesCategorysForMasechet(todaysMaschet, andPage: todaysPage)
+        if dispalyLastPageViewed
+            ,let lastViewdPageArticles = UserDefaults.standard.object(forKey: "lastViewdPageArticles") as? [String:Int]
+            ,let selectedPageIndex = lastViewdPageArticles["selectedPageIndex"]
+            ,let page = HadafHayomiManager.sharedManager.getPageForPageIndex(selectedPageIndex)
+            ,let maschent = HadafHayomiManager.sharedManager.getMasechetForPageIndex(selectedPageIndex){
+            self.getArticalesCategorysForMasechet(maschent, andPage: page)
+        }
+
+        else {
+            let todaysMaschet = HadafHayomiManager.sharedManager.todaysMaschet!
+            let todaysPage = HadafHayomiManager.sharedManager.todaysPage!
+            self.getArticalesCategorysForMasechet(todaysMaschet, andPage: todaysPage)
+        }
         
         self.searchPageButton.layer.borderWidth = 1.0
         self.searchPageButton.layer.borderColor = self.talmudPagePickerView.backgroundColor!.cgColor
@@ -206,6 +218,10 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
     {
         self.selectedMasechet = masechet
         self.selectedPage = page
+        
+        let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: 1)
+        UserDefaults.standard.set(["selectedPageIndex":pageIndex], forKey: "lastViewdPageArticles")
+        UserDefaults.standard.synchronize()
         
         Util.showDefaultLoadingView()
         self.topBarTitleLabel?.text = "מסכת " + masechet.name + " " + "דף " + page.symbol
