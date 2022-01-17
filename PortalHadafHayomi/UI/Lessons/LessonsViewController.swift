@@ -142,12 +142,15 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             self.lessonsPickerView.pickerView.frame = self.lessonsPickerView.bounds
             self.lessonsPickerView.pickerView.reloadAllComponents()
             
+            let saveLastLesson = UserDefaults.standard.object(forKey: "setableItem_SaveLastLesson") as? Bool ?? true
+            
             if let playingLesson = LessonsManager.sharedManager.playingLesson
             {
               self.setPlayingLesson(playingLesson)
             }
                 
             else if let lastPlayedLasson = LessonsManager.sharedManager.lastPlayedLasson()
+                        ,saveLastLesson == true
             {
                 if self.lessonsPickerView != nil
                 {
