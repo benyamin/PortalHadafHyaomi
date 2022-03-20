@@ -32,6 +32,8 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
         
         accessoriesList.append(Accessory(id: "LR", title: "lazay_rashi", iconImage: "rashi_icon_ios.png", dataType:"Text"))
         
+        accessoriesList.append(Accessory(id: "SH", title: "sefer_hearuch", iconImage: "rashi_icon_ios.png", dataType:"Text"))
+        
         accessoriesList.append(Accessory(id: "RT", title: "acronyms", iconImage: "RasheiTevot_icon_ios.png", dataType:"Text"))
         
   
@@ -214,6 +216,32 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
         })
     }
     
+    func showSeferHearuch()
+    {
+        self.navigationController?.pushViewController(self.expressionsViewController, animated: true)
+        
+        //If The selected accessory is equal to the last dispalyed accessory
+        if self.expressionsViewController.accessory?.id == "SH" {
+            return
+        }
+        
+        self.expressionsViewController.setLoadingLayout()
+        
+        GetSeferHearuchValuesProcess().executeWithObject(nil, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            if let accessory = self.getAccessoryById("SH")
+            {
+                accessory.expressions = object as? [Expression]
+                self.expressionsViewController.reloadWithObject(accessory)
+            }
+            
+        },onFaile: { (object, error) -> Void in
+            
+        })
+    }
+    
     func showCalculator()
     {
         let calculatorViewController = UIViewController.withName("MeasurementCalculatorViewController", storyBoardIdentifier: "Measurements")
@@ -270,6 +298,11 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
             
         case "LR"://אוצר לעזי רש״י
              self.showLaazy_rashi()
+             
+            break
+            
+        case "SH": // ספר הערוך
+             self.showSeferHearuch()
              
             break
             

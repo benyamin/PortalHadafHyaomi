@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,7 +54,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccessoryTableCell" rowHeight="80" id="VdA-V0-vmm" customClass="AccessoryTableCell" customModule="PortalHadafHayomi">
-                                        <rect key="frame" x="0.0" y="24.5" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VdA-V0-vmm" id="dEc-8I-Xhe">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
@@ -210,7 +210,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ExpressionsTableCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpressionsTableCell" rowHeight="70" id="9VH-K1-BIr" customClass="ExpressionsTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9VH-K1-BIr" id="QLe-nr-YoV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -253,7 +253,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpressionsWebTableCell" rowHeight="210" id="Sxr-5g-Huu" customClass="ExpressionsWebTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="94.5" width="375" height="210"/>
+                                        <rect key="frame" x="0.0" y="114.5" width="375" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sxr-5g-Huu" id="mx7-NC-89x">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
@@ -384,7 +384,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReferenceTableViewCell" rowHeight="80" id="QtI-eD-fr6" customClass="ReferenceTableViewCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QtI-eD-fr6" id="U3g-Lr-1T6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>

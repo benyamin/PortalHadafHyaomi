@@ -80,6 +80,8 @@
 		4A47E6051FF9098500785929 /* Talmud_IPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47E6041FF9098500785929 /* Talmud_IPadViewController.swift */; };
 		4A497905223A7D3D00B813AD /* GetAppSettingsProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A497904223A7D3D00B813AD /* GetAppSettingsProcess.swift */; };
 		4A497907223A7D5300B813AD /* GetUserSettingsProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A497906223A7D5300B813AD /* GetUserSettingsProcess.swift */; };
+		4A50C23C27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A50C23B27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift */; };
+		4A50C23E27DD5B4D009B894B /* seferHearuch.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A50C23D27DD5B4D009B894B /* seferHearuch.plist */; };
 		4A534A1A21C6FCD000AF363B /* ArticleSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A534A1921C6FCD000AF363B /* ArticleSearchResult.swift */; };
 		4A534A1C21C70A0B00AF363B /* SearchArticleResultTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A534A1B21C70A0B00AF363B /* SearchArticleResultTableCell.swift */; };
 		4A57510621535DD5009FC3B0 /* FourmDiscussoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57510521535DD5009FC3B0 /* FourmDiscussoinViewController.swift */; };
@@ -655,6 +657,8 @@
 		4A47E6041FF9098500785929 /* Talmud_IPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Talmud_IPadViewController.swift; sourceTree = "<group>"; };
 		4A497904223A7D3D00B813AD /* GetAppSettingsProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppSettingsProcess.swift; sourceTree = "<group>"; };
 		4A497906223A7D5300B813AD /* GetUserSettingsProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserSettingsProcess.swift; sourceTree = "<group>"; };
+		4A50C23B27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSeferHearuchValuesProcess.swift; sourceTree = "<group>"; };
+		4A50C23D27DD5B4D009B894B /* seferHearuch.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = seferHearuch.plist; sourceTree = "<group>"; };
 		4A534A1921C6FCD000AF363B /* ArticleSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchResult.swift; sourceTree = "<group>"; };
 		4A534A1B21C70A0B00AF363B /* SearchArticleResultTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticleResultTableCell.swift; sourceTree = "<group>"; };
 		4A57510521535DD5009FC3B0 /* FourmDiscussoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourmDiscussoinViewController.swift; sourceTree = "<group>"; };
@@ -2036,6 +2040,7 @@
 				4ABFB696235290FF0079D68B /* Laazy_rashi.plist */,
 				4ABFB697235290FF0079D68B /* Munahim_talmudim.plist */,
 				4AB91A36237E91BE00282F2F /* AramicWordTranslation.plist */,
+				4A50C23D27DD5B4D009B894B /* seferHearuch.plist */,
 			);
 			path = "Plist's";
 			sourceTree = "<group>";
@@ -2288,6 +2293,7 @@
 				220C99C724FAF1130013D377 /* RegistrationProcess.swift */,
 				224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */,
 				221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */,
+				4A50C23B27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -2808,6 +2814,7 @@
 				4ABFB711235291000079D68B /* TranslationIcon_off.png in Resources */,
 				4ABFB6A7235290FF0079D68B /* btn_bg_B_click.png in Resources */,
 				4ABFB739235291000079D68B /* menu_icon.png in Resources */,
+				4A50C23E27DD5B4D009B894B /* seferHearuch.plist in Resources */,
 				4ABFB6BA235290FF0079D68B /* klaliyot_icon_and_text.png in Resources */,
 				4ABFB6E5235291000079D68B /* saveIcon.png in Resources */,
 			);
@@ -3015,6 +3022,7 @@
 				4A2C76C11FD490180074A0CC /* TablePickerView.swift in Sources */,
 				4AFE3EFD20548A5A0040BD24 /* AddLessonVenueProcess.swift in Sources */,
 				4AF5554A1FCA378D00A830EE /* BaseRequest.swift in Sources */,
+				4A50C23C27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift in Sources */,
 				4A9BF0972097600E0051D48A /* GetSettingsProcess.swift in Sources */,
 				4A7537211FD6B6070013BCD9 /* GetLessonsProcess.swift in Sources */,
 				4A2151242225E0DC00BFEEF7 /* SettableItemReminderCell.swift in Sources */,
@@ -3283,7 +3291,7 @@
 				CODE_SIGN_ENTITLEMENTS = PortalHadafHayomi/PortalHadafHayomi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 6RMGV6CC47;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3293,7 +3301,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.8;
+				MARKETING_VERSION = 10.10;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3314,7 +3322,7 @@
 				CODE_SIGN_ENTITLEMENTS = PortalHadafHayomi/PortalHadafHayomi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 6RMGV6CC47;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3324,7 +3332,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.8;
+				MARKETING_VERSION = 10.10;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

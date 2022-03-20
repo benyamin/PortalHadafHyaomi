@@ -88,6 +88,13 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
             self.topBarSubTitleLabel.isHidden = false
             self.topBarSubTitleLabel.text = "by_moshe_katan".localize()
         }
+        
+        //ספר הערוך
+        if self.accessory?.id == "SH"
+        {
+            self.topBarSubTitleLabel.isHidden = false
+            self.topBarSubTitleLabel.text = "courtesy_of_sefaria".localize()
+        }
     }
     
     //MARK: - Keyboard notifications

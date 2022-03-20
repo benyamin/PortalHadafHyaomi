@@ -215,8 +215,8 @@
 "st_save_last_lesson_description" = "הצג שיעור שמע אחרון לו האזנתי";
 "st_save_last_selected_page_in_articles" = "שמור דף אחרון שנבחר ב״תכנים״";
 "st_save_last_selected_page_in_articles_description" = "שמור את הדף האחרון שנבר ב״תכנים״ לכניסה חוזרת";
-"st_save_last_selected_page_in_page_summary" = "שמור דף נבחר אחרון ב״הדף בקצה״";
-"st_save_last_selected_page_in_page_summary_description" = "שמור את דף לוח השנה האחרון שהוצג במסך ״הדף בקצרה״ לכניסה חוזרת";
+"st_save_last_selected_page_in_page_summary" = "שמור דף נבחר אחרון ב״הדף בקצרה״";
+"st_save_last_selected_page_in_page_summary_description" = "שמור את הדף האחרון שנבחר במסך ״הדף בקצרה״ לכניסה חוזרת";
 
 //Talmud page
 "st_display_palyer" = "הצג נגן";
@@ -355,6 +355,8 @@
 "acronyms" = "ראשי תיבות";
 "measurements" = "מידות ושיעורים";
 "by_moshe_katan" = "מאת משה קטן";
+"sefer_hearuch" = "ספר הערוך";
+"courtesy_of_sefaria" = "באדיבות ספריא";
 
 //Search
 "st_talmud_search" = "חיפוש בש׳׳ס";
