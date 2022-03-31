@@ -203,6 +203,10 @@
 		4A933AF91FD35B8100D175E1 /* BTPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A933AF81FD35B8100D175E1 /* BTPopUpView.swift */; };
 		4A933B081FD36AB300D175E1 /* UIView+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A933B071FD36AB300D175E1 /* UIView+Extras.swift */; };
 		4A933B0A1FD484B300D175E1 /* LessonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A933B091FD484B200D175E1 /* LessonsManager.swift */; };
+		4A999D6627F4F2C7004C9675 /* A-_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A999D6227F4F2C6004C9675 /* A-_icon.png */; };
+		4A999D6727F4F2C8004C9675 /* AH-_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A999D6327F4F2C7004C9675 /* AH-_icon.png */; };
+		4A999D6827F4F2C8004C9675 /* A+_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A999D6427F4F2C7004C9675 /* A+_icon.png */; };
+		4A999D6927F4F2C8004C9675 /* AH+_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A999D6527F4F2C7004C9675 /* AH+_icon.png */; };
 		4A9BF0972097600E0051D48A /* GetSettingsProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9BF0962097600E0051D48A /* GetSettingsProcess.swift */; };
 		4AAA44FB21BC7293003ED877 /* SearchArticalesProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA44FA21BC7293003ED877 /* SearchArticalesProcess.swift */; };
 		4AAA44FD21BDC694003ED877 /* SearchArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA44FC21BDC694003ED877 /* SearchArticlesViewController.swift */; };
@@ -781,6 +785,10 @@
 		4A933AF81FD35B8100D175E1 /* BTPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTPopUpView.swift; sourceTree = "<group>"; };
 		4A933B071FD36AB300D175E1 /* UIView+Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extras.swift"; sourceTree = "<group>"; };
 		4A933B091FD484B200D175E1 /* LessonsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonsManager.swift; sourceTree = "<group>"; };
+		4A999D6227F4F2C6004C9675 /* A-_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "A-_icon.png"; sourceTree = "<group>"; };
+		4A999D6327F4F2C7004C9675 /* AH-_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AH-_icon.png"; sourceTree = "<group>"; };
+		4A999D6427F4F2C7004C9675 /* A+_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "A+_icon.png"; sourceTree = "<group>"; };
+		4A999D6527F4F2C7004C9675 /* AH+_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AH+_icon.png"; sourceTree = "<group>"; };
 		4A9BF0962097600E0051D48A /* GetSettingsProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSettingsProcess.swift; sourceTree = "<group>"; };
 		4AAA44FA21BC7293003ED877 /* SearchArticalesProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticalesProcess.swift; sourceTree = "<group>"; };
 		4AAA44FC21BDC694003ED877 /* SearchArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesViewController.swift; sourceTree = "<group>"; };
@@ -1598,6 +1606,10 @@
 		4ABFB45A235290FF0079D68B /* Azarim_icons_ios_150X150 */ = {
 			isa = PBXGroup;
 			children = (
+				4A999D6227F4F2C6004C9675 /* A-_icon.png */,
+				4A999D6427F4F2C7004C9675 /* A+_icon.png */,
+				4A999D6327F4F2C7004C9675 /* AH-_icon.png */,
+				4A999D6527F4F2C7004C9675 /* AH+_icon.png */,
 				4ABFB45B235290FF0079D68B /* RasheiTevot_icon_ios.png */,
 				4ABFB45C235290FF0079D68B /* rashi_icon_ios.png */,
 				4ABFB45D235290FF0079D68B /* Munachim_icon_ios.png */,
@@ -2570,6 +2582,7 @@
 				4ABFB75A235291000079D68B /* seker_icon_and_text.png in Resources */,
 				4ABFB69D235290FF0079D68B /* Opening_Screen_ios_Lines.png in Resources */,
 				4ABFB75D235291000079D68B /* seker_icon.png in Resources */,
+				4A999D6627F4F2C7004C9675 /* A-_icon.png in Resources */,
 				4ABFB718235291000079D68B /* delete.png in Resources */,
 				4ABFB706235291000079D68B /* move_left@2x.png in Resources */,
 				4ABFB77D235291000079D68B /* Icon-App-76x76@1x.png in Resources */,
@@ -2655,6 +2668,7 @@
 				4ABFB6BB235290FF0079D68B /* hadracha_icon_and_text.png in Resources */,
 				4ABFB6D5235291000079D68B /* musagim_icon.png in Resources */,
 				4ABFB740235291000079D68B /* calender_icon.png in Resources */,
+				4A999D6727F4F2C8004C9675 /* AH-_icon.png in Resources */,
 				4ABFB765235291000079D68B /* logo-portal.png in Resources */,
 				4AFC24A01FCB61B90056E726 /* HomeStoryboard.storyboard in Resources */,
 				4ABFB75C235291000079D68B /* calender_icon_and_text.png in Resources */,
@@ -2700,6 +2714,7 @@
 				4ABFB756235291000079D68B /* hadaf_icon_and_text.png in Resources */,
 				4ABFB6DB235291000079D68B /* midot_icon.png in Resources */,
 				4AC1F25A236789B300133263 /* nikud_on.png in Resources */,
+				4A999D6927F4F2C8004C9675 /* AH+_icon.png in Resources */,
 				4ABFB722235291000079D68B /* boxShadow.png in Resources */,
 				4ABFB763235291000079D68B /* azarim_icon.png in Resources */,
 				4ABFB6A3235290FF0079D68B /* Toldot_icon_ios.png in Resources */,
@@ -2787,6 +2802,7 @@
 				4ABFB727235291000079D68B /* nextIcon@2X.png in Resources */,
 				4ABFB734235291000079D68B /* dirug_icon.png in Resources */,
 				4AF5552C1FCA360E00A830EE /* Main.storyboard in Resources */,
+				4A999D6827F4F2C8004C9675 /* A+_icon.png in Resources */,
 				4ABFB6A5235290FF0079D68B /* Thumbs.db in Resources */,
 				4ABFB6EF235291000079D68B /* homeButton_pressed.png in Resources */,
 				4ABFB6D0235291000079D68B /* rashi_icon_and_text.png in Resources */,
@@ -3291,7 +3307,7 @@
 				CODE_SIGN_ENTITLEMENTS = PortalHadafHayomi/PortalHadafHayomi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = 6RMGV6CC47;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3301,7 +3317,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.10;
+				MARKETING_VERSION = 10.11;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3322,7 +3338,7 @@
 				CODE_SIGN_ENTITLEMENTS = PortalHadafHayomi/PortalHadafHayomi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = 6RMGV6CC47;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3332,7 +3348,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.10;
+				MARKETING_VERSION = 10.11;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

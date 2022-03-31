@@ -12,12 +12,24 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
 {
     var accessory:Accessory?
     var displayedExpressions = [Expression]()
+    lazy var textDisplaySize:Int = {
+        if let savedExpressionsTextSize = UserDefaults.standard.object(forKey: "expressionsTextSize") as? Int
+        {
+            return savedExpressionsTextSize
+        }
+        else{
+            return 18
+        }
+    }()
     
     @IBOutlet weak var topBarSubTitleLabel:UILabel!
     @IBOutlet weak var loadingMessageLabel:UILabel!
     @IBOutlet weak var expressionsTableView:UITableView!
     @IBOutlet weak var tableViewBottomConstrains:NSLayoutConstraint!
     @IBOutlet weak var searchBar:UISearchBar!
+    
+    @IBOutlet weak var increaseTextSizeButton:UIButton!
+    @IBOutlet weak var dicreaseTextSizeButton:UIButton!
     
     lazy var webViewController:BTWebViewController = {
        
@@ -42,6 +54,17 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
         
         self.searchBar.layer.borderWidth = 1.0
         self.searchBar.layer.borderColor = UIColor(HexColor:"791F23").cgColor
+        
+        if let currentLanguage = Locale.current.languageCode
+            ,currentLanguage.hasSuffix("he")
+        {
+            self.increaseTextSizeButton.setImage(UIImage(named: "AH+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "AH-_icon"), for: .normal)
+        }
+        else{
+            self.increaseTextSizeButton.setImage(UIImage(named: "A+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "A-_icon"), for: .normal)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -126,6 +149,32 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
         })
     }
     
+    @IBAction func dicreaseTextSizeButtonClicked(_ sender:UIButton) {
+        textDisplaySize -= 1
+        if textDisplaySize < 10 {
+            textDisplaySize = 10
+        }
+        
+        UserDefaults.standard.set(textDisplaySize, forKey: "expressionsTextSize")
+        UserDefaults.standard.synchronize()
+        
+        self.expressionsTableView.reloadData()
+    }
+    
+    @IBAction func increaseTextSizeButtonClicked(_ sender:UIButton) {
+        
+        textDisplaySize += 1
+        if textDisplaySize > 50 {
+            textDisplaySize = 50
+        }
+        
+        UserDefaults.standard.set(textDisplaySize, forKey: "expressionsTextSize")
+        UserDefaults.standard.synchronize()
+        
+        self.expressionsTableView.reloadData()
+    }
+    
+    
     // MARK: - TableView Methods:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -135,6 +184,8 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpressionsTableCell", for:indexPath) as! ExpressionsTableCell
+        
+        cell.textSize = self.textDisplaySize
         cell.delegate = self
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none

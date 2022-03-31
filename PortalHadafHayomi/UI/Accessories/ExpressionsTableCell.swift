@@ -18,6 +18,7 @@ class ExpressionsTableCell: MSBaseTableViewCell, UITextViewDelegate
      weak var delegate:ExpressionsTableCellDelegate?
     
     var expression:Expression!
+    var textSize = 18
     
     @IBOutlet weak var keyLabel:UILabel!
     @IBOutlet weak var valueTextView:UITextView!
@@ -30,18 +31,14 @@ class ExpressionsTableCell: MSBaseTableViewCell, UITextViewDelegate
     override func reloadWithObject(_ object: Any)
     {
         self.expression = object as? Expression
-        
+       
+        self.keyLabel.font = self.keyLabel.font.withSize(CGFloat(self.textSize))
         self.keyLabel.text = self.expression.key
-        
-       // self.valueTextView.text = self.expression.value
-       // self.valueTextView.text = self.expression.value.htmlToString//htmlAttributedString()
-        //let val = "<p dir=\"ltr\">\(self.expression.value)</p>"
-        //let val = "<span style=\"direction:rtl;\">\(self.expression.value)</span>"
-        
         
         if var expressionValue = self.expression.value
         {
-            expressionValue = "<!DOCTYPE html><html dir=\"rtl\" lang=\"ar\"><head><meta charset=\"utf-8\">" + expressionValue
+            expressionValue = "<!DOCTYPE html><html dir=\"rtl\" lang=\"he\">><head><meta charset=\"utf-8\"><body><p style=font-size:\(textSize)px;\">\(expressionValue)</p> </body>"
+            
             self.valueTextView.attributedText = expressionValue.htmlAttributedString()
         }
         else{

@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -77,7 +78,7 @@
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.499360621" green="0.1692838371" blue="0.18975445630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.49803921568627452" green="0.16862745098039217" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="sSd-A8-cAI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GUL-Jk-cuz" secondAttribute="top" constant="4" id="7YY-Qg-Ie8"/>
                                                         <constraint firstItem="sSd-A8-cAI" firstAttribute="centerY" secondItem="GUL-Jk-cuz" secondAttribute="centerY" id="9C2-MK-pUl"/>
@@ -219,7 +220,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMt-OQ-xvW">
                                                     <rect key="frame" x="16" y="10" width="45" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="19"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.49803921569999998" green="0.16862745100000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="value label" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FF7-ef-TJJ">
@@ -298,6 +299,34 @@
                                     <outlet property="delegate" destination="nJ0-GT-8bx" id="trx-QQ-Zlx"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hx4-AH-w7F" userLabel="Minus">
+                                <rect key="frame" x="309" y="601" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8Yh-od-2Se"/>
+                                    <constraint firstAttribute="height" constant="50" id="FEK-5g-mUT"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="AH+_icon.png">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="increaseTextSizeButtonClicked:" destination="nJ0-GT-8bx" eventType="touchUpInside" id="s2J-IC-tgI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgg-ky-AmY">
+                                <rect key="frame" x="16" y="601" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="YxQ-1L-sVg"/>
+                                    <constraint firstAttribute="height" constant="50" id="cY8-zT-Wdi"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="AH-_icon.png">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dicreaseTextSizeButtonClicked:" destination="nJ0-GT-8bx" eventType="touchUpInside" id="xaS-gh-frf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zGj-lE-C3Y"/>
                         <color key="backgroundColor" red="0.97723382711410522" green="0.95447605848312378" blue="0.85833317041397095" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -305,19 +334,25 @@
                             <constraint firstItem="PKt-fT-luB" firstAttribute="top" secondItem="AjM-wm-gLI" secondAttribute="bottom" constant="230" id="0uu-xF-vIz"/>
                             <constraint firstItem="fUv-CJ-0RU" firstAttribute="trailing" secondItem="zGj-lE-C3Y" secondAttribute="trailing" id="0x8-5P-1cY"/>
                             <constraint firstItem="U6H-h6-AoG" firstAttribute="trailing" secondItem="zGj-lE-C3Y" secondAttribute="trailing" id="1Ct-l6-eJk"/>
+                            <constraint firstItem="zGj-lE-C3Y" firstAttribute="bottom" secondItem="Hgg-ky-AmY" secondAttribute="bottom" constant="16" id="2j5-23-Abk"/>
                             <constraint firstItem="AjM-wm-gLI" firstAttribute="trailing" secondItem="zGj-lE-C3Y" secondAttribute="trailing" id="AAH-cY-G8K"/>
                             <constraint firstItem="fUv-CJ-0RU" firstAttribute="top" secondItem="AjM-wm-gLI" secondAttribute="bottom" id="B29-4K-V2b"/>
                             <constraint firstItem="AjM-wm-gLI" firstAttribute="leading" secondItem="zGj-lE-C3Y" secondAttribute="leading" id="MvX-tX-Jfr"/>
                             <constraint firstItem="U6H-h6-AoG" firstAttribute="leading" secondItem="zGj-lE-C3Y" secondAttribute="leading" id="Ow4-vV-YKW"/>
+                            <constraint firstItem="zGj-lE-C3Y" firstAttribute="trailing" secondItem="hx4-AH-w7F" secondAttribute="trailing" constant="16" id="Rt1-el-6bd"/>
                             <constraint firstItem="fUv-CJ-0RU" firstAttribute="bottom" secondItem="zGj-lE-C3Y" secondAttribute="bottom" id="W3B-q1-C9K"/>
+                            <constraint firstItem="Hgg-ky-AmY" firstAttribute="leading" secondItem="zGj-lE-C3Y" secondAttribute="leading" constant="16" id="auP-P0-YMg"/>
                             <constraint firstItem="AjM-wm-gLI" firstAttribute="top" secondItem="U6H-h6-AoG" secondAttribute="bottom" id="ddg-Xk-guP"/>
+                            <constraint firstItem="zGj-lE-C3Y" firstAttribute="bottom" secondItem="hx4-AH-w7F" secondAttribute="bottom" constant="16" id="eor-Ae-Vu5"/>
                             <constraint firstItem="fUv-CJ-0RU" firstAttribute="leading" secondItem="zGj-lE-C3Y" secondAttribute="leading" id="fps-uQ-A13"/>
                             <constraint firstItem="PKt-fT-luB" firstAttribute="centerX" secondItem="zGj-lE-C3Y" secondAttribute="centerX" id="kUg-x2-y0C"/>
                             <constraint firstItem="U6H-h6-AoG" firstAttribute="top" secondItem="BOA-vw-xPN" secondAttribute="top" id="mZa-oN-8kT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dicreaseTextSizeButton" destination="Hgg-ky-AmY" id="RPw-wU-lJ7"/>
                         <outlet property="expressionsTableView" destination="fUv-CJ-0RU" id="81V-Bb-Noj"/>
+                        <outlet property="increaseTextSizeButton" destination="hx4-AH-w7F" id="fnh-AY-2TI"/>
                         <outlet property="loadingMessageLabel" destination="PKt-fT-luB" id="bAe-zw-swh"/>
                         <outlet property="searchBar" destination="AjM-wm-gLI" id="RRC-5I-i2g"/>
                         <outlet property="tableViewBottomConstrains" destination="W3B-q1-C9K" id="kXY-hk-hdF"/>
@@ -463,8 +498,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AH+_icon.png" width="320" height="320"/>
+        <image name="AH-_icon.png" width="320" height="320"/>
         <image name="Midot_icon_ios.png" width="150" height="150"/>
         <image name="backButton.png" width="99" height="99"/>
         <image name="topBar750.png" width="750" height="120"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
