@@ -15,6 +15,16 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     let masechtot = HadafHayomiManager.sharedManager.masechtot;
 
     var selectedMaseceht:Masechet?
+    
+    lazy var textDisplaySize:Int = {
+        if let savedExpressionsTextSize = UserDefaults.standard.object(forKey: "pageSummaryTextSize") as? Int
+        {
+            return savedExpressionsTextSize
+        }
+        else{
+            return 6
+        }
+    }()
         
     @IBOutlet weak var searchPageButton:UIButton?
     @IBOutlet weak var selectTodaysPageButton:UIButton?
@@ -26,6 +36,9 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     @IBOutlet weak var pagePickerTitleLabel:UILabel?
     @IBOutlet weak var pagePickerSelectButton:UIButton?
     @IBOutlet weak var pagePickerBaseViewBottomConstraint:NSLayoutConstraint?
+    
+    @IBOutlet weak var increaseTextSizeButton:UIButton!
+    @IBOutlet weak var dicreaseTextSizeButton:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +58,17 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         self.selectTodaysPageButton?.setTitle(("st_todays_page").localize(), for: .normal)
         
         self.hidePagePicker(animated:false)
+        
+        if let currentLanguage = Locale.current.languageCode
+            ,currentLanguage.hasSuffix("he")
+        {
+            self.increaseTextSizeButton.setImage(UIImage(named: "AH+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "AH-_icon"), for: .normal)
+        }
+        else{
+            self.increaseTextSizeButton.setImage(UIImage(named: "A+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "A-_icon"), for: .normal)
+        }
         
        self.getPageSummaries()
     }
@@ -118,6 +142,7 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         }
     }
     
+    
     @IBAction func pagePickerSelectButtonClicked(_ sender:UIButton)
     {
         self.hidePagePicker(animated: true)
@@ -131,6 +156,31 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     @IBAction func showTodaysPageButtonClicked(_ sender:UIButton)
     {
         self.scrollToTodaysPage()
+    }
+    
+    @IBAction func dicreaseTextSizeButtonClicked(_ sender:UIButton) {
+        textDisplaySize -= 1
+        if textDisplaySize < 8 {
+            textDisplaySize = 8
+        }
+        
+        UserDefaults.standard.set(textDisplaySize, forKey: "pageSummaryTextSize")
+        UserDefaults.standard.synchronize()
+        
+        self.pageSummaryCollectoinView?.reloadData()
+    }
+    
+    @IBAction func increaseTextSizeButtonClicked(_ sender:UIButton) {
+        
+        textDisplaySize += 1
+        if textDisplaySize > 50 {
+            textDisplaySize = 50
+        }
+        
+        UserDefaults.standard.set(textDisplaySize, forKey: "pageSummaryTextSize")
+        UserDefaults.standard.synchronize()
+        
+        self.pageSummaryCollectoinView?.reloadData()
     }
     
     //MARK: - UICollectoinView Delegate methods:
@@ -147,6 +197,7 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         
         if let pageSummary = self.pageSummaries?[indexPath.row] {
             
+            cell.textSize = self.textDisplaySize
             cell.reloadWithObject(pageSummary)
             cell.getPageSummary()
         }

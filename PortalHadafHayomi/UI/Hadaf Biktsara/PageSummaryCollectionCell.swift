@@ -11,6 +11,7 @@ import UIKit
 class PageSummaryCollectionCell: MSBaseCollectionViewCell, UITextViewDelegate
 {
     var pageSummary:PageSummary?
+    var textSize = 18
     
     var getPagSummaryProcess:GetPagSummaryProcess?
     
@@ -51,7 +52,7 @@ class PageSummaryCollectionCell: MSBaseCollectionViewCell, UITextViewDelegate
             
             self.titleLabel.text = self.pageSummary?.key
             
-            summary = "<!DOCTYPE html><html dir=\"rtl\" lang=\"he\"><head><meta charset=\"utf-8\"><font size=\"5\">" + summary
+            summary = "<!DOCTYPE html><html dir=\"rtl\" lang=\"he\">><head><meta charset=\"utf-8\"><body><p style=font-size:\(self.textSize)px;\">\(summary)</p> </body>"
             
             self.valueTextView.attributedText = summary.htmlAttributedString()
         }

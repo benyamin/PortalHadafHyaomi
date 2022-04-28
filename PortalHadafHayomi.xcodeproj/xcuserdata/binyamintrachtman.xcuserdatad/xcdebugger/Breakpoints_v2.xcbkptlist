@@ -51,8 +51,8 @@
             filePath = "PortalHadafHayomi/UI/Hadaf Biktsara/PageSummaryCollectionCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "getPageSummary()"
             landmarkType = "7">
          </BreakpointContent>
@@ -67,10 +67,10 @@
             filePath = "PortalHadafHayomi/UI/Hadaf Biktsara/PageSummaryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "PageSummaryViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -83,8 +83,8 @@
             filePath = "PortalHadafHayomi/UI/Hadaf Biktsara/PageSummaryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "scrollToSelectedPage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -131,10 +131,10 @@
             filePath = "PortalHadafHayomi/UI/Hadaf Biktsara/PageSummaryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "selectPage(pageSummary:)"
-            landmarkType = "7">
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "PageSummaryViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -195,8 +195,8 @@
             filePath = "PortalHadafHayomi/UI/Hadaf Biktsara/PageSummaryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
             landmarkName = "scrollToSelectedPage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -551,38 +551,6 @@
             endingLineNumber = "86"
             landmarkName = "addMessageButtonClicked(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "71C84436-AB14-4F76-B6FF-1EB54865EF97 - e579713e8ecf3abe"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Int) -&gt; () in PortalHadafHayomi.FourmDiscussoinViewController.addMessageButtonClicked(__C.UIButton) -&gt; ()"
-                  moduleName = "PortalHadafHayomi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/binyamintrachtman/Desktop/%20%20%20cx%20vx%20sa%CC%8Axz,.:::::::::.z.a%60z%60z%E2%89%A4~%60.~%C2%AC,.%60.::.%60h%20%D7%A9%D7%99%D7%97%D7%96%3B%20%20%20%20%3B%20%20%20%20%20%20%20%20%20%20%20%20/Development/Portal%20Hadaf%20Hayomi/PortalHadafHayomi/PortalHadafHayomi/UI/Forums/FourmDiscussoinViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "71C84436-AB14-4F76-B6FF-1EB54865EF97 - 8aededa0313195e6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in closure #1 (Swift.Int) -&gt; () in PortalHadafHayomi.FourmDiscussoinViewController.addMessageButtonClicked(__C.UIButton) -&gt; ()"
-                  moduleName = "PortalHadafHayomi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/binyamintrachtman/Desktop/%20%20%20cx%20vx%20sa%CC%8Axz,.:::::::::.z.a%60z%60z%E2%89%A4~%60.~%C2%AC,.%60.::.%60h%20%D7%A9%D7%99%D7%97%D7%96%3B%20%20%20%20%3B%20%20%20%20%20%20%20%20%20%20%20%20/Development/Portal%20Hadaf%20Hayomi/PortalHadafHayomi/PortalHadafHayomi/UI/Forums/FourmDiscussoinViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "68">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -615,38 +583,6 @@
             endingLineNumber = "35"
             landmarkName = "runWebServiceWithRequest(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "396E2BBB-6C63-455B-9591-25F87211B7EC - 6140706484e9043e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in PortalHadafHayomi.RegistrationProcess.runWebServiceWithRequest(PortalHadafHayomi.BaseRequest) -&gt; ()"
-                  moduleName = "PortalHadafHayomi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/binyamintrachtman/Desktop/%20%20%20cx%20vx%20sa%CC%8Axz,.:::::::::.z.a%60z%60z%E2%89%A4~%60.~%C2%AC,.%60.::.%60h%20%D7%A9%D7%99%D7%97%D7%96%3B%20%20%20%20%3B%20%20%20%20%20%20%20%20%20%20%20%20/Development/Portal%20Hadaf%20Hayomi/PortalHadafHayomi/PortalHadafHayomi/Processes/RegistrationProcess.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "396E2BBB-6C63-455B-9591-25F87211B7EC - f1b291f695490286"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Any, Any) -&gt; Any in closure #2 (Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in PortalHadafHayomi.RegistrationProcess.runWebServiceWithRequest(PortalHadafHayomi.BaseRequest) -&gt; ()"
-                  moduleName = "PortalHadafHayomi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/binyamintrachtman/Desktop/%20%20%20cx%20vx%20sa%CC%8Axz,.:::::::::.z.a%60z%60z%E2%89%A4~%60.~%C2%AC,.%60.::.%60h%20%D7%A9%D7%99%D7%97%D7%96%3B%20%20%20%20%3B%20%20%20%20%20%20%20%20%20%20%20%20/Development/Portal%20Hadaf%20Hayomi/PortalHadafHayomi/PortalHadafHayomi/Processes/RegistrationProcess.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -695,38 +631,6 @@
             endingLineNumber = "38"
             landmarkName = "runWebServiceWithRequest(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "38F8BF1F-38A3-43D1-A16C-C1DCDC8F996A - 28d210376da0e2f9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in PortalHadafHayomi.LoginProcess.runWebServiceWithRequest(PortalHadafHayomi.BaseRequest) -&gt; ()"
-                  moduleName = "PortalHadafHayomi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/binyamintrachtman/Desktop/%20%20%20cx%20vx%20sa%CC%8Axz,.:::::::::.z.a%60z%60z%E2%89%A4~%60.~%C2%AC,.%60.::.%60h%20%D7%A9%D7%99%D7%97%D7%96%3B%20%20%20%20%3B%20%20%20%20%20%20%20%20%20%20%20%20/Development/Portal%20Hadaf%20Hayomi/PortalHadafHayomi/PortalHadafHayomi/Processes/LoginProcess.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "38F8BF1F-38A3-43D1-A16C-C1DCDC8F996A - b5a7bd92ac382e0b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Any, Any) -&gt; Any in closure #2 (Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in PortalHadafHayomi.LoginProcess.runWebServiceWithRequest(PortalHadafHayomi.BaseRequest) -&gt; ()"
-                  moduleName = "PortalHadafHayomi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/binyamintrachtman/Desktop/%20%20%20cx%20vx%20sa%CC%8Axz,.:::::::::.z.a%60z%60z%E2%89%A4~%60.~%C2%AC,.%60.::.%60h%20%D7%A9%D7%99%D7%97%D7%96%3B%20%20%20%20%3B%20%20%20%20%20%20%20%20%20%20%20%20/Development/Portal%20Hadaf%20Hayomi/PortalHadafHayomi/PortalHadafHayomi/Processes/LoginProcess.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1286,6 +1190,38 @@
             startingLineNumber = "100"
             endingLineNumber = "100"
             landmarkName = "onDidSavePage(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ABED7BF0-1E08-49F5-83B5-A8D63A5AB29F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/UI/Hadaf Biktsara/PageSummaryCollectionCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "reloadData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47DAD5E8-9373-498B-9E36-9A025CAFF6BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/UI/Hadaf Biktsara/PageSummaryViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
