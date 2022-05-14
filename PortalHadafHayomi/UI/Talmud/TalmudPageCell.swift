@@ -8,9 +8,12 @@
 
 import UIKit
 import WebKit
+import PDFKit
 
-class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelegate/*, WKScriptMessageHandler*/
+class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelegate
 {
+    
+    @IBOutlet var pagPDFView: PDFView?
     
     @IBOutlet weak var pageWebView:WKWebView!
     @IBOutlet weak var pageTextView:UITextView?
@@ -34,6 +37,10 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         
         self.pageWebView.navigationDelegate = self
         self.pageWebView.uiDelegate = self
+        
+        pagPDFView?.displayMode = .singlePageContinuous
+        pagPDFView?.autoScales = true
+        pagPDFView?.displayDirection = .vertical
     }
     
     override func reloadWithObject(_ object: Any)
@@ -54,16 +61,19 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         if displayType == .EN
         {           
             self.setEnglishDispaly()
+            self.pagPDFView?.isHidden = true
+            self.pageWebView.isHidden = false
             return
         }
         else if displayType == .Steinsaltz
         {
             self.setSteinsaltzDisplay()
+            self.pagPDFView?.isHidden = true
+            self.pageWebView.isHidden = false
             return
         }
             
         else{
-       
             self.pageTextView?.isHidden = true
             self.pageWebView.isHidden = false
             
@@ -71,9 +81,13 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
             
             if displayType == .Vagshal
             {
+                self.pagPDFView?.isHidden = false
+                self.pageWebView.isHidden = true
+                
                 if let savedPageFilePath = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex:self.pageIndex, type: TalmudDisplayType.Vagshal)
                 {
-                    self.pageWebView.load(URLRequest(url: URL(fileURLWithPath: savedPageFilePath)))
+                    let pageUrl =  URL(fileURLWithPath: savedPageFilePath)
+                    self.pageWebView.load(URLRequest(url:pageUrl))
                 }
                 else{
                     urlString = ("https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")
@@ -82,11 +96,17 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
             else if displayType == .Text
                  || displayType == .TextWithScore
             {
+                self.pagPDFView?.isHidden = true
+                self.pageWebView.isHidden = false
+                
                 self.setPlaneTextDisplay()
                 return
             }
             else if displayType == .Meorot
             {
+                self.pagPDFView?.isHidden = true
+                self.pageWebView.isHidden = false
+                
                 if let masechet = HadafHayomiManager.sharedManager.getMasechetForPageIndex(self.pageIndex)
                 {
                     let maschentNumber = 282 + Int(masechet.id!)!
@@ -95,6 +115,9 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
             }
             else if displayType == .Chavruta
             {
+                self.pagPDFView?.isHidden = false
+                self.pageWebView.isHidden = true
+                
                 if let savedPageFilePath = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex:self.pageIndex, type: TalmudDisplayType.Chavruta)
                 {
                     self.pageWebView.load(URLRequest(url: URL(fileURLWithPath: savedPageFilePath)))
@@ -107,13 +130,34 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
             
             if let url = URL(string: urlString)
             {
-                let requestObj = URLRequest(url: url)
-                
-                if self.pageWebView.isLoading
-                {
-                   // self.pageWebView.stopLoading()
+                if pagPDFView?.isHidden == false {
+                        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) {
+                            (data, response, error) -> Void in
+
+                            if let httpResponse = response as? HTTPURLResponse
+                            {
+                                let statusCode = httpResponse.statusCode
+                                if (statusCode == 200) {
+                                    print("file downloaded successfully.")
+                                } else  {
+                                    print("Failed")
+                                }
+                            }
+
+                            if let actualData = data {
+                                
+                                DispatchQueue.main.async {
+                                    self.loadingView.isHidden = true
+                                    self.loadingIndicatorView.stopAnimating()
+                                    self.pagPDFView?.document = PDFDocument(data: actualData)
+                                }
+                            }
+                        }
+                        task.resume()
                 }
-                self.pageWebView.load(requestObj)
+                else {
+                    self.pageWebView.load(URLRequest(url: url))
+                }
             }
         }
     }

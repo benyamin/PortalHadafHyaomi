@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -60,6 +61,10 @@
                                                         <wkPreferences key="preferences"/>
                                                     </wkWebViewConfiguration>
                                                 </wkWebView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14J-8G-mhW" customClass="PDFView">
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="593"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9A-Zd-2A8">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
                                                     <subviews>
@@ -104,14 +109,17 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="oLM-3t-2ik" secondAttribute="bottom" id="4fy-Lm-6uG"/>
                                             <constraint firstAttribute="bottom" secondItem="S9A-Zd-2A8" secondAttribute="bottom" id="7Yc-gT-YFt"/>
+                                            <constraint firstAttribute="trailing" secondItem="14J-8G-mhW" secondAttribute="trailing" constant="8" id="Amx-FP-TWm"/>
                                             <constraint firstAttribute="trailing" secondItem="oLM-3t-2ik" secondAttribute="trailing" constant="1" id="H5B-w2-hdp"/>
                                             <constraint firstItem="nHt-Th-vlo" firstAttribute="leading" secondItem="b2h-cO-jdY" secondAttribute="leading" constant="1" id="KM5-iH-OF1"/>
+                                            <constraint firstItem="14J-8G-mhW" firstAttribute="top" secondItem="b2h-cO-jdY" secondAttribute="top" id="KO5-9y-Ldr"/>
                                             <constraint firstAttribute="bottom" secondItem="L9J-qF-ZXp" secondAttribute="bottom" id="P42-ad-f0b"/>
                                             <constraint firstItem="S9A-Zd-2A8" firstAttribute="leading" secondItem="b2h-cO-jdY" secondAttribute="leading" id="QNq-Sv-Mab"/>
                                             <constraint firstAttribute="bottom" secondItem="oLM-3t-2ik" secondAttribute="bottom" id="Qa4-w9-PtE"/>
                                             <constraint firstAttribute="trailing" secondItem="S9A-Zd-2A8" secondAttribute="trailing" id="VTr-Ph-L6N"/>
                                             <constraint firstItem="S9A-Zd-2A8" firstAttribute="top" secondItem="b2h-cO-jdY" secondAttribute="top" id="Vnn-oe-ppK"/>
                                             <constraint firstAttribute="bottom" secondItem="nHt-Th-vlo" secondAttribute="bottom" id="X0v-Cf-ccN"/>
+                                            <constraint firstAttribute="bottom" secondItem="14J-8G-mhW" secondAttribute="bottom" id="bdA-At-uaI"/>
                                             <constraint firstItem="nHt-Th-vlo" firstAttribute="top" secondItem="b2h-cO-jdY" secondAttribute="top" id="clB-9z-2EA"/>
                                             <constraint firstItem="oLM-3t-2ik" firstAttribute="top" secondItem="b2h-cO-jdY" secondAttribute="top" id="eIn-Q7-7sS"/>
                                             <constraint firstItem="oLM-3t-2ik" firstAttribute="top" secondItem="b2h-cO-jdY" secondAttribute="top" id="fbX-Ch-h2m"/>
@@ -121,6 +129,7 @@
                                             <constraint firstAttribute="trailing" secondItem="oLM-3t-2ik" secondAttribute="trailing" constant="1" id="hhP-1R-sEv"/>
                                             <constraint firstAttribute="trailing" secondItem="L9J-qF-ZXp" secondAttribute="trailing" id="kBt-ZV-9ls"/>
                                             <constraint firstItem="oLM-3t-2ik" firstAttribute="leading" secondItem="b2h-cO-jdY" secondAttribute="leading" constant="1" id="m26-ku-Uk7"/>
+                                            <constraint firstItem="14J-8G-mhW" firstAttribute="leading" secondItem="b2h-cO-jdY" secondAttribute="leading" constant="8" id="mMA-pZ-0CQ"/>
                                             <constraint firstAttribute="trailing" secondItem="nHt-Th-vlo" secondAttribute="trailing" constant="1" id="zP1-Mv-dOE"/>
                                         </constraints>
                                         <connections>
@@ -128,6 +137,7 @@
                                             <outlet property="loadingMessageLabel" destination="DJ6-bH-dKA" id="Thh-vq-gr4"/>
                                             <outlet property="loadingMessgaeView" destination="wUS-7H-7bS" id="TP6-up-DGD"/>
                                             <outlet property="loadingView" destination="S9A-Zd-2A8" id="G1N-kN-sQf"/>
+                                            <outlet property="pagPDFView" destination="14J-8G-mhW" id="lgo-i4-QjI"/>
                                             <outlet property="pageTextView" destination="L9J-qF-ZXp" id="nNP-zy-0fl"/>
                                             <outlet property="pageWebView" destination="nHt-Th-vlo" id="AUb-bx-2cr"/>
                                         </connections>
@@ -1118,5 +1128,8 @@
         <image name="topBar750.png" width="750" height="120"/>
         <image name="trachIcon.png" width="100" height="110"/>
         <image name="vasgal-icon.png" width="140" height="152"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
