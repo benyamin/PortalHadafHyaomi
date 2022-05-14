@@ -52,6 +52,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 if self.blockView.superview != self.pagesCollectionView {
                     self.pagesCollectionView.addSubview(self.blockView)
                 }
+                self.blockView .frame = self.pagesCollectionView.bounds
                 self.blockView.isHidden = false
                 self.pagesCollectionView.bringSubview(toFront: self.blockView)
             }

@@ -739,11 +739,12 @@ open class  HadafHayomiManager
     lazy var bottomBarItems:[MenuItem] = {
         
         var menuItems = [MenuItem]()
+        menuItems.append(MenuItem(dictionary:["name":"Home","title":"Home","imageName":"Home icon_ios.png"]))
         menuItems.append(contentsOf: self.homeMenuItems)
         
         /*
         var menuItems = [MenuItem]()
-        menuItems.append(MenuItem(dictionary:["name":"Home","title":"Home","imageName":"Home icon_ios.png"]))
+        
         menuItems.append(MenuItem(dictionary:["name":"Talmud","title":"Talmud","imageName":"talmus_icon.png"]))
         
         menuItems.append(MenuItem(dictionary:["name":"AudioLessons","title":"Audio Lessons","imageName":"shema_icon.png"]))

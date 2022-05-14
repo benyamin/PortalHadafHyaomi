@@ -43,7 +43,7 @@ open class  MesurementsManager
     static let sit:Double = 2 * tefach
     static let zeret:Double = 3 * tefach
     static let ama:Double = 6 * tefach
-    static let ris:Double = 8 * sit
+    static let ris:Double = 800 * sit
     static let mil:Double = 2000 * ama
     static let hilochShah:Double = 25 * ris
     static let parsa:Double = 4 * mil
@@ -132,7 +132,7 @@ open class  MesurementsManager
         volumeMeasurements["reviet"] = reviet
         volumeMeasurements["pratz"] = pratz
         volumeMeasurements["litra"] = litra
-        volumeMeasurements["log"] = litra
+        volumeMeasurements["log"] = log
         volumeMeasurements["rova"] = rova
         volumeMeasurements["kav"] = kav
         volumeMeasurements["omer"] = omer

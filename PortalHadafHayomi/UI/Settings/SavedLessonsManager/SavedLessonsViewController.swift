@@ -91,7 +91,7 @@ class SavedLessonsViewController: MSBaseViewController, UITableViewDelegate, UIT
         }
         
         let alertTitle = "st_delete_lessons_alert_title".localize()
-        let alertMessage = String(format: "st_delete_lessons_alert_message".localize(), arguments: [selectedLessons.count])
+        let alertMessage = String(format: "st_delete_lessons_alert_message".localize(), arguments: ["\(selectedLessons.count)"])
         
         let alertDeleteButtonTitle = "st_delete".localize()
         let alertCancelButtonTitle = "st_cancel".localize()

@@ -245,7 +245,7 @@
 "st_lesson_downlad_error_message" = "The system encountered a problem while downloading the lesson\nPlease try again later";
 "st_lesson_not_found_message" = "Required lesson not found\nPlease try again later.";
 "st_delete_lessons_alert_title" = "Delete Lessons";
-"st_delete_lessons_alert_message" = "%i lessons were chosen";
+"st_delete_lessons_alert_message" = "%@ lessons were chosen";
 "st_lesson_not_found_message" = "No lessons of %@ were found on the selected page";
 "st_delete_lesson_alert_title" = "Delete Lesson";
 "st_delete_lesson_alert_message" = "Delete lesson of %@ on Masechet %@ page %@ ?";
