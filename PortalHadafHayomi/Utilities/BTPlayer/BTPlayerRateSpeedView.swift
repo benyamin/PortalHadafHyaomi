@@ -21,7 +21,8 @@ class BTPlayerRateSpeedView: UIView
     @IBOutlet weak var backGroundView:UIView?
     @IBOutlet weak var rateSpeedTitleLabel:UILabel?
     @IBOutlet weak var rateSpeedSlider:UISlider?
-    @IBOutlet weak var rateSpeedSliderValue:UILabel?
+    @IBOutlet weak var rightRateLabel:UILabel?
+    @IBOutlet weak var leftRateLabel:UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +33,12 @@ class BTPlayerRateSpeedView: UIView
         self.backGroundView?.layer.cornerRadius = 5.0
         
         self.rateSpeedTitleLabel?.text = "st_speed_rate".localize()
+        
+        if let currentLanguage = Locale.current.languageCode
+            ,currentLanguage.hasSuffix("he"){
+            self.rightRateLabel?.text = "x0.5"
+            self.leftRateLabel?.text = "x2.0"
+        }
         /*
         let snailImage = UIImage(named:"snail_icon.png")
         
@@ -40,8 +47,17 @@ class BTPlayerRateSpeedView: UIView
  */
     }
     
+    func setValue(_ value: Float, animated: Bool) {
+        
+        self.rateSpeedTitleLabel?.text = "\("st_speed_rate".localize()) \(String(format: "%.1f",  value))"
+        
+        self.rateSpeedSlider?.setValue(value, animated: animated)
+    }
+    
     @IBAction func sliderChanged(_ slider:UISlider)
     {
+        self.rateSpeedTitleLabel?.text = "\("st_speed_rate".localize()) \(String(format: "%.1f",  slider.value))"
+
         self.delegate?.rateSpeedView(self, valueChanged: slider.value)
     }
 }

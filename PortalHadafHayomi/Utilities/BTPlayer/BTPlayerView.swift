@@ -250,6 +250,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         self.becomeFirstResponder()
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
+        if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
+            self.rateSpeedButton?.setTitle( String(format: "%.1f", playerRateSpeed), for: .normal)
+        }
     }
   
     
@@ -335,7 +338,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             }
             popover.show(playerRateSpeedView, fromView: self.rateSpeedButton!, inView: inView)
             
-            playerRateSpeedView.rateSpeedSlider?.setValue(player.rate(), animated: false)
+            playerRateSpeedView.setValue(player.rate(), animated: false)
         }
     }
     
@@ -713,6 +716,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     func rateSpeedView(_ rateSpeedView:BTPlayerRateSpeedView, valueChanged value:Float)
     {
         self.rateSpeedButton?.setTitle( String(format: "%.1f", value), for: .normal)
+      
+        UserDefaults.standard.set(value, forKey: "lessonPlayerRateSpeed")
+        UserDefaults.standard.synchronize()
         
         self.player.setRate(value)
     }

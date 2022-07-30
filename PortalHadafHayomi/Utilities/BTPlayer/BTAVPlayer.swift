@@ -66,7 +66,10 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     func setup()
     {
           NotificationCenter.default.addObserver(self, selector: #selector(self.itemDidFinishPlaying(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-
+        
+        if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
+            self.setRate(playerRateSpeed)
+        }
     }
     
     func play()
