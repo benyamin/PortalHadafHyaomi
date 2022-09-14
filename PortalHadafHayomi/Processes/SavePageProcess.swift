@@ -27,7 +27,7 @@ open class SavePageProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDow
         var pageUrlPath = ("https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageInfo.pageIndex).pdf")
         
         if pageInfo.type == .Chavruta {
-            pageUrlPath = "http://files.daf-yomi.com/app/chavruta/\(pageInfo.pageIndex).pdf"
+            pageUrlPath = "http://files.daf-yomi.com/files/app/chavruta/\(pageInfo.pageIndex).pdf"
         }
         
         if let pageUrl = URL(string: pageUrlPath)

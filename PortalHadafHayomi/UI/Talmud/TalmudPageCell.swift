@@ -123,7 +123,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                     self.pageWebView.load(URLRequest(url: URL(fileURLWithPath: savedPageFilePath)))
                 }
                 else{
-                    urlString = "http://files.daf-yomi.com/app/chavruta/\(pageIndex!).pdf"
+                    urlString = "http://files.daf-yomi.com/files/app/chavruta/\(pageIndex!).pdf"
 
                 }
             }

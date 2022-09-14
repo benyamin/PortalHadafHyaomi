@@ -262,7 +262,7 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
     
     func setExplanationPageDispaly()//Chavrota
     {
-        let urlString = "http://files.daf-yomi.com/app/chavruta/\(self.pageIndex!).pdf"
+        let urlString = "http://files.daf-yomi.com/files/app/chavruta/\(self.pageIndex!).pdf"
         
          self.creaditView?.isHidden = true
         
