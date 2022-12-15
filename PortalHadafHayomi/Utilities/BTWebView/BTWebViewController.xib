@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,6 +23,7 @@
                 <outlet property="lockRotationArrowImageView" destination="Wsa-Qm-zMS" id="hJ2-Xj-E5O"/>
                 <outlet property="lockRotationButton" destination="6Tf-3m-yAh" id="jen-9W-mmT"/>
                 <outlet property="lockRotationContentView" destination="i92-G5-uNn" id="EdJ-uf-lNw"/>
+                <outlet property="shareButton" destination="jLs-6Z-ixQ" id="hsf-Tg-Zii"/>
                 <outlet property="topBarTitleLabel" destination="9A0-dL-63g" id="RtB-cM-US3"/>
                 <outlet property="topBarView" destination="TSE-wb-a6t" id="tqb-AU-Kne"/>
                 <outlet property="view" destination="lGa-sG-6yi" id="NGT-yl-tha"/>
@@ -76,7 +77,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9A0-dL-63g">
-                            <rect key="frame" x="39" y="31" width="297" height="28"/>
+                            <rect key="frame" x="39" y="33" width="297" height="26"/>
                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
                             <color key="textColor" red="0.47058823529411764" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -134,7 +135,7 @@
                     <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MU4-iY-LXU">
-                            <rect key="frame" x="166.5" y="288.5" width="42" height="20.5"/>
+                            <rect key="frame" x="167" y="288.5" width="41.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -157,6 +158,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <viewLayoutGuide key="safeArea" id="ZdL-rA-6OQ"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="MU4-iY-LXU" firstAttribute="centerY" secondItem="coN-So-Jtq" secondAttribute="centerY" id="GdE-83-Jy3"/>
@@ -168,9 +170,9 @@
                         <constraint firstItem="MU4-iY-LXU" firstAttribute="centerX" secondItem="coN-So-Jtq" secondAttribute="centerX" id="kMb-cc-CJc"/>
                         <constraint firstItem="auQ-TN-jwU" firstAttribute="centerY" secondItem="coN-So-Jtq" secondAttribute="centerY" id="whX-KG-J6k"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="ZdL-rA-6OQ"/>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="8MU-uv-snC"/>
             <color key="backgroundColor" red="0.97577124829999995" green="0.95302349330000002" blue="0.85892361399999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="kNF-WN-qNY" firstAttribute="leading" secondItem="lGa-sG-6yi" secondAttribute="leading" id="6Ky-Zf-9uR"/>
@@ -188,7 +190,6 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <viewLayoutGuide key="safeArea" id="8MU-uv-snC"/>
             <point key="canvasLocation" x="535.20000000000005" y="336.88155922038982"/>
         </view>
     </objects>

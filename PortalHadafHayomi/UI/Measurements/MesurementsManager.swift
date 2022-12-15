@@ -41,7 +41,7 @@ open class  MesurementsManager
     static let etzba:Double = 1
     static let tefach:Double = 4 * etzba
     static let sit:Double = 2 * tefach
-    static let zeret:Double = 3 * tefach
+    static let zeret:Double = 10/3 * tefach
     static let ama:Double = 6 * tefach
     static let ris:Double = 800 * sit
     static let mil:Double = 2000 * ama

@@ -55,12 +55,13 @@ class PageSelectingCell: MSBaseCollectionViewCell {
              self.noteButton?.isHidden = true
         }
         
-        self.checkBoxButton?.isSelected = self.page?.isMarkedAsLearned ?? false
+        self.noteButton?.isSelected = self.page?.isMarkedAsLearned ?? false
     }
     
     @IBAction func checkBoxButton(_ sener:UIButton)
     {
-        self.checkBoxButton?.isSelected =  self.page!.isSelected
+        self.page?.isSelected = !(self.page?.isSelected ?? false)
+        self.checkBoxButton?.isSelected = self.page?.isSelected ?? false
     }
     
     @IBAction func noteButtonClicked(_ sener:UIButton)

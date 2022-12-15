@@ -28,6 +28,8 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
     
     var getWebPageProcess:MSBaseProcess?
     
+    let basicfontSize = 100
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -45,8 +47,17 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
     
     override func reloadWithObject(_ object: Any)
     {
-        self.pageIndex = object as? Int
-
+        if let userInfo = object as? (displayType:TalmudDisplayType, pageIndex:Int){
+            self.displayType = userInfo.displayType
+            self.pageIndex = userInfo.pageIndex
+        }
+        else if let index = object as? Int{
+            self.pageIndex = index
+        }
+        else{
+            self.pageIndex = 0
+        }
+    
         if self.pageWebView.isLoading
         {
             //self.pageWebView.stopLoading()
@@ -124,7 +135,6 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                 }
                 else{
                     urlString = "http://files.daf-yomi.com/files/app/chavruta/\(pageIndex!).pdf"
-
                 }
             }
             
@@ -160,6 +170,10 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                 }
             }
         }
+    }
+    
+    override func reloadData() {
+        self.setTextSize()
     }
     
     func setEnglishDispaly()
@@ -200,11 +214,15 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
             
         }, onComplete: { (object) -> Void in
             
-            self.loadingView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-            
             if let pageText = object as? String {
                 self.pageWebView.loadHTMLString("<font size=\"25\">\(pageText)</font>", baseURL: nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.setTextSize()
+                    
+                    self.loadingView.isHidden = true
+                    self.loadingIndicatorView.stopAnimating()
+                }
+               
             }
             else if let pageURL = object as? URL {
                  self.pageWebView.load(URLRequest.init(url: pageURL))
@@ -214,6 +232,17 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
             
             self.loadingIndicatorView.stopAnimating()
         })
+    }
+    
+    func setTextSize(){
+        
+        let textSizeKey = HadafHayomiManager.sharedManager.textSizeKeyForDisplayType(displayType)
+        
+        if let additionalTextSize = UserDefaults.standard.object(forKey: textSizeKey) as? Int{
+            let requiredfontSize = self.basicfontSize+additionalTextSize
+            let js = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust='\(requiredfontSize)%'"
+            pageWebView.evaluateJavaScript(js, completionHandler: nil)
+        }
     }
     
     func showLoadingView()
@@ -257,7 +286,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         self.loadingView.isHidden = true
         self.loadingIndicatorView.stopAnimating()
     }
-    
+        
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         
         if webView.url?.absoluteString == "about:blank"

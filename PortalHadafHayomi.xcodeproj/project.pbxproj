@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		220C99C824FAF1130013D377 /* RegistrationProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C99C724FAF1130013D377 /* RegistrationProcess.swift */; };
 		220C99CA24FAF7890013D377 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C99C924FAF7890013D377 /* User.swift */; };
+		220F5CA52904A650002CEC7C /* GetTalmudQAInfoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */; };
 		221A2DB0254B49B50040475E /* ForgotPasswordProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */; };
 		221A2DB2254B8FA00040475E /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221A2DB1254B8FA00040475E /* shareIcon.png */; };
 		223508BD2581684C0049D467 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223508BC2581684C0049D467 /* LessonTableViewCell.swift */; };
@@ -16,13 +17,19 @@
 		224518E4250BC2A600C82C9E /* ForumAddMessageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */; };
 		224EFDB02576DDAB003532DE /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDAE2576DDAB003532DE /* nextButton.png */; };
 		224EFDB42576ECFB003532DE /* preButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDB22576ECFB003532DE /* preButton.png */; };
+		2260061C28D9122100FF8386 /* StudyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */; };
+		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
 		2273A8C72471CBA7000E0390 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C52471CBA7000E0390 /* playIcon.png */; };
 		2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C62471CBA7000E0390 /* stopIcon.png */; };
 		22CD09B32467CEA100936262 /* PageSummaryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */; };
+		22CDDD76294B24AD00945E6F /* UIButton+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */; };
+		22CDDD7D294B571400945E6F /* showPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7B294B571400945E6F /* showPlayer.png */; };
+		22CDDD7E294B571400945E6F /* hidePlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7C294B571400945E6F /* hidePlayer.png */; };
 		22CED9EA24636BF800D6A8D5 /* GetPagSummaryProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */; };
 		22CF56F0250D6D3C00273D07 /* FourmUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */; };
 		22CF571B250EA3E700273D07 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF571A250EA3E700273D07 /* LoginView.swift */; };
 		22CF571D250EA3F500273D07 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CF571C250EA3F500273D07 /* LoginView.xib */; };
+		22D3B82B29173A5B003FE3E0 /* QandATestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */; };
 		22D69D7B2483279500525786 /* MediaLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D69D7A2483279500525786 /* MediaLesson.swift */; };
 		22DEFE3325080D40005CB2FF /* ForumAddMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */; };
 		4A0BCF7A1FE7B799009F7261 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BCF791FE7B799009F7261 /* MapViewController.swift */; };
@@ -586,6 +593,7 @@
 /* Begin PBXFileReference section */
 		220C99C724FAF1130013D377 /* RegistrationProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProcess.swift; sourceTree = "<group>"; };
 		220C99C924FAF7890013D377 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAInfoProcess.swift; sourceTree = "<group>"; };
 		221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordProcess.swift; sourceTree = "<group>"; };
 		221A2DB1254B8FA00040475E /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
 		223508BC2581684C0049D467 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
@@ -597,13 +605,19 @@
 		224EFDB72576ED8B003532DE /* he */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he; path = he.lproj/nextButton.png; sourceTree = "<group>"; };
 		224EFDB82576EE41003532DE /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/preButton.png; sourceTree = "<group>"; };
 		224EFDB92576EE46003532DE /* he */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he; path = he.lproj/preButton.png; sourceTree = "<group>"; };
+		2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyStoryboard.storyboard; sourceTree = "<group>"; };
+		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
 		2273A8C52471CBA7000E0390 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
 		2273A8C62471CBA7000E0390 /* stopIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopIcon.png; sourceTree = "<group>"; };
 		22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSummaryCollectionCell.swift; sourceTree = "<group>"; };
+		22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extras.swift"; sourceTree = "<group>"; };
+		22CDDD7B294B571400945E6F /* showPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showPlayer.png; path = ../../../../../../../Downloads/showPlayer.png; sourceTree = "<group>"; };
+		22CDDD7C294B571400945E6F /* hidePlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hidePlayer.png; path = ../../../../../../../Downloads/hidePlayer.png; sourceTree = "<group>"; };
 		22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPagSummaryProcess.swift; sourceTree = "<group>"; };
 		22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourmUserInfoView.swift; sourceTree = "<group>"; };
 		22CF571A250EA3E700273D07 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		22CF571C250EA3F500273D07 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QandATestViewController.swift; sourceTree = "<group>"; };
 		22D69D7A2483279500525786 /* MediaLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLesson.swift; sourceTree = "<group>"; };
 		22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumAddMessageViewController.swift; sourceTree = "<group>"; };
 		4A0BCF791FE7B799009F7261 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -1198,6 +1212,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2260061A28D911EF00FF8386 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
 		22CF5711250E378600273D07 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1439,6 +1461,7 @@
 				4A90C8A420BB4AB400D46BC2 /* QuastionsViewController.swift */,
 				4A90C8A620BB4AF400D46BC2 /* QuastionTopicTableCell.swift */,
 				4A90C8AA20BC984E00D46BC2 /* QandADetailsViewController.swift */,
+				22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */,
 			);
 			path = "Q&A";
 			sourceTree = "<group>";
@@ -1481,6 +1504,7 @@
 				4A79B04320F1876100C3C456 /* Window+Extras.swift */,
 				4A59302C21E179F4001A3360 /* URLSessionDataTask+Extras.swift */,
 				4A2150FB2216F6EA00BFEEF7 /* UITableViewCell+Extras.swift */,
+				22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1765,6 +1789,8 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				22CDDD7C294B571400945E6F /* hidePlayer.png */,
+				22CDDD7B294B571400945E6F /* showPlayer.png */,
 				4A74B4C9270F83EC00DD20E6 /* MultiplePageDownload.png */,
 				4A74B4C8270F83EA00DD20E6 /* pageDownload.png */,
 				221A2DB1254B8FA00040475E /* shareIcon.png */,
@@ -2306,6 +2332,8 @@
 				224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */,
 				221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */,
 				4A50C23B27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift */,
+				2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */,
+				220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -2338,6 +2366,7 @@
 				4AB166222113AB3600481B04 /* Chavrusas */,
 				4AB1665121446BC600481B04 /* Forums */,
 				22CF5711250E378600273D07 /* Login */,
+				2260061A28D911EF00FF8386 /* Study */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2628,6 +2657,7 @@
 				4A5884912085C6DC003EC9E5 /* check@3x.png in Resources */,
 				4A47E6011FF9043600785929 /* Main_IPadStoryboard.storyboard in Resources */,
 				4ABFB768235291000079D68B /* Icon-App-76x76@2x.png in Resources */,
+				22CDDD7D294B571400945E6F /* showPlayer.png in Resources */,
 				4AEC802221727122003459AF /* BTPlayerRateSpeedView.xib in Resources */,
 				4ABFB6CE235290FF0079D68B /* hasivut_icon_and_text.png in Resources */,
 				2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */,
@@ -2635,6 +2665,7 @@
 				4ABFB6B2235290FF0079D68B /* title_2.png in Resources */,
 				4ABFB738235291000079D68B /* lower_bar_empty_4.png in Resources */,
 				4ABFB778235291000079D68B /* defaultIcon.png in Resources */,
+				22CDDD7E294B571400945E6F /* hidePlayer.png in Resources */,
 				4ABFB710235291000079D68B /* move_left@3x.png in Resources */,
 				4ABFB8AB235291000079D68B /* rasheyTeivot.plist in Resources */,
 				4ABFB6B3235290FF0079D68B /* Sefer_btn.png in Resources */,
@@ -2718,6 +2749,7 @@
 				4ABFB722235291000079D68B /* boxShadow.png in Resources */,
 				4ABFB763235291000079D68B /* azarim_icon.png in Resources */,
 				4ABFB6A3235290FF0079D68B /* Toldot_icon_ios.png in Resources */,
+				2260061C28D9122100FF8386 /* StudyStoryboard.storyboard in Resources */,
 				4ABFB785235291000079D68B /* Learchiv_icon_ios.png in Resources */,
 				4A733B3020B22BF800976D55 /* SurveysStoryboard.storyboard in Resources */,
 				4ABFB6D8235291000079D68B /* Calculator_icon_ios.png in Resources */,
@@ -2878,6 +2910,7 @@
 				4A534A1C21C70A0B00AF363B /* SearchArticleResultTableCell.swift in Sources */,
 				4A2150F82216172D00BFEEF7 /* PageSelectingCell.swift in Sources */,
 				4A90C88520B61CD400D46BC2 /* SiyumTopic.swift in Sources */,
+				220F5CA52904A650002CEC7C /* GetTalmudQAInfoProcess.swift in Sources */,
 				4A2150BD220B643700BFEEF7 /* GetSteinsaltzPageProcess.swift in Sources */,
 				4AC4830D1FE5CFBA000F1528 /* GetArticalesProcess.swift in Sources */,
 				4A933ADA1FCF4AB400D175E1 /* TalmudViewController.swift in Sources */,
@@ -2950,6 +2983,7 @@
 				4ABFB8B123529DFA0079D68B /* DownloadOperation.swift in Sources */,
 				4A5B59752246B54D00C1765D /* Language.swift in Sources */,
 				4AD149731FDDABBB0038EBDF /* HomeSideMenuCell.swift in Sources */,
+				22D3B82B29173A5B003FE3E0 /* QandATestViewController.swift in Sources */,
 				4AF555541FCA379900A830EE /* DataObject.swift in Sources */,
 				4AFE3EF9204F3E140040BD24 /* Map_IPadViewController.swift in Sources */,
 				4A6B0BEB1FCEA75C008C1205 /* HadafHayomiManager.swift in Sources */,
@@ -3013,6 +3047,7 @@
 				4A435FBD2198BCF50006BB02 /* MidotAndShiourimViewController.swift in Sources */,
 				4A74B4CD270F8C1300DD20E6 /* TalmudPageRangePickerView.swift in Sources */,
 				4AD149621FD9CAE70038EBDF /* MSBaseTableViewCell.swift in Sources */,
+				2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */,
 				4AD4099F201F9C1000A76EF0 /* JewishCallCollectionHeaderView.swift in Sources */,
 				4ABFB21E235250050079D68B /* DownloadSiriInstructions.swift in Sources */,
 				4AE638321FCEF3CA00CD93C1 /* HebrewUtil.swift in Sources */,
@@ -3028,6 +3063,7 @@
 				4AEACF2E20963F8500385129 /* MeasurementCalculatorViewController.swift in Sources */,
 				220C99CA24FAF7890013D377 /* User.swift in Sources */,
 				4A215101221B491200BFEEF7 /* SavedLessonsViewController.swift in Sources */,
+				22CDDD76294B24AD00945E6F /* UIButton+Extras.swift in Sources */,
 				4AD409A820262EE800A76EF0 /* JewishCallPopOver.swift in Sources */,
 				4AB166422134A43700481B04 /* GetCurrenySurveyProcess.swift in Sources */,
 				4A65E1781FE802BF008BA62B /* AddVenueViewController.swift in Sources */,
@@ -3309,6 +3345,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = 6RMGV6CC47;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Batch.embeddedframework",
@@ -3317,7 +3354,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.12;
+				MARKETING_VERSION = 10.13;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3348,7 +3385,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.12;
+				MARKETING_VERSION = 10.13;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

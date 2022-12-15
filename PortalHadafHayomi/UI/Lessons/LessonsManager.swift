@@ -13,6 +13,7 @@ class LessonsManager
     static let sharedManager =  LessonsManager()
     
     var playingLesson:Lesson?
+    var isPlaying:Bool = false
     
     var lessons = [Lesson](){
         didSet{

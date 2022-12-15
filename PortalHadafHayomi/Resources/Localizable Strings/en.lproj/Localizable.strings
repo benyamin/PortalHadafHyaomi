@@ -264,8 +264,9 @@
 "st_change_lesson_alert_message" = "Do you wish to move to lesson of %@ on masehcet %@ page %@?";
 "st_move_to_selected_lesson" = "Move";
 "st_stay_at_current_lesson" = "Stay";
-
-
+"st_all" = "All";
+"st_audio" = "Audio";
+"st_video" = "Video";
 
 //Lessons Map page
 "st_lessons_map" = "Lessons map";

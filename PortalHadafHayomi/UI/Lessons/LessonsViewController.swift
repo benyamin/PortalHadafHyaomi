@@ -739,6 +739,8 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
    
     //MARK : BTPlayerView delegate methods
     func didPause(player:BTPlayerView){
+        
+        LessonsManager.sharedManager.isPlaying = false
         self.playPauseButton.isSelected = false
         
         if let tableView  = self.lastPlayedLessonsTableView
@@ -749,6 +751,8 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     func didPlay(player:BTPlayerView){
         self.playPauseButton.isSelected = true
+        
+        LessonsManager.sharedManager.isPlaying = true
         
         if let tableView  = self.lastPlayedLessonsTableView
            ,let visibleCellsIndexes = tableView.indexPathsForVisibleRows {

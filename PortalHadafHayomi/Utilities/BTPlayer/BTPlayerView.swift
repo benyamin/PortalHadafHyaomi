@@ -231,7 +231,12 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        /*
+        self.playButton.accessibilityIdentifier = "Play"
+        self.pauseButton.accessibilityIdentifier = "Pause"
+        self.jumpForwardButton?.accessibilityIdentifier = "Jump Forward"
+        self.jumpBackButton?.accessibilityIdentifier = "Jump Back"
+        */
         self.loadingActivityIndicator.isHidden = true
         self.pauseButton.isHidden = true
         self.errorLabel.isHidden = true

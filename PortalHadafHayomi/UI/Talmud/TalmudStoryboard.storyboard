@@ -168,10 +168,10 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khj-Z1-3kN">
-                                <rect key="frame" x="70" y="632" width="305" height="35"/>
+                                <rect key="frame" x="70" y="627" width="305" height="40"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="safaira2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9wL-yX-eHY">
-                                        <rect key="frame" x="8" y="0.0" width="35" height="35"/>
+                                        <rect key="frame" x="8" y="0.0" width="35" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="nzG-TM-0Jw"/>
                                         </constraints>
@@ -183,7 +183,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lza-nH-Mug">
-                                        <rect key="frame" x="51" y="21.5" width="162" height="12.5"/>
+                                        <rect key="frame" x="51" y="23.5" width="162" height="12.5"/>
                                         <string key="text">William Davidson Edition - English
 </string>
                                         <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="10"/>
@@ -193,30 +193,29 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.1803921568627451" green="0.2196078431372549" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="8DX-5e-HtT"/>
+                                    <constraint firstAttribute="height" constant="40" id="8DX-5e-HtT"/>
                                     <constraint firstItem="1FM-6Z-3iK" firstAttribute="leading" secondItem="9wL-yX-eHY" secondAttribute="trailing" constant="8" id="J5G-zq-3rc"/>
                                     <constraint firstItem="9wL-yX-eHY" firstAttribute="leading" secondItem="khj-Z1-3kN" secondAttribute="leading" constant="8" id="KId-G1-0bi"/>
                                     <constraint firstItem="lza-nH-Mug" firstAttribute="leading" secondItem="9wL-yX-eHY" secondAttribute="trailing" constant="8" id="LUG-TE-e0A"/>
                                     <constraint firstItem="9wL-yX-eHY" firstAttribute="top" secondItem="khj-Z1-3kN" secondAttribute="top" id="RqC-Un-NgR"/>
-                                    <constraint firstAttribute="bottom" secondItem="lza-nH-Mug" secondAttribute="bottom" constant="1" id="VRI-uY-2IY"/>
+                                    <constraint firstAttribute="bottom" secondItem="lza-nH-Mug" secondAttribute="bottom" constant="4" id="VRI-uY-2IY"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1FM-6Z-3iK" secondAttribute="trailing" constant="16" id="Yyf-mq-JjO"/>
                                     <constraint firstAttribute="bottom" secondItem="9wL-yX-eHY" secondAttribute="bottom" id="ikb-Hc-nWH"/>
                                     <constraint firstItem="1FM-6Z-3iK" firstAttribute="top" secondItem="khj-Z1-3kN" secondAttribute="top" constant="1" id="ssY-VL-QqY"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyy-A8-skH">
-                                <rect key="frame" x="0.0" y="632" width="70" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyy-A8-skH">
+                                <rect key="frame" x="0.0" y="627" width="70" height="40"/>
                                 <color key="backgroundColor" red="0.55294117647058827" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="SLm-cK-lHN"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="ZgL-0l-gb8"/>
+                                    <constraint firstAttribute="height" constant="40" id="SLm-cK-lHN"/>
+                                    <constraint firstAttribute="width" constant="70" id="ZgL-0l-gb8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="הצג נגן">
+                                <state key="normal" image="showPlayer.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <state key="selected" title="הסתר נגן">
+                                <state key="selected" image="hidePlayer.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -463,11 +462,23 @@
                                             <action selector="saveMultiplePageButtonClicked:" destination="Jai-r2-lgz" eventType="touchUpInside" id="jl7-u6-fnw"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oma-Al-xFl">
+                                        <rect key="frame" x="72" y="31" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="L04-4n-SHc"/>
+                                            <constraint firstAttribute="width" constant="24" id="ywo-xQ-NJe"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="shareIcon.png"/>
+                                        <connections>
+                                            <action selector="shareButtonClicked" destination="Jai-r2-lgz" eventType="touchUpInside" id="22C-8l-rom"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xp5-oI-U2O" secondAttribute="trailing" id="0dE-yE-gsG"/>
                                     <constraint firstItem="Omk-88-gA9" firstAttribute="leading" secondItem="1fD-PZ-PnB" secondAttribute="trailing" constant="10" id="43l-6n-CWJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="oma-Al-xFl" secondAttribute="bottom" constant="15" id="7XW-K0-XeL"/>
                                     <constraint firstAttribute="bottom" secondItem="8aq-g3-dl1" secondAttribute="bottom" constant="16" id="8kE-GN-wLH"/>
                                     <constraint firstItem="iEe-e7-9qT" firstAttribute="leading" secondItem="Gtt-Vg-Jeg" secondAttribute="leading" constant="40" id="A76-ev-SzF"/>
                                     <constraint firstAttribute="bottom" secondItem="Omk-88-gA9" secondAttribute="bottom" constant="16" id="CJH-ak-deL"/>
@@ -478,6 +489,7 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Nr3-LU-cUC" secondAttribute="trailing" constant="16" id="TDD-Cq-A6F"/>
                                     <constraint firstAttribute="bottom" secondItem="1fD-PZ-PnB" secondAttribute="bottom" constant="15" id="WRQ-m8-2j9"/>
                                     <constraint firstAttribute="bottom" secondItem="Nr3-LU-cUC" secondAttribute="bottom" constant="13" id="WX8-4u-ucq"/>
+                                    <constraint firstItem="oma-Al-xFl" firstAttribute="leading" secondItem="iEe-e7-9qT" secondAttribute="trailing" constant="8" id="eAh-Cf-MQE"/>
                                     <constraint firstAttribute="bottom" secondItem="xp5-oI-U2O" secondAttribute="bottom" id="iHT-dc-0Uk"/>
                                     <constraint firstItem="Nr3-LU-cUC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gtt-Vg-Jeg" secondAttribute="leading" constant="16" id="lkd-NX-uqc"/>
                                     <constraint firstItem="Nr3-LU-cUC" firstAttribute="centerX" secondItem="Gtt-Vg-Jeg" secondAttribute="centerX" id="nA1-BS-qYg"/>
@@ -485,14 +497,44 @@
                                     <constraint firstItem="xp5-oI-U2O" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="top" id="xAW-WQ-vji"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XK-vw-AZT">
+                                <rect key="frame" x="299" y="631" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="IoU-o5-v6Z"/>
+                                    <constraint firstAttribute="width" constant="30" id="dX5-Hr-t9X"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="AH-_icon.png">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dicreaseTextSizeButtonClicked:" destination="Jai-r2-lgz" eventType="touchUpInside" id="IMN-dA-VPH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsp-Gh-zwb">
+                                <rect key="frame" x="337" y="631" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="5qL-fZ-yvD"/>
+                                    <constraint firstAttribute="height" constant="30" id="tgS-Le-EtF"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="AH-_icon.png">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="increaseTextSizeButtonClicked:" destination="Jai-r2-lgz" eventType="touchUpInside" id="Aki-2V-d2r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97723382709999995" green="0.95447605849999995" blue="0.85833317040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="iXH-Fj-72o" firstAttribute="top" secondItem="6XK-vw-AZT" secondAttribute="bottom" constant="6" id="0Db-gZ-RLt"/>
                             <constraint firstItem="khj-Z1-3kN" firstAttribute="leading" secondItem="zyy-A8-skH" secondAttribute="trailing" id="0j3-eY-WuN"/>
                             <constraint firstAttribute="trailing" secondItem="UgW-NQ-GQb" secondAttribute="trailing" id="1Qh-QC-ZV4"/>
                             <constraint firstItem="Gtt-Vg-Jeg" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="5N9-F5-azG"/>
                             <constraint firstItem="zVD-0l-dn5" firstAttribute="top" secondItem="d41-67-OzN" secondAttribute="bottom" id="8S2-DC-v2x"/>
                             <constraint firstItem="d41-67-OzN" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="B9e-7B-OhT"/>
+                            <constraint firstItem="zsp-Gh-zwb" firstAttribute="leading" secondItem="6XK-vw-AZT" secondAttribute="trailing" constant="8" id="BFA-fx-FOw"/>
                             <constraint firstItem="Qye-yT-nQL" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="bottom" constant="-300" id="CON-BK-twg"/>
                             <constraint firstAttribute="trailing" secondItem="e3S-8u-bB1" secondAttribute="trailing" id="Cn6-tr-h9E"/>
                             <constraint firstItem="iXH-Fj-72o" firstAttribute="top" secondItem="e3S-8u-bB1" secondAttribute="bottom" id="DSB-Ko-I7L"/>
@@ -500,10 +542,12 @@
                             <constraint firstItem="Gtt-Vg-Jeg" firstAttribute="top" secondItem="tTo-xy-lHx" secondAttribute="top" id="Pkl-PE-9FM"/>
                             <constraint firstAttribute="trailing" secondItem="5Sk-sJ-IN1" secondAttribute="trailing" id="QMk-LS-ihY"/>
                             <constraint firstAttribute="trailing" secondItem="khj-Z1-3kN" secondAttribute="trailing" id="QYt-fT-cT1"/>
+                            <constraint firstAttribute="trailing" secondItem="zsp-Gh-zwb" secondAttribute="trailing" constant="8" id="Qxl-5z-OxX"/>
                             <constraint firstItem="e3S-8u-bB1" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="T3R-cC-3ew"/>
                             <constraint firstItem="e3S-8u-bB1" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="bottom" constant="35" id="W9Q-72-7TC"/>
                             <constraint firstAttribute="bottomMargin" secondItem="zyy-A8-skH" secondAttribute="bottom" id="c53-bn-coE"/>
                             <constraint firstItem="cxP-Kk-WIo" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="cCy-bz-dhh"/>
+                            <constraint firstItem="iXH-Fj-72o" firstAttribute="top" secondItem="zsp-Gh-zwb" secondAttribute="bottom" constant="6" id="cxS-T5-j9h"/>
                             <constraint firstAttribute="trailing" secondItem="Qye-yT-nQL" secondAttribute="trailing" id="dGY-uM-kN9"/>
                             <constraint firstItem="tw4-s9-hff" firstAttribute="width" secondItem="UgW-NQ-GQb" secondAttribute="width" id="ddk-8L-7RG"/>
                             <constraint firstItem="UgW-NQ-GQb" firstAttribute="leading" secondItem="tw4-s9-hff" secondAttribute="trailing" constant="1" id="eoa-BI-kbD"/>
@@ -530,8 +574,10 @@
                     <connections>
                         <outlet property="addNoteButton" destination="iEe-e7-9qT" id="3UP-eW-vP5"/>
                         <outlet property="creaditView" destination="khj-Z1-3kN" id="M5d-Le-kje"/>
+                        <outlet property="dicreaseTextSizeButton" destination="6XK-vw-AZT" id="EZJ-3c-RF0"/>
                         <outlet property="displayTypePickerView" destination="5Sk-sJ-IN1" id="qib-Tf-W1b"/>
                         <outlet property="displayTypePickerViewTopConstraint" destination="yKF-AK-JQH" id="7lZ-1C-Od4"/>
+                        <outlet property="increaseTextSizeButton" destination="zsp-Gh-zwb" id="Lk9-gA-7Jn"/>
                         <outlet property="lessonsPickerView" destination="Qye-yT-nQL" id="Ohk-77-zIU"/>
                         <outlet property="lessonsPickerViewTopConstraint" destination="CON-BK-twg" id="tW3-sw-grn"/>
                         <outlet property="lockRotationArrowImageView" destination="rmO-ke-PJF" id="ILB-oM-OHu"/>
@@ -540,11 +586,13 @@
                         <outlet property="nikodButton" destination="3CU-qn-65E" id="KaT-oa-Vha"/>
                         <outlet property="pagesCollectionBottomConstraint" destination="DSB-Ko-I7L" id="Yv1-vf-t0h"/>
                         <outlet property="pagesCollectionView" destination="e3S-8u-bB1" id="R0Y-WR-53C"/>
+                        <outlet property="saveMultiplePageButton" destination="8aq-g3-dl1" id="cbm-CZ-CcC"/>
                         <outlet property="saveOrDeletePageButton" destination="1fD-PZ-PnB" id="tWi-cQ-ae6"/>
                         <outlet property="selectDisplayTypeButton" destination="tw4-s9-hff" id="4OC-Ke-aWX"/>
                         <outlet property="selectLessonButton" destination="UgW-NQ-GQb" id="qg6-vK-OyO"/>
                         <outlet property="selectPageButton" destination="zVD-0l-dn5" id="faa-Hj-Xk3"/>
                         <outlet property="selectTodaysPageButton" destination="cxP-Kk-WIo" id="fNq-xb-B8g"/>
+                        <outlet property="shareButton" destination="oma-Al-xFl" id="FK1-Ve-spl"/>
                         <outlet property="showPlayerButton" destination="zyy-A8-skH" id="u2q-OB-OVq"/>
                         <outlet property="showPlayerButtonBottomConstraint" destination="c53-bn-coE" id="5ay-Rb-hNy"/>
                         <outlet property="talmudPagePickerView" destination="d41-67-OzN" id="xaN-gg-tWW"/>
@@ -605,7 +653,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בחר דף" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Dar-LD-X5J">
                                         <rect key="frame" x="159.5" y="31" width="56" height="26"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
-                                        <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.47058823529411764" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4Y-jl-ZH3">
@@ -646,6 +694,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="700"/>
                     <connections>
+                        <outlet property="saveMultiplePageButton" destination="q4Y-jl-ZH3" id="tYa-s4-9tD"/>
                         <outlet property="selectPageTitleLabel" destination="Dar-LD-X5J" id="mVl-hl-NfS"/>
                         <outlet property="talmudPagePickerView" destination="TeH-jA-h55" id="fzA-pn-1SR"/>
                         <outlet property="topBarView" destination="Bwo-Na-8HY" id="vF3-EX-BK7"/>
@@ -1105,6 +1154,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AH-_icon.png" width="320" height="320"/>
         <image name="Arrow.png" width="90" height="90"/>
         <image name="Icons_notes_off.png" width="120" height="120"/>
         <image name="Lock_close.png" width="90" height="90"/>
@@ -1115,6 +1165,7 @@
         <image name="TranslationIcon_off.png" width="120" height="120"/>
         <image name="TranslationIcon_on.png" width="120" height="120"/>
         <image name="backButton.png" width="99" height="99"/>
+        <image name="hidePlayer.png" width="160" height="160"/>
         <image name="move_center.png" width="36" height="33"/>
         <image name="move_left.png" width="36" height="33"/>
         <image name="move_right.png" width="36" height="33"/>
@@ -1124,10 +1175,15 @@
         <image name="save.png" width="102" height="102"/>
         <image name="saveIcon.png" width="120" height="120"/>
         <image name="save_highlighted.png" width="100" height="100"/>
+        <image name="shareIcon.png" width="128" height="128"/>
+        <image name="showPlayer.png" width="160" height="160"/>
         <image name="topBar1100.png" width="1100" height="120"/>
         <image name="topBar750.png" width="750" height="120"/>
         <image name="trachIcon.png" width="100" height="110"/>
         <image name="vasgal-icon.png" width="140" height="152"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

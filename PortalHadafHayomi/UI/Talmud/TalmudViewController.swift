@@ -43,6 +43,12 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var nikodButton:UIButton?
     
+    @IBOutlet weak var saveMultiplePageButton:UIButton?
+    
+    @IBOutlet weak var shareButton:UIButton?
+    
+    @IBOutlet weak var increaseTextSizeButton:UIButton!
+    @IBOutlet weak var dicreaseTextSizeButton:UIButton!
     
     var displyedPicker:UIView?{
         didSet{
@@ -115,7 +121,24 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     var displyedPageSide:Int!
     
-    var selectedDisplayType:TalmudDisplayType = .Vagshal
+    var selectedDisplayType:TalmudDisplayType = .Vagshal{
+        didSet{
+            if self.pagesCollectionView != nil {
+                self.pagesCollectionView.reloadData()
+            }
+            
+            switch selectedDisplayType {
+            case .Vagshal, .Text, .TextWithScore, .Meorot, .Chavruta:
+                self.increaseTextSizeButton.isHidden = true
+                self.dicreaseTextSizeButton.isHidden = true
+                break
+            case .Steinsaltz, .EN:
+                self.increaseTextSizeButton.isHidden = false
+                self.dicreaseTextSizeButton.isHidden = false
+                break 
+            }
+        }
+    }
     
     var talmudNumberOfPages:Int
     {
@@ -154,6 +177,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.showPlayerButton?.layer.shadowOpacity = 0.5
         self.showPlayerButton?.layer.shadowOffset = CGSize(width: -1.0, height: -1.0)
         self.showPlayerButton?.layer.shadowRadius = 1.0
+        self.showPlayerButton?.imageView?.contentMode = .scaleAspectFit
         
         self.creaditView?.layer.shadowColor = UIColor.darkGray.cgColor
         self.creaditView?.layer.shadowOpacity = 0.5
@@ -170,13 +194,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             UserDefaults.standard.set(true, forKey: "didUpdateOldSavedPages")
         }
         
-        let showPlayerButtonTitle = "  " + ("st_display_palyer").localize() + "  "
-        self.showPlayerButton?.setTitle(showPlayerButtonTitle, for: .normal)
-        
-        let hidePlayerButtonTitle = "  " + ("st_hide_palyer").localize() + "  "
-        self.showPlayerButton?.setTitle(hidePlayerButtonTitle, for: .selected)
-        
-        
         self.selectLessonButton?.titleLabel?.numberOfLines = 2
          self.selectPageButton?.titleLabel?.numberOfLines = 2
          self.selectTodaysPageButton?.titleLabel?.numberOfLines = 2
@@ -191,6 +208,21 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
         self.creaditView.isHidden = true
         self.pagesCollectionBottomConstraint?.constant = 0
+    
+        self.saveMultiplePageButton?.setImageTintColor(UIColor(HexColor: "781F24"))
+        
+        self.shareButton?.setImageTintColor(UIColor(HexColor: "781F24"))
+        
+        if let currentLanguage = Locale.current.languageCode
+            ,currentLanguage.hasSuffix("he")
+        {
+            self.increaseTextSizeButton.setImage(UIImage(named: "AH+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "AH-_icon"), for: .normal)
+        }
+        else{
+            self.increaseTextSizeButton.setImage(UIImage(named: "A+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "A-_icon"), for: .normal)
+        }
     }
     
     func setDefaultTalmudDisplay()
@@ -252,6 +284,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             self.pagesCollectionView.reloadData()
             
             if let playingLesson = LessonsManager.sharedManager.playingLesson
+                ,LessonsManager.sharedManager.isPlaying
             {
                 self.talmudPagePickerView.scrollToMasechet(playingLesson.masechet, page: playingLesson.page!, pageSide: 1, animated: false)
                 
@@ -273,6 +306,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             }
         }
         else if let playingLesson = LessonsManager.sharedManager.playingLesson
+                    ,LessonsManager.sharedManager.isPlaying
         {
             self.talmudPagePickerView.scrollToMasechet(playingLesson.masechet, page: playingLesson.page!, pageSide: 1, animated: false)
             
@@ -575,6 +609,14 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func onDidSelectPage()
     {
+        if let pageIndex = self.currentPageIndex
+            ,let pageLink = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageIndex, displayType: self.selectedDisplayType){
+            self.shareButton?.isHidden = false
+        }
+        else{
+            self.shareButton?.isHidden = true
+        }
+        
         if self.selectedDisplayType == .EN
         {
             self.topBarTitleLabel?.text = HadafHayomiManager.dispalyEnglishTitleForMaschet(self.displyedMasceht!, page: self.displyedPage, pageSide:  self.displyedPageSide)
@@ -983,6 +1025,49 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         })
     }
     
+    @IBAction func shareButtonClicked() {
+        self.share(sender: self.view)
+    }
+    
+    @IBAction func dicreaseTextSizeButtonClicked(_ sender:UIButton) {
+          
+        let textSizeKey = HadafHayomiManager.sharedManager.textSizeKeyForDisplayType(selectedDisplayType)
+        let textSize = UserDefaults.standard.object(forKey: textSizeKey) as? Int ?? 0
+        UserDefaults.standard.set( (textSize-2 > -80) ? textSize-2 : -80 , forKey: textSizeKey)
+        UserDefaults.standard.synchronize()
+     
+        for cell in self.pagesCollectionView.visibleCells{
+            (cell as? TalmudPageCell)?.reloadData()
+        }
+    }
+    
+    @IBAction func increaseTextSizeButtonClicked(_ sender:UIButton) {
+        
+        let textSizeKey = HadafHayomiManager.sharedManager.textSizeKeyForDisplayType(selectedDisplayType)
+        let textSize = UserDefaults.standard.object(forKey: textSizeKey) as? Int ?? 0
+        UserDefaults.standard.set( (textSize+2 < 80) ? textSize+2 : 80 , forKey: textSizeKey)
+        UserDefaults.standard.synchronize()
+     
+        for cell in self.pagesCollectionView.visibleCells{
+            (cell as? TalmudPageCell)?.reloadData()
+        }
+    }
+    
+    func share(sender:UIView){
+        
+        let text = self.topBarTitleLabel?.text ?? ""
+        if let image = UIImage(named: "defaultIcon")
+            , let pageIndex = self.currentPageIndex
+            ,let pageLink = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageIndex, displayType: self.selectedDisplayType) {
+            
+            let shareAll = [text ,image , pageLink] as [Any]
+            let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
+    
     //MARK: - CollectionView Delegate methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -993,10 +1078,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TalmudPageCell", for: indexPath) as! TalmudPageCell
-        
-        cell.displayType = self.selectedDisplayType
-            
-        cell.reloadWithObject(indexPath.row + 1)
+                    
+        cell.reloadWithObject((self.selectedDisplayType, indexPath.row+1))
         
         return cell
     }
@@ -1135,7 +1218,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             var lessonPickerText =  self.displyedMasceht?.maggidShiurs[row].name ?? ""
             
             if let maggidShiourLessonType = self.displyedMasceht?.maggidShiurs[row].mediaType.rawValue {
-                let lessonType = "(\(maggidShiourLessonType))"
+                let lessonType = "(\("st_\(maggidShiourLessonType)".localize()))"
+                
                 lessonPickerText += " \(lessonType)"
                 
                 pikerLabel.attributedText = lessonPickerText.addAttribute(["name":NSAttributedStringKey.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 12)], ToSubString: lessonType, ignoreCase: true)

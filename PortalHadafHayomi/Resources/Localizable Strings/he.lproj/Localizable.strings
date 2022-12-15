@@ -262,6 +262,9 @@
 "st_change_lesson_alert_message" = "האם הינך מעוניין לעבור לשיעור של %@ על מסכת %@ דף %@?";
 "st_move_to_selected_lesson" = "עבור לשיעור המבוקש";
 "st_stay_at_current_lesson" = "השאר בשיעור הנוכחי";
+"st_all" = "הכל";
+"st_audio" = "אודיו";
+"st_video" = "וידאו";
 
 //Lessons Map page
 "st_lessons_map" = "מפת שיעורים";

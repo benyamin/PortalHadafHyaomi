@@ -318,7 +318,7 @@ class MeasurementCalculatorViewController: MSBaseViewController, UITextFieldDele
     {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0 // for float
-        formatter.maximumFractionDigits = 5 // for float
+        formatter.maximumFractionDigits = 8 // for float
         formatter.minimumIntegerDigits = 1
         formatter.paddingPosition = .afterPrefix
         formatter.paddingCharacter = "0"

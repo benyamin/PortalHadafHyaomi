@@ -38,12 +38,16 @@ class TalmudPagePickerViewController: MSBaseViewController,TalmudPagePickerViewD
     
     @IBOutlet weak var talmudPagePickerView:TalmudPagePickerView!
     
+    @IBOutlet weak var saveMultiplePageButton:UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         talmudPagePickerView.delegate = self
         
         self.selectPageTitleLabel?.text = "st_select_page".localize()
+        
+        self.saveMultiplePageButton?.setImageTintColor(UIColor(HexColor: "781F24"))
     }
     
     override func viewDidAppear(_ animated: Bool) {
