@@ -35,9 +35,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     @IBOutlet weak var durationLabel:UILabel?
     
     @IBOutlet weak var searchBar:UISearchBar!
-    @IBOutlet weak var searchBarTopConstrinat:NSLayoutConstraint?
-    @IBOutlet weak var pickerToSearchBarConstrint:NSLayoutConstraint?
-    @IBOutlet weak var pickerBottomConstrint:NSLayoutConstraint?
+    @IBOutlet weak var searchBarTopConstrinatToTopBar:NSLayoutConstraint?
     
     @IBOutlet weak var lastPlayedLessonsTableView:UITableView?
     
@@ -71,9 +69,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.searchBarTopConstrinat?.constant = -1*(self.searchBar.frame.size.height)
-        
+                
         self.lessonsPickerView.isHidden = true
         
         self.sortSegmenterController.setTitle("st_sort_by_masechtot".localize(), forSegmentAt: 0)
@@ -413,19 +409,16 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     func setSearchLayout(visible:Bool) {
                               
+        searchBar.showsCancelButton = visible
+
         if self.lessonsFilterSegmentedController.selectedSegmentIndex == 2 { //Last payed lessons
             self.lessonsFilterSegmentedController.selectedSegmentIndex = 0
             self.lessonsFilterSegmentedControllerValueChanged(self.lessonsFilterSegmentedController)
         }
         
-        self.searchBarTopConstrinat?.constant = visible ? 0 : -1*(self.searchBar.frame.size.height)
-        self.pickerToSearchBarConstrint?.priority = UILayoutPriority(rawValue: visible ? 900 : 500)
-        self.pickerBottomConstrint?.constant = visible ? 0 : 0
+        self.searchBarTopConstrinatToTopBar?.priority = UILayoutPriority(rawValue: visible ? 900 : 500)
         
-        if visible {
-            self.searchBar.becomeFirstResponder()
-        }
-        else{
+        if !visible {
             self.searchBar.resignFirstResponder()
         }
         
@@ -856,6 +849,14 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     }
     
     //MARK: - search bar delegate methods]
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.setSearchLayout(visible: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.setSearchLayout(visible: false)
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
