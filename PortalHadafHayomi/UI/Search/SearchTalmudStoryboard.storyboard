@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,15 +47,15 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KGf-zT-PfT">
-                                <rect key="frame" x="0.0" y="203" width="375" height="797"/>
+                                <rect key="frame" x="0.0" y="215" width="375" height="785"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.499360621" green="0.1692838371" blue="0.18975445630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchResultTableCell" rowHeight="70" id="ys8-33-xUb" customClass="SearchResultTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ys8-33-xUb" id="fiK-0M-KjQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="דף" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQq-fr-Wpd">
@@ -99,14 +97,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTalmudLastSearchesHeader" id="WtO-WA-nvz" customClass="MSTableHeaderTitleCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="98" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="114.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WtO-WA-nvz" id="6bb-Bv-2pZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="חיפושים אחרונים" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycq-Yj-iFq">
-                                                    <rect key="frame" x="133.5" y="11.5" width="109.5" height="21.5"/>
+                                                    <rect key="frame" x="133" y="11" width="109.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="20"/>
                                                     <color key="textColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -123,10 +121,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SavedSearchTableCell" rowHeight="61" id="gnp-Lg-v0G" customClass="SavedSearchTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142" width="375" height="61"/>
+                                        <rect key="frame" x="0.0" y="158" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gnp-Lg-v0G" id="dNC-11-VqA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Text" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6C-Mx-8pl">
@@ -136,7 +134,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Masechet" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="np7-S8-Avy">
-                                                    <rect key="frame" x="268.5" y="31.5" width="90.5" height="19.5"/>
+                                                    <rect key="frame" x="268.5" y="32" width="90.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                                     <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -159,14 +157,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTalmudWordsListHeader" id="2va-vl-olq" customClass="MSTableHeaderTitleCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="203" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="219" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2va-vl-olq" id="5Hx-r7-pQW">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="רשימת מילים" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK2-lV-F4v">
-                                                    <rect key="frame" x="145.5" y="11.5" width="84.5" height="21.5"/>
+                                                    <rect key="frame" x="145.5" y="11" width="84.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="20"/>
                                                     <color key="textColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -185,7 +183,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchSuggestionTableCell" id="9tg-c0-R3Q" customClass="SearchSuggestionTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="247" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="262.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9tg-c0-R3Q" id="qpi-WN-BCE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -210,14 +208,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingDataTableCell" rowHeight="80" id="9Qs-ML-tOf" customClass="LoadingDataTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="291" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="306" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Qs-ML-tOf" id="qgf-GD-tIX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Zh-au-xsg">
-                                                    <rect key="frame" x="160.5" y="12.5" width="54" height="54"/>
+                                                    <rect key="frame" x="160.5" y="12.5" width="54" height="54.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="54" id="QsZ-0X-hpk"/>
                                                         <constraint firstAttribute="width" constant="54" id="d7m-CP-cc9"/>
@@ -243,10 +241,10 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpf-MQ-djd">
-                                <rect key="frame" x="0.0" y="70" width="375" height="133"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="145"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ברכות" borderStyle="roundedRect" placeholder="בחר מסכת" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wG1-9K-N94">
-                                        <rect key="frame" x="90" y="50" width="105" height="30"/>
+                                        <rect key="frame" x="90" y="54" width="105" height="34"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -255,19 +253,19 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Masechet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa2-JN-AVM">
-                                        <rect key="frame" x="16" y="55" width="70" height="20"/>
+                                        <rect key="frame" x="16" y="61" width="70" height="20"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vP3-LV-yzl">
-                                        <rect key="frame" x="293" y="55" width="20" height="20"/>
+                                        <rect key="frame" x="293" y="61" width="20" height="20"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="קיא" borderStyle="roundedRect" placeholder="בחר מסכת" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wy4-Pe-WbR">
-                                        <rect key="frame" x="317" y="50" width="42" height="30"/>
+                                        <rect key="frame" x="317" y="54" width="42" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="42" id="w0q-2Y-y7A"/>
                                         </constraints>
@@ -279,13 +277,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sk9-fg-qfo">
-                                        <rect key="frame" x="16" y="17" width="36" height="20"/>
+                                        <rect key="frame" x="16" y="19" width="36" height="20"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCh-6Y-UFp">
-                                        <rect key="frame" x="56" y="12" width="163" height="30"/>
+                                        <rect key="frame" x="56" y="12" width="163" height="34"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -295,20 +293,20 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkT-L3-keM">
-                                        <rect key="frame" x="0.0" y="132" width="375" height="1"/>
+                                        <rect key="frame" x="0.0" y="144" width="375" height="1"/>
                                         <color key="backgroundColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="0lr-X1-Rf1"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUg-R1-99q">
-                                        <rect key="frame" x="202.5" y="55" width="40" height="20"/>
+                                        <rect key="frame" x="203" y="61" width="40" height="20"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="קיא" borderStyle="roundedRect" placeholder="בחר מסכת" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gyc-Ye-SaV">
-                                        <rect key="frame" x="247" y="50" width="42" height="30"/>
+                                        <rect key="frame" x="247" y="54" width="42" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="42" id="hXH-Uo-AaJ"/>
                                         </constraints>
@@ -320,13 +318,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk3-jK-t1d">
-                                        <rect key="frame" x="16" y="95" width="72" height="20"/>
+                                        <rect key="frame" x="16" y="105" width="72" height="20"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="גמרא" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="roL-eP-8lC">
-                                        <rect key="frame" x="92" y="90" width="179" height="30"/>
+                                        <rect key="frame" x="92" y="98" width="179" height="34"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -335,13 +333,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exact Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKp-mi-JEp">
-                                        <rect key="frame" x="226.5" y="17" width="98" height="20"/>
+                                        <rect key="frame" x="227" y="19" width="98" height="20"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWD-un-ITq">
-                                        <rect key="frame" x="329" y="12" width="30" height="30"/>
+                                        <rect key="frame" x="329" y="14" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="621-wN-1n8"/>
                                             <constraint firstAttribute="height" constant="30" id="ndy-wM-hcd"/>
@@ -351,8 +349,8 @@
                                             <action selector="matchingSearchCheckBoxButtonClicked:" destination="29v-Wt-xkE" eventType="touchUpInside" id="vo3-1k-dPE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djk-2Q-z6A">
-                                        <rect key="frame" x="279" y="90" width="80" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djk-2Q-z6A">
+                                        <rect key="frame" x="279" y="100" width="80" height="30"/>
                                         <color key="backgroundColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="1ff-55-Cza"/>
@@ -410,10 +408,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAh-kO-c7r">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFN-N7-NWJ">
-                                                <rect key="frame" x="16" y="7" width="38" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFN-N7-NWJ">
+                                                <rect key="frame" x="16" y="7" width="80" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Qj1-f4-jlY"/>
+                                                    <constraint firstAttribute="width" constant="80" id="Ycf-FC-gIm"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="21"/>
                                                 <state key="normal" title="הסתר">
@@ -465,6 +464,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="MRM-If-9Bn"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="tpf-MQ-djd" secondAttribute="trailing" id="2Ga-sM-2oH"/>
@@ -481,7 +481,6 @@
                             <constraint firstItem="tpf-MQ-djd" firstAttribute="top" secondItem="MNU-Ab-zXX" secondAttribute="bottom" id="nQM-3n-tex"/>
                             <constraint firstAttribute="bottom" secondItem="KGf-zT-PfT" secondAttribute="bottom" id="tZ0-BO-MMs"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="MRM-If-9Bn"/>
                     </view>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
@@ -587,13 +586,13 @@
                                                             <rect key="frame" x="40" y="200" width="295" height="94"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="המערכת טוענת את הדף" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BM-qa-u6g">
-                                                                    <rect key="frame" x="55" y="20" width="185.5" height="24"/>
+                                                                    <rect key="frame" x="54.5" y="20" width="186.5" height="24"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                     <color key="textColor" red="0.54694771769999995" green="0.18103945260000001" blue="0.17900258299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="py6-Ji-U16">
-                                                                    <rect key="frame" x="138" y="54" width="20" height="20"/>
+                                                                    <rect key="frame" x="137.5" y="54" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="PEe-zL-Lgt"/>
                                                                         <constraint firstAttribute="height" constant="20" id="XA0-UK-USP"/>
@@ -644,6 +643,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="DlN-sM-hKP"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="x8S-HY-mRq" firstAttribute="top" secondItem="grb-96-lwN" secondAttribute="top" id="2k5-jx-XDr"/>
@@ -654,7 +654,6 @@
                             <constraint firstItem="MTs-8n-KS4" firstAttribute="top" secondItem="x8S-HY-mRq" secondAttribute="bottom" id="f5p-4c-1hp"/>
                             <constraint firstItem="x8S-HY-mRq" firstAttribute="leading" secondItem="DlN-sM-hKP" secondAttribute="leading" id="svv-XJ-lIX"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="DlN-sM-hKP"/>
                     </view>
                     <connections>
                         <outlet property="pagesCollectionView" destination="MTs-8n-KS4" id="tSK-yi-0Ks"/>

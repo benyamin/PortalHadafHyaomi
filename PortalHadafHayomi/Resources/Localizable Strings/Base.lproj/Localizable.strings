@@ -252,7 +252,9 @@
 "st_change_lesson_alert_message" = "Do you wish to move to lesson of %@ on masehcet %@ page %@?";
 "st_move_to_selected_lesson" = "Move";
 "st_stay_at_current_lesson" = "Stay";
-
+"st_all" = "All";
+"st_audio" = "Audio";
+"st_video" = "Video";
 
 
 //Lessons Map page
@@ -303,6 +305,7 @@
 "st_fourm_login_required_message" = "Only רegistered users can post messages";
 "st_fourm_error_missing_Info" = "Must complete title and content";
 "st_fourm_did_add_message" = "Message was successfully added";
+"st_comments" = "%@ comments";
 
 //Fourm Add Message
 "st_add_message_title" = "Add Message";

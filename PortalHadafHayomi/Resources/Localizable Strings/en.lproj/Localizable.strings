@@ -316,6 +316,7 @@
 "st_fourm_login_required_message" = "Only רegistered users can post messages";
 "st_fourm_error_missing_Info" = "Must complete title and content";
 "st_fourm_did_add_message" = "Message was successfully added";
+"st_comments" = "%@ comments";
 
 //Fourm Add Message
 "st_add_message_title" = "Add Message";

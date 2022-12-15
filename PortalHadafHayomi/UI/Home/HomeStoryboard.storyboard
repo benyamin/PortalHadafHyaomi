@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DBr-AN-zC1">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DBr-AN-zC1">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="70" width="375" height="570"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מסכת בבא מציעא דף פ״ד" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT2-0b-O11">
-                                        <rect key="frame" x="98" y="54" width="180.5" height="24"/>
+                                        <rect key="frame" x="97.5" y="54" width="180.5" height="24"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="22"/>
                                         <color key="textColor" red="0.54694771766662598" green="0.18103945255279541" blue="0.17900258302688599" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -57,33 +55,33 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tchanim_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="fOJ-Y8-w1I">
-                                                                    <rect key="frame" x="14.5" y="16" width="61" height="34"/>
+                                                                    <rect key="frame" x="14.5" y="12" width="61" height="34"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="34" id="hUH-I2-lnO"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-TS-DF2">
-                                                                    <rect key="frame" x="0.0" y="50" width="90" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="46" width="90" height="44"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="תכנים" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OL-J1-cUz">
-                                                                            <rect key="frame" x="29.5" y="11.5" width="31.5" height="17.5"/>
-                                                                            <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
+                                                                            <rect key="frame" x="27.5" y="12.5" width="35.5" height="19.5"/>
+                                                                            <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                                                             <color key="textColor" red="0.98132246732711792" green="0.95032817125320435" blue="0.86662572622299194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0OL-J1-cUz" secondAttribute="bottom" constant="2" id="08V-2P-Du6"/>
+                                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0OL-J1-cUz" secondAttribute="bottom" constant="1" id="08V-2P-Du6"/>
                                                                         <constraint firstItem="0OL-J1-cUz" firstAttribute="centerX" secondItem="bwP-TS-DF2" secondAttribute="centerX" id="35q-Gh-p6d"/>
                                                                         <constraint firstItem="0OL-J1-cUz" firstAttribute="centerY" secondItem="bwP-TS-DF2" secondAttribute="centerY" id="LzX-s8-NmB"/>
                                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0OL-J1-cUz" secondAttribute="trailing" constant="4" id="QZv-cd-xQ4"/>
                                                                         <constraint firstItem="0OL-J1-cUz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bwP-TS-DF2" secondAttribute="leading" constant="4" id="cxq-M0-mlJ"/>
-                                                                        <constraint firstItem="0OL-J1-cUz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bwP-TS-DF2" secondAttribute="top" constant="1" id="s9m-g9-BbA"/>
+                                                                        <constraint firstItem="0OL-J1-cUz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bwP-TS-DF2" secondAttribute="top" constant="2" id="s9m-g9-BbA"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="כ״ט" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-zp-CnI">
-                                                                    <rect key="frame" x="36" y="29" width="19.5" height="16.5"/>
+                                                                    <rect key="frame" x="35.5" y="25" width="19.5" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -98,7 +96,7 @@
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fOJ-Y8-w1I" secondAttribute="trailing" constant="4" id="MDI-Ej-17c"/>
                                                             <constraint firstAttribute="bottom" secondItem="bwP-TS-DF2" secondAttribute="bottom" id="THO-n3-7lr"/>
                                                             <constraint firstItem="TRx-zp-CnI" firstAttribute="centerY" secondItem="fOJ-Y8-w1I" secondAttribute="centerY" constant="4" id="Xq8-Y3-QoP"/>
-                                                            <constraint firstItem="fOJ-Y8-w1I" firstAttribute="top" secondItem="ZnL-af-pcb" secondAttribute="top" constant="16" id="iIw-6y-vbd"/>
+                                                            <constraint firstItem="fOJ-Y8-w1I" firstAttribute="top" secondItem="ZnL-af-pcb" secondAttribute="top" constant="12" id="iIw-6y-vbd"/>
                                                             <constraint firstItem="bwP-TS-DF2" firstAttribute="leading" secondItem="ZnL-af-pcb" secondAttribute="leading" id="s8z-fa-9ax"/>
                                                             <constraint firstItem="fOJ-Y8-w1I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZnL-af-pcb" secondAttribute="leading" constant="4" id="tgf-9F-R6d"/>
                                                             <constraint firstItem="TRx-zp-CnI" firstAttribute="centerX" secondItem="fOJ-Y8-w1I" secondAttribute="centerX" id="y4E-xX-OuY"/>
@@ -127,13 +125,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ט״ו כסלו תשע״ה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma8-Ve-Me8">
-                                        <rect key="frame" x="128.5" y="30" width="119.5" height="24"/>
+                                        <rect key="frame" x="128" y="30" width="119.5" height="24"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="22"/>
                                         <color key="textColor" red="0.47450980392156861" green="0.12156862745098039" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" red="0.47551590204238892" green="0.11987368017435074" blue="0.13828745484352112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-portal.png" translatesAutoresizingMaskIntoConstraints="NO" id="jNH-08-3xw">
-                                        <rect key="frame" x="42" y="114.5" width="290" height="55"/>
+                                        <rect key="frame" x="42.5" y="114.5" width="290" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="b0k-IC-sAA"/>
                                             <constraint firstAttribute="width" constant="290" id="z63-q1-ynP"/>
@@ -205,7 +203,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="אודות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="o8p-Zt-RWn">
-                                                    <rect key="frame" x="29.5" y="40" width="30.5" height="17.5"/>
+                                                    <rect key="frame" x="30" y="40" width="30.5" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -248,7 +246,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pb8-U3-2dh">
                                         <rect key="frame" x="0.0" y="0.0" width="186.5" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqM-dq-3Ww">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqM-dq-3Ww">
                                                 <rect key="frame" x="0.0" y="0.0" width="186.5" height="60"/>
                                                 <connections>
                                                     <action selector="contactUsButtonClicked:" destination="DBr-AN-zC1" eventType="touchUpInside" id="mC8-B3-R4L"/>
@@ -284,8 +282,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJk-io-eC9">
                                         <rect key="frame" x="188.5" y="0.0" width="186.5" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7A-ua-8tc">
-                                                <rect key="frame" x="-0.5" y="0.0" width="186.5" height="60"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7A-ua-8tc">
+                                                <rect key="frame" x="0.0" y="0.0" width="186.5" height="60"/>
                                                 <connections>
                                                     <action selector="rateUsButtonClicked:" destination="DBr-AN-zC1" eventType="touchUpInside" id="G93-0g-Spm"/>
                                                 </connections>
@@ -349,6 +347,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="7El-bg-5Ky"/>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.94901960784313721" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8i6-Lk-Co0" firstAttribute="leading" secondItem="7El-bg-5Ky" secondAttribute="leading" id="1uz-nE-mFW"/>
@@ -365,7 +364,6 @@
                             <constraint firstItem="qeI-gb-t0H" firstAttribute="top" secondItem="dIN-5S-RWQ" secondAttribute="bottom" id="tYv-zs-ZNt"/>
                             <constraint firstItem="dIN-5S-RWQ" firstAttribute="trailing" secondItem="7El-bg-5Ky" secondAttribute="trailing" id="uFs-sN-px3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7El-bg-5Ky"/>
                     </view>
                     <size key="freeformSize" width="375" height="700"/>
                     <connections>
@@ -403,14 +401,14 @@
                             </constraints>
                             <prototypes>
                                 <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeSideMenuCell" id="yFq-CN-sDz" customClass="HomeSideMenuCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="28" width="154" height="44"/>
+                                    <rect key="frame" x="0.0" y="44.5" width="154" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yFq-CN-sDz" id="vyb-Zj-dKU">
                                         <rect key="frame" x="0.0" y="0.0" width="154" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUg-hy-BRX">
-                                                <rect key="frame" x="16" y="11" width="42" height="21"/>
+                                                <rect key="frame" x="16" y="11.5" width="42" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -436,6 +434,7 @@
                             </connections>
                         </tableView>
                     </subviews>
+                    <viewLayoutGuide key="safeArea" id="bPK-IG-WIf"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="ptZ-W1-IQR" firstAttribute="bottom" secondItem="bPK-IG-WIf" secondAttribute="bottom" id="7VV-qt-ONz"/>
@@ -446,7 +445,6 @@
                         <constraint firstItem="ptZ-W1-IQR" firstAttribute="leading" secondItem="bPK-IG-WIf" secondAttribute="leading" id="dBg-HL-cdu"/>
                         <constraint firstItem="RGa-ii-rV1" firstAttribute="leading" secondItem="bPK-IG-WIf" secondAttribute="leading" id="fRi-hK-8dj"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="bPK-IG-WIf"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="109.59999999999999" y="161.91904047976013"/>

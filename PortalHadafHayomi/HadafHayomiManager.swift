@@ -257,7 +257,7 @@ open class  HadafHayomiManager
         return [MaggidShiur]()
     }()
     
-    func sortMaggidShiursArray(maggidShiursArray:[MaggidShiur]) -> [MaggidShiur]{
+    func sortMaggidShiursArrayByLastPlayed(maggidShiursArray:[MaggidShiur]) -> [MaggidShiur]{
                    
            var sortedMaggisShiurs = maggidShiursArray
            

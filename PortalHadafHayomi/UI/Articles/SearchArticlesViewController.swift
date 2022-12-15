@@ -64,7 +64,7 @@ class SearchArticlesViewController: MSBaseViewController, UITableViewDelegate, U
         self.pagePickerBaseView?.layer.shadowOffset = CGSize(width: 0.0, height: -2.0)
         self.pagePickerBaseView?.layer.shadowRadius = 2.0
         
-        self.pagePickerSelectButton?.setTitle(("  \("st_hide".localize())  "), for: .normal)
+        self.pagePickerSelectButton?.setTitle(("\("st_hide".localize())"), for: .normal)
         self.pagePickerSelectButton?.layer.borderWidth = 1.0
         self.pagePickerSelectButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
         

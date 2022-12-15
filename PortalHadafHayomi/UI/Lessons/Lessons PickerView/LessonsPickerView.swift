@@ -325,7 +325,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
             }
         }
         
-        sortedMagidShiours = HadafHayomiManager.sharedManager.sortMaggidShiursArray(maggidShiursArray: sortedMagidShiours)
+       // sortedMagidShiours = HadafHayomiManager.sharedManager.sortMaggidShiursArrayByLastPlayed(maggidShiursArray: sortedMagidShiours)
         
         return sortedMagidShiours
     }

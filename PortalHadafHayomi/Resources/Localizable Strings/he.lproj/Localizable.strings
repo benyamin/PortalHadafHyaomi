@@ -316,6 +316,8 @@
 "st_fourm_login_required_message" = "עליך להיות רשום על מנת להעלות הודעות";
 "st_fourm_error_missing_Info" = "חובה למלא כותרת ותוכן";
 "st_fourm_did_add_message" = "ההודעה נוספה בהצלחה";
+"st_comments" = "%@ תגובות";
+
 
 //Fourm Add Message
 "st_add_message_title" = "הוספת הודעה";

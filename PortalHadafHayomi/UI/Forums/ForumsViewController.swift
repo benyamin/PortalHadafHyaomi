@@ -33,8 +33,6 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        
         self.searchButton?.layer.cornerRadius = 3.0
         
         self.searchFourmLabel?.text = "st_search_fourm".localize()
@@ -115,6 +113,12 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
     {
         self.revokeDiscussions()
         self.searchTextField?.resignFirstResponder()
+    }
+    
+    @IBAction func refreshButtonClicked(_ sender:UIButton)
+    {
+        Util.showLoadingViewOnView(self.discussionsTableView!)
+        self.getDiscussions()
     }
     
     func revokeDiscussions()
@@ -284,6 +288,11 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
             
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedDiscussion = self.discussions![indexPath.row]
+        self.showDiscussionView(discussion: selectedDiscussion)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

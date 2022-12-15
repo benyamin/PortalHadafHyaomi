@@ -11,6 +11,7 @@ import UIKit
 class FourmDiscussoinViewController: MSBaseViewController, UITableViewDelegate, UITableViewDataSource, FourmDiscussionTableCellDelegate
 {
     var discussion:ForumPost?
+    var updateDiscussionWork:DispatchWorkItem?
         
     @IBOutlet weak var discussionTableView:UITableView?
     @IBOutlet weak var fourmUserInfoView:FourmUserInfoView?
@@ -32,22 +33,36 @@ class FourmDiscussoinViewController: MSBaseViewController, UITableViewDelegate, 
         super.viewDidAppear(animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.updateDiscussionWork?.cancel()
+    }
+    
     override func reloadWithObject(_ object: Any)
     {
         self.discussion = object as? ForumPost
     }
     
-    func getDiscussionDetials(discussion:ForumPost)
+    func getDiscussionDetials(discussion:ForumPost, showLoadingView:Bool = true)
     {
-        Util.showLoadingViewOnView(self.discussionTableView!)
+        if showLoadingView {
+            Util.showLoadingViewOnView(self.discussionTableView!)
+        }
         
         GetForumDiscussionProcess().executeWithObject(discussion, onStart: { () -> Void in
             
-        }, onComplete: { (object) -> Void in
+        }, onComplete: { [self] (object) -> Void in
             
             discussion.discussions = object as? [ForumPost]
             
             self.reloadData()
+            
+            //Update discussion every 10 seconds
+            self.updateDiscussionWork = DispatchWorkItem(block: {
+                self.getDiscussionDetials(discussion: discussion, showLoadingView: false)
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: self.updateDiscussionWork!)
             
         },onFaile: { (object, error) -> Void in
             
@@ -105,6 +120,11 @@ class FourmDiscussoinViewController: MSBaseViewController, UITableViewDelegate, 
               })
           }
       }
+    
+    @IBAction func refreshButtonClicked(_ sender:UIButton)
+    {
+        self.getDiscussionDetials(discussion: self.discussion!)
+    }
     
     // MARK: - TableView Methods:
     

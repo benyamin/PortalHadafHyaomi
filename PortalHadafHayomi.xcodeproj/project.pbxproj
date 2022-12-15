@@ -25,6 +25,7 @@
 		22CDDD76294B24AD00945E6F /* UIButton+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */; };
 		22CDDD7D294B571400945E6F /* showPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7B294B571400945E6F /* showPlayer.png */; };
 		22CDDD7E294B571400945E6F /* hidePlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7C294B571400945E6F /* hidePlayer.png */; };
+		22CDDD82294BB3FF00945E6F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD81294BB3FF00945E6F /* refresh.png */; };
 		22CED9EA24636BF800D6A8D5 /* GetPagSummaryProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */; };
 		22CF56F0250D6D3C00273D07 /* FourmUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */; };
 		22CF571B250EA3E700273D07 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF571A250EA3E700273D07 /* LoginView.swift */; };
@@ -613,6 +614,7 @@
 		22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extras.swift"; sourceTree = "<group>"; };
 		22CDDD7B294B571400945E6F /* showPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showPlayer.png; path = ../../../../../../../Downloads/showPlayer.png; sourceTree = "<group>"; };
 		22CDDD7C294B571400945E6F /* hidePlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hidePlayer.png; path = ../../../../../../../Downloads/hidePlayer.png; sourceTree = "<group>"; };
+		22CDDD81294BB3FF00945E6F /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPagSummaryProcess.swift; sourceTree = "<group>"; };
 		22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourmUserInfoView.swift; sourceTree = "<group>"; };
 		22CF571A250EA3E700273D07 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -1789,6 +1791,7 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				22CDDD81294BB3FF00945E6F /* refresh.png */,
 				22CDDD7C294B571400945E6F /* hidePlayer.png */,
 				22CDDD7B294B571400945E6F /* showPlayer.png */,
 				4A74B4C9270F83EC00DD20E6 /* MultiplePageDownload.png */,
@@ -2639,6 +2642,7 @@
 				4ABFB700235291000079D68B /* trachIcon.png in Resources */,
 				4ABFB703235291000079D68B /* TranslationIcon_on.png in Resources */,
 				4ABFB74B235291000079D68B /* btn_bg_click.png in Resources */,
+				22CDDD82294BB3FF00945E6F /* refresh.png in Resources */,
 				4ABFB729235291000079D68B /* safaira2.jpg in Resources */,
 				4AD4098F201B735300A76EF0 /* CalendarStoryboard.storyboard in Resources */,
 				4ABFB6E9235291000079D68B /* Down_line.png in Resources */,

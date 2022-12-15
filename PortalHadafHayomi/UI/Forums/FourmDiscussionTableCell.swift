@@ -26,6 +26,8 @@ class FourmDiscussionTableCell: MSBaseTableViewCell, UITextViewDelegate {
     @IBOutlet weak var userNameLabel:UILabel?
     @IBOutlet weak var masechetLabel:UILabel?
     @IBOutlet weak var publishDateLabel:UILabel?
+    @IBOutlet weak var publishTimeLabel:UILabel?
+    @IBOutlet weak var commentsNumLabel:UILabel?
     @IBOutlet weak var contentTextView:UITextView?
     @IBOutlet weak var showFullDiscussionButton:UIButton?
     @IBOutlet weak var fileIncludedButton:UIButton?
@@ -62,7 +64,7 @@ class FourmDiscussionTableCell: MSBaseTableViewCell, UITextViewDelegate {
         }
         if let content = self.discussion?.content
         {
-            self.contentTextView?.attributedText = content.htmlAttributedString(textDirection: "rtl", fontSize: 4.5, color:"6A2423")
+            self.contentTextView?.attributedText = content.htmlAttributedString(textDirection: "rtl", fontSize: 4.5, color:"000000")
         }
         
         self.userNameLabel?.text = self.discussion?.username
@@ -76,6 +78,9 @@ class FourmDiscussionTableCell: MSBaseTableViewCell, UITextViewDelegate {
         }
         
         self.publishDateLabel?.text = self.discussion?.date?.hebrewDispaly()
+        self.publishTimeLabel?.text = self.discussion?.date?.stringWithFormat("HH:mm:ss")
+        
+        self.commentsNumLabel?.text = "st_comments".localize(withArgumetns: ["\(self.discussion?.children ?? 0)"])
         
         if let filename = self.discussion?.filename, filename.count > 0
         {
@@ -104,9 +109,9 @@ class FourmDiscussionTableCell: MSBaseTableViewCell, UITextViewDelegate {
     
     func setMainLayout()
     {
-        self.cardView?.backgroundColor = UIColor(HexColor: "6A2423")
+        self.cardView?.backgroundColor = .white
 
-        let color = UIColor(HexColor:"FAF2DD")
+        let color = UIColor(HexColor:"6A2423")
         
         self.cardView?.layer.borderColor = color.cgColor
         
@@ -116,7 +121,7 @@ class FourmDiscussionTableCell: MSBaseTableViewCell, UITextViewDelegate {
         
         if let content = self.discussion?.content
         {
-            self.contentTextView?.attributedText = content.htmlAttributedString(textDirection: "rtl", fontSize: 4.5, color:"FAF2DD")
+            self.contentTextView?.attributedText = content.htmlAttributedString(textDirection: "rtl", fontSize: 4.5, color:"000000")
         }
         
         self.showFullDiscussionButton?.isHidden = true
@@ -134,7 +139,7 @@ class FourmDiscussionTableCell: MSBaseTableViewCell, UITextViewDelegate {
         
         if let content = self.discussion?.content
         {
-            self.contentTextView?.attributedText = content.htmlAttributedString(textDirection: "rtl", fontSize: 4.5, color:"6A2423")
+            self.contentTextView?.attributedText = content.htmlAttributedString(textDirection: "rtl", fontSize: 4.5, color:"000000")
         }
         
          self.showFullDiscussionButton?.isHidden = true
