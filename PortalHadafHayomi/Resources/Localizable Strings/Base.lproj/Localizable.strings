@@ -46,6 +46,8 @@
 "st_send" = "Send";
 "st_alert" = "Alert";
 "st_dont_show_again" = "Don't show again";
+"st_yes" = "YES";
+"st_no" = "NO";
 
 "st_launch_language_selection_title" = "Application Language display";
 "st_launch_language_selection_message" = "Please select the app language.\nYou can change the language at any time throw the settings page in the application";
@@ -255,6 +257,9 @@
 "st_all" = "All";
 "st_audio" = "Audio";
 "st_video" = "Video";
+
+"st_Continue_from_where_you_left_off_alert_title" = "";
+"st_Continue_from_where_you_left_off_alert_message" = "Continue rabbi's %@ on Masechet %@ page %@ from where you left off?";
 
 
 //Lessons Map page

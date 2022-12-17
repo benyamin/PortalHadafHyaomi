@@ -521,7 +521,25 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.audioPlayer?.subTitle = lesson.maggidShiur.name
         
         LessonsManager.sharedManager.playingLesson = lesson
-        self.audioPlayer?.setPlayerUrl(lesson.getUrl(), durration:lesson.durration ?? 0)
+
+        if let lessonIdentifier = lesson.identifier
+            ,let lessonInfo = UserDefaults.standard.object(forKey: lessonIdentifier) as? [String:Any]
+            ,let duration = lessonInfo["duration"] as? Int {
+            
+            let alertTitle = "st_Continue_from_where_you_left_off_alert_title".localize()
+            let alertMessage = "st_Continue_from_where_you_left_off_alert_message".localize(withArgumetns: [lesson.maggidShiur.name ?? "",lesson.masechet.name ?? "",lesson.page?.symbol ?? ""])
+            
+            BTAlertView.show(title: alertTitle, message:alertMessage, buttonKeys: ["st_no".localize(),"st_yes".localize()], onComplete:{ (dismissButtonKey) in
+                
+                lesson.durration = dismissButtonKey == "st_yes".localize() ? duration : 0
+                self.audioPlayer?.setPlayerUrl(lesson.getUrl(), durration:lesson.durration ?? 0)
+            })
+            
+            lesson.durration = duration
+        }
+        else{
+            self.audioPlayer?.setPlayerUrl(lesson.getUrl(), durration:lesson.durration ?? 0)
+        }
     }
     
     func isSavingLessonInProgress(lesson:Lesson) -> Bool

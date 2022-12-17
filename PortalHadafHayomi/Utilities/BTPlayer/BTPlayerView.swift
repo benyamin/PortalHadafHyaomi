@@ -149,7 +149,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         if self.player != nil
         {
-            self.desiredStartDuration = 0.0
+            //self.desiredStartDuration = 0.0
             
             if timeObserver != nil
             {

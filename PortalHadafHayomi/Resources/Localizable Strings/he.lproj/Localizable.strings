@@ -50,6 +50,8 @@
 "st_return" = "חזור";
 "st_alert" = "התראה";
 "st_dont_show_again" = "אל תציג שוב";
+"st_yes" = "כן";
+"st_no" = "לא";
 
 //Home Page
 "st_talmud_completion_today" = "היום סיום הש׳׳ס";
@@ -265,6 +267,9 @@
 "st_all" = "הכל";
 "st_audio" = "אודיו";
 "st_video" = "וידאו";
+
+"st_Continue_from_where_you_left_off_alert_title" = "";
+"st_Continue_from_where_you_left_off_alert_message" = "האם להמשיך את השיעור של הרב %@ על מסכת %@ דף %@ מהמקום שעצרת?";
 
 //Lessons Map page
 "st_lessons_map" = "מפת שיעורים";

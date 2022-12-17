@@ -392,10 +392,15 @@ class LessonsManager
     
     func savePlayingLassonInfo(_ lesson:Lesson, duratoinInSeconds seconds:Int)
     {
-        let lastPlayedLassonDictionary:[String : Any] = ["duration":seconds,
-                                                         "lesson":lesson.deserializeDictioanry()]
-        
-        UserDefaults.standard.set(lastPlayedLassonDictionary, forKey: "lastPlayedLasson")
+        let lessonInfo:[String : Any]  = ["duration":seconds
+                                          ,"lesson":lesson.deserializeDictioanry()
+                                          ,"savedLessonDate":Date()]
+           
+        if let lessonIdentifier = lesson.identifier
+        ,seconds > 30{
+            UserDefaults.standard.set(lessonInfo, forKey: lessonIdentifier)
+        }
+        UserDefaults.standard.set(lessonInfo, forKey: "lastPlayedLasson")
         UserDefaults.standard.set(Date(), forKey: "savedLessonDate")
         UserDefaults.standard.synchronize()
         
