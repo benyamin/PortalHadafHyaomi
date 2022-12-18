@@ -398,5 +398,13 @@ extension String {
         let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         return Set(self).isSubset(of: nums)
     }
+    
+    func components(separatedBy separators: [String]) -> [String] {
+          var output: [String] = [self]
+          for separator in separators {
+              output = output.flatMap { $0.components(separatedBy: separator) }
+          }
+          return output.map { $0.trimmingCharacters(in: .whitespaces)}
+      }
 }
 

@@ -320,7 +320,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1017"
                   endingLineNumber = "1017"
-                  offsetFromSymbolStart = "1096">
+                  offsetFromSymbolStart = "1041">
                </Location>
                <Location
                   uuid = "396F6540-1892-498F-B5D9-C65FF1104F92 - dac2f7304a787238"
@@ -335,7 +335,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1017"
                   endingLineNumber = "1017"
-                  offsetFromSymbolStart = "1140">
+                  offsetFromSymbolStart = "1089">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -513,6 +513,22 @@
             startingLineNumber = "836"
             endingLineNumber = "836"
             landmarkName = "showPlayNextLessonAlert(nextLesson:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B9E6927-4D74-44B5-A061-C87AC79902B6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/UI/Dictionary/AramicDictionaryViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "translateText(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

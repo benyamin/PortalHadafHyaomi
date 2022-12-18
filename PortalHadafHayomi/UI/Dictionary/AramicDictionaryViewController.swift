@@ -228,17 +228,39 @@ class AramicDictionaryViewController: MSBaseViewController, UITableViewDelegate,
     {
         var translatoinText = " "
         
-        for word in aramicText.components(separatedBy: " ")
+        let aramicWords = aramicText.components(separatedBy: " ")
+        for word in aramicWords
         {
             if let translationWord = DictionaryManager.sharedManager.translateWord(word, fromDictioanry: self.selectedDictionary)
             {
                 translatoinText += translationWord
+                translatoinText += " "
             }
             else{
-                translatoinText += word
+                if word.contains("\n"){
+                    let additionalWords = word.components(separatedBy: "\n")
+                    for subWord in additionalWords
+                    {
+                        if let translationWord = DictionaryManager.sharedManager.translateWord(subWord, fromDictioanry: self.selectedDictionary)
+                        {
+                            translatoinText += translationWord
+                        }
+                        else{
+                            translatoinText += subWord
+                        }
+                        if subWord != additionalWords.last {
+                            translatoinText += "\n"
+                        }
+                        else{
+                            translatoinText += " "
+                        }
+                    }
+                }
+                else{
+                    translatoinText += word
+                    translatoinText += " "
+                }
             }
-            
-            translatoinText += " "
         }
         
         return translatoinText
