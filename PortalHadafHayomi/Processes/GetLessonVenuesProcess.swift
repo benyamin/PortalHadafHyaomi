@@ -12,13 +12,17 @@ open class GetLessonVenuesProcess: MSBaseProcess
 {
     open override func executeWithObj(_ obj:Any?)
     {
+        self.getVenues()
+    }
+    
+    func getVenues(){
         
         // let params = obj as! [String:String]
         var params = [String:String]()
         params["lesson"] = "1"
         
         let request = MSRequest()
-        request.baseUrl = "https://daf-yomi.com/mobile" 
+        request.baseUrl = "https://daf-yomi.com/mobile"
         request.serviceName = "jsonservice.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET

@@ -13,11 +13,34 @@ import CoreLocation
 class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, LessonVenueTableCellDelegate
 {
     @IBOutlet weak var displaySegmentedControlr:UISegmentedControl!
+    @IBOutlet weak var sortSegmentedControlr:UISegmentedControl!
     @IBOutlet weak var mapView:MKMapView!
     @IBOutlet weak var venuesTableView:UITableView!
     @IBOutlet weak var searchBar:UISearchBar!
+    @IBOutlet weak var sortSegmentedSecondaryTopConstraint:NSLayoutConstraint!
     
-    var lessonVenues = [LessonVenue]()
+    var userLocation:CLLocation?{
+        didSet{
+            if userLocation != nil {
+                self.sortSegmentedSecondaryTopConstraint.priority = UILayoutPriority(rawValue: 500)
+            }
+        }
+    }
+    
+    private var _lessonVenues:[LessonVenue]?
+    var lessonVenues:[LessonVenue]!{
+        get{
+            return _lessonVenues ?? HadafHayomiManager.sharedManager.lessonVenues 
+        }
+        set (value){
+            if self.sortSegmentedControlr.selectedSegmentIndex == 0 {//Sort by City
+                _lessonVenues = value.sorted(by:{ $0.city < $1.city })
+            }
+            else if self.sortSegmentedControlr.selectedSegmentIndex == 1 {//Sort by Distance
+                _lessonVenues = value.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
+            }
+        }
+    }
     var lessonsAnnotations = [LessonVenueAnnotation]()
     
     override func viewDidLoad() {
@@ -27,12 +50,22 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         self.searchBar.layer.borderColor = UIColor(HexColor:"791F23").cgColor
         
         self.displaySegmentedControlr.setTitle("st_map".localize(), forSegmentAt: 0)
+        self.displaySegmentedControlr.setTitle("st_list".localize(), forSegmentAt: 1)
         
-         self.displaySegmentedControlr.setTitle("st_list".localize(), forSegmentAt: 1)
+        self.sortSegmentedControlr.setTitle("st_sort_by_city".localize(), forSegmentAt: 0)
+        self.sortSegmentedControlr.setTitle("st_sort_by_distance".localize(), forSegmentAt: 1)
         
         self.getLessonVenues()
+        self.getUserLocatoin()
         
         self.mapView.showsUserLocation = true
+        
+        self.sortSegmentedSecondaryTopConstraint.priority = UILayoutPriority(rawValue: 900)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.getLessonVenues()
+        self.getUserLocatoin()
     }
     
     func getLessonVenues()
@@ -50,6 +83,30 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         },onFaile: { (object, error) -> Void in
             
         })
+    }
+    
+    func getUserLocatoin(){
+        
+        GetUserLocationProcess().executeWithObject(nil, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            self.userLocation = object as? CLLocation
+            
+            if self.lessonVenues.count > 0 {
+                self.updateVenues(self.lessonVenues, withUserLocatoin: self.userLocation!)
+            }
+            
+        },onFaile: { (object, error) -> Void in
+        })
+    }
+    
+    func updateVenues(_ venues:[LessonVenue], withUserLocatoin location:CLLocation){
+        for venue in venues {
+            let venueLocation = CLLocation(latitude: venue.latitude,longitude: venue.longitude)
+            venue.distanceFromUser = venueLocation.distance(from: location)/1000
+        }
+        self.venuesTableView.reloadData()
     }
     
     override func reloadData()
@@ -86,6 +143,17 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         }
     }
     
+    @IBAction func sortSegmentedControlrValueChanged(_ sedner:AnyObject)
+    {
+        if self.sortSegmentedControlr.selectedSegmentIndex == 0 {//Sort by City
+            self.lessonVenues = self.lessonVenues.sorted(by:{ $0.city < $1.city })
+        }
+        else if self.sortSegmentedControlr.selectedSegmentIndex == 1 {//Sort by Distance
+            self.lessonVenues = self.lessonVenues.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
+        }
+        self.venuesTableView.reloadData()
+    }
+        
     @IBAction func addLessonButtonClicked(_ sender:AnyObject)
     {        
         let addVenueViewController =  UIViewController.withName("AddVenueViewController", storyBoardIdentifier: "MapStoryboard") as! AddVenueViewController
@@ -218,5 +286,32 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             }
         }
     }
-
+    
+    func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, showNavigationOptions lessonVenue:LessonVenue) {
+        
+        let lessonVenueFullAddress = "\(lessonVenue.city ?? "") \(lessonVenue.address ?? "") \(lessonVenue.location ?? "")"
+        
+        let actionSheet = NavigationActoinSheet.createWith(address: lessonVenueFullAddress, latitude: lessonVenue.latitude, longitude: lessonVenue.longitude)
+        
+        if(UIDevice.current.userInterfaceIdiom == .pad){
+            if let ppc = actionSheet.popoverPresentationController {
+                ppc.sourceView = lessonVenueTableCell
+                ppc.sourceRect = lessonVenueTableCell.bounds
+            }
+        }
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, share lessonVenue:LessonVenue) {
+        
+        let text = lessonVenue.dispalyedInformation
+        if let image = UIImage(named: "defaultIcon")  {
+            
+            let shareAll = [text, image] as [Any]
+            let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
 }

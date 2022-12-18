@@ -79,7 +79,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         
         self.lessonsFilterSegmentedController.setTitle("st_all_essons".localize(), forSegmentAt: 0)
         self.lessonsFilterSegmentedController.setTitle("st_saved_lessons".localize(), forSegmentAt: 1)
-        self.lessonsFilterSegmentedController.setTitle("st_last_played_lessons".localize(), forSegmentAt: 2)
+        self.lessonsFilterSegmentedController.setTitle("st_playlist_history".localize(), forSegmentAt: 2)
         self.lessonsFilterSegmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(HexColor: "781F24")], for: .selected)
         self.lessonsFilterSegmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:  UIColor.gray], for: .normal)
         
@@ -259,6 +259,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             self.lastPlayedLessons = LessonsManager.sharedManager.getLastPlayedLessons()
             self.lastPlayedLessonsTableView?.reloadData()
             self.lastPlayedLessonsTableView?.isHidden = false
+            self.searchBar?.isHidden = true
         }
     }
     
@@ -469,6 +470,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.lastPlayedLessonsTableView?.isHidden = true
         self.noSavedLessonsFoundView.isHidden = true
         self.lessonsPickerView.isHidden = false
+        self.searchBar?.isHidden = false
     }
     
     func setNoLessonsLayout()

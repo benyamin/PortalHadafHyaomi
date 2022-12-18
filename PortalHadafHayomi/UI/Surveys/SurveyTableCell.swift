@@ -18,7 +18,7 @@ class SurveyTableCell: MSBaseTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+                
         let arrowImage = UIImage(named: "arrowLeft.png")
         let tintableArrowImage = UIImage.imageWithTintColor(arrowImage!, color: UIColor(HexColor: "781F24"))
         self.arrowImageView?.image = tintableArrowImage

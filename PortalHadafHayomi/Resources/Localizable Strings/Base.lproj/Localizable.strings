@@ -235,6 +235,7 @@
 "st_lesson_not_found" = "Lesson not found";
 "st_all_essons" = "All Lessons";
 "st_last_played_lessons" = "Last Played";
+"st_playlist_history" = "History";
 "st_saved_lessons" = "Saved Lessons";
 "st_sort_by_masechtot" = "Sort by masechet";
 "st_sort_by_magid_shiour" = "Sort by Magid Shiour";
@@ -281,6 +282,13 @@
 "st_add_venue" = "Add Lesson";
 "st_attachment" = "Attachment";
 "st_map_location" = "Location";
+"st_copy.location.address" = "Copy Location Address";
+"st_copy.location.coordinates" = "Copy Location Coordinates";
+"st_open_in_apple_maps" = "Open With Maps";
+"st_open_in_google_maps" = "Open With GoogleMaps";
+"st_open_in_waze" = "Open With Waze";
+"st_sort_by_city" = "Sort By City";
+"st_sort_by_distance" = "Sort By Distance";
 
 // Articles
 "st_all_categories" = "All Categories";

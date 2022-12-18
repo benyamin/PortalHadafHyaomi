@@ -26,6 +26,11 @@
 		22CDDD7D294B571400945E6F /* showPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7B294B571400945E6F /* showPlayer.png */; };
 		22CDDD7E294B571400945E6F /* hidePlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7C294B571400945E6F /* hidePlayer.png */; };
 		22CDDD82294BB3FF00945E6F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD81294BB3FF00945E6F /* refresh.png */; };
+		22CDDD88294E937800945E6F /* GetUserLocationProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD87294E937800945E6F /* GetUserLocationProcess.swift */; };
+		22CDDD8A294F171700945E6F /* CGPoint+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD89294F171700945E6F /* CGPoint+Extras.swift */; };
+		22CDDD8C294F342200945E6F /* navigator.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD8B294F342200945E6F /* navigator.png */; };
+		22CDDD8E294F35AC00945E6F /* pinLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD8D294F35AC00945E6F /* pinLocation.png */; };
+		22CDDD90294F519200945E6F /* NavigationActoinSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD8F294F519200945E6F /* NavigationActoinSheet.swift */; };
 		22CED9EA24636BF800D6A8D5 /* GetPagSummaryProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */; };
 		22CF56F0250D6D3C00273D07 /* FourmUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */; };
 		22CF571B250EA3E700273D07 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF571A250EA3E700273D07 /* LoginView.swift */; };
@@ -615,6 +620,11 @@
 		22CDDD7B294B571400945E6F /* showPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showPlayer.png; path = ../../../../../../../Downloads/showPlayer.png; sourceTree = "<group>"; };
 		22CDDD7C294B571400945E6F /* hidePlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hidePlayer.png; path = ../../../../../../../Downloads/hidePlayer.png; sourceTree = "<group>"; };
 		22CDDD81294BB3FF00945E6F /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		22CDDD87294E937800945E6F /* GetUserLocationProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLocationProcess.swift; sourceTree = "<group>"; };
+		22CDDD89294F171700945E6F /* CGPoint+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extras.swift"; sourceTree = "<group>"; };
+		22CDDD8B294F342200945E6F /* navigator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigator.png; sourceTree = "<group>"; };
+		22CDDD8D294F35AC00945E6F /* pinLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinLocation.png; sourceTree = "<group>"; };
+		22CDDD8F294F519200945E6F /* NavigationActoinSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActoinSheet.swift; sourceTree = "<group>"; };
 		22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPagSummaryProcess.swift; sourceTree = "<group>"; };
 		22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourmUserInfoView.swift; sourceTree = "<group>"; };
 		22CF571A250EA3E700273D07 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -1507,6 +1517,7 @@
 				4A59302C21E179F4001A3360 /* URLSessionDataTask+Extras.swift */,
 				4A2150FB2216F6EA00BFEEF7 /* UITableViewCell+Extras.swift */,
 				22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */,
+				22CDDD89294F171700945E6F /* CGPoint+Extras.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1736,6 +1747,8 @@
 		4ABFB48E235290FF0079D68B /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				22CDDD8D294F35AC00945E6F /* pinLocation.png */,
+				22CDDD8B294F342200945E6F /* navigator.png */,
 				4ABFB48F235290FF0079D68B /* AddOnMap_Icon_ios.png */,
 			);
 			path = Map;
@@ -2337,6 +2350,7 @@
 				4A50C23B27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift */,
 				2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */,
 				220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */,
+				22CDDD87294E937800945E6F /* GetUserLocationProcess.swift */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -2410,6 +2424,7 @@
 				4A5B59742246B54D00C1765D /* Language.swift */,
 				22D69D7A2483279500525786 /* MediaLesson.swift */,
 				220C99C924FAF7890013D377 /* User.swift */,
+				22CDDD8F294F519200945E6F /* NavigationActoinSheet.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -2737,6 +2752,7 @@
 				22CF571D250EA3F500273D07 /* LoginView.xib in Resources */,
 				4ABFB6B8235290FF0079D68B /* ask_questions_icon.png in Resources */,
 				4ABFB6EC235291000079D68B /* move_left.png in Resources */,
+				22CDDD8E294F35AC00945E6F /* pinLocation.png in Resources */,
 				4ABFB719235291000079D68B /* play.png in Resources */,
 				4ABFB6C0235290FF0079D68B /* kal_tile_today.png in Resources */,
 				224EFDB42576ECFB003532DE /* preButton.png in Resources */,
@@ -2858,6 +2874,7 @@
 				4AD149681FDC845B0038EBDF /* AccessoriesStoryboard.storyboard in Resources */,
 				4A58848B2085C5DF003EC9E5 /* BTTablePopUpView.xib in Resources */,
 				4ABFB6CD235290FF0079D68B /* katavot_icon_and_text.png in Resources */,
+				22CDDD8C294F342200945E6F /* navigator.png in Resources */,
 				4ABFB717235291000079D68B /* exitButton.png in Resources */,
 				4ABFB78C235291000079D68B /* InfoPlist.strings in Resources */,
 				4ABFB6C2235290FF0079D68B /* Dot3.png in Resources */,
@@ -2924,11 +2941,13 @@
 				4A59302D21E179F4001A3360 /* URLSessionDataTask+Extras.swift in Sources */,
 				4AC483071FE5BD81000F1528 /* CategoryTableCell.swift in Sources */,
 				4A90C8AD20C07EA200D46BC2 /* SearchTalmudProcess.swift in Sources */,
+				22CDDD8A294F171700945E6F /* CGPoint+Extras.swift in Sources */,
 				4AFC249A1FCB5FB30056E726 /* SQLmanager.swift in Sources */,
 				4AE755582321ABFE001B0E24 /* SpeachManager.swift in Sources */,
 				4AB1665C214860B900481B04 /* FourmDiscussionTableCell.swift in Sources */,
 				4AD40997201D139200A76EF0 /* Calendar+Extras.swift in Sources */,
 				4A2151222225DF5B00BFEEF7 /* UILabel+Extras.swift in Sources */,
+				22CDDD90294F519200945E6F /* NavigationActoinSheet.swift in Sources */,
 				4A5884802082AF4B003EC9E5 /* GetRegionsProcess.swift in Sources */,
 				4A733B3220B22C1100976D55 /* SurveysViewController.swift in Sources */,
 				4AD409AE2027B43E00A76EF0 /* DafYomiDate+Extras.swift in Sources */,
@@ -3014,6 +3033,7 @@
 				4AB1665521446D6000481B04 /* ForumsViewController.swift in Sources */,
 				221A2DB0254B49B50040475E /* ForgotPasswordProcess.swift in Sources */,
 				4AB3473222343C68002ED44C /* Note.swift in Sources */,
+				22CDDD88294E937800945E6F /* GetUserLocationProcess.swift in Sources */,
 				4A79B04120E2C7E900C3C456 /* SearchResultsPagerViewController.swift in Sources */,
 				4AC972EA20CC80F4003AD2A5 /* SearchResultTableCell.swift in Sources */,
 				4AC972E820CC80D3003AD2A5 /* SearchTalmudViewController.swift in Sources */,

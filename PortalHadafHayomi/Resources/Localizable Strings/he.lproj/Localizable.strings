@@ -245,6 +245,7 @@
 "st_lesson_not_found" = "השיעור לא נמצא";
 "st_all_essons" = "כל השיעורים";
 "st_last_played_lessons" = "שיעורים אחרונים";
+"st_playlist_history" = "היסטורית האזנה";
 "st_saved_lessons" = "שיעורים שנשמרו";
 "st_sort_by_masechtot" = "מיין לפי מסכתות";
 "st_sort_by_magid_shiour" = "מיין לפי מגידי שיעור";
@@ -289,7 +290,14 @@
 "st_missing_field_alert_title" = "חסרים שדות חובה";
 "st_add_venue" = "הוספת שיעור";
 "st_map_location" = "מקום השיעור";
-
+"st_distance_from_user" = "מרחק: %@ ק״מ";
+"st_copy.location.address" = "העתק כתובת";
+"st_copy.location.coordinates" = "העתק נקודת ציון";
+"st_open_in_apple_maps" = "פתח באמצעות מפות";
+"st_open_in_google_maps" = "פתח באמצעות גוגל מפות";
+"st_open_in_waze" = "פתח באמצעות וויז";
+"st_sort_by_city" = "מיין לפי עיר";
+"st_sort_by_distance" = "מיין לפי מרחק";
 
 // Articles
 "st_all_categories" = "כל הקטגוריות";

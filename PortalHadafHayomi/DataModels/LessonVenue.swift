@@ -16,6 +16,7 @@ class  LessonVenue:Venue
     var sregionname:String!
     var house_number:Int?
     var location:String?
+    var distanceFromUser:Double = 0.0
     
     lazy var dispalyedInformation:String = {
         
