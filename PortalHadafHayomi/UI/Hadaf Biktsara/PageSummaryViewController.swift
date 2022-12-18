@@ -39,10 +39,13 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     
     @IBOutlet weak var increaseTextSizeButton:UIButton!
     @IBOutlet weak var dicreaseTextSizeButton:UIButton!
+    @IBOutlet weak var shareButton:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
            
+        self.shareButton?.setImageTintColor(UIColor(HexColor: "781F24"))
+        
         //self.pageSummaryCollectoinView?.semanticContentAttribute = .forceRightToLeft
         
         self.pagePickerView?.semanticContentAttribute = .forceRightToLeft
@@ -181,6 +184,25 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         UserDefaults.standard.synchronize()
         
         self.pageSummaryCollectoinView?.reloadData()
+    }
+    
+    @IBAction func shareButtonClicked() {
+        self.share(sender: self.view)
+    }
+    
+    func share(sender:UIView){
+        
+        if let centerPageIndex = self.pageSummaryCollectoinView?.centerRowIndex()
+            ,let pageSummary = self.pageSummaries?[centerPageIndex].summary?.htmlAttributedString()
+        {
+            if let image = UIImage(named: "defaultIcon"){
+                
+                let shareAll = [pageSummary ,image] as [Any]
+                let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
     }
     
     //MARK: - UICollectoinView Delegate methods:

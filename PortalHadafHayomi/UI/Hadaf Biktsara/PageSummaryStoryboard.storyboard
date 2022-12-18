@@ -35,6 +35,17 @@
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAR-fx-9RZ">
+                                        <rect key="frame" x="343" y="31" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="6wS-WU-NvP"/>
+                                            <constraint firstAttribute="width" constant="24" id="Xki-lt-FLa"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="shareIcon.png"/>
+                                        <connections>
+                                            <action selector="shareButtonClicked" destination="KUm-Ej-wEj" eventType="touchUpInside" id="Few-Ef-8J6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -44,6 +55,8 @@
                                     <constraint firstItem="RjL-7W-be1" firstAttribute="centerX" secondItem="uvU-7x-e7f" secondAttribute="centerX" id="ObH-KR-Tld"/>
                                     <constraint firstAttribute="bottom" secondItem="RjL-7W-be1" secondAttribute="bottom" constant="13" id="XYn-QO-hvO"/>
                                     <constraint firstItem="gDv-hH-H4n" firstAttribute="leading" secondItem="uvU-7x-e7f" secondAttribute="leading" id="fBA-J9-0Rs"/>
+                                    <constraint firstAttribute="trailing" secondItem="JAR-fx-9RZ" secondAttribute="trailing" constant="8" id="jEi-4I-noc"/>
+                                    <constraint firstAttribute="bottom" secondItem="JAR-fx-9RZ" secondAttribute="bottom" constant="15" id="kgm-gy-0zO"/>
                                     <constraint firstAttribute="bottom" secondItem="gDv-hH-H4n" secondAttribute="bottom" id="njp-Ao-9Fk"/>
                                 </constraints>
                             </view>
@@ -273,6 +286,7 @@
                         <outlet property="pageSummaryCollectoinView" destination="zNZ-HZ-Ox9" id="b5I-Oo-BIP"/>
                         <outlet property="searchPageButton" destination="DOc-pw-ka9" id="ph7-h8-auy"/>
                         <outlet property="selectTodaysPageButton" destination="oRP-jr-0DY" id="i6W-II-w91"/>
+                        <outlet property="shareButton" destination="JAR-fx-9RZ" id="5Iq-QA-s5v"/>
                         <outlet property="topBarTitleLabel" destination="RjL-7W-be1" id="lAy-e6-wn4"/>
                         <outlet property="topBarView" destination="uvU-7x-e7f" id="6JC-Bs-Ah5"/>
                     </connections>
@@ -285,6 +299,7 @@
     <resources>
         <image name="AH+_icon.png" width="320" height="320"/>
         <image name="AH-_icon.png" width="320" height="320"/>
+        <image name="shareIcon.png" width="128" height="128"/>
         <image name="topBar750.png" width="750" height="120"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

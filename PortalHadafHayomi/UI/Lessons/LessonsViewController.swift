@@ -39,6 +39,8 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     @IBOutlet weak var lastPlayedLessonsTableView:UITableView?
     
+    @IBOutlet weak var todaysPageLabel:UILabel?
+    
     var firstAppearacne = true
     
     var changeLessonAlert:BTAlertView?
@@ -172,11 +174,12 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             self.lessonsPickerView.addConstraint(NSLayoutConstraint(item: lessonsPickerView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: lessonsPickerView.frame.size.height))
 
         }
-        
         else if let playingLesson = LessonsManager.sharedManager.playingLesson
         {
            self.setPlayingLesson(playingLesson)
         }
+        
+        self.todaysPageLabel?.text = "הדף היומי\n\(HadafHayomiManager.sharedManager.todaysPageDisplay())"
         
         if UserDefaults.standard.object(forKey: "didShowUpdateAlert") == nil{
             
@@ -533,8 +536,17 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             
             BTAlertView.show(title: alertTitle, message:alertMessage, buttonKeys: ["st_no".localize(),"st_yes".localize()], onComplete:{ (dismissButtonKey) in
                 
-                lesson.durration = dismissButtonKey == "st_yes".localize() ? duration : 0
+                if dismissButtonKey == "st_yes".localize(){
+                    lesson.durration = duration
+                }
+                else if dismissButtonKey == "st_no".localize(){
+                    lesson.durration = 0
+                    UserDefaults.standard.removeObject(forKey: lessonIdentifier)
+                    UserDefaults.standard.synchronize()
+                }
+                
                 self.audioPlayer?.setPlayerUrl(lesson.getUrl(), durration:lesson.durration ?? 0)
+
             })
             
             lesson.durration = duration
@@ -822,6 +834,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             if dismissButtonKey == playButton
             {
                 self.lessonsPickerView.select(maschet: nextLesson.masechet, page: nextLesson.page!, maggidShior:nextLesson.maggidShiur)
+                
+                self.playSelectedLesson()
+                self.playPauseButton.isSelected = true
             }
         })
     }

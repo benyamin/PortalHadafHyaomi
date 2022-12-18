@@ -42,20 +42,30 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
         
         self.articalesCategorysTableView.isHidden = true
                 
-        let dispalyLastPageViewed = UserDefaults.standard.object(forKey: "setableItem_SaveLastSelectedPageInArticles") as? Bool ?? true
-        
-        if dispalyLastPageViewed
-            ,let lastViewdPageArticles = UserDefaults.standard.object(forKey: "lastViewdPageArticles") as? [String:Int]
-            ,let selectedPageIndex = lastViewdPageArticles["selectedPageIndex"]
-            ,let page = HadafHayomiManager.sharedManager.getPageForPageIndex(selectedPageIndex)
-            ,let maschent = HadafHayomiManager.sharedManager.getMasechetForPageIndex(selectedPageIndex){
-            self.getArticalesCategorysForMasechet(maschent, andPage: page)
+        //Current selected display page in Talmud VC
+        if let selectedPageInfo = UserDefaults.standard.object(forKey: "selectedPageInfo") as? [String:Any]
+            ,let maschetId = selectedPageInfo["maschetId"] as? String
+            ,let maschent = HadafHayomiManager.sharedManager.getMasechetById(maschetId)
+            ,let pageIndex = selectedPageInfo["pageIndex"] as? Int{
+            
+            self.getArticalesCategorysForMasechet(maschent, andPage: Page(index: pageIndex))
         }
-
-        else {
-            let todaysMaschet = HadafHayomiManager.sharedManager.todaysMaschet!
-            let todaysPage = HadafHayomiManager.sharedManager.todaysPage!
-            self.getArticalesCategorysForMasechet(todaysMaschet, andPage: todaysPage)
+        else{
+            let dispalyLastPageViewed = UserDefaults.standard.object(forKey: "setableItem_SaveLastSelectedPageInArticles") as? Bool ?? true
+            
+            if dispalyLastPageViewed
+                ,let lastViewdPageArticles = UserDefaults.standard.object(forKey: "lastViewdPageArticles") as? [String:Int]
+                ,let selectedPageIndex = lastViewdPageArticles["selectedPageIndex"]
+                ,let page = HadafHayomiManager.sharedManager.getPageForPageIndex(selectedPageIndex)
+                ,let maschent = HadafHayomiManager.sharedManager.getMasechetForPageIndex(selectedPageIndex){
+                self.getArticalesCategorysForMasechet(maschent, andPage: page)
+            }
+            
+            else {
+                let todaysMaschet = HadafHayomiManager.sharedManager.todaysMaschet!
+                let todaysPage = HadafHayomiManager.sharedManager.todaysPage!
+                self.getArticalesCategorysForMasechet(todaysMaschet, andPage: todaysPage)
+            }
         }
         
         self.searchPageButton.layer.borderWidth = 1.0
@@ -94,6 +104,15 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
             self.firstAppearance = false
             
            self.setTalmudPagePickerView()
+        }
+        
+        //Current selected display page in Talmud VC
+        if let selectedPageInfo = UserDefaults.standard.object(forKey: "selectedPageInfo") as? [String:Any]
+            ,let maschetId = selectedPageInfo["maschetId"] as? String
+            ,let maschent = HadafHayomiManager.sharedManager.getMasechetById(maschetId)
+            ,let pageIndex = selectedPageInfo["pageIndex"] as? Int{
+            
+            self.getArticalesCategorysForMasechet(maschent, andPage: Page(index: pageIndex))
         }
         
     }

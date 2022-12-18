@@ -126,7 +126,6 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
             
         }, onComplete: { (object) -> Void in
             
-            Util.hideDefaultLoadingView()
             
             if self.chavrusas == nil
             {
@@ -151,8 +150,10 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
                 self.sholdLoadMoreChavrusas = false
             }
             
-            
             self.chavrusasTableView?.reloadData()
+            
+            Util.hideDefaultLoadingView()
+
             
         },onFaile: { (object, error) -> Void in
             

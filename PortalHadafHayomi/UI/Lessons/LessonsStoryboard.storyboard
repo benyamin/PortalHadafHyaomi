@@ -33,16 +33,25 @@
                                         <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todays Page" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgW-TC-fd0">
+                                        <rect key="frame" x="234" y="39.5" width="133" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
+                                        <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="WWF-Uq-Zjd" secondAttribute="bottom" id="83y-Wt-hFL"/>
+                                    <constraint firstAttribute="trailing" secondItem="vgW-TC-fd0" secondAttribute="trailing" constant="8" id="ELL-3f-oZd"/>
                                     <constraint firstItem="WWF-Uq-Zjd" firstAttribute="leading" secondItem="JV2-3G-vJg" secondAttribute="leading" id="GG4-zS-h5w"/>
                                     <constraint firstItem="WWF-Uq-Zjd" firstAttribute="top" secondItem="JV2-3G-vJg" secondAttribute="top" id="Lja-R2-S0z"/>
                                     <constraint firstAttribute="trailing" secondItem="WWF-Uq-Zjd" secondAttribute="trailing" id="R4t-WY-pSl"/>
                                     <constraint firstAttribute="bottom" secondItem="P4X-K8-h3C" secondAttribute="bottom" constant="13" id="SVr-lu-9fL"/>
                                     <constraint firstAttribute="height" constant="70" id="XWx-YP-PfM"/>
+                                    <constraint firstItem="vgW-TC-fd0" firstAttribute="leading" secondItem="P4X-K8-h3C" secondAttribute="trailing" constant="8" id="Z1G-9I-Rdr"/>
                                     <constraint firstItem="P4X-K8-h3C" firstAttribute="centerX" secondItem="JV2-3G-vJg" secondAttribute="centerX" id="bBK-NK-mDe"/>
+                                    <constraint firstAttribute="bottom" secondItem="vgW-TC-fd0" secondAttribute="bottom" constant="13" id="hnx-0e-00w"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kP9-sM-rk4" userLabel="optionsView">
@@ -373,6 +382,7 @@
                         <outlet property="showAllLessonsButton" destination="bRB-Vx-WnP" id="xku-np-dyg"/>
                         <outlet property="sortSegmenterController" destination="xq1-FL-rrn" id="hhT-9Q-Vry"/>
                         <outlet property="todaysPageButton" destination="4vc-hv-k6p" id="xci-XI-1ab"/>
+                        <outlet property="todaysPageLabel" destination="vgW-TC-fd0" id="I4f-f0-lxE"/>
                         <outlet property="topBarTitleLabel" destination="P4X-K8-h3C" id="W4R-LD-jO0"/>
                         <outlet property="topBarView" destination="JV2-3G-vJg" id="TCx-IV-Zwi"/>
                     </connections>

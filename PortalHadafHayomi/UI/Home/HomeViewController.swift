@@ -314,7 +314,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
                  self.perform( #selector(scrollToFirstItem), with: nil, afterDelay: 1.0)
             }           
         }
-        
+        self.currentPageLabel.text = HadafHayomiManager.sharedManager.todaysPageDisplay()        
     }
     
     func selectItemWithName(itemName:String) {

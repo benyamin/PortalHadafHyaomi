@@ -30,8 +30,8 @@
             filePath = "PortalHadafHayomi/UI/Lessons/LessonsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "756"
-            endingLineNumber = "756"
+            startingLineNumber = "768"
+            endingLineNumber = "768"
             landmarkName = "didPause(player:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -286,8 +286,8 @@
             filePath = "PortalHadafHayomi/UI/Lessons/LessonsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "990"
-            endingLineNumber = "990"
+            startingLineNumber = "1005"
+            endingLineNumber = "1005"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -302,13 +302,13 @@
             filePath = "PortalHadafHayomi/UI/Lessons/LessonsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1002"
-            endingLineNumber = "1002"
+            startingLineNumber = "1017"
+            endingLineNumber = "1017"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "396F6540-1892-498F-B5D9-C65FF1104F92 - dac2f7304a787457"
+                  uuid = "396F6540-1892-498F-B5D9-C65FF1104F92 - dac2f7304a787238"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -318,12 +318,12 @@
                   urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Lessons/LessonsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1002"
-                  endingLineNumber = "1002"
+                  startingLineNumber = "1017"
+                  endingLineNumber = "1017"
                   offsetFromSymbolStart = "1096">
                </Location>
                <Location
-                  uuid = "396F6540-1892-498F-B5D9-C65FF1104F92 - dac2f7304a787457"
+                  uuid = "396F6540-1892-498F-B5D9-C65FF1104F92 - dac2f7304a787238"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -333,8 +333,8 @@
                   urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Lessons/LessonsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1002"
-                  endingLineNumber = "1002"
+                  startingLineNumber = "1017"
+                  endingLineNumber = "1017"
                   offsetFromSymbolStart = "1140">
                </Location>
             </Locations>
@@ -497,6 +497,22 @@
             startingLineNumber = "14"
             endingLineNumber = "14"
             landmarkName = "distance(to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F57B5BE9-564D-43D0-920B-6FD0E40B9AC8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/UI/Lessons/LessonsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "836"
+            endingLineNumber = "836"
+            landmarkName = "showPlayNextLessonAlert(nextLesson:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
