@@ -128,15 +128,30 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             }
             
             switch selectedDisplayType {
-            case .Vagshal, .Text, .TextWithScore, .Meorot, .Chavruta:
+            case .Vagshal, .Meorot, .Chavruta:
                 self.increaseTextSizeButton.isHidden = true
                 self.dicreaseTextSizeButton.isHidden = true
                 break
-            case .Steinsaltz, .EN:
+            case .Steinsaltz, .EN, .Text, .TextWithScore:
                 self.increaseTextSizeButton.isHidden = false
                 self.dicreaseTextSizeButton.isHidden = false
                 break 
             }
+            
+            if selectedDisplayType == .Text {
+                self.nikodButton?.isHidden = false
+                self.nikodButton?.isSelected = false
+            }
+            else if selectedDisplayType == .TextWithScore {
+                self.nikodButton?.isHidden = false
+                self.nikodButton?.isSelected = true
+            }
+            else{
+                self.nikodButton?.isHidden = true
+            }
+            
+            UserDefaults.standard.set(selectedDisplayType.rawValue, forKey: "TalmudSelectedDisplayType")
+            UserDefaults.standard.synchronize()
         }
     }
     
@@ -227,8 +242,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func setDefaultTalmudDisplay()
     {
-        self.nikodButton?.isHidden = true
-        
+        selectedDisplayType =  TalmudDisplayType(rawValue:(UserDefaults.standard.object(forKey: "TalmudSelectedDisplayType") as? String ?? "Vagshal")) ?? .Vagshal
+        /*
         if let selectedTalmudDisplayType = UserDefaults.standard.object(forKey: "TalmudDisplayType") as? String
         {
             if selectedTalmudDisplayType == "צורת הדף"
@@ -263,6 +278,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         else{
            selectedDisplayType = .Vagshal
         }
+        */
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -51,8 +51,8 @@ open class GetPageTextProcess: MSBaseProcess
                         if let responseData = String(data: data, encoding: String.Encoding.utf8)
                         {
                             if let talmudText = responseData.slice(from: "<div id=\"PageText\">", to: "</div>")
-                            ,let rashiText = responseData.slice(from: "<div class=\"clsContainer\"><h2 id=\"ContentPlaceHolderMain_oRashiTitle\">רש&quot;י</h2><div class=\"clsBody\">", to: "</div>")
-                            ,let tosfotText = responseData.slice(from: "<div class=\"clsContainer\"><h2 id=\"ContentPlaceHolderMain_oTosfotTitle\">תוספות</h2><div class=\"clsBody\">", to: "</div>")
+                            ,let rashiText = responseData.slice(from: "id=\"ContentPlaceHolderMain_oRashiTitle\">רש&quot;י</h2><div class=\"clsBody\">", to: "</div>")
+                            ,let tosfotText = responseData.slice(from: "id=\"ContentPlaceHolderMain_oTosfotTitle\">תוספות</h2><div class=\"clsBody\">", to: "</div>")
                             {
                                 
                                 //var pageText = "<p style=\"line-height:1.5em;background-color:#6A2423;color:#FAF2DD\">גמרא</p>"
@@ -65,6 +65,7 @@ open class GetPageTextProcess: MSBaseProcess
                                 pageText += "<br>"
                                 pageText += "<p style=\"color:#6A2423;\">תוס׳</p>"
                                 pageText += tosfotText
+                                pageText += "<br><br>"
                                 
                                 //<!DOCTYPE html><html dir=\"rtl\" lang=\"ar\"><head><meta charset=\"utf-8\">
                                 

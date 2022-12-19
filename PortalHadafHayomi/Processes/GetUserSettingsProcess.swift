@@ -19,10 +19,11 @@ class GetUserSettingsProcess: MSBaseProcess
                                       "title":"Languages",
                                       "type":"Selection"])
         
+        /*
         setableItemsInfo.append(["key":"TalmudDisplayType",
                                  "title":"Default_Page_Type",
                                  "type":"Selection"])
-        
+        */
         if HadafHayomiManager.sharedManager.maggidShiurs.count > 0
         {
             setableItemsInfo.append(["key":"DefaultMagidShiour",
