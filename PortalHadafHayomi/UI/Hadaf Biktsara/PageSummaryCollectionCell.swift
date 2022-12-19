@@ -34,8 +34,13 @@ class PageSummaryCollectionCell: MSBaseCollectionViewCell, UITextViewDelegate
     {
         self.pageSummary = object as? PageSummary
         
-        self.reloadData()
-        
+        if let summary = self.pageSummary?.summary
+            , summary.count > 0 {
+            self.reloadData()
+        }
+        else{
+            self.getPageSummary()
+        } 
     }
     
     override func reloadData() {
@@ -52,9 +57,9 @@ class PageSummaryCollectionCell: MSBaseCollectionViewCell, UITextViewDelegate
             
             self.titleLabel.text = self.pageSummary?.key
             
-            summary = "<!DOCTYPE html><html dir=\"rtl\" lang=\"he\">><head><meta charset=\"utf-8\"><body><p style=font-size:\(self.textSize)px;\">\(summary)</p> </body>"
-            
-            self.valueTextView.attributedText = summary.htmlAttributedString()
+            let style = "<style>body {text-align: right; font-size:\(self.textSize)px; }</style>"
+
+            self.valueTextView.attributedText = summary.htmlAttributedString(style:style)
         }
         else{
             self.titleLabel.text = self.pageSummary?.key

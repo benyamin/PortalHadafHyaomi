@@ -121,9 +121,9 @@ extension String {
     }
     
     
-    func htmlAttributedString() -> NSAttributedString?
+    func htmlAttributedString(style:String = "") -> NSAttributedString?
     {
-        guard let data = data(using: .unicode) else { return NSAttributedString() }
+        guard let data = (self + style).data(using: .unicode) else { return NSAttributedString() }
         do {
             return try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType:  NSAttributedString.DocumentType.html], documentAttributes: nil)
             

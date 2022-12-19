@@ -12,10 +12,18 @@ class QuastionTopicTableCell: MSBaseTableViewCell {
 
     var expression:Expression?
     
+    @IBOutlet weak var cardView:UIView?
     @IBOutlet weak var quastionTopicLabel:UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.cardView?.backgroundColor = UIColor(HexColor: "FAF2DD")
+        self.cardView?.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
+        self.cardView?.layer.borderWidth = 1
+        self.cardView?.layer.cornerRadius = 3
+        
+        self.quastionTopicLabel?.textColor = UIColor(HexColor:"6A2423")
        
         self.reloadData()
     }

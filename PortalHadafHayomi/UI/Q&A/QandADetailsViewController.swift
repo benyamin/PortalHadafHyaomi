@@ -43,10 +43,11 @@ class QandADetailsViewController: MSBaseViewController, UITextViewDelegate
         
         self.qustionTopicLabel?.text = self.expression?.key
         
-        if var expressionValue = self.expression?.value
+        if let expressionValue = self.expression?.value
         {
-            expressionValue = "<!DOCTYPE html><html dir=\"rtl\" lang=\"ar\"><head><meta charset=\"utf-8\"><font size=\"5\">" + expressionValue + "</font>"
-            self.detailsTextView?.attributedText = expressionValue.htmlAttributedString()
+            let style = "<style>body {text-align: right; font-size:20px; }</style>"
+
+            self.detailsTextView?.attributedText = expressionValue.htmlAttributedString(style:style)
         }
         else{
             self.detailsTextView?.text = ""

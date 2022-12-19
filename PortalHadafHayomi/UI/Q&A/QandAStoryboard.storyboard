@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,7 +54,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.97577124829999995" green="0.95302349330000002" blue="0.85892361399999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QandATopicTableCell" rowHeight="80" id="lPQ-jo-hnx" customClass="QandATopicTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lPQ-jo-hnx" id="rl7-vc-tQA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
@@ -65,7 +64,7 @@
                                                     <rect key="frame" x="16" y="8" width="343" height="64"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הדרכה בלימוד" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="VpC-33-4C3">
-                                                            <rect key="frame" x="57" y="18.5" width="118.5" height="28"/>
+                                                            <rect key="frame" x="57" y="18" width="118.5" height="28"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="26"/>
                                                             <color key="textColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -84,7 +83,7 @@
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VpC-33-4C3" secondAttribute="bottom" constant="4" id="94E-mP-wSh"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VpC-33-4C3" secondAttribute="trailing" constant="16" id="9n4-Zy-HcR"/>
                                                         <constraint firstItem="c5q-Yj-Dzf" firstAttribute="leading" secondItem="brI-pG-nK4" secondAttribute="leading" constant="16" id="Kkv-jq-thP"/>
-                                                        <constraint firstAttribute="height" constant="64" id="Srp-Um-u3x"/>
+                                                        <constraint firstAttribute="height" constant="60" id="Srp-Um-u3x"/>
                                                         <constraint firstItem="VpC-33-4C3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="brI-pG-nK4" secondAttribute="top" constant="4" id="ev8-td-pyR"/>
                                                         <constraint firstItem="c5q-Yj-Dzf" firstAttribute="centerY" secondItem="brI-pG-nK4" secondAttribute="centerY" id="rd4-Eg-i8h"/>
                                                         <constraint firstItem="VpC-33-4C3" firstAttribute="leading" secondItem="c5q-Yj-Dzf" secondAttribute="trailing" constant="16" id="vme-ap-t7J"/>
@@ -112,6 +111,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="yjQ-oZ-izX"/>
                         <color key="backgroundColor" red="0.97723382709999995" green="0.95447605849999995" blue="0.85833317040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="u1N-JX-djS" firstAttribute="leading" secondItem="yjQ-oZ-izX" secondAttribute="leading" id="9bG-PS-iqA"/>
@@ -122,7 +122,6 @@
                             <constraint firstAttribute="bottom" secondItem="YOO-if-4rH" secondAttribute="bottom" id="nqD-JW-FlC"/>
                             <constraint firstItem="u1N-JX-djS" firstAttribute="top" secondItem="2ot-d1-hHS" secondAttribute="top" id="x6l-eO-gfl"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="yjQ-oZ-izX"/>
                     </view>
                     <connections>
                         <outlet property="topBarTitleLabel" destination="vnp-eh-U97" id="hub-R5-3cY"/>
@@ -151,6 +150,11 @@
                                 <color key="tintColor" red="0.98132246729999995" green="0.95032817130000002" blue="0.8666257262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="searchField.textColor">
+                                        <color key="value" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="3Qh-20-xLd" id="DJF-5O-bBK"/>
                                 </connections>
@@ -205,24 +209,24 @@
                                 <color key="separatorColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuastionTopicTableCell" rowHeight="60" id="FIf-Af-UTC" customClass="QuastionTopicTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuastionTopicTableCell" rowHeight="67" id="FIf-Af-UTC" customClass="QuastionTopicTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FIf-Af-UTC" id="xmT-xJ-Wuz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inb-nx-XuN">
-                                                    <rect key="frame" x="8" y="8" width="359" height="44"/>
+                                                    <rect key="frame" x="8" y="8" width="359" height="51"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="תוכן השאלה" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJL-aa-bCF">
-                                                            <rect key="frame" x="8" y="10" width="70" height="24"/>
+                                                            <rect key="frame" x="8" y="10" width="70" height="31"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                                             <color key="textColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowContinue.png" translatesAutoresizingMaskIntoConstraints="NO" id="rxQ-qg-I73">
-                                                            <rect key="frame" x="329" y="11" width="22" height="22"/>
+                                                            <rect key="frame" x="329" y="14.5" width="22" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="22" id="IyD-1G-wRp"/>
                                                                 <constraint firstAttribute="height" constant="22" id="pPg-Df-LFZ"/>
@@ -236,6 +240,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="rxQ-qg-I73" secondAttribute="trailing" constant="8" id="MRh-gq-nNh"/>
                                                         <constraint firstItem="wJL-aa-bCF" firstAttribute="top" secondItem="inb-nx-XuN" secondAttribute="top" constant="10" id="YMW-sA-F0y"/>
                                                         <constraint firstItem="wJL-aa-bCF" firstAttribute="centerY" secondItem="inb-nx-XuN" secondAttribute="centerY" id="hyp-0S-ZTt"/>
+                                                        <constraint firstAttribute="height" constant="45" id="oZE-GA-zrU"/>
                                                         <constraint firstItem="rxQ-qg-I73" firstAttribute="centerY" secondItem="inb-nx-XuN" secondAttribute="centerY" id="qrp-Cs-AuK"/>
                                                         <constraint firstItem="rxQ-qg-I73" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wJL-aa-bCF" secondAttribute="trailing" constant="8" id="vOY-8Y-l9M"/>
                                                     </constraints>
@@ -250,6 +255,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cardView" destination="inb-nx-XuN" id="zP9-fk-iAK"/>
                                             <outlet property="quastionTopicLabel" destination="wJL-aa-bCF" id="rNQ-f3-9rn"/>
                                         </connections>
                                     </tableViewCell>
@@ -260,6 +266,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Z78-8l-R6B"/>
                         <color key="backgroundColor" red="0.97723382709999995" green="0.95447605849999995" blue="0.85833317040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="TP6-HC-Xz1" firstAttribute="top" secondItem="KSO-My-PD3" secondAttribute="bottom" id="2c5-LY-27e"/>
@@ -275,7 +282,6 @@
                             <constraint firstItem="KSO-My-PD3" firstAttribute="top" secondItem="dOx-6m-eNg" secondAttribute="bottom" id="ljA-Yv-FmB"/>
                             <constraint firstItem="KSO-My-PD3" firstAttribute="trailing" secondItem="Z78-8l-R6B" secondAttribute="trailing" id="sq5-Cu-P2U"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Z78-8l-R6B"/>
                     </view>
                     <connections>
                         <outlet property="QandATableView" destination="TP6-HC-Xz1" id="vzd-xW-aH5"/>
@@ -353,6 +359,7 @@
                                 </connections>
                             </textView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="8Tb-5r-mBY"/>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8Tb-5r-mBY" firstAttribute="trailing" secondItem="zY8-3d-yFX" secondAttribute="trailing" constant="16" id="3DD-Dg-aJC"/>
@@ -366,7 +373,6 @@
                             <constraint firstItem="2K7-Ni-Xl2" firstAttribute="top" secondItem="dGb-Q6-KWz" secondAttribute="bottom" constant="30" id="aSd-Ov-d6c"/>
                             <constraint firstItem="dGb-Q6-KWz" firstAttribute="top" secondItem="JKR-DK-jTK" secondAttribute="top" id="l48-1b-aEa"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8Tb-5r-mBY"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="2mQ-P5-Bfv" id="z87-HV-Mbm"/>

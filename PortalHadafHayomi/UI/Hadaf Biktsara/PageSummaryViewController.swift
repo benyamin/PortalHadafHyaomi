@@ -221,7 +221,6 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
             
             cell.textSize = self.textDisplaySize
             cell.reloadWithObject(pageSummary)
-            cell.getPageSummary()
         }
         
         return cell

@@ -18,7 +18,13 @@ class QandATopicTableCell: MSBaseTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.cardView?.backgroundColor = UIColor(HexColor: "FAF2DD")
+        self.cardView?.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
+        self.cardView?.layer.borderWidth = 1
+        self.cardView?.layer.cornerRadius = 3
+        
+        self.titleLabel.textColor = UIColor(HexColor:"6A2423")
     }
     
     override func reloadWithObject(_ object: Any)
