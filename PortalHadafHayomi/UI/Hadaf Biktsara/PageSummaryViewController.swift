@@ -41,10 +41,15 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     @IBOutlet weak var dicreaseTextSizeButton:UIButton!
     @IBOutlet weak var shareButton:UIButton!
     
+    @IBOutlet weak var nextPageButton:UIButton!
+    @IBOutlet weak var prePageButton:UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
            
-        self.shareButton?.setImageTintColor(UIColor(HexColor: "781F24"))
+        self.shareButton.setImageTintColor(UIColor(HexColor: "781F24"))
+        self.nextPageButton.setImageTintColor(UIColor(HexColor: "781F24"))
+        self.prePageButton.setImageTintColor(UIColor(HexColor: "781F24"))
         
         //self.pageSummaryCollectoinView?.semanticContentAttribute = .forceRightToLeft
         
@@ -136,12 +141,12 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         }
     }
     
-    func selectPage(pageSummary:PageSummary){
+    func selectPage(pageSummary:PageSummary, animated:Bool){
         
         if let index = self.pageSummaries?.index(of:pageSummary) {
             let selectedIndexPath = IndexPath(row:index, section: 0)
             
-            self.pageSummaryCollectoinView?.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally)
+            self.pageSummaryCollectoinView?.selectItem(at: selectedIndexPath, animated: animated, scrollPosition: .centeredHorizontally)
         }
     }
     
@@ -186,8 +191,26 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         self.pageSummaryCollectoinView?.reloadData()
     }
     
-    @IBAction func shareButtonClicked() {
+    @IBAction func shareButtonClicked(_ sender:UIButton) {
         self.share(sender: self.view)
+    }
+    
+    @IBAction func nextPageButtonClicked(_ sender:UIButton) {
+        
+        if let selectedpageSummaryIndex = self.pageSummaryCollectoinView?.centerRowIndex()
+            ,let nextPageSummary = self.pageSummaries?[selectedpageSummaryIndex+1]{
+                
+            self.selectPage(pageSummary: nextPageSummary, animated: true)
+        }
+    }
+    
+    @IBAction func prePageButtonClicked(_ sender:UIButton) {
+        
+        if let selectedpageSummaryIndex = self.pageSummaryCollectoinView?.centerRowIndex()
+            ,let prePageSummary = self.pageSummaries?[selectedpageSummaryIndex-1]{
+                
+            self.selectPage(pageSummary: prePageSummary, animated: true)
+        }
     }
     
     func share(sender:UIView){
@@ -206,7 +229,6 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     }
     
     //MARK: - UICollectoinView Delegate methods:
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -377,8 +399,7 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         }
                 
         if let pageSummary = self.pageSummaries?[pageIndex] {
-                 
-                 self.selectPage(pageSummary: pageSummary)
+                 self.selectPage(pageSummary: pageSummary, animated: false)
         }
     
         self.saveViewedPage(selectedPageIndex: selectedPageIndex, masechet: selectedMasechet)
@@ -397,7 +418,7 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
     {
         if let todyasPageSummary = self.pageSummaries?[HadafHayomiManager.sharedManager.todaysPageIndex()-1] {
             
-            self.selectPage(pageSummary: todyasPageSummary)
+            self.selectPage(pageSummary: todyasPageSummary, animated: false)
             
             UserDefaults.standard.removeObject(forKey: "lastViewdPageSummary")
             UserDefaults.standard.synchronize()

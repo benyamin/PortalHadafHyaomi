@@ -30,20 +30,42 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="תוכן" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="RjL-7W-be1">
-                                        <rect key="frame" x="170.5" y="31" width="34.5" height="26"/>
+                                        <rect key="frame" x="168.5" y="29" width="38.5" height="28"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAR-fx-9RZ">
-                                        <rect key="frame" x="343" y="31" width="24" height="24"/>
+                                        <rect key="frame" x="335" y="31" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="6wS-WU-NvP"/>
                                             <constraint firstAttribute="width" constant="24" id="Xki-lt-FLa"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="shareIcon.png"/>
                                         <connections>
-                                            <action selector="shareButtonClicked" destination="KUm-Ej-wEj" eventType="touchUpInside" id="Few-Ef-8J6"/>
+                                            <action selector="shareButtonClicked:" destination="KUm-Ej-wEj" eventType="touchUpInside" id="OZg-Qx-pzA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNi-FB-k7j">
+                                        <rect key="frame" x="257" y="18" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="JrL-t2-XQQ"/>
+                                            <constraint firstAttribute="height" constant="40" id="mrQ-0r-ipC"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="nextButton.png"/>
+                                        <connections>
+                                            <action selector="nextPageButtonClicked:" destination="KUm-Ej-wEj" eventType="touchUpInside" id="nVf-tk-qy8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PbC-0s-ghM">
+                                        <rect key="frame" x="78.5" y="18" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Huj-Td-Ety"/>
+                                            <constraint firstAttribute="width" constant="40" id="srW-A7-Kw2"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="preButton.png"/>
+                                        <connections>
+                                            <action selector="prePageButtonClicked:" destination="KUm-Ej-wEj" eventType="touchUpInside" id="M0c-dQ-5py"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -52,12 +74,16 @@
                                     <constraint firstAttribute="height" constant="70" id="9Dy-Xc-NYi"/>
                                     <constraint firstAttribute="trailing" secondItem="gDv-hH-H4n" secondAttribute="trailing" id="ACe-a4-PpX"/>
                                     <constraint firstItem="gDv-hH-H4n" firstAttribute="top" secondItem="uvU-7x-e7f" secondAttribute="top" id="EEG-3t-ljP"/>
+                                    <constraint firstItem="RjL-7W-be1" firstAttribute="leading" secondItem="PbC-0s-ghM" secondAttribute="trailing" constant="50" id="EcB-gy-HnK"/>
+                                    <constraint firstItem="dNi-FB-k7j" firstAttribute="leading" secondItem="RjL-7W-be1" secondAttribute="trailing" constant="50" id="FKj-A1-Tex"/>
+                                    <constraint firstAttribute="trailing" secondItem="JAR-fx-9RZ" secondAttribute="trailing" constant="16" id="Oa5-nE-Iao"/>
                                     <constraint firstItem="RjL-7W-be1" firstAttribute="centerX" secondItem="uvU-7x-e7f" secondAttribute="centerX" id="ObH-KR-Tld"/>
                                     <constraint firstAttribute="bottom" secondItem="RjL-7W-be1" secondAttribute="bottom" constant="13" id="XYn-QO-hvO"/>
                                     <constraint firstItem="gDv-hH-H4n" firstAttribute="leading" secondItem="uvU-7x-e7f" secondAttribute="leading" id="fBA-J9-0Rs"/>
-                                    <constraint firstAttribute="trailing" secondItem="JAR-fx-9RZ" secondAttribute="trailing" constant="8" id="jEi-4I-noc"/>
+                                    <constraint firstAttribute="bottom" secondItem="PbC-0s-ghM" secondAttribute="bottom" constant="12" id="hLI-Tx-fsZ"/>
                                     <constraint firstAttribute="bottom" secondItem="JAR-fx-9RZ" secondAttribute="bottom" constant="15" id="kgm-gy-0zO"/>
                                     <constraint firstAttribute="bottom" secondItem="gDv-hH-H4n" secondAttribute="bottom" id="njp-Ao-9Fk"/>
+                                    <constraint firstAttribute="bottom" secondItem="dNi-FB-k7j" secondAttribute="bottom" constant="12" id="vXx-sm-t6V"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-HZ-Ox9">
@@ -279,11 +305,13 @@
                     <connections>
                         <outlet property="dicreaseTextSizeButton" destination="fN3-Uc-pOr" id="XW0-6H-Eaq"/>
                         <outlet property="increaseTextSizeButton" destination="uH1-Ce-RjC" id="Bhm-DW-EYH"/>
+                        <outlet property="nextPageButton" destination="dNi-FB-k7j" id="hH8-IO-odC"/>
                         <outlet property="pagePickerBaseView" destination="L4a-G1-SRI" id="hbf-iD-XLU"/>
                         <outlet property="pagePickerBaseViewBottomConstraint" destination="yGV-uf-R3N" id="1hq-ur-yU9"/>
                         <outlet property="pagePickerSelectButton" destination="CSu-R6-aDQ" id="h8Y-nF-5cM"/>
                         <outlet property="pagePickerView" destination="hdE-4M-XA3" id="2NW-XY-7Cz"/>
                         <outlet property="pageSummaryCollectoinView" destination="zNZ-HZ-Ox9" id="b5I-Oo-BIP"/>
+                        <outlet property="prePageButton" destination="PbC-0s-ghM" id="y1N-aP-Nm1"/>
                         <outlet property="searchPageButton" destination="DOc-pw-ka9" id="ph7-h8-auy"/>
                         <outlet property="selectTodaysPageButton" destination="oRP-jr-0DY" id="i6W-II-w91"/>
                         <outlet property="shareButton" destination="JAR-fx-9RZ" id="5Iq-QA-s5v"/>
@@ -299,6 +327,8 @@
     <resources>
         <image name="AH+_icon.png" width="320" height="320"/>
         <image name="AH-_icon.png" width="320" height="320"/>
+        <image name="nextButton.png" width="99" height="99"/>
+        <image name="preButton.png" width="99" height="99"/>
         <image name="shareIcon.png" width="128" height="128"/>
         <image name="topBar750.png" width="750" height="120"/>
         <systemColor name="labelColor">
