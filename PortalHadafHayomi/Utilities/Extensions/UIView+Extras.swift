@@ -225,4 +225,8 @@ extension UIView
             }
         }
     }
+    
+    func centerBounds() -> CGPoint {
+        return CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
+    }
 }

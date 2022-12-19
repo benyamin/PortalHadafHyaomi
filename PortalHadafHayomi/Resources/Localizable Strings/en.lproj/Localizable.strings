@@ -358,6 +358,11 @@
 "st_last_name" = "Last Name";
 "st_email" = "Email";
 "st_not_matching_passwords" = "Incompatible passwords";
+"st_not_matching_passwords" = "Incompatible passwords";
+"st_add_to_mailing_list" = "Add me to the mailing list.";
+"st_verify_regulations" = "I read the forum rules and will follow them.";
+"st_regulation" = "forum rules";
+"st_please_confirm_the_regulations" = "Please Confirm Forum Rules";
 
 //Page Summary
 "st_page_summary" = "Page Summary";

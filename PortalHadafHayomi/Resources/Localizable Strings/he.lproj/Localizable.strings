@@ -341,7 +341,7 @@
 "st_selected_discussion" = "הדיון הנבחר";
 
 //Login
-"st_username" = "שם משתמש";
+"st_username" = "שם משתמש (הכינוי שיופיע בפורום)";
 "st_password" = "סיסמא";
 "st_forgot_password" = "שכחתי סיסמא";
 "st_signin" = "הירשם";
@@ -354,10 +354,14 @@
 "st_password_send_to_mail" = "הסיסמא תשלח לכתובת האימייל שאיתה נרשמת תוך מספר דקות";
 "st_forgot_password_recovery_error" = "שיחזור סיסמא נכשל, אנא נסה שנית";
 "st_re_enter_password" = "אימות סיסמא";
-"st_first_name" = "שם פרטי";
-"st_last_name" = "שם משפחה";
-"st_email" = "כתובת מייל";
+"st_first_name" = "שם פרטי (לא יפורסם בפורום)";
+"st_last_name" = "שם משפחה (לא יפורסם בפורום)";
+"st_email" = "כתובת מייל (לא יפורסם בפורום)";
 "st_not_matching_passwords" = "סיסמאות לא תואמות";
+"st_add_to_mailing_list" = "הוסף אותי לרשימת התפוצה.";
+"st_verify_regulations" = "קראתי את תקנון הפורום ואתנהג לפיו.";
+"st_regulation" = "תקנון הפורום";
+"st_please_confirm_the_regulations" = "אנא אשר את תקנון הפורום";
 
 
 //Page Summary
