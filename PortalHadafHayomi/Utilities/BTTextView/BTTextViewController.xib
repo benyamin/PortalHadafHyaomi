@@ -53,13 +53,27 @@
                                 <action selector="backButtonClicked:" destination="-1" eventType="touchUpInside" id="Gd6-Xh-EV8"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRj-8m-tfh">
+                            <rect key="frame" x="291" y="31" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="4o3-ok-0JM"/>
+                                <constraint firstAttribute="width" constant="24" id="GnJ-mH-T3Y"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="shareIcon.png"/>
+                            <connections>
+                                <action selector="shareButtonClicked:" destination="-1" eventType="touchUpInside" id="hef-Oo-m8l"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="7CD-l1-NI7"/>
                         <constraint firstItem="HVW-9j-F2N" firstAttribute="centerX" secondItem="DG3-vI-bK6" secondAttribute="centerX" id="DUy-9G-Vqz"/>
                         <constraint firstItem="S0r-xm-xdU" firstAttribute="leading" secondItem="DG3-vI-bK6" secondAttribute="leading" id="FeO-1L-lKJ"/>
+                        <constraint firstAttribute="bottom" secondItem="cRj-8m-tfh" secondAttribute="bottom" constant="15" id="FoO-Tz-VZP"/>
                         <constraint firstAttribute="bottom" secondItem="22r-nF-6eT" secondAttribute="bottom" id="U6U-sq-Vv8"/>
+                        <constraint firstAttribute="trailing" secondItem="cRj-8m-tfh" secondAttribute="trailing" constant="60" id="ccb-lI-Ab1"/>
                         <constraint firstAttribute="bottom" secondItem="S0r-xm-xdU" secondAttribute="bottom" constant="9.5" id="eaQ-8a-b7J"/>
                         <constraint firstAttribute="bottom" secondItem="HVW-9j-F2N" secondAttribute="bottom" constant="11" id="kRh-c4-szk"/>
                         <constraint firstItem="22r-nF-6eT" firstAttribute="leading" secondItem="DG3-vI-bK6" secondAttribute="leading" id="kaC-wk-rmd"/>
@@ -121,13 +135,14 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="60" y="72"/>
+            <point key="canvasLocation" x="60" y="71.514242878560722"/>
         </view>
     </objects>
     <resources>
         <image name="AH+_icon.png" width="320" height="320"/>
         <image name="AH-_icon.png" width="320" height="320"/>
         <image name="backButton.png" width="99" height="99"/>
+        <image name="shareIcon.png" width="128" height="128"/>
         <image name="topBar750.png" width="750" height="120"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

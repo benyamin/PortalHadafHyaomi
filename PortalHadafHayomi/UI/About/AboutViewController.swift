@@ -33,9 +33,7 @@ class AboutViewController: MSBaseViewController {
                                             NSAttributedStringKey.foregroundColor: UIColor(HexColor:"7F2B30")]
         
         displaySegmentedControlr.setTitleTextAttributes(segmentFontAttribute, for: .normal)
-        displaySegmentedControlr.setTitleTextAttributes(segmentSelectedFontAttribute, for: .selected)
-        
-        
+        displaySegmentedControlr.setTitleTextAttributes(segmentSelectedFontAttribute, for: .selected)        
     }
     
     @IBAction func displaySegmentedControlrValueChanged(_ sedner:AnyObject)

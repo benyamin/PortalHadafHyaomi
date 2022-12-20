@@ -101,4 +101,19 @@ class QandADetailsViewController: MSBaseViewController, UITextViewDelegate
         
         webViewController.loadUrl(url.absoluteString, title: self.topBarTitleLabel?.text)
     }
+    
+    @IBAction func shareButtonClicked(_ sender:UIButton){
+        
+        if let text = self.detailsTextView?.attributedText
+        {
+            if let image = UIImage(named: "Icon-App-60x60@2x.png"){
+                
+                let shareAll = [text ,image] as [Any]
+                let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
 }

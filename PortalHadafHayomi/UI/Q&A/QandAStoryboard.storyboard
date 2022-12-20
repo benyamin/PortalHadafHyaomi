@@ -326,6 +326,18 @@
                                             <action selector="backButtonClicked:" destination="ZWk-Qy-onQ" eventType="touchUpInside" id="C9t-OA-5iX"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTf-Ri-EcI">
+                                        <rect key="frame" x="291" y="31" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="aXl-Xm-DsX"/>
+                                            <constraint firstAttribute="width" constant="24" id="je5-ZC-jQT"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="shareIcon.png"/>
+                                        <connections>
+                                            <action selector="shareButtonClicked:" destination="ZWk-Qy-onQ" eventType="touchUpInside" id="9Za-hq-axd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -334,10 +346,12 @@
                                     <constraint firstItem="2mQ-P5-Bfv" firstAttribute="leading" secondItem="dGb-Q6-KWz" secondAttribute="leading" id="Kph-Hp-viA"/>
                                     <constraint firstItem="6vr-r7-N9C" firstAttribute="top" secondItem="dGb-Q6-KWz" secondAttribute="top" id="LvM-kN-Pp5"/>
                                     <constraint firstAttribute="height" constant="70" id="Mac-tZ-KqR"/>
+                                    <constraint firstAttribute="trailing" secondItem="nTf-Ri-EcI" secondAttribute="trailing" constant="60" id="McF-1m-Nny"/>
                                     <constraint firstAttribute="trailing" secondItem="6vr-r7-N9C" secondAttribute="trailing" id="NP6-Ot-BXS"/>
                                     <constraint firstAttribute="bottom" secondItem="jWD-Nk-27K" secondAttribute="bottom" constant="13" id="V0z-pC-HWO"/>
                                     <constraint firstItem="jWD-Nk-27K" firstAttribute="centerX" secondItem="dGb-Q6-KWz" secondAttribute="centerX" id="eZe-bQ-AtZ"/>
                                     <constraint firstItem="6vr-r7-N9C" firstAttribute="leading" secondItem="dGb-Q6-KWz" secondAttribute="leading" id="mHg-JD-VxA"/>
+                                    <constraint firstAttribute="bottom" secondItem="nTf-Ri-EcI" secondAttribute="bottom" constant="15" id="tXx-xd-fPX"/>
                                     <constraint firstAttribute="bottom" secondItem="6vr-r7-N9C" secondAttribute="bottom" id="xdo-Wm-NpL"/>
                                 </constraints>
                             </view>
@@ -390,6 +404,7 @@
     <resources>
         <image name="arrowContinue.png" width="99" height="99"/>
         <image name="backButton.png" width="99" height="99"/>
+        <image name="shareIcon.png" width="128" height="128"/>
         <image name="star_icon.png" width="32" height="34"/>
         <image name="topBar750.png" width="750" height="120"/>
     </resources>

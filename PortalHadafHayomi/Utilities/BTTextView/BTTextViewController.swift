@@ -118,4 +118,18 @@ class BTTextViewController: MSBaseViewController {
             self.textView?.attributedText = newStr
         }
     }
+    
+    @IBAction func shareButtonClicked(_ sender:UIButton){
+        
+        if let text = self.textView?.attributedText
+        {
+            if let image = UIImage(named: "Icon-App-60x60@2x.png"){
+                
+                let shareAll = [text ,image] as [Any]
+                let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
 }
