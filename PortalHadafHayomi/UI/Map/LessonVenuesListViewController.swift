@@ -218,7 +218,7 @@ class LessonVenuesListViewController: MSBaseViewController, UITableViewDelegate,
     func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, share lessonVenue:LessonVenue) {
         
         let text = lessonVenue.dispalyedInformation
-        if let image = UIImage(named: "defaultIcon")  {
+        if let image = UIImage(named: "Icon-App-60x60@2x.png")  {
             
             let shareAll = [text, image] as [Any]
             let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)

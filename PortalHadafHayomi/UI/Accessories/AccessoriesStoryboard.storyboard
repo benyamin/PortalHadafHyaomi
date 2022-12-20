@@ -218,13 +218,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMt-OQ-xvW">
-                                                    <rect key="frame" x="16" y="10" width="45" height="20.5"/>
+                                                    <rect key="frame" x="16" y="10" width="45" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="19"/>
                                                     <color key="textColor" red="0.49803921569999998" green="0.16862745100000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="value label" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FF7-ef-TJJ">
-                                                    <rect key="frame" x="15" y="32" width="345" height="33.5"/>
+                                                    <rect key="frame" x="15" y="32.5" width="345" height="33"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="xG9-Xu-W0T"/>
@@ -236,20 +236,35 @@
                                                         <outlet property="delegate" destination="9VH-K1-BIr" id="E12-aS-vdH"/>
                                                     </connections>
                                                 </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFl-mw-1lB">
+                                                    <rect key="frame" x="334" y="6" width="29" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="29" id="1hL-q7-31c"/>
+                                                        <constraint firstAttribute="width" constant="29" id="eJU-fN-3WJ"/>
+                                                    </constraints>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="shareIcon.png"/>
+                                                    <connections>
+                                                        <action selector="shareButtonClicked:" destination="9VH-K1-BIr" eventType="touchUpInside" id="saX-gq-eee"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="FF7-ef-TJJ" secondAttribute="bottom" constant="4.5" id="5c4-R6-rDG"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MMt-OQ-xvW" secondAttribute="trailing" constant="16" id="Dzc-d4-v2i"/>
+                                                <constraint firstItem="XFl-mw-1lB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MMt-OQ-xvW" secondAttribute="trailing" constant="8" id="AIQ-F8-7Qf"/>
                                                 <constraint firstItem="MMt-OQ-xvW" firstAttribute="top" secondItem="QLe-nr-YoV" secondAttribute="top" constant="10" id="FqZ-gx-e91"/>
                                                 <constraint firstAttribute="trailing" secondItem="FF7-ef-TJJ" secondAttribute="trailing" constant="15" id="Gda-tL-n3d"/>
-                                                <constraint firstItem="FF7-ef-TJJ" firstAttribute="top" secondItem="MMt-OQ-xvW" secondAttribute="bottom" constant="1.5" id="OM5-Iy-Wes"/>
+                                                <constraint firstItem="FF7-ef-TJJ" firstAttribute="top" secondItem="MMt-OQ-xvW" secondAttribute="bottom" constant="6" id="OM5-Iy-Wes"/>
                                                 <constraint firstItem="FF7-ef-TJJ" firstAttribute="leading" secondItem="QLe-nr-YoV" secondAttribute="leading" constant="15" id="Qm9-vN-drD"/>
                                                 <constraint firstItem="MMt-OQ-xvW" firstAttribute="leading" secondItem="QLe-nr-YoV" secondAttribute="leading" constant="16" id="iSV-qE-Gms"/>
+                                                <constraint firstItem="XFl-mw-1lB" firstAttribute="top" secondItem="QLe-nr-YoV" secondAttribute="top" constant="6" id="k4N-kc-9Iv"/>
+                                                <constraint firstAttribute="trailing" secondItem="XFl-mw-1lB" secondAttribute="trailing" constant="12" id="lEc-3L-XNo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97647058823529409" green="0.95294117647058818" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="keyLabel" destination="MMt-OQ-xvW" id="f5F-He-Yfd"/>
+                                            <outlet property="shareButton" destination="XFl-mw-1lB" id="B1c-ju-Rkf"/>
                                             <outlet property="valueTextView" destination="FF7-ef-TJJ" id="mdZ-7M-0ZG"/>
                                         </connections>
                                     </tableViewCell>
@@ -502,6 +517,7 @@
         <image name="AH-_icon.png" width="320" height="320"/>
         <image name="Midot_icon_ios.png" width="150" height="150"/>
         <image name="backButton.png" width="99" height="99"/>
+        <image name="shareIcon.png" width="128" height="128"/>
         <image name="topBar750.png" width="750" height="120"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

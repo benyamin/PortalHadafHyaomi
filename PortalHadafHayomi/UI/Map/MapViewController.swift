@@ -194,11 +194,35 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             annotationView.image = UIImage(named: "map_marker_off")
             annotationView.canShowCallout = true
+            
+            let btn = UIButton(type: .custom)
+            btn.setImage(UIImage(named: "nextButton"), for: .normal)
+         
+            btn.addTarget(self, action: #selector(annotationViewButtonClicked(_:)), for: .touchUpInside)
+            btn.frame = CGRect.init(x: 0, y: 0, width: 20, height: 30)
+            annotationView.rightCalloutAccessoryView = btn
 
-
+        }
+        let btn = annotationView.rightCalloutAccessoryView as! UIButton
+        if let lessonVenue = (annotationView.annotation as? LessonVenueAnnotation)?.lessonVenue {
+            btn.userInfo = ["lessonVenue":lessonVenue]
         }
         
         return annotationView
+    }
+    
+    @objc func annotationViewButtonClicked(_ button:UIButton)
+    {
+        if let lessonVenueTableCell = UIView.loadFromNibNamed("LessonVenueTableCell") as? LessonVenueTableCell {
+            
+            if let lessonVenue = button.userInfo?["lessonVenue"] {
+                lessonVenueTableCell.reloadWithObject(lessonVenue)
+                lessonVenueTableCell.delegate = self
+               // lessonVenueTableCell.frame = lessonVenueBaseView.bounds
+                
+                BTPopUpView.show(view: lessonVenueTableCell, onComplete:{ })
+            }
+        }
     }
     
     // MARK: - TableView Methods:
@@ -306,7 +330,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, share lessonVenue:LessonVenue) {
         
         let text = lessonVenue.dispalyedInformation
-        if let image = UIImage(named: "defaultIcon")  {
+        if let image = UIImage(named: "Icon-App-60x60@2x.png")  {
             
             let shareAll = [text, image] as [Any]
             let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)

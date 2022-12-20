@@ -349,10 +349,10 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
     
     func share(sender:UIView){
         let text = self.pageTitle ?? ""
-        if let image = UIImage(named: "defaultIcon")
+        if let image = UIImage(named: "Icon-App-60x60@2x.png")
             ,let link = self.url {
             
-            let shareAll = [text /*, image */, link] as [Any]
+            let shareAll = [text , image , link] as [Any]
             let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)

@@ -31,6 +31,8 @@
 		22CDDD8C294F342200945E6F /* navigator.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD8B294F342200945E6F /* navigator.png */; };
 		22CDDD8E294F35AC00945E6F /* pinLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD8D294F35AC00945E6F /* pinLocation.png */; };
 		22CDDD90294F519200945E6F /* NavigationActoinSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD8F294F519200945E6F /* NavigationActoinSheet.swift */; };
+		22CDDD962951A40E00945E6F /* copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD952951A40E00945E6F /* copy.png */; };
+		22CDDD982951B51600945E6F /* LessonVenueTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD972951B51600945E6F /* LessonVenueTableCell.xib */; };
 		22CED9EA24636BF800D6A8D5 /* GetPagSummaryProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */; };
 		22CF56F0250D6D3C00273D07 /* FourmUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */; };
 		22CF571B250EA3E700273D07 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF571A250EA3E700273D07 /* LoginView.swift */; };
@@ -625,6 +627,8 @@
 		22CDDD8B294F342200945E6F /* navigator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigator.png; sourceTree = "<group>"; };
 		22CDDD8D294F35AC00945E6F /* pinLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinLocation.png; sourceTree = "<group>"; };
 		22CDDD8F294F519200945E6F /* NavigationActoinSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActoinSheet.swift; sourceTree = "<group>"; };
+		22CDDD952951A40E00945E6F /* copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copy.png; sourceTree = "<group>"; };
+		22CDDD972951B51600945E6F /* LessonVenueTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonVenueTableCell.xib; sourceTree = "<group>"; };
 		22CED9E924636BF800D6A8D5 /* GetPagSummaryProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPagSummaryProcess.swift; sourceTree = "<group>"; };
 		22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourmUserInfoView.swift; sourceTree = "<group>"; };
 		22CF571A250EA3E700273D07 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -1804,6 +1808,7 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				22CDDD952951A40E00945E6F /* copy.png */,
 				22CDDD81294BB3FF00945E6F /* refresh.png */,
 				22CDDD7C294B571400945E6F /* hidePlayer.png */,
 				22CDDD7B294B571400945E6F /* showPlayer.png */,
@@ -2120,6 +2125,7 @@
 				4AC483DB1FE855AC000F1528 /* LessonVenueTableCell.swift */,
 				4AFE3EFA205463C20040BD24 /* LessonVenuesListViewController.swift */,
 				4A65E1771FE802BF008BA62B /* AddVenueViewController.swift */,
+				22CDDD972951B51600945E6F /* LessonVenueTableCell.xib */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -2572,6 +2578,7 @@
 				4ABFB73F235291000079D68B /* forum_icon.png in Resources */,
 				4ABFB714235291000079D68B /* save_highlighted.png in Resources */,
 				4ABFB73A235291000079D68B /* menu_logo_small.png in Resources */,
+				22CDDD982951B51600945E6F /* LessonVenueTableCell.xib in Resources */,
 				4ABFB6C9235290FF0079D68B /* yomit_icon_and_text.png in Resources */,
 				4ABFB69B235290FF0079D68B /* TheBigKAdish.rtf in Resources */,
 				4ABFB6C5235290FF0079D68B /* kal_grid_background.png in Resources */,
@@ -2763,6 +2770,7 @@
 				4ABFB6B9235290FF0079D68B /* Sefer_icon.png in Resources */,
 				4A2C76A41FD48D380074A0CC /* full-bar.png in Resources */,
 				4ABFB756235291000079D68B /* hadaf_icon_and_text.png in Resources */,
+				22CDDD962951A40E00945E6F /* copy.png in Resources */,
 				4ABFB6DB235291000079D68B /* midot_icon.png in Resources */,
 				4AC1F25A236789B300133263 /* nikud_on.png in Resources */,
 				4A999D6927F4F2C8004C9675 /* AH+_icon.png in Resources */,

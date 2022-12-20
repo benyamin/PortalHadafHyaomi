@@ -276,4 +276,20 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
         
         self.webViewController.loadUrl(url.absoluteString, title: self.topBarTitleLabel?.text)
     }
+    
+    func expressionsTableCell(_ expressionsTableCell:ExpressionsTableCell, shareExpression expression:Expression) {
+        
+        if let expressionValue = expression.value
+            , let text = expressionValue.htmlAttributedString()
+        {
+            if let image = UIImage(named: "Icon-App-60x60@2x.png")  {
+                
+                let shareAll = [text, image] as [Any]
+                let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
 }

@@ -218,7 +218,7 @@ class PageSummaryViewController:MSBaseViewController, UICollectionViewDelegate, 
         if let centerPageIndex = self.pageSummaryCollectoinView?.centerRowIndex()
             ,let pageSummary = self.pageSummaries?[centerPageIndex].summary?.htmlAttributedString()
         {
-            if let image = UIImage(named: "defaultIcon"){
+            if let image = UIImage(named: "Icon-App-60x60@2x.png"){
                 
                 let shareAll = [pageSummary ,image] as [Any]
                 let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)

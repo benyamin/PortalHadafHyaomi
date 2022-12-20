@@ -3,12 +3,52 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "AramicDictionaryViewController.translateText(_:):AramicDictionaryViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LessonsPickerView.setDisplayedMaggidShiours():LessonsPickerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LessonVenuesListViewController.updateVenues(_:withUserLocatoin:):LessonVenuesListViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "PageSummaryCollectionCell.reloadData():PageSummaryCollectionCell.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.textSize">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LessonsPickerView.sortMagidShioursbyLanguage():LessonsPickerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SavedMasechtPagesCell.checkBoxButtonClicked(_:):SavedMasechtPagesCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in LessonVenuesListViewController.lessonVenueTableCell(_:showNavigationOptions:):LessonVenuesListViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MapViewController.annotationViewButtonClicked(_:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "button.userActivity?.userInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TalmudPageCell.reloadWithObject(_:):TalmudPageCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MapViewController.getDefaultAnnotationViewForAnnotation(_:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "btn.userActivity?.userInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LessonVenue.init(dictionary:):LessonVenue.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

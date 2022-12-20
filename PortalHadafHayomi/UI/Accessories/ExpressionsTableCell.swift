@@ -11,6 +11,7 @@ import UIKit
 @objc protocol ExpressionsTableCellDelegate: class
 {
     func expressionsTableCell(_ expressionsTableCell:ExpressionsTableCell, shouldStartLoadURL url:URL)
+    func expressionsTableCell(_ expressionsTableCell:ExpressionsTableCell, shareExpression expression:Expression)
 }
 
 class ExpressionsTableCell: MSBaseTableViewCell, UITextViewDelegate
@@ -22,10 +23,12 @@ class ExpressionsTableCell: MSBaseTableViewCell, UITextViewDelegate
     
     @IBOutlet weak var keyLabel:UILabel!
     @IBOutlet weak var valueTextView:UITextView!
+    @IBOutlet weak var shareButton:UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.shareButton.setImageTintColor(UIColor(HexColor: "781F24"))
     }
     
     override func reloadWithObject(_ object: Any)
@@ -66,6 +69,22 @@ class ExpressionsTableCell: MSBaseTableViewCell, UITextViewDelegate
         }
         else{
             return true
+        }
+    }
+    
+    @IBAction func  shareButtonClicked(_ sender:UIButton){
+        if self.expression != nil {
+            self.delegate?.expressionsTableCell(self, shareExpression: self.expression!)
+        }
+    }
+    
+    @IBAction func copyButtonClicked(_ sender:UIButton){
+        if let expressionValue = self.expression.value
+        {
+            UIPasteboard.general.string = expressionValue
+            
+            let okButtonTitle = "st_ok".localize()
+            BTAlertView.show(title:"", message: "st_copied_successfully".localize(), buttonKeys: [okButtonTitle], onComplete:{ (dismissButtonKey) in })
         }
     }
 }

@@ -1072,7 +1072,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     func share(sender:UIView){
         
         let text = self.topBarTitleLabel?.text ?? ""
-        if let image = UIImage(named: "defaultIcon")
+        if let image = UIImage(named: "Icon-App-60x60@2x.png")
             , let pageIndex = self.currentPageIndex
             ,let pageLink = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageIndex, displayType: self.selectedDisplayType) {
             
