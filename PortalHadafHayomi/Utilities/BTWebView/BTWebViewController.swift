@@ -16,6 +16,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
     
     var url:URL?
     var pageTitle:String?
+    var shareButtonDisabled:Bool = false
     
     var scalesPageToFit:Bool = true {
         didSet{
@@ -42,7 +43,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
     @IBOutlet weak var lockRotationButton:UIButton!
     @IBOutlet weak var lockRotationArrowImageView:UIImageView!
     
-    @IBOutlet weak var shareButton:UIButton!
+    @IBOutlet weak var shareButton:UIButton?
     
     //MARK: - Actions
     @IBAction override func backButtonClicked(_ sender: AnyObject) {
@@ -88,8 +89,11 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
         self.loadingView.isHidden = true
         self.loadingGifImageview.image = nil
      
-        self.shareButton.setImageTintColor(UIColor(HexColor: "781F24"))
+        self.shareButton?.setImageTintColor(UIColor(HexColor: "781F24"))
         
+        if self.shareButtonDisabled {
+            self.shareButton?.removeFromSuperview()
+        }
         self.reloadData()
     }
     

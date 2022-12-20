@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,6 +17,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BTTextViewController" customModule="PortalHadafHayomi" customModuleProvider="target">
             <connections>
                 <outlet property="backButton" destination="S0r-xm-xdU" id="qFh-pN-IRl"/>
+                <outlet property="dicreaseTextSizeButton" destination="7kk-pk-pjz" id="M2E-Um-Fha"/>
+                <outlet property="increaseTextSizeButton" destination="06b-fn-7eK" id="XgS-e1-FYe"/>
                 <outlet property="textView" destination="d02-G6-YJx" id="FW2-GR-6ge"/>
                 <outlet property="topBarTitleLabel" destination="HVW-9j-F2N" id="Ipl-SV-MJg"/>
                 <outlet property="topBarView" destination="DG3-vI-bK6" id="ErY-AQ-Bys"/>
@@ -66,32 +68,69 @@
                         <constraint firstAttribute="trailing" secondItem="22r-nF-6eT" secondAttribute="trailing" id="xUF-Kv-PcD"/>
                     </constraints>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d02-G6-YJx">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d02-G6-YJx">
                     <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7kk-pk-pjz">
+                    <rect key="frame" x="277" y="626" width="33" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="LBA-Ky-AAo"/>
+                        <constraint firstAttribute="width" constant="33" id="uVG-Hd-LFE"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="AH-_icon.png">
+                        <color key="titleColor" systemColor="linkColor"/>
+                    </state>
+                    <connections>
+                        <action selector="dicreaseTextSizeButtonClicked:" destination="-1" eventType="touchUpInside" id="MJQ-17-6pY"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06b-fn-7eK" userLabel="Minus">
+                    <rect key="frame" x="326" y="626" width="33" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="33" id="hOd-aU-4gh"/>
+                        <constraint firstAttribute="height" constant="33" id="mnp-yq-cS0"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="AH+_icon.png">
+                        <color key="titleColor" systemColor="linkColor"/>
+                    </state>
+                    <connections>
+                        <action selector="increaseTextSizeButtonClicked:" destination="-1" eventType="touchUpInside" id="kfx-tY-rHL"/>
+                    </connections>
+                </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="QW4-Hd-EgL"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="06b-fn-7eK" firstAttribute="leading" secondItem="7kk-pk-pjz" secondAttribute="trailing" constant="16" id="BV7-Rm-hUg"/>
                 <constraint firstItem="d02-G6-YJx" firstAttribute="leading" secondItem="hP4-Fh-FP8" secondAttribute="leading" id="Lwl-qI-sdB"/>
                 <constraint firstItem="d02-G6-YJx" firstAttribute="top" secondItem="DG3-vI-bK6" secondAttribute="bottom" id="TC5-Yu-BFK"/>
                 <constraint firstAttribute="trailing" secondItem="DG3-vI-bK6" secondAttribute="trailing" id="a0t-0X-nXq"/>
                 <constraint firstAttribute="bottom" secondItem="d02-G6-YJx" secondAttribute="bottom" id="awx-vT-fUW"/>
                 <constraint firstItem="DG3-vI-bK6" firstAttribute="leading" secondItem="hP4-Fh-FP8" secondAttribute="leading" id="cCl-id-eNR"/>
+                <constraint firstItem="QW4-Hd-EgL" firstAttribute="trailing" secondItem="06b-fn-7eK" secondAttribute="trailing" constant="16" id="diL-6x-sHc"/>
                 <constraint firstAttribute="trailing" secondItem="d02-G6-YJx" secondAttribute="trailing" id="lJv-5b-Jm9"/>
+                <constraint firstItem="7kk-pk-pjz" firstAttribute="bottom" secondItem="06b-fn-7eK" secondAttribute="bottom" id="naO-Hq-Klf"/>
+                <constraint firstItem="QW4-Hd-EgL" firstAttribute="bottom" secondItem="06b-fn-7eK" secondAttribute="bottom" constant="8" id="w1K-JL-Ktj"/>
                 <constraint firstItem="DG3-vI-bK6" firstAttribute="top" secondItem="hP4-Fh-FP8" secondAttribute="top" id="woA-SZ-ABT"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="QW4-Hd-EgL"/>
             <point key="canvasLocation" x="60" y="72"/>
         </view>
     </objects>
     <resources>
+        <image name="AH+_icon.png" width="320" height="320"/>
+        <image name="AH-_icon.png" width="320" height="320"/>
         <image name="backButton.png" width="99" height="99"/>
         <image name="topBar750.png" width="750" height="120"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

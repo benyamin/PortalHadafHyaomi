@@ -95,6 +95,9 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
         self.emailTitleLabel?.text = "* " +  "st_email".localize()
         self.additionalInfoTotleLabel?.text = "st_additional_information".localize()
         
+        self.regionTextField?.placeholder = "st_select_country".localize()
+        self.cityTextField?.placeholder = "st_select_city".localize()
+        
         if let timePickerview = UIView.viewWithNib("BTTimePickerview") as? BTTimePickerview{
             
             timePickerview.delegate = self
@@ -226,8 +229,6 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
             
             self.regions =  HadafHayomiManager.sharedManager.regions!
            
-            self.selectedRegion = self.regions.first
-            
         },onFaile: { (object, error) -> Void in
             
             Util.hideDefaultLoadingView()

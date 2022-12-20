@@ -362,8 +362,6 @@
 "st_verify_regulations" = "קראתי את תקנון הפורום ואתנהג לפיו.";
 "st_regulation" = "תקנון הפורום";
 "st_please_confirm_the_regulations" = "אנא אשר את תקנון הפורום";
-"st_from_time" = "שעת התחלה";
-"st_to_time" = "שעת סיום";
 
 //Page Summary
 "st_page_summary" = "הדף בקצרה";
@@ -395,12 +393,16 @@
 "st_region" = "אזור";
 "st_city" = "יישוב";
 "st_location" = "מיקום";
-"st_address" = "כתובת";
+"st_address" = "רחוב";
 "st_house_number" = "מס׳ בית";
 "st_time" = "שעה";
 "st_maggid_shiour" = "מגיד שיעור";
 "st_email" = "דוא״ל";
+"st_from_time" = "שעת התחלה";
+"st_to_time" = "שעת סיום";
 "st_additional_information" = "מידע נוסף";
+"st_select_country" = "בחר מדינה";
+"st_select_city" = "בחר יישוב";
 
 //Siyum
 "Endings for Talmud" = "";

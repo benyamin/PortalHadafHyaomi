@@ -289,8 +289,6 @@
 "st_open_in_waze" = "Open With Waze";
 "st_sort_by_city" = "Sort By City";
 "st_sort_by_distance" = "Sort By Distance";
-"st_from_time" = "Strat Time";
-"st_to_time" = "End time";
 
 // Articles
 "st_all_categories" = "All Categories";
@@ -387,6 +385,10 @@
 "st_maggid_shiour" = "Magid Shiour";
 "st_email" = "Email";
 "st_additional_information" = "Additional Information";
+"st_from_time" = "Strat Time";
+"st_to_time" = "End time";
+"st_select_country" = "Select Country";
+"st_select_city" = "Select City";
 
 //Siyum
 "Endings for Talmud" = "";

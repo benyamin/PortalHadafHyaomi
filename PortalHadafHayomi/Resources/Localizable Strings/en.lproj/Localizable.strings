@@ -363,8 +363,6 @@
 "st_verify_regulations" = "I read the forum rules and will follow them.";
 "st_regulation" = "forum rules";
 "st_please_confirm_the_regulations" = "Please Confirm Forum Rules";
-"st_from_time" = "Strat Time";
-"st_to_time" = "End time";
 
 //Page Summary
 "st_page_summary" = "Page Summary";
@@ -396,12 +394,16 @@
 "st_region" = "Region";
 "st_city" = "City";
 "st_location" = "Location";
-"st_address" = "Address";
+"st_address" = "Street";
 "st_house_number" = "Number";
 "st_time" = "Time";
 "st_maggid_shiour" = "Magid Shiour";
 "st_email" = "Email";
 "st_additional_information" = "Additional Information";
+"st_from_time" = "Strat Time";
+"st_to_time" = "End time";
+"st_select_country" = "Select Country";
+"st_select_city" = "Select City";
 
 //Siyum
 "Endings for Talmud" = "";

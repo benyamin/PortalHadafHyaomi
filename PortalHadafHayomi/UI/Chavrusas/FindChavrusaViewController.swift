@@ -414,7 +414,7 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
             webViewController.scalesPageToFit = false
             
             webViewController.loadUrl(contactUrl, title: "st_find_chavrusa".localize())
-            webViewController.shareButton.isHidden = true
+            webViewController.shareButtonDisabled = true
             
             self.navigationController?.pushViewController(webViewController, animated: true)
         }

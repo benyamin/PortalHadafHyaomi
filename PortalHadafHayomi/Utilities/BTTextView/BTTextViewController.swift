@@ -11,6 +11,8 @@ import UIKit
 class BTTextViewController: MSBaseViewController {
 
     @IBOutlet weak var textView:UITextView?
+    @IBOutlet weak var increaseTextSizeButton:UIButton!
+    @IBOutlet weak var dicreaseTextSizeButton:UIButton!
     
     var pageTitle:String?
     var fileName:String?
@@ -19,6 +21,17 @@ class BTTextViewController: MSBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let currentLanguage = Locale.current.languageCode
+            ,currentLanguage.hasSuffix("he")
+        {
+            self.increaseTextSizeButton.setImage(UIImage(named: "AH+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "AH-_icon"), for: .normal)
+        }
+        else{
+            self.increaseTextSizeButton.setImage(UIImage(named: "A+_icon"), for: .normal)
+            self.dicreaseTextSizeButton.setImage(UIImage(named: "A-_icon"), for: .normal)
+        }
+        
         self.reloadData()
     }
     
@@ -46,11 +59,63 @@ class BTTextViewController: MSBaseViewController {
             if let filePath = Bundle.main.url(forResource: self.fileName, withExtension:self.fileType) {
                 do {
                     let attributedStringWithRtf: NSAttributedString = try NSAttributedString(url: filePath, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+                                        
                     self.textView?.attributedText = attributedStringWithRtf
+                    
+                    if let savedFontSize = UserDefaults.standard.value(forKey: "textViewControllerFontSize") as? CGFloat {
+                        self.setFontSize(savedFontSize)
+                    }
                 } catch let error {
                     print("Got an error \(error)")
                 }
             }
+        }
+    }
+    
+    @IBAction func dicreaseTextSizeButtonClicked(_ sender:UIButton) {
+     
+        self.changeFontSizeBy(-1)
+    }
+    
+    @IBAction func increaseTextSizeButtonClicked(_ sender:UIButton) {
+        
+        self.changeFontSizeBy(1)
+    }
+    
+    func changeFontSizeBy(_ change:CGFloat){
+        
+        if let newStr = self.textView?.attributedText?.mutableCopy() as? NSMutableAttributedString{
+        newStr.beginEditing()
+        newStr.enumerateAttribute(.font, in: NSRange(location: 0, length: newStr.string.utf16.count)) { (value, range, stop) in
+            if let oldFont = value as? UIFont {
+                let newFont = oldFont.withSize(oldFont.pointSize+change)
+                newStr.addAttribute(.font, value: newFont, range: range)
+                
+                UserDefaults.standard.set(newFont.pointSize, forKey: "textViewControllerFontSize")
+               UserDefaults.standard.synchronize()
+            }
+        }
+        newStr.endEditing()
+            self.textView?.attributedText = newStr
+        }
+    }
+    
+    func setFontSize(_ fontSize:CGFloat){
+        
+        if let newStr = self.textView?.attributedText?.mutableCopy() as? NSMutableAttributedString{
+            
+            newStr.beginEditing()
+            newStr.enumerateAttribute(.font, in: NSRange(location: 0, length: newStr.string.utf16.count)) { (value, range, stop) in
+                if let oldFont = value as? UIFont {
+                    let newFont = oldFont.withSize(fontSize)
+                    newStr.addAttribute(.font, value: newFont, range: range)
+                    
+                    UserDefaults.standard.set(newFont.pointSize, forKey: "textViewControllerFontSize")
+                    UserDefaults.standard.synchronize()
+                }
+            }
+            newStr.endEditing()
+            self.textView?.attributedText = newStr
         }
     }
 }
