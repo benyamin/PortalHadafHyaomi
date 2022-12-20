@@ -363,6 +363,8 @@
 "st_verify_regulations" = "I read the forum rules and will follow them.";
 "st_regulation" = "forum rules";
 "st_please_confirm_the_regulations" = "Please Confirm Forum Rules";
+"st_from_time" = "Strat Time";
+"st_to_time" = "End time";
 
 //Page Summary
 "st_page_summary" = "Page Summary";

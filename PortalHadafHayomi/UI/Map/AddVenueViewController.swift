@@ -8,16 +8,16 @@
 
 import UIKit
 
-class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTablePopUpViewDelegate
+class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTablePopUpViewDelegate, BTTimePickerviewDelegate
 {
-    
     @IBOutlet weak var scrollView:UIScrollView?
     @IBOutlet weak var regionTextField:UITextField?
     @IBOutlet weak var cityTextField:UITextField?
     @IBOutlet weak var locationTextField:UITextField?
     @IBOutlet weak var adressTextField:UITextField?
     @IBOutlet weak var houseNumberTextField:UITextField?
-    @IBOutlet weak var timeTextField:UITextField?
+    @IBOutlet weak var fromTimeTextField:UITextField!
+    @IBOutlet weak var toTimeTextField:UITextField!
     @IBOutlet weak var maggidShiourTextField:UITextField?
     @IBOutlet weak var emailTextField:UITextField?
     @IBOutlet weak var additionalInfoTextView:UITextView?
@@ -27,13 +27,21 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
     @IBOutlet weak var locatoinTitleLabel:UILabel?
     @IBOutlet weak var addressTitleLabel:UILabel?
     @IBOutlet weak var houseNumberTitleLabel:UILabel?
-    @IBOutlet weak var timeTitleLabel:UILabel?
+    @IBOutlet weak var fromTimeTitleLabel:UILabel?
+    @IBOutlet weak var toTimeTitleLabel:UILabel?
     @IBOutlet weak var maggidShiourTitleLabel:UILabel?
     @IBOutlet weak var emailTitleLabel:UILabel?
     @IBOutlet weak var additionalInfoTotleLabel:UILabel?
     
     @IBOutlet weak var emailInfoLabel:UILabel?
     @IBOutlet weak var addVenueButton:UIButton?
+    
+    @IBOutlet weak var timePickerBaseView:UIView!
+    @IBOutlet weak var timePickerContentView:UIView!
+    @IBOutlet weak var timePickerTitleLabel:UILabel!
+    @IBOutlet weak var hideTimePickerButton:UIButton!
+    @IBOutlet weak var timePickerBottomConstraint:NSLayoutConstraint!
+
     
     var regions = [Region]()
     
@@ -43,14 +51,8 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
     {
         didSet{
             self.regionTextField?.text = selectedRegion?.sRegionName
-            
-            if let city = selectedRegion?.cities.first
-            {
-                self.cityTextField?.text = city.sCityName
-            }
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,11 +89,25 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
         self.locatoinTitleLabel?.text = "* " +  "st_map_location".localize()
         self.addressTitleLabel?.text = "st_address".localize()
         self.houseNumberTitleLabel?.text = "st_house_number".localize()
-        self.timeTitleLabel?.text = "* " +  "st_time".localize()
+        self.fromTimeTitleLabel?.text = "* " + "st_from_time".localize()
+        self.toTimeTitleLabel?.text = "st_to_time".localize()
         self.maggidShiourTitleLabel?.text = "st_maggid_shiour".localize()
         self.emailTitleLabel?.text = "* " +  "st_email".localize()
         self.additionalInfoTotleLabel?.text = "st_additional_information".localize()
         
+        if let timePickerview = UIView.viewWithNib("BTTimePickerview") as? BTTimePickerview{
+            
+            timePickerview.delegate = self
+
+            self.timePickerContentView.addSubview(timePickerview)
+            timePickerview.frame = self.timePickerContentView.bounds
+        }
+        
+        self.hideTimePicker(animated: false)
+        
+        self.timePickerBaseView.alpha = 1.0
+        self.timePickerBaseView.layer.borderWidth = 1.0
+        self.timePickerBaseView.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
     }
     
     @IBAction func addVenueButtonCliced(_ sender:AnyObject)
@@ -100,6 +116,10 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
         {
              self.addVenue()
         }
+    }
+    
+    @IBAction func hideTimePickerButtonClicked(_ sender:UIButton){
+        self.hideTimePicker(animated: true)
     }
     
     func validateMandatoryFields() -> Bool
@@ -123,9 +143,9 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
             return false
         }
         
-        if self.timeTextField?.text == nil || timeTextField?.text?.count == 0
+        if self.fromTimeTextField.text == nil || self.fromTimeTextField.text?.count == 0
         {
-            self.showMissingValueAlert(textField: self.timeTextField)
+            self.showMissingValueAlert(textField:self.fromTimeTextField)
             return false
         }
         
@@ -161,7 +181,7 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
             missingValueName = "st_lesson_location".localize()
         }
         
-        else if textField == timeTextField
+        else if textField == fromTimeTextField
         {
             missingValueName = "st_missing_lesson_time".localize()
         }
@@ -270,7 +290,7 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
         venueParams["address"] = self.adressTextField?.text ?? ""
         venueParams["bayit"] = self.houseNumberTextField?.text ?? ""
         venueParams["email"] = self.emailTextField?.text ?? ""
-        venueParams["hour"] = self.timeTextField?.text ?? ""
+        venueParams["hour"] = "\(self.fromTimeTextField!.text ?? "") - \(self.toTimeTextField!.text ?? "")"
         venueParams["maggid"] = self.maggidShiourTextField?.text ?? ""
         venueParams["pratim"] = self.additionalInfoTextView?.text ?? ""
         
@@ -309,8 +329,33 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
         })
     }
 
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
+        self.fromTimeTextField.isSelected = false
+        self.toTimeTextField.isSelected = false
+        
+        if textField == self.fromTimeTextField
+                    || textField == self.toTimeTextField
+        {
+            self.showTimePicker()
+            textField.isSelected = true
+            
+            self.timePickerTitleLabel.text = self.fromTimeTextField.isSelected
+            ? "st_from_time".localize()
+            :  (self.toTimeTextField.isSelected
+                ? "st_to_time".localize()
+                : "")
+
+            return false
+        }
+        else{
+            self.hideTimePicker(animated: true)
+        }
+        
         if textField == self.regionTextField
         {
             self.showRegionOptions()
@@ -329,7 +374,7 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
     
     func showRegionOptions()
     {
-        self.resignFirstResponder()
+        self.view.endEditing(true)
         
         let tablePopUpView = UIView.loadFromNibNamed("BTTablePopUpView") as! BTTablePopUpView
         tablePopUpView.delegate = self
@@ -352,8 +397,7 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
     
     func showCitiesOptions()
     {
-        self.resignFirstResponder()
-        
+        self.view.endEditing(true)
         
         if let selectedRegion = self.selectedRegion
         {
@@ -375,6 +419,39 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
             tablePopUpView.reloadWithOptions(cityNames, title:popupTitle, selectedOption: selectedOption)
             
             self.popupview = BTPopUpView.show(view: tablePopUpView, onComplete:{ })
+        }
+    }
+    
+    func showTimePicker(){
+        
+        self.view.endEditing(true)
+
+        
+        self.timePickerBottomConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+                        {
+            self.view.layoutIfNeeded()
+            
+        }, completion: {_ in
+        })
+    }
+    
+    func hideTimePicker(animated:Bool){
+        
+        //If time picker is visible
+        if self.timePickerBottomConstraint.constant == 0 {
+            
+            self.timePickerBottomConstraint.constant = -self.timePickerBaseView.frame.size.height
+            
+            if animated {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+                                {
+                    self.view.layoutIfNeeded()
+                    
+                }, completion: {_ in
+                })
+            }
         }
     }
     
@@ -400,4 +477,16 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
         
         self.popupview?.dismiss()
     }
+    
+    //BTTimePickerview Delegate methods
+    func timePickerView(_ timePickerView: BTTimePickerview, didSelectDate date: Date) {
+        if self.fromTimeTextField.isSelected {
+            self.fromTimeTextField?.text = date.stringWithFormat("HH:mm")
+        }
+        else if self.toTimeTextField.isSelected {
+            self.toTimeTextField?.text = date.stringWithFormat("HH:mm")
+        }
+    }
+    
+    func timePickerView(_ timePickerView: BTTimePickerview, cancelButtonClicked sender: AnyObject){}
 }

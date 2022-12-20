@@ -289,6 +289,8 @@
 "st_open_in_waze" = "Open With Waze";
 "st_sort_by_city" = "Sort By City";
 "st_sort_by_distance" = "Sort By Distance";
+"st_from_time" = "Strat Time";
+"st_to_time" = "End time";
 
 // Articles
 "st_all_categories" = "All Categories";

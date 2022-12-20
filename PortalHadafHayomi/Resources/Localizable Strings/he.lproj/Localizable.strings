@@ -362,7 +362,8 @@
 "st_verify_regulations" = "קראתי את תקנון הפורום ואתנהג לפיו.";
 "st_regulation" = "תקנון הפורום";
 "st_please_confirm_the_regulations" = "אנא אשר את תקנון הפורום";
-
+"st_from_time" = "שעת התחלה";
+"st_to_time" = "שעת סיום";
 
 //Page Summary
 "st_page_summary" = "הדף בקצרה";
@@ -398,7 +399,7 @@
 "st_house_number" = "מס׳ בית";
 "st_time" = "שעה";
 "st_maggid_shiour" = "מגיד שיעור";
-"st_email" = "מייל";
+"st_email" = "דוא״ל";
 "st_additional_information" = "מידע נוסף";
 
 //Siyum
