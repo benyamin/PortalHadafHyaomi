@@ -32,16 +32,21 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     @IBOutlet weak var playPauseButton:UIButton!
     
+    @IBOutlet weak var sortByLabel:UILabel?
     @IBOutlet weak var durationLabel:UILabel?
     
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var searchBarTopConstrinatToTopBar:NSLayoutConstraint?
+    @IBOutlet weak var searchBarTrailingConstraintToView:NSLayoutConstraint?
     
     @IBOutlet weak var lastPlayedLessonsTableView:UITableView?
     
     @IBOutlet weak var todaysPageLabel:UILabel?
     
     @IBOutlet weak var displayPageButton:UIButton!
+    
+    @IBOutlet weak var noFavoriteMaggidShioursContentView:UIView!
+    @IBOutlet weak var noFavoriteMaggidShioursMessageLabel:UILabel!
     
     var firstAppearacne = true
     
@@ -63,6 +68,23 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         }
     }
     var savinglessonsActiveProcess = [String:SaveLessonProcess]()
+    
+    lazy var maggidiShiourTableView:MaggidiShiourTableView? =
+    {
+        if let maggidiShiourTableView = MaggidiShiourTableView.create(){
+            
+            maggidiShiourTableView.frame = CGRect(x: 0, y: palyerPlaceHolderView.bottom(), width: self.view.bounds.width, height: self.view.bounds.height - palyerPlaceHolderView.bottom())
+            
+            maggidiShiourTableView.onDismiss = { [weak self]  in
+                maggidiShiourTableView.removeFromSuperview()
+                self?.lessonsPickerView.reloadData()
+                self?.setFavoriteMaggidShioursLayout()
+            }
+            return maggidiShiourTableView}
+        else{
+            return nil
+        }
+    }()
     
     lazy var audioPlayer:BTPlayerView? = {
         
@@ -99,8 +121,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
                 
         self.lessonsPickerView.isHidden = true
         
-        self.sortSegmenterController.setTitle("st_sort_by_masechtot".localize(), forSegmentAt: 0)
-        self.sortSegmenterController.setTitle("st_sort_by_magid_shiour".localize(), forSegmentAt: 1)
+        self.sortSegmenterController.setTitle( "st_sort_masechtot".localize(), forSegmentAt: 0)
+        self.sortSegmenterController.setTitle("st_sort_magid_shiour".localize(), forSegmentAt: 1)
+        self.sortSegmenterController.setTitle("st_sort_selected_magid_shiour".localize(), forSegmentAt: 2)
         self.sortSegmenterController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(HexColor: "781F24")], for: .selected)
         self.sortSegmenterController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:  UIColor.gray], for: .normal)
         
@@ -116,11 +139,11 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.mediaTypeSegmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(HexColor: "781F24")], for: .selected)
         self.mediaTypeSegmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:  UIColor.gray], for: .normal)
 
-
+        self.sortByLabel?.text = "st_sort_by".localize()
         
         self.todaysPageButton?.setTitle("st_move_to_todays_page".localize(), for: .normal)
        
-        self.noSavedLessonsMessageLable?.text = "st_saved_lessons_not_found".localize()
+        self.noSavedLessonsMessageLable = "st_saved_lessons_not_found".localize()
         self.showAllLessonsButton?.setTitle("st_show_all_lessons".localize(), for: .normal)
         
         self.addBorderToView(self.todaysPageButton)
@@ -129,6 +152,13 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.addBorderToView(self.mediaTypeSegmentedController)
         
         self.displayPageButton.setImageTintColor(UIColor(HexColor: "781F24"))
+        
+        self.noFavoriteMaggidShioursContentView.layer.borderColor = (UIColor(HexColor: "781F24")).cgColor
+        self.noFavoriteMaggidShioursContentView.layer.borderWidth = 1
+        self.noFavoriteMaggidShioursContentView.layer.cornerRadius = 3
+        self.noFavoriteMaggidShioursMessageLabel?.text = "st_add_Favorite_maggid_shiour_message".localize()
+        
+        self.noFavoriteMaggidShioursContentView.isHidden = true
     }
     
     func addBorderToView(_ view:UIView?) {
@@ -147,6 +177,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         super.viewWillAppear(animated)
         
         self.palyerPlaceHolderView.addSubview(self.audioPlayer!)
+        palyerPlaceHolderView.addBottomShadow()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -248,24 +279,27 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     @IBAction func sortSegmentedControlloerValueChanged(_ sedner:AnyObject)
     {
-        if sortSegmenterController.selectedSegmentIndex == 0//Sort by Masechtot
-        {
+        if sortSegmenterController.selectedSegmentIndex == 0{//Sort by Masechtot
             self.lessonsPickerView.lessonsSortOption = .Maschtot
+            self.setDefaultLayout()
         }
-        
-        if sortSegmenterController.selectedSegmentIndex == 1//Sort by MaggidShiours
-        {
-             self.lessonsPickerView.lessonsSortOption = .MagidShiurs
+        else if sortSegmenterController.selectedSegmentIndex == 1 {//Sort by MaggidShiours
+             self.lessonsPickerView.lessonsSortOption = .AllMagidiShiurs
+            self.setDefaultLayout()
+        }
+        else if sortSegmenterController.selectedSegmentIndex == 2 {//Sort by Favorite MaggidShiours
+            self.lessonsPickerView.lessonsSortOption = .FavoirteMagidiShiour
+            self.setFavoriteMaggidShioursLayout()
         }
     }
     
     @IBAction func lessonsFilterSegmentedControllerValueChanged(_ sedner:AnyObject)
     {
-         self.setDefaultLayout()
         
         if lessonsFilterSegmentedController.selectedSegmentIndex == 0//Show All Lessons
         {
             self.lessonsPickerView.lessonsFilterOption = .All
+            self.setDefaultLayout()
         }
         
         else if lessonsFilterSegmentedController.selectedSegmentIndex == 1//Show saved Lessons
@@ -280,6 +314,8 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         }
         else if lessonsFilterSegmentedController.selectedSegmentIndex == 2//lastPlayedLessons
         {
+            self.setDefaultLayout()
+            
             self.lastPlayedLessons = LessonsManager.sharedManager.getLastPlayedLessons()
             self.lastPlayedLessonsTableView?.reloadData()
             self.lastPlayedLessonsTableView?.isHidden = false
@@ -303,8 +339,6 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         {
             self.lessonsPickerView.lessonsMediaTypeOption = .Video
         }
-      
-       
     }
     
     @IBAction func showAllLessonsButtonClicked(_ sedner:AnyObject)
@@ -436,6 +470,14 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.selectTabWithName(tabName:"Talmud")
     }
     
+    @IBAction func favoriteMaggidShioursButtonClicked(_ sedner:AnyObject)
+    {
+        if self.maggidiShiourTableView != nil {
+            
+            self.view.addSubview(self.maggidiShiourTableView!)
+        }
+    }
+    
     func setSearchLayout(visible:Bool) {
                               
         searchBar.showsCancelButton = visible
@@ -446,6 +488,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         }
         
         self.searchBarTopConstrinatToTopBar?.priority = UILayoutPriority(rawValue: visible ? 900 : 500)
+        self.searchBarTrailingConstraintToView?.priority = UILayoutPriority(rawValue: visible ? 900 : 500)
         
         if !visible {
             self.searchBar.resignFirstResponder()
@@ -499,12 +542,41 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.noSavedLessonsFoundView.isHidden = true
         self.lessonsPickerView.isHidden = false
         self.searchBar?.isHidden = false
+        self.todaysPageButton?.isHidden = false
+        self.noFavoriteMaggidShioursContentView.isHidden = true
+        
+        if self.lessonsPickerView.lessonsFilterOption == .Saved
+        && self.lessonsPickerView.displayedMasechetot.count == 0 {
+            self.setNoLessonsLayout()
+        }
     }
     
     func setNoLessonsLayout()
     {
          self.noSavedLessonsFoundView.isHidden = false
         self.lessonsPickerView.isHidden = true
+    }
+    
+    func setFavoriteMaggidShioursLayout()
+    {
+        let favoritMaggidShiours = HadafHayomiManager.sharedManager.maggidShiurs.filter{ $0.isFavorite == true }
+        if favoritMaggidShiours.count == 0 {
+            
+            self.lastPlayedLessonsTableView?.isHidden = true
+            self.noSavedLessonsFoundView.isHidden = true
+            self.lessonsPickerView.isHidden = true
+            self.searchBar?.isHidden = true
+            self.todaysPageButton?.isHidden = true
+            self.noFavoriteMaggidShioursContentView.isHidden = false
+        }
+        else{
+            self.setDefaultLayout()
+
+            if self.lessonsPickerView.lessonsFilterOption == .Saved
+            && self.lessonsPickerView.displayedMasechetot.count == 0 {
+                self.setNoLessonsLayout()
+            }
+        }
     }
     
     func scrollToTodaysPage(selectDefaultMaggidShiour:Bool)
@@ -689,19 +761,27 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         switch pickerView.lessonsSortOption
         {
         case .Maschtot:
-            let lesson = Lesson()
-            lesson.masechet = pickerView.selectedMaschet
-            lesson.page = pickerView.selectedPage
-            self.getInfoForLesson(lesson)
             
+            if let masechet = pickerView.selectedMaschet
+                ,let page = pickerView.selectedPage {
+                
+                let lesson = Lesson()
+                lesson.masechet = masechet
+                lesson.page = page
+                self.getInfoForLesson(lesson)
+            }
             break
             
-        case .MagidShiurs:
-            let lesson = Lesson()
-            lesson.masechet = pickerView.selectedMaschet
-            lesson.maggidShiur = pickerView.selectedMaggidShiur
-            self.getInfoForLesson(lesson)
+        case .AllMagidiShiurs, .FavoirteMagidiShiour:
             
+            if let masechet = pickerView.selectedMaschet
+                ,let maggidShiur = pickerView.selectedMaggidShiur {
+                
+                let lesson = Lesson()
+                lesson.masechet = masechet
+                lesson.maggidShiur = maggidShiur
+                self.getInfoForLesson(lesson)
+            }
             break
         }
     }

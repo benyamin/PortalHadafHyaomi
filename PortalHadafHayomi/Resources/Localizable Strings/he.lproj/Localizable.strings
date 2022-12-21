@@ -247,8 +247,9 @@
 "st_last_played_lessons" = "שיעורים אחרונים";
 "st_playlist_history" = "היסטורית האזנה";
 "st_saved_lessons" = "שיעורים שנשמרו";
-"st_sort_by_masechtot" = "מיין לפי מסכתות";
-"st_sort_by_magid_shiour" = "מיין לפי מגידי שיעור";
+"st_sort_masechtot" = "מסכתות";
+"st_sort_magid_shiour" = "כל מגידי השיעור";
+"st_sort_selected_magid_shiour" = "מגידי שיעור נבחרים";
 "st_all_media_type" = "כל סוגי  המדיה";
 "st_audio_lessons" = "שיעורי שמע";
 "st_video_lessons" = "שיעורי וידאו";
@@ -268,6 +269,7 @@
 "st_all" = "הכל";
 "st_audio" = "אודיו";
 "st_video" = "וידאו";
+"st_sort_by" = "מיין לפי:";
 
 "st_Continue_from_where_you_left_off_alert_title" = "";
 "st_Continue_from_where_you_left_off_alert_message" = "האם להמשיך את השיעור של הרב %@ על מסכת %@ דף %@ מהמקום שעצרת?";
@@ -298,6 +300,8 @@
 "st_open_in_waze" = "פתח באמצעות וויז";
 "st_sort_by_city" = "מיין לפי עיר";
 "st_sort_by_distance" = "מיין לפי מרחק";
+"st_favorite_magid_shiours" = "מגידי שיעור מועדפים";
+"st_add_Favorite_maggid_shiour_message" = "לחץ כאן על מנת להוסיף מגידי שיעור מועדפים";
 
 // Articles
 "st_all_categories" = "כל הקטגוריות";

@@ -249,8 +249,9 @@
 "st_last_played_lessons" = "Last Played";
 "st_playlist_history" = "Last Played";
 "st_saved_lessons" = "Saved Lessons";
-"st_sort_by_masechtot" = "Sort by masechet";
-"st_sort_by_magid_shiour" = "Sort by Magid Shiour";
+"st_sort_masechtot" = "Masechtot";
+"st_sort_magid_shiour" = "All Magidi Shiour";
+"st_sort_selected_magid_shiour" = "Selected Magidi Shiour";
 "st_all_media_type" = "All Media";
 "st_audio_lessons" = "Audio Lessons";
 "st_video_lessons" = "Video Lessons";
@@ -270,6 +271,9 @@
 "st_all" = "All";
 "st_audio" = "Audio";
 "st_video" = "Video";
+"st_sort_by" = "Sort By:";
+"st_favorite_magid_shiours" = "Favorite Maggid Shiours";
+"st_add_Favorite_maggid_shiour_message" = "Click here to add your favorite maggid shiours";
 
 "st_Continue_from_where_you_left_off_alert_title" = "";
 "st_Continue_from_where_you_left_off_alert_message" = "Continue rabbi's %@ on Masechet %@ page %@ from where you left off?";

@@ -43,6 +43,11 @@
 		22FD992E29527D8C00F73BDD /* nextLesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD992C29527D8C00F73BDD /* nextLesson.png */; };
 		22FD992F29527D8C00F73BDD /* preLesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD992D29527D8C00F73BDD /* preLesson.png */; };
 		22FD99312952F06600F73BDD /* add-friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD99302952F06600F73BDD /* add-friend.png */; };
+		22FD9933295323D300F73BDD /* MaggidiShiourTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FD9932295323D300F73BDD /* MaggidiShiourTableView.swift */; };
+		22FD99362953262700F73BDD /* TableSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FD99342953262700F73BDD /* TableSelectionCell.swift */; };
+		22FD99372953262700F73BDD /* TableSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22FD99352953262700F73BDD /* TableSelectionCell.xib */; };
+		22FD9939295364CC00F73BDD /* favoriteUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD9938295364CC00F73BDD /* favoriteUser.png */; };
+		22FD993B2953673D00F73BDD /* MaggidiShiourTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22FD993A2953673D00F73BDD /* MaggidiShiourTableView.xib */; };
 		4A0BCF7A1FE7B799009F7261 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BCF791FE7B799009F7261 /* MapViewController.swift */; };
 		4A0F791921ADC085000F8393 /* RemovePageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0F791821ADC085000F8393 /* RemovePageProcess.swift */; };
 		4A17CBCA21C593370063F834 /* ArticlesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A17CBC921C593370063F834 /* ArticlesManager.swift */; };
@@ -642,6 +647,11 @@
 		22FD992C29527D8C00F73BDD /* nextLesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextLesson.png; sourceTree = "<group>"; };
 		22FD992D29527D8C00F73BDD /* preLesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preLesson.png; sourceTree = "<group>"; };
 		22FD99302952F06600F73BDD /* add-friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friend.png"; sourceTree = "<group>"; };
+		22FD9932295323D300F73BDD /* MaggidiShiourTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaggidiShiourTableView.swift; sourceTree = "<group>"; };
+		22FD99342953262700F73BDD /* TableSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSelectionCell.swift; sourceTree = "<group>"; };
+		22FD99352953262700F73BDD /* TableSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSelectionCell.xib; sourceTree = "<group>"; };
+		22FD9938295364CC00F73BDD /* favoriteUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favoriteUser.png; sourceTree = "<group>"; };
+		22FD993A2953673D00F73BDD /* MaggidiShiourTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaggidiShiourTableView.xib; sourceTree = "<group>"; };
 		4A0BCF791FE7B799009F7261 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4A0F791821ADC085000F8393 /* RemovePageProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePageProcess.swift; sourceTree = "<group>"; };
 		4A17CBC921C593370063F834 /* ArticlesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesManager.swift; sourceTree = "<group>"; };
@@ -1816,6 +1826,7 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				22FD9938295364CC00F73BDD /* favoriteUser.png */,
 				22FD99302952F06600F73BDD /* add-friend.png */,
 				22CDDD952951A40E00945E6F /* copy.png */,
 				22CDDD81294BB3FF00945E6F /* refresh.png */,
@@ -2452,6 +2463,10 @@
 				4A6349A6200C9794000428AA /* LessonsViewController.swift */,
 				223508BC2581684C0049D467 /* LessonTableViewCell.swift */,
 				4A2C76B71FD490180074A0CC /* Lessons PickerView */,
+				22FD9932295323D300F73BDD /* MaggidiShiourTableView.swift */,
+				22FD993A2953673D00F73BDD /* MaggidiShiourTableView.xib */,
+				22FD99342953262700F73BDD /* TableSelectionCell.swift */,
+				22FD99352953262700F73BDD /* TableSelectionCell.xib */,
 			);
 			path = Lessons;
 			sourceTree = "<group>";
@@ -2711,6 +2726,7 @@
 				4ABFB773235291000079D68B /* Icon-App-20x20@2x.png in Resources */,
 				4ABFB6DF235291000079D68B /* musagim2_icon_text.png in Resources */,
 				4AEC80A9217535B4003459AF /* snail_ios.png in Resources */,
+				22FD993B2953673D00F73BDD /* MaggidiShiourTableView.xib in Resources */,
 				4ABFB71B235291000079D68B /* move_right.png in Resources */,
 				4ABFB772235291000079D68B /* ItunesArtwork@2x.png in Resources */,
 				4ABFB69E235290FF0079D68B /* Opening_Screen_ios_BG.png in Resources */,
@@ -2776,6 +2792,7 @@
 				4ABFB6C0235290FF0079D68B /* kal_tile_today.png in Resources */,
 				224EFDB42576ECFB003532DE /* preButton.png in Resources */,
 				4ABFB71F235291000079D68B /* star.png in Resources */,
+				22FD9939295364CC00F73BDD /* favoriteUser.png in Resources */,
 				4ABFB6DD235291000079D68B /* rashei_tevot_icon_ios.png in Resources */,
 				4ABFB6E4235291000079D68B /* backButton.png in Resources */,
 				4ABFB6C7235290FF0079D68B /* kal_grid_shadow.png in Resources */,
@@ -2798,6 +2815,7 @@
 				4ABFB6DE235291000079D68B /* rashei_tevot_icon+text_ios.png in Resources */,
 				4ABFB6D6235291000079D68B /* toldot_icon.png in Resources */,
 				4A2C76A81FD48D380074A0CC /* player-play-btn.jpg in Resources */,
+				22FD99372953262700F73BDD /* TableSelectionCell.xib in Resources */,
 				4ABFB6E8235291000079D68B /* aramicTitleImage.png in Resources */,
 				4ABFB70A235291000079D68B /* Arrow.png in Resources */,
 				4ABFB6A1235290FF0079D68B /* Munachim_icon_ios.png in Resources */,
@@ -2918,6 +2936,7 @@
 			files = (
 				4AD409AC2026735500A76EF0 /* Array+Extras.swift in Sources */,
 				4A7E0E961FFACB0700D84E0E /* TalmudPagePickerViewController.swift in Sources */,
+				22FD9933295323D300F73BDD /* MaggidiShiourTableView.swift in Sources */,
 				4A6B0BC21FCD6B01008C1205 /* MenuItem.swift in Sources */,
 				4A65E1721FE7F970008BA62B /* Venue.swift in Sources */,
 				4A215103221B495700BFEEF7 /* LessonSelectionCell.swift in Sources */,
@@ -3093,6 +3112,7 @@
 				4AD149621FD9CAE70038EBDF /* MSBaseTableViewCell.swift in Sources */,
 				2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */,
 				4AD4099F201F9C1000A76EF0 /* JewishCallCollectionHeaderView.swift in Sources */,
+				22FD99362953262700F73BDD /* TableSelectionCell.swift in Sources */,
 				4ABFB21E235250050079D68B /* DownloadSiriInstructions.swift in Sources */,
 				4AE638321FCEF3CA00CD93C1 /* HebrewUtil.swift in Sources */,
 				4A435F74218E5BDD0006BB02 /* GetMidotAndShiurimInfoProcess.swift in Sources */,

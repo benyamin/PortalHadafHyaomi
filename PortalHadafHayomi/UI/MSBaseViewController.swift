@@ -81,10 +81,7 @@ class MSBaseViewController: UIViewController {
             }
         }
         
-        self.topBarView?.layer.shadowColor = UIColor.darkGray.cgColor
-        self.topBarView?.layer.shadowOpacity = 0.5
-        self.topBarView?.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        self.topBarView?.layer.shadowRadius = 2.0
+        self.topBarView?.addBottomShadow()
         
         if self.topBarView != nil
         {

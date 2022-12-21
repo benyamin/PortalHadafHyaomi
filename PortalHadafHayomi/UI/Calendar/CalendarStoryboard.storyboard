@@ -276,7 +276,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqI-WH-rj9">
                                 <rect key="frame" x="0.0" y="70" width="375" height="260"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-uL-d5M">
+                                    <datePicker contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-uL-d5M">
                                         <rect key="frame" x="0.0" y="28" width="375" height="201"/>
                                         <color key="backgroundColor" red="0.96954065560000002" green="0.94300681350000004" blue="0.82594186069999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>

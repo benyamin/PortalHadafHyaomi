@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Brosh-Medium.ttf">
+            <string>BroshMF</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MaggidiShiourTableView" customModule="PortalHadafHayomi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="423"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iVf-1k-R0S">
+                    <rect key="frame" x="0.0" y="55" width="414" height="368"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="Tcj-3l-ube"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="uuH-AL-sV0"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snk-H4-5Ot">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vyc-ux-wwi">
+                            <rect key="frame" x="0.0" y="54" width="414" height="1"/>
+                            <color key="backgroundColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Sy9-zP-mwt"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlQ-gg-XFc">
+                            <rect key="frame" x="165" y="17.5" width="84" height="20"/>
+                            <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
+                            <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zN-MT-eha">
+                            <rect key="frame" x="369" y="11" width="33" height="33"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="33" id="6pD-b7-Xb6"/>
+                                <constraint firstAttribute="width" constant="33" id="Daa-l6-JXj"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="dismiss_icon.png"/>
+                            <connections>
+                                <action selector="dismissButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="is7-bO-XBr"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="1zN-MT-eha" secondAttribute="trailing" constant="12" id="0ad-6l-Ce8"/>
+                        <constraint firstItem="1zN-MT-eha" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RlQ-gg-XFc" secondAttribute="trailing" constant="16" id="1Ue-fg-DRO"/>
+                        <constraint firstItem="RlQ-gg-XFc" firstAttribute="centerX" secondItem="snk-H4-5Ot" secondAttribute="centerX" id="Dz7-22-zi5"/>
+                        <constraint firstItem="vyc-ux-wwi" firstAttribute="leading" secondItem="snk-H4-5Ot" secondAttribute="leading" id="LLB-3H-GMo"/>
+                        <constraint firstItem="RlQ-gg-XFc" firstAttribute="centerY" secondItem="snk-H4-5Ot" secondAttribute="centerY" id="UK0-pC-Lfm"/>
+                        <constraint firstAttribute="trailing" secondItem="vyc-ux-wwi" secondAttribute="trailing" id="Y8c-6Y-aVM"/>
+                        <constraint firstItem="1zN-MT-eha" firstAttribute="centerY" secondItem="snk-H4-5Ot" secondAttribute="centerY" id="cMy-cE-p8w"/>
+                        <constraint firstItem="RlQ-gg-XFc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="snk-H4-5Ot" secondAttribute="leading" constant="16" id="dFr-Bn-rE9"/>
+                        <constraint firstAttribute="height" constant="55" id="h20-j2-Ldh"/>
+                        <constraint firstAttribute="bottom" secondItem="vyc-ux-wwi" secondAttribute="bottom" id="qld-xe-jgv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="iVf-1k-R0S" secondAttribute="bottom" id="80d-Xh-hxP"/>
+                <constraint firstAttribute="trailing" secondItem="snk-H4-5Ot" secondAttribute="trailing" id="CAi-lt-rnP"/>
+                <constraint firstItem="snk-H4-5Ot" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EOY-aC-H9a"/>
+                <constraint firstAttribute="trailing" secondItem="iVf-1k-R0S" secondAttribute="trailing" id="RJh-bS-6FC"/>
+                <constraint firstItem="iVf-1k-R0S" firstAttribute="top" secondItem="snk-H4-5Ot" secondAttribute="bottom" id="X3y-70-l1P"/>
+                <constraint firstItem="snk-H4-5Ot" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pU0-rM-ekQ"/>
+                <constraint firstItem="iVf-1k-R0S" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uU2-ig-MiC"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="tableView" destination="iVf-1k-R0S" id="ULA-1s-wz8"/>
+                <outlet property="titleLabel" destination="RlQ-gg-XFc" id="aci-dO-LRv"/>
+                <outlet property="topBarView" destination="snk-H4-5Ot" id="Ehd-R2-1nW"/>
+            </connections>
+            <point key="canvasLocation" x="-120.28985507246378" y="-274.21875"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dismiss_icon.png" width="21.600000381469727" height="21.600000381469727"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -10,7 +10,8 @@ import UIKit
 
 enum LessonsSortOption {
     case Maschtot
-    case MagidShiurs
+    case AllMagidiShiurs
+    case FavoirteMagidiShiour
 }
 
 enum LessonsFilterOption {
@@ -54,7 +55,8 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
                 self.pagesComponentTag = 1
                 self.magidShioursComponentTag = 0
             }
-            else if lessonsSortOption == .MagidShiurs
+            else if lessonsSortOption == .AllMagidiShiurs
+                        || lessonsSortOption == .FavoirteMagidiShiour
             {
                 self.magidShioursComponentTag = 2
                 self.masechtotComponentTag = 1
@@ -202,7 +204,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
         {
            self.reloadDataByMasechtot()
         }
-        else if lessonsSortOption == .MagidShiurs
+        else if lessonsSortOption == .AllMagidiShiurs || lessonsSortOption == .FavoirteMagidiShiour
         {
           self.reloadDataByMaggidShiours()
         }
@@ -263,7 +265,11 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
             self.displayedMasechetot = HadafHayomiManager.sharedManager.masechtot
             break
             
-        case .MagidShiurs:
+        case .AllMagidiShiurs:
+            self.displayedMasechetot = self.selectedMaggidShiur?.maschtot ?? [Masechet]()
+            break
+            
+        case .FavoirteMagidiShiour:
             self.displayedMasechetot = self.selectedMaggidShiur?.maschtot ?? [Masechet]()
             break
         }
@@ -280,9 +286,12 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
             self.displayedMaggidShiours = self.selectedMaschet?.maggidShiurs ?? [MaggidShiur]()
             break
             
-        case .MagidShiurs:
-            
+        case .AllMagidiShiurs:
             self.displayedMaggidShiours = HadafHayomiManager.sharedManager.maggidShiurs
+            break
+            
+        case .FavoirteMagidiShiour:
+            self.displayedMaggidShiours = HadafHayomiManager.sharedManager.maggidShiurs.filter{ $0.isFavorite == true }
             break
         }
         
@@ -415,7 +424,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
                 masechet.hasSavedLessons = masechet.hasSavedLessonForMaggidShiour(nil, andPage: nil)
             }
         }
-        else if self.lessonsSortOption == .MagidShiurs
+        else if self.lessonsSortOption == .AllMagidiShiurs || self.lessonsSortOption == .FavoirteMagidiShiour
         {
             for masechet in self.displayedMasechetot
             {
@@ -433,7 +442,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
                 maggidShiour.hasSavedLessons = maggidShiour.hasSavedLessonForMasechet(self.selectedMaschet, andPage: self.selectedPage)
             }
         }
-        else if self.lessonsSortOption == .MagidShiurs
+        else if self.lessonsSortOption == .AllMagidiShiurs || self.lessonsSortOption == .FavoirteMagidiShiour
         {
             for maggidShiour in self.displayedMaggidShiours
             {
@@ -451,10 +460,13 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
             self.masechetDisplaySetSelected(maschet: maschet, page: page, maggidShior: maggidShior)
             break
             
-        case .MagidShiurs:
+        case .AllMagidiShiurs:
             
             self.maggidShoiurDisplaySetSelected(maschet: maschet, page: page, maggidShior: maggidShior ?? self.selectedMaggidShiur)
-           
+            break
+            
+        case .FavoirteMagidiShiour:
+            self.maggidShoiurDisplaySetSelected(maschet: maschet, page: page, maggidShior: maggidShior ?? self.selectedMaggidShiur)
             break
         }
         
@@ -593,7 +605,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
                 return self.frame.size.width/3
             }
             
-        case .MagidShiurs:
+        case .AllMagidiShiurs, .FavoirteMagidiShiour:
             switch(component)
             {
             case self.magidShioursComponentTag:
@@ -654,7 +666,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
                 break
             }
             
-        case .MagidShiurs:
+        case .AllMagidiShiurs, .FavoirteMagidiShiour:
             switch(component)
             {
             case self.magidShioursComponentTag:
@@ -774,7 +786,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
                 break
             }
             
-        case .MagidShiurs:
+        case .AllMagidiShiurs, .FavoirteMagidiShiour:
             switch(component)
             {
             case 2://MaggidShiur

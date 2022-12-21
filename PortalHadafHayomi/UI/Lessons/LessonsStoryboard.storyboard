@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -51,6 +52,18 @@
                                             <action selector="displayPageButtonClicked:" destination="YpC-Qg-P9H" eventType="touchUpInside" id="yh3-Cg-eVv"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgM-Dj-f5h">
+                                        <rect key="frame" x="90" y="30" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="XgQ-3r-2GM"/>
+                                            <constraint firstAttribute="width" constant="26" id="aup-hV-zce"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="favoriteUser.png"/>
+                                        <connections>
+                                            <action selector="favoriteMaggidShioursButtonClicked:" destination="YpC-Qg-P9H" eventType="touchUpInside" id="fN7-fw-Vak"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -66,6 +79,8 @@
                                     <constraint firstItem="vgW-TC-fd0" firstAttribute="leading" secondItem="P4X-K8-h3C" secondAttribute="trailing" constant="8" id="Z1G-9I-Rdr"/>
                                     <constraint firstItem="P4X-K8-h3C" firstAttribute="centerX" secondItem="JV2-3G-vJg" secondAttribute="centerX" id="bBK-NK-mDe"/>
                                     <constraint firstAttribute="bottom" secondItem="vgW-TC-fd0" secondAttribute="bottom" constant="13" id="hnx-0e-00w"/>
+                                    <constraint firstAttribute="bottom" secondItem="xgM-Dj-f5h" secondAttribute="bottom" constant="14" id="i7d-sh-cBN"/>
+                                    <constraint firstItem="xgM-Dj-f5h" firstAttribute="leading" secondItem="bzb-u0-Ztn" secondAttribute="trailing" constant="16" id="llo-c0-VZ2"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kP9-sM-rk4" userLabel="optionsView">
@@ -99,36 +114,6 @@
                                             <action selector="mediaTypeSegmentedControllerValueChanged:" destination="YpC-Qg-P9H" eventType="valueChanged" id="BO9-EW-B4l"/>
                                         </connections>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vc-hv-k6p">
-                                        <rect key="frame" x="287" y="8" width="80" height="33"/>
-                                        <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Qbv-g4-mGo"/>
-                                            <constraint firstAttribute="height" constant="33" id="zCG-52-Eqd"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
-                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
-                                        <state key="normal" title="לדף היומי">
-                                            <color key="titleColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="scrollToTodaysPageButtonClicked:" destination="YpC-Qg-P9H" eventType="touchUpInside" id="CId-wA-FqI"/>
-                                        </connections>
-                                    </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xq1-FL-rrn">
-                                        <rect key="frame" x="7" y="12" width="231" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="XDU-CH-OmL"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="מיין לפי מגידי שיעור"/>
-                                            <segment title="מיין לפי מסכתות"/>
-                                        </segments>
-                                        <color key="tintColor" red="1" green="0.98198771979999999" blue="0.88677577549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="sortSegmentedControlloerValueChanged:" destination="YpC-Qg-P9H" eventType="valueChanged" id="PdM-AU-Bid"/>
-                                        </connections>
-                                    </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag8-Ux-D4j">
                                         <rect key="frame" x="0.0" y="141" width="375" height="1"/>
                                         <color key="backgroundColor" red="0.49803921569999998" green="0.16862745100000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -136,22 +121,43 @@
                                             <constraint firstAttribute="height" constant="1" id="69c-To-qix"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort By:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdv-rL-UDr">
+                                        <rect key="frame" x="8" y="17" width="54" height="18"/>
+                                        <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
+                                        <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xq1-FL-rrn">
+                                        <rect key="frame" x="66" y="12" width="301" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="XDU-CH-OmL"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="מגידי שיעור נבחרים"/>
+                                            <segment title="כל מגידי השיעור"/>
+                                            <segment title="מסכתות"/>
+                                        </segments>
+                                        <color key="tintColor" red="1" green="0.98198771979999999" blue="0.88677577549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="sortSegmentedControlloerValueChanged:" destination="YpC-Qg-P9H" eventType="valueChanged" id="PdM-AU-Bid"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="4vc-hv-k6p" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xq1-FL-rrn" secondAttribute="trailing" constant="35" id="5jI-rU-3Jh"/>
+                                    <constraint firstAttribute="trailing" secondItem="xq1-FL-rrn" secondAttribute="trailing" constant="8" id="AsD-JF-B5V"/>
+                                    <constraint firstItem="Zj3-Qa-Lj2" firstAttribute="leading" secondItem="3Dn-GO-QdM" secondAttribute="leading" id="BJZ-Lg-P39"/>
+                                    <constraint firstItem="xq1-FL-rrn" firstAttribute="leading" secondItem="kdv-rL-UDr" secondAttribute="trailing" constant="4" id="CJV-ur-dZQ"/>
                                     <constraint firstItem="3Dn-GO-QdM" firstAttribute="top" secondItem="xq1-FL-rrn" secondAttribute="bottom" constant="12" id="JZJ-fL-CMm"/>
-                                    <constraint firstItem="xq1-FL-rrn" firstAttribute="leading" secondItem="3Dn-GO-QdM" secondAttribute="leading" id="R5D-dM-ImP"/>
                                     <constraint firstItem="xq1-FL-rrn" firstAttribute="top" secondItem="kP9-sM-rk4" secondAttribute="top" constant="12" id="ZYj-sL-ohc"/>
-                                    <constraint firstItem="4vc-hv-k6p" firstAttribute="top" secondItem="kP9-sM-rk4" secondAttribute="top" constant="8" id="ceK-bg-xbY"/>
                                     <constraint firstAttribute="trailing" secondItem="Ag8-Ux-D4j" secondAttribute="trailing" id="dMa-xd-tFb"/>
                                     <constraint firstItem="3Dn-GO-QdM" firstAttribute="leading" secondItem="kP9-sM-rk4" secondAttribute="leading" constant="7" id="fWf-CP-m9G"/>
                                     <constraint firstItem="Zj3-Qa-Lj2" firstAttribute="top" secondItem="3Dn-GO-QdM" secondAttribute="bottom" constant="12" id="glM-jh-hzd"/>
                                     <constraint firstItem="Ag8-Ux-D4j" firstAttribute="leading" secondItem="kP9-sM-rk4" secondAttribute="leading" id="goV-v5-Uo6"/>
-                                    <constraint firstAttribute="trailing" secondItem="4vc-hv-k6p" secondAttribute="trailing" constant="8" id="iP3-zH-slV"/>
                                     <constraint firstAttribute="trailing" secondItem="Zj3-Qa-Lj2" secondAttribute="trailing" constant="8" id="ieI-eV-ggP"/>
                                     <constraint firstAttribute="trailing" secondItem="3Dn-GO-QdM" secondAttribute="trailing" constant="8" id="oTV-Zm-PQc"/>
-                                    <constraint firstItem="Zj3-Qa-Lj2" firstAttribute="leading" secondItem="xq1-FL-rrn" secondAttribute="leading" id="qRs-cD-vwR"/>
+                                    <constraint firstItem="kdv-rL-UDr" firstAttribute="leading" secondItem="kP9-sM-rk4" secondAttribute="leading" constant="8" id="out-Nx-DP5"/>
+                                    <constraint firstItem="kdv-rL-UDr" firstAttribute="centerY" secondItem="xq1-FL-rrn" secondAttribute="centerY" id="pbP-lE-K6c"/>
                                     <constraint firstAttribute="bottom" secondItem="Ag8-Ux-D4j" secondAttribute="bottom" id="s3c-kC-RJ2"/>
                                     <constraint firstAttribute="height" constant="142" id="twA-e8-2yi"/>
                                 </constraints>
@@ -259,8 +265,8 @@
                                     <constraint firstItem="Rha-ed-F8c" firstAttribute="centerX" secondItem="4N8-5R-SH1" secondAttribute="centerX" id="tI6-Eh-xN0"/>
                                 </constraints>
                             </view>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sfC-LN-Pgc">
-                                <rect key="frame" x="0.0" y="551" width="375" height="116"/>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sfC-LN-Pgc">
+                                <rect key="frame" x="0.0" y="382" width="375" height="285"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LessonTableViewCell" rowHeight="56" id="TkQ-qy-jUF" customClass="LessonTableViewCell" customModule="PortalHadafHayomi" customModuleProvider="target">
@@ -338,8 +344,52 @@
                                     <outlet property="delegate" destination="YpC-Qg-P9H" id="WM1-nX-3xh"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" text="" placeholder="הזן טקסט חופשי לדוגמא -  שבת דף ב הרב קצין " translatesAutoresizingMaskIntoConstraints="NO" id="V2S-wh-Irx">
-                                <rect key="frame" x="0.0" y="382" width="375" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DUi-9g-g7f">
+                                <rect key="frame" x="57.5" y="516.5" width="260" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Osz-Jl-Ub9">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="60"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="favoriteMaggidShioursButtonClicked:" destination="YpC-Qg-P9H" eventType="touchUpInside" id="FFh-n7-fL7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AID-9q-qcQ">
+                                        <rect key="frame" x="226" y="17" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="LLd-PL-NPX"/>
+                                            <constraint firstAttribute="width" constant="26" id="cdm-nf-Fwe"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="favoriteUser.png"/>
+                                        <connections>
+                                            <action selector="favoriteMaggidShioursButtonClicked:" destination="YpC-Qg-P9H" eventType="touchUpInside" id="K6E-3Z-yHl"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="click here to add favorit maggid shiours" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6X6-Yd-Viv">
+                                        <rect key="frame" x="8" y="13" width="164.5" height="34.5"/>
+                                        <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
+                                        <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="highlightedColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Osz-Jl-Ub9" secondAttribute="bottom" id="0gn-Pf-0Vd"/>
+                                    <constraint firstItem="Osz-Jl-Ub9" firstAttribute="top" secondItem="DUi-9g-g7f" secondAttribute="top" id="22Z-fI-jmd"/>
+                                    <constraint firstAttribute="width" constant="260" id="9UZ-Qt-iPH"/>
+                                    <constraint firstAttribute="height" constant="60" id="Vfm-vS-E4p"/>
+                                    <constraint firstItem="6X6-Yd-Viv" firstAttribute="centerY" secondItem="DUi-9g-g7f" secondAttribute="centerY" id="bxA-Qh-JqW"/>
+                                    <constraint firstAttribute="trailing" secondItem="AID-9q-qcQ" secondAttribute="trailing" constant="8" id="evL-m8-3up"/>
+                                    <constraint firstAttribute="trailing" secondItem="Osz-Jl-Ub9" secondAttribute="trailing" id="iw6-xE-fPg"/>
+                                    <constraint firstItem="AID-9q-qcQ" firstAttribute="centerY" secondItem="DUi-9g-g7f" secondAttribute="centerY" id="nEy-uW-auM"/>
+                                    <constraint firstItem="6X6-Yd-Viv" firstAttribute="leading" secondItem="DUi-9g-g7f" secondAttribute="leading" constant="8" id="rVP-E6-nhz"/>
+                                    <constraint firstItem="AID-9q-qcQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6X6-Yd-Viv" secondAttribute="trailing" constant="8" id="vYg-ZG-kdB"/>
+                                    <constraint firstItem="Osz-Jl-Ub9" firstAttribute="leading" secondItem="DUi-9g-g7f" secondAttribute="leading" id="xAm-Q8-koL"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" text="" placeholder="טקסט חופשי לדוגמא -  שבת דף ב הרב קצין " translatesAutoresizingMaskIntoConstraints="NO" id="V2S-wh-Irx">
+                                <rect key="frame" x="0.0" y="382" width="279" height="44"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="RhU-dU-80V"/>
@@ -350,6 +400,22 @@
                                     <outlet property="delegate" destination="YpC-Qg-P9H" id="fGk-vv-3Aj"/>
                                 </connections>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vc-hv-k6p">
+                                <rect key="frame" x="287" y="387.5" width="80" height="33"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Qbv-g4-mGo"/>
+                                    <constraint firstAttribute="height" constant="33" id="zCG-52-Eqd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                <state key="normal" title="לדף היומי">
+                                    <color key="titleColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="scrollToTodaysPageButtonClicked:" destination="YpC-Qg-P9H" eventType="touchUpInside" id="CId-wA-FqI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cwN-Ni-Ana"/>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -357,8 +423,11 @@
                             <constraint firstItem="9dS-eo-bs7" firstAttribute="leading" secondItem="cwN-Ni-Ana" secondAttribute="leading" id="64b-St-K6Q"/>
                             <constraint firstItem="V2S-wh-Irx" firstAttribute="leading" secondItem="CWR-Y2-7Nf" secondAttribute="leading" id="6wS-Ca-5W0"/>
                             <constraint firstAttribute="trailing" secondItem="uVS-YN-XcR" secondAttribute="trailing" id="8PG-5J-Xxe"/>
+                            <constraint firstAttribute="trailing" secondItem="V2S-wh-Irx" secondAttribute="trailing" priority="500" id="8ba-Uy-PkP"/>
+                            <constraint firstItem="4vc-hv-k6p" firstAttribute="centerY" secondItem="V2S-wh-Irx" secondAttribute="centerY" id="BHt-Ln-631"/>
                             <constraint firstItem="V2S-wh-Irx" firstAttribute="top" secondItem="JV2-3G-vJg" secondAttribute="bottom" priority="500" id="Bt1-xb-dfJ"/>
                             <constraint firstItem="kP9-sM-rk4" firstAttribute="leading" secondItem="CWR-Y2-7Nf" secondAttribute="leading" id="DQu-gJ-XXV"/>
+                            <constraint firstItem="DUi-9g-g7f" firstAttribute="centerY" secondItem="9dS-eo-bs7" secondAttribute="centerY" id="EmW-Er-Hfg"/>
                             <constraint firstItem="JV2-3G-vJg" firstAttribute="leading" secondItem="CWR-Y2-7Nf" secondAttribute="leading" id="GFk-lH-niP"/>
                             <constraint firstItem="uVS-YN-XcR" firstAttribute="top" secondItem="JV2-3G-vJg" secondAttribute="bottom" id="GYm-id-hjq"/>
                             <constraint firstItem="9dS-eo-bs7" firstAttribute="trailing" secondItem="cwN-Ni-Ana" secondAttribute="trailing" id="KfQ-Zf-86h"/>
@@ -371,12 +440,14 @@
                             <constraint firstItem="DHg-OP-aun" firstAttribute="top" secondItem="kP9-sM-rk4" secondAttribute="bottom" constant="60" id="SBQ-hf-aDL"/>
                             <constraint firstItem="sfC-LN-Pgc" firstAttribute="bottom" secondItem="cwN-Ni-Ana" secondAttribute="bottom" id="UeR-EY-BTu"/>
                             <constraint firstItem="sfC-LN-Pgc" firstAttribute="top" secondItem="kP9-sM-rk4" secondAttribute="bottom" id="fVo-5Q-zLa"/>
+                            <constraint firstItem="DUi-9g-g7f" firstAttribute="centerX" secondItem="9dS-eo-bs7" secondAttribute="centerX" id="fWc-X4-T65"/>
+                            <constraint firstAttribute="trailing" secondItem="4vc-hv-k6p" secondAttribute="trailing" priority="750" constant="8" id="j3G-d8-3Q6"/>
                             <constraint firstItem="V2S-wh-Irx" firstAttribute="top" secondItem="kP9-sM-rk4" secondAttribute="bottom" priority="750" id="qGY-nD-Sp5"/>
                             <constraint firstItem="kP9-sM-rk4" firstAttribute="top" secondItem="uVS-YN-XcR" secondAttribute="bottom" id="qLi-St-3WX"/>
                             <constraint firstItem="DHg-OP-aun" firstAttribute="centerX" secondItem="cwN-Ni-Ana" secondAttribute="centerX" id="qbM-GS-Q2a"/>
                             <constraint firstItem="sfC-LN-Pgc" firstAttribute="leading" secondItem="cwN-Ni-Ana" secondAttribute="leading" id="vgh-T3-MWj"/>
+                            <constraint firstItem="4vc-hv-k6p" firstAttribute="leading" secondItem="V2S-wh-Irx" secondAttribute="trailing" constant="8" id="wnZ-TU-FSp"/>
                             <constraint firstItem="uVS-YN-XcR" firstAttribute="leading" secondItem="CWR-Y2-7Nf" secondAttribute="leading" id="xLi-VF-SrN"/>
-                            <constraint firstAttribute="trailing" secondItem="V2S-wh-Irx" secondAttribute="trailing" id="ztM-t9-OCi"/>
                         </constraints>
                     </view>
                     <connections>
@@ -387,14 +458,18 @@
                         <outlet property="lessonsFilterSegmentedController" destination="3Dn-GO-QdM" id="E6G-Vb-ERT"/>
                         <outlet property="lessonsPickerView" destination="9dS-eo-bs7" id="iUA-IQ-Qb5"/>
                         <outlet property="mediaTypeSegmentedController" destination="Zj3-Qa-Lj2" id="DGV-xQ-FzP"/>
-                        <outlet property="noSavedLessonsFoundView" destination="DHg-OP-aun" id="Avk-or-j0Q"/>
+                        <outlet property="noFavoriteMaggidShioursContentView" destination="DUi-9g-g7f" id="o3q-Du-aow"/>
+                        <outlet property="noFavoriteMaggidShioursMessageLabel" destination="6X6-Yd-Viv" id="UIE-SU-CHM"/>
+                        <outlet property="noSavedLessonsFoundView" destination="DHg-OP-aun" id="O8T-wH-Vrx"/>
                         <outlet property="noSavedLessonsMessageLable" destination="HiZ-Ug-5bj" id="VW5-dP-uQt"/>
                         <outlet property="palyerPlaceHolderView" destination="uVS-YN-XcR" id="45M-Ux-hM8"/>
                         <outlet property="playPauseButton" destination="4N8-5R-SH1" id="nCy-8y-Kbc"/>
                         <outlet property="saveLessonButton" destination="ZdJ-Vn-mZL" id="WTM-YB-aGM"/>
                         <outlet property="searchBar" destination="V2S-wh-Irx" id="pa7-5z-VK0"/>
                         <outlet property="searchBarTopConstrinatToTopBar" destination="Bt1-xb-dfJ" id="jBj-n6-RiX"/>
+                        <outlet property="searchBarTrailingConstraintToView" destination="8ba-Uy-PkP" id="XVv-lh-hP9"/>
                         <outlet property="showAllLessonsButton" destination="bRB-Vx-WnP" id="xku-np-dyg"/>
+                        <outlet property="sortByLabel" destination="kdv-rL-UDr" id="zo9-pI-Lt9"/>
                         <outlet property="sortSegmenterController" destination="xq1-FL-rrn" id="hhT-9Q-Vry"/>
                         <outlet property="todaysPageButton" destination="4vc-hv-k6p" id="xci-XI-1ab"/>
                         <outlet property="todaysPageLabel" destination="vgW-TC-fd0" id="I4f-f0-lxE"/>
@@ -410,6 +485,7 @@
     <resources>
         <image name="btnFrame.png" width="127.5" height="43"/>
         <image name="delete_highlighted.png" width="100" height="100"/>
+        <image name="favoriteUser.png" width="160" height="160"/>
         <image name="playIcon.png" width="110" height="110"/>
         <image name="saveIcon.png" width="120" height="120"/>
         <image name="save_select.png" width="16" height="16"/>
@@ -417,5 +493,8 @@
         <image name="talmus_icon.png" width="71" height="70"/>
         <image name="topBar750.png" width="750" height="120"/>
         <image name="trachIcon.png" width="100" height="110"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
