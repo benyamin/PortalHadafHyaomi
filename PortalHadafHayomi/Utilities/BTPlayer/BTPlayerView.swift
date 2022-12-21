@@ -37,13 +37,12 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     @IBOutlet weak var jumpForwardButton:UIButton?
     @IBOutlet weak var jumpBackButton:UIButton?
-    
-    @IBOutlet weak var displayPageButton:UIButton?
-    
+        
     var onReadyToPlay:(() -> Void)?
     var onLessonNotFound:(() -> Void)?
     var onPlayerDidStop:(() -> Void)?
-    var onDisplayPage:(() -> Void)?
+    var onPreButtonClicked:(() -> Void)?
+    var onNextButtonClicked:(() -> Void)?
     
     var isPaused = false
     var startAutomatically = false
@@ -383,6 +382,14 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         }
     }
     
+    @IBAction func preButtonClicked(_ sender:UIButton){
+        self.onPreButtonClicked?()
+    }
+    
+    @IBAction func nextButtonClicked(_ sender:UIButton){
+        self.onNextButtonClicked?()
+    }
+    
     func setDuration(_ duration:Int)
     {
         self.updateDurationLayout(duration:duration)
@@ -452,10 +459,6 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         self.play()
         
        self.setIsPlayingLayout()
-    }
-    
-    @IBAction func displayPageButtonClicked(_ sender:AnyObject) {
-        self.onDisplayPage?()
     }
     
     func play()

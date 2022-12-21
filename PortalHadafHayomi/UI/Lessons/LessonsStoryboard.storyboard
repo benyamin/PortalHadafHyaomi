@@ -39,13 +39,27 @@
                                         <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzb-u0-Ztn">
+                                        <rect key="frame" x="50" y="31" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="lO1-a3-fPR"/>
+                                            <constraint firstAttribute="height" constant="24" id="vED-lo-nyy"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="talmus_icon.png"/>
+                                        <connections>
+                                            <action selector="displayPageButtonClicked:" destination="YpC-Qg-P9H" eventType="touchUpInside" id="yh3-Cg-eVv"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="WWF-Uq-Zjd" secondAttribute="bottom" id="83y-Wt-hFL"/>
                                     <constraint firstAttribute="trailing" secondItem="vgW-TC-fd0" secondAttribute="trailing" constant="8" id="ELL-3f-oZd"/>
                                     <constraint firstItem="WWF-Uq-Zjd" firstAttribute="leading" secondItem="JV2-3G-vJg" secondAttribute="leading" id="GG4-zS-h5w"/>
+                                    <constraint firstItem="bzb-u0-Ztn" firstAttribute="leading" secondItem="JV2-3G-vJg" secondAttribute="leading" constant="50" id="Inl-on-0KV"/>
                                     <constraint firstItem="WWF-Uq-Zjd" firstAttribute="top" secondItem="JV2-3G-vJg" secondAttribute="top" id="Lja-R2-S0z"/>
+                                    <constraint firstAttribute="bottom" secondItem="bzb-u0-Ztn" secondAttribute="bottom" constant="15" id="Lyz-zy-kp2"/>
                                     <constraint firstAttribute="trailing" secondItem="WWF-Uq-Zjd" secondAttribute="trailing" id="R4t-WY-pSl"/>
                                     <constraint firstAttribute="bottom" secondItem="P4X-K8-h3C" secondAttribute="bottom" constant="13" id="SVr-lu-9fL"/>
                                     <constraint firstAttribute="height" constant="70" id="XWx-YP-PfM"/>
@@ -55,7 +69,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kP9-sM-rk4" userLabel="optionsView">
-                                <rect key="frame" x="0.0" y="190" width="375" height="142"/>
+                                <rect key="frame" x="0.0" y="240" width="375" height="142"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Dn-GO-QdM">
                                         <rect key="frame" x="7" y="52" width="360" height="29"/>
@@ -143,14 +157,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVS-YN-XcR">
-                                <rect key="frame" x="0.0" y="70" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="170"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="cNE-xr-LIR"/>
+                                    <constraint firstAttribute="height" constant="170" id="cNE-xr-LIR"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHg-OP-aun">
-                                <rect key="frame" x="67.5" y="392" width="240" height="99"/>
+                                <rect key="frame" x="67.5" y="442" width="240" height="99"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRB-Vx-WnP">
                                         <rect key="frame" x="44.5" y="50.5" width="151" height="33"/>
@@ -188,10 +202,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dS-eo-bs7" customClass="LessonsPickerView" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="376" width="375" height="291"/>
+                                <rect key="frame" x="0.0" y="426" width="375" height="241"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdJ-Vn-mZL">
-                                        <rect key="frame" x="8" y="127.5" width="30" height="36"/>
+                                        <rect key="frame" x="8" y="102.5" width="30" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="4Ec-wa-SPQ"/>
                                             <constraint firstAttribute="height" constant="36" id="yIs-Da-zW1"/>
@@ -203,7 +217,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crM-Se-eRn">
-                                        <rect key="frame" x="8" y="127.5" width="30" height="36"/>
+                                        <rect key="frame" x="8" y="102.5" width="30" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="17n-fA-KQv"/>
                                             <constraint firstAttribute="width" constant="30" id="Qr4-Tk-maL"/>
@@ -215,7 +229,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4N8-5R-SH1">
-                                        <rect key="frame" x="46" y="127.5" width="30" height="22"/>
+                                        <rect key="frame" x="46" y="102.5" width="30" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="N9A-Fv-dXe"/>
                                             <constraint firstAttribute="width" constant="30" id="TUC-zH-LRN"/>
@@ -227,7 +241,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99:99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rha-ed-F8c">
-                                        <rect key="frame" x="45" y="152.5" width="32" height="13.5"/>
+                                        <rect key="frame" x="45" y="127.5" width="32" height="13.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -325,7 +339,7 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" text="" placeholder="הזן טקסט חופשי לדוגמא -  שבת דף ב הרב קצין " translatesAutoresizingMaskIntoConstraints="NO" id="V2S-wh-Irx">
-                                <rect key="frame" x="0.0" y="332" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="382" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="RhU-dU-80V"/>
@@ -367,6 +381,7 @@
                     </view>
                     <connections>
                         <outlet property="deleteLessonButton" destination="crM-Se-eRn" id="ys8-Jl-hyV"/>
+                        <outlet property="displayPageButton" destination="bzb-u0-Ztn" id="EsA-8O-BLT"/>
                         <outlet property="durationLabel" destination="Rha-ed-F8c" id="8na-hx-sjB"/>
                         <outlet property="lastPlayedLessonsTableView" destination="sfC-LN-Pgc" id="hOg-LG-kYD"/>
                         <outlet property="lessonsFilterSegmentedController" destination="3Dn-GO-QdM" id="E6G-Vb-ERT"/>
@@ -399,6 +414,7 @@
         <image name="saveIcon.png" width="120" height="120"/>
         <image name="save_select.png" width="16" height="16"/>
         <image name="stopIcon.png" width="110" height="110"/>
+        <image name="talmus_icon.png" width="71" height="70"/>
         <image name="topBar750.png" width="750" height="120"/>
         <image name="trachIcon.png" width="100" height="110"/>
     </resources>

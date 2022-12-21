@@ -41,6 +41,8 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     @IBOutlet weak var todaysPageLabel:UILabel?
     
+    @IBOutlet weak var displayPageButton:UIButton!
+    
     var firstAppearacne = true
     
     var changeLessonAlert:BTAlertView?
@@ -64,9 +66,32 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     lazy var audioPlayer:BTPlayerView? = {
         
-        BTPlayerManager.sharedManager.sharedPlayerView.delegate = self
+        let player = BTPlayerManager.sharedManager.sharedPlayerView
+        player?.delegate = self
         
-        return BTPlayerManager.sharedManager.sharedPlayerView
+        player?.onPreButtonClicked = {
+            
+            if let preLesson = self.getPreLesson() {
+                
+                self.lessonsPickerView.select(maschet: preLesson.masechet, page: preLesson.page!, maggidShior:preLesson.maggidShiur)
+                
+                self.playSelectedLesson()
+                self.playPauseButton.isSelected = true
+            }
+        }
+        
+        player?.onNextButtonClicked = {
+            
+            if let nextLesson = self.getNextLesson() {
+                
+                self.lessonsPickerView.select(maschet: nextLesson.masechet, page: nextLesson.page!, maggidShior:nextLesson.maggidShiur)
+                
+                self.playSelectedLesson()
+                self.playPauseButton.isSelected = true
+            }
+        }
+        
+        return player
     }()
     
     override func viewDidLoad() {
@@ -103,6 +128,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.addBorderToView(self.lessonsFilterSegmentedController)
         self.addBorderToView(self.mediaTypeSegmentedController)
         
+        self.displayPageButton.setImageTintColor(UIColor(HexColor: "781F24"))
     }
     
     func addBorderToView(_ view:UIView?) {
@@ -121,11 +147,6 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         super.viewWillAppear(animated)
         
         self.palyerPlaceHolderView.addSubview(self.audioPlayer!)
-        
-        self.audioPlayer?.displayPageButton?.isHidden = false
-        self.audioPlayer?.onDisplayPage = {
-            self.selectTabWithName(tabName:"Talmud")
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -409,6 +430,10 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     @IBAction func searchButtonClicked(_ sender:UIButton){
         self.setSearchLayout(visible: true)
+    }
+        
+    @IBAction func displayPageButtonClicked(_ sender:UIButton) {
+        self.selectTabWithName(tabName:"Talmud")
     }
     
     func setSearchLayout(visible:Bool) {
@@ -808,6 +833,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
                 , playLessonsInSequence == true
                 {
                     self.lessonsPickerView.select(maschet: nextLesson.masechet, page: nextLesson.page!, maggidShior:nextLesson.maggidShiur)
+                    
+                    self.playSelectedLesson()
+                    self.playPauseButton.isSelected = true
                 }
                 
                 else{
@@ -841,8 +869,16 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         })
     }
     
-    func getNextLesson() -> Lesson?
-    {
+    func getNextLesson() -> Lesson? {
+        self.jumpToLesson(jump:1)
+    }
+    
+    func getPreLesson() -> Lesson? {
+        self.jumpToLesson(jump:-1)
+    }
+    
+    func jumpToLesson(jump:Int) -> Lesson? {
+        
         if let masechet = self.selectedLesson?.masechet
         ,let page = self.selectedLesson?.page
         {
@@ -853,9 +889,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             {
                 if let masechtIndex = HadafHayomiManager.sharedManager.masechtot.index(of: masechet)
                 {
-                    if HadafHayomiManager.sharedManager.masechtot.count > masechtIndex+1
+                    if HadafHayomiManager.sharedManager.masechtot.count > masechtIndex+jump
                     {
-                        nextLesson.masechet = HadafHayomiManager.sharedManager.masechtot[masechtIndex+1]
+                        nextLesson.masechet = HadafHayomiManager.sharedManager.masechtot[masechtIndex+jump]
                        
                     }
                     else{
@@ -867,7 +903,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             else
             {
                 nextLesson.masechet = masechet
-                nextLesson.page = Page(index: page.index+1)
+                nextLesson.page = Page(index: page.index+jump)
                 
             }
             return nextLesson

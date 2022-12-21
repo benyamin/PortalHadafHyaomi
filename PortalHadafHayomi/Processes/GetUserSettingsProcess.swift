@@ -19,6 +19,23 @@ class GetUserSettingsProcess: MSBaseProcess
                                       "title":"Languages",
                                       "type":"Selection"])
         
+        
+        setableItemsInfo.append(["key":"AutoLock",
+                                 "title":"Auto_Lock",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"DefaultMenuItem",
+                                 "title":"Default_MenuItem",
+                                 "type":"Selection"])
+        
+        setableItemsInfo.append(["key":"EnablesAutomaticPlaying",
+                                 "title":"Enables_Automatic_Lesson_Playing",
+                                 "type":"Bool"])
+        
+        setableItemsInfo.append(["key":"PlayLessonsInSequence",
+                                 "title":"Play_Lessons_In_Sequence",
+                                 "type":"Bool"])
+        
         /*
         setableItemsInfo.append(["key":"TalmudDisplayType",
                                  "title":"Default_Page_Type",
@@ -47,28 +64,12 @@ class GetUserSettingsProcess: MSBaseProcess
         setableItemsInfo.append(["key":"DailyReminder",
                                  "title":"Daily_Reminder",
                                  "type":"Bool"])
-        
-        setableItemsInfo.append(["key":"AutoLock",
-                                 "title":"Auto_Lock",
-                                 "type":"Bool"])
-        
+                
         setableItemsInfo.append(["key":"LessonSkipInterval",
                                  "title":"Lesson_Skip_Interval",
                                  "type":"Selection"])
-        
-        setableItemsInfo.append(["key":"DefaultMenuItem",
-                                 "title":"Default_MenuItem",
-                                 "type":"Selection"])
-        
-        
-        setableItemsInfo.append(["key":"EnablesAutomaticPlaying",
-                                 "title":"Enables_Automatic_Lesson_Playing",
-                                 "type":"Bool"])
-        
-        setableItemsInfo.append(["key":"PlayLessonsInSequence",
-                                 "title":"Play_Lessons_In_Sequence",
-                                 "type":"Bool"])
-        
+                
+                
         setableItemsInfo.append(["key":"Donation",
                                  "title":"Donation",
                                  "type":"Selection"])

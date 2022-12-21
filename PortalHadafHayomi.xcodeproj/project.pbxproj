@@ -40,6 +40,8 @@
 		22D3B82B29173A5B003FE3E0 /* QandATestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */; };
 		22D69D7B2483279500525786 /* MediaLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D69D7A2483279500525786 /* MediaLesson.swift */; };
 		22DEFE3325080D40005CB2FF /* ForumAddMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */; };
+		22FD992E29527D8C00F73BDD /* nextLesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD992C29527D8C00F73BDD /* nextLesson.png */; };
+		22FD992F29527D8C00F73BDD /* preLesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD992D29527D8C00F73BDD /* preLesson.png */; };
 		4A0BCF7A1FE7B799009F7261 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BCF791FE7B799009F7261 /* MapViewController.swift */; };
 		4A0F791921ADC085000F8393 /* RemovePageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0F791821ADC085000F8393 /* RemovePageProcess.swift */; };
 		4A17CBCA21C593370063F834 /* ArticlesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A17CBC921C593370063F834 /* ArticlesManager.swift */; };
@@ -636,6 +638,8 @@
 		22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QandATestViewController.swift; sourceTree = "<group>"; };
 		22D69D7A2483279500525786 /* MediaLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLesson.swift; sourceTree = "<group>"; };
 		22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumAddMessageViewController.swift; sourceTree = "<group>"; };
+		22FD992C29527D8C00F73BDD /* nextLesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextLesson.png; sourceTree = "<group>"; };
+		22FD992D29527D8C00F73BDD /* preLesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preLesson.png; sourceTree = "<group>"; };
 		4A0BCF791FE7B799009F7261 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4A0F791821ADC085000F8393 /* RemovePageProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePageProcess.swift; sourceTree = "<group>"; };
 		4A17CBC921C593370063F834 /* ArticlesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesManager.swift; sourceTree = "<group>"; };
@@ -1287,6 +1291,8 @@
 		4A2C76931FD48D380074A0CC /* audioPlayerImages */ = {
 			isa = PBXGroup;
 			children = (
+				22FD992C29527D8C00F73BDD /* nextLesson.png */,
+				22FD992D29527D8C00F73BDD /* preLesson.png */,
 				4AEC80A6217535B3003459AF /* snail_ios.png */,
 				4AEC80A5217535B2003459AF /* TimeIcons_120X120_down.png */,
 				4AEC80A7217535B4003459AF /* TimeIcons_120X120_up.png */,
@@ -2571,6 +2577,7 @@
 				4ABFB6BE235290FF0079D68B /* Strip3.png in Resources */,
 				4ABFB776235291000079D68B /* Icon-App-40x40@2x.png in Resources */,
 				4ABFB6C3235290FF0079D68B /* green_strip.png in Resources */,
+				22FD992F29527D8C00F73BDD /* preLesson.png in Resources */,
 				4AD149781FDDD7480038EBDF /* BTWebViewController.xib in Resources */,
 				4ABFB6C8235290FF0079D68B /* AddOnMap_Icon_ios.png in Resources */,
 				4ABFB737235291000079D68B /* contact_icon_and_text.png in Resources */,
@@ -2707,6 +2714,7 @@
 				4ABFB755235291000079D68B /* talmus_icon.png in Resources */,
 				4ABFB6FA235291000079D68B /* snail_icon.png in Resources */,
 				4ABFB8AC235291000079D68B /* localization.plist in Resources */,
+				22FD992E29527D8C00F73BDD /* nextLesson.png in Resources */,
 				4ABFB6EA235291000079D68B /* Checkbox_off.png in Resources */,
 				4ABFB761235291000079D68B /* tchanim_icon_and_text.png in Resources */,
 				4A7B14AF209E6A9400C62929 /* BTAddViewController.xib in Resources */,

@@ -163,8 +163,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     }
     
     lazy var audioPlayer:BTPlayerView? = {
-        
-        BTPlayerManager.sharedManager.sharedPlayerView.displayPageButton?.isHidden = true
       return BTPlayerManager.sharedManager.sharedPlayerView
     }()
     
@@ -336,7 +334,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             self.view.addSubview(audioPlayerView)
             
             let playerOrigenY = self.showPlayerButton!.frame.origin.y + self.showPlayerButton!.frame.size.height
-            audioPlayerView.frame = CGRect(x: 0.0, y: playerOrigenY, width: self.view.frame.size.width, height: 120.0)
+            audioPlayerView.frame = CGRect(x: 0.0, y: playerOrigenY, width: self.view.frame.size.width, height: 170.0)
         }
     }
     
