@@ -319,6 +319,8 @@
 "st_fourm_error_missing_Info" = "Must complete title and content";
 "st_fourm_did_add_message" = "Message was successfully added";
 "st_comments" = "%@ comments";
+"st_fourm_sort_by_last_comment" = "Sort by last comment";
+"st_fourm_sort_by_last_message" = "Sort by last message";
 
 //Fourm Add Message
 "st_add_message_title" = "Add Message";
@@ -408,6 +410,7 @@
 "st_select_country" = "Select Country";
 "st_select_area" = "Select Area";
 "st_select_city" = "Select City";
+"st_chavrusa" = "chavrusa";
 
 //Calendar
 "st_calendar" = "Calendar";

@@ -202,10 +202,10 @@ class LoginView: UIView, UITextFieldDelegate {
                     })
                 }
                 else {
-                    var userInfo = ["username":username, "password":password, "firstname":firstName, "lastname":lastName, "email":email]
+                    var userInfo:[String:Any] = ["username":username, "password":password, "firstname":firstName, "lastname":lastName, "email":email]
                     
                     if self.addToMailingListButton.isSelected{
-                        //userInfo["Mailing"] = "on"
+                        userInfo["mailing"] = 1
                     }
                     
                     self.runProcess(RegistrationProcess() , withInfo: userInfo)
@@ -275,7 +275,7 @@ class LoginView: UIView, UITextFieldDelegate {
         self.addToMailingListButton.isSelected = !self.addToMailingListButton.isSelected
     }
     
-    func runProcess(_ process:MSBaseProcess, withInfo info:[String:String])
+    func runProcess(_ process:MSBaseProcess, withInfo info:[String:Any])
     {
         
         self.loadingGifImageview.image = UIImage.gifWithName("ajax-loader")

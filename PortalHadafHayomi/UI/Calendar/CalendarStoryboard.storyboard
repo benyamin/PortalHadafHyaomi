@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-hv-KrU">
-                                        <rect key="frame" x="139" y="29" width="97" height="28"/>
+                                        <rect key="frame" x="142" y="31" width="91" height="26"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -115,13 +115,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="61" height="64"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="כט" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="I3O-jX-AYS">
-                                                    <rect key="frame" x="8" y="5" width="18" height="20"/>
+                                                    <rect key="frame" x="8" y="5" width="15.5" height="18.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etk-pD-z4K">
-                                                    <rect key="frame" x="40.5" y="11" width="13.5" height="14"/>
+                                                    <rect key="frame" x="45" y="10.5" width="9" height="13"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="12"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="דף" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="y9t-Ce-K8L">
-                                                    <rect key="frame" x="4" y="47" width="53" height="14"/>
+                                                    <rect key="frame" x="4" y="48" width="53" height="13"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="12"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -173,7 +173,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="month name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="so7-e3-NAq">
-                                            <rect key="frame" x="131.5" y="8" width="112.5" height="21.5"/>
+                                            <rect key="frame" x="135.5" y="8" width="104" height="21.5"/>
                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="20"/>
                                             <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -283,7 +283,7 @@
                                             <constraint firstAttribute="height" constant="201" id="byJ-Tp-Rdi"/>
                                         </constraints>
                                     </datePicker>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiC-5w-fko">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiC-5w-fko">
                                         <rect key="frame" x="188" y="229" width="187" height="31"/>
                                         <color key="backgroundColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -313,7 +313,7 @@
                                             <action selector="datePickerTypeSegmentedControllerValueChanged:" destination="12e-gE-gDg" eventType="valueChanged" id="fuB-H8-GQy"/>
                                         </connections>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5v6-uM-mNX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5v6-uM-mNX">
                                         <rect key="frame" x="0.0" y="229" width="187" height="31"/>
                                         <color key="backgroundColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
@@ -349,8 +349,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrK-zr-71w">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-Yv-eQ4">
-                                                <rect key="frame" x="287" y="12" width="80" height="36"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-Yv-eQ4">
+                                                <rect key="frame" x="287" y="13" width="80" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="daQ-yr-3dw"/>
                                                 </constraints>
@@ -362,7 +362,7 @@
                                                     <action selector="selectPageButtonClicked" destination="12e-gE-gDg" eventType="touchUpInside" id="bVn-vP-ACN"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1um-xU-U7e">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1um-xU-U7e">
                                                 <rect key="frame" x="191" y="13" width="80" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Tl9-yk-5Zr"/>
@@ -404,6 +404,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kq6-G2-6hg"/>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pcm-vd-caF" firstAttribute="top" secondItem="PmV-xR-pEg" secondAttribute="bottom" id="4ba-RB-thh"/>
@@ -423,7 +424,6 @@
                             <constraint firstItem="ry7-Uj-yMz" firstAttribute="leading" secondItem="Kq6-G2-6hg" secondAttribute="leading" id="o8f-xO-tkL"/>
                             <constraint firstAttribute="bottom" secondItem="cE0-q2-4s8" secondAttribute="bottom" id="uet-Md-cEb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Kq6-G2-6hg"/>
                     </view>
                     <connections>
                         <outlet property="cancelSelecttionDateButton" destination="YiC-5w-fko" id="NRi-gF-kPX"/>

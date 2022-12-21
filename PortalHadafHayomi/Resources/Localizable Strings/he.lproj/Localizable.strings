@@ -330,7 +330,8 @@
 "st_fourm_error_missing_Info" = "חובה למלא כותרת ותוכן";
 "st_fourm_did_add_message" = "ההודעה נוספה בהצלחה";
 "st_comments" = "%@ תגובות";
-
+"st_fourm_sort_by_last_comment" = "מיין לפי תגובה אחרונה";
+"st_fourm_sort_by_last_message" = "מיין לפי הודעה אחרונה";
 
 //Fourm Add Message
 "st_add_message_title" = "הוספת הודעה";
@@ -422,6 +423,7 @@
 "st_select_country" = "בחר מדינה";
 "st_select_area" = "בחר אזור";
 "st_select_city" = "בחר עיר";
+"st_chavrusa" = "חברותא";
 
 //Calendar
 "st_calendar" = "לוח שנה";

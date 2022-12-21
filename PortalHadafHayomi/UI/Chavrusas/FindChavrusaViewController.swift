@@ -79,6 +79,12 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
         self.getRegions()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        self.getChavrusas()
+    }
+    
     @IBAction func searchButtonClicked()
     {
         Util.showDefaultLoadingView()
@@ -418,5 +424,16 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
             
             self.navigationController?.pushViewController(webViewController, animated: true)
         }
+    }
+    
+    @IBAction func addNewChahvortaRequestButtonClicked(_ sender:UIButton) {
+        
+        let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
+        webViewController.shareButtonDisabled = true
+        
+        let title = "st_chavrusa".localize()
+        webViewController.loadUrl("https://daf-yomi.com/BoardAdd.aspx", title: title)
+        
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }

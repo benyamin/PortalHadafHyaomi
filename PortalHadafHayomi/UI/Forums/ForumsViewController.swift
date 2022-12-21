@@ -30,6 +30,8 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var fourmUserInfoView:FourmUserInfoView?
     
+    @IBOutlet weak var sortBySegmentedController:UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +40,8 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
         self.searchFourmLabel?.text = "st_search_fourm".localize()
         self.searchButton?.setTitle("st_search".localize(), for: .normal)
         
-       
+        self.sortBySegmentedController.setTitle("st_fourm_sort_by_last_comment".localize(), forSegmentAt: 0)
+        self.sortBySegmentedController.setTitle("st_fourm_sort_by_last_message".localize(), forSegmentAt: 1)
         
         if HadafHayomiManager.sharedManager.logedInUser == nil
             , let userInfo = UserDefaults.standard.object(forKey:"loginUserData") as? [String:Any] {
@@ -49,6 +52,8 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
              self.revokeDiscussions()
              self.updateUI()
         }
+        
+        self.sortBySegmentedController.selectedSegmentIndex = 0 //Sort by last comment
     }
     
     func runSilegntLoginWithInfo(_ userInfo:[String:Any]) {
@@ -121,6 +126,10 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
         self.getDiscussions()
     }
     
+    @IBAction func sortBySegmentedControllerValueChanged(_ sedner:AnyObject){
+        self.getDiscussions()
+    }
+    
     func revokeDiscussions()
     {
         self.discussions = nil
@@ -156,6 +165,8 @@ class ForumsViewController: MSBaseViewController, UITableViewDelegate, UITableVi
         params["forumid"] = self.selectedDiscussionsId
 
         params["chofshi"] = self.searchTextField?.text ?? ""
+        
+        params["order"] = self.sortBySegmentedController.selectedSegmentIndex == 0 ? "1" : "0"
         
         self.getForumPostsProcess = GetForumPostsProcess()
         

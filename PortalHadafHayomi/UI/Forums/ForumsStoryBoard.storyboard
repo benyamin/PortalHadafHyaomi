@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AfT-kx-oWk">
-                                <rect key="frame" x="0.0" y="160" width="375" height="507"/>
+                                <rect key="frame" x="0.0" y="195" width="375" height="472"/>
                                 <color key="backgroundColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FourmDiscussionTableCell" rowHeight="110" id="GEJ-Ut-dgT" customClass="FourmDiscussionTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
@@ -287,7 +287,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="GMK-s5-hob" firstAttribute="leading" secondItem="V2M-UP-woT" secondAttribute="leading" constant="8" id="0TW-oJ-s6e"/>
                                     <constraint firstAttribute="bottom" secondItem="Fu9-MA-0uH" secondAttribute="bottom" id="1M4-vJ-Svx"/>
@@ -302,13 +302,28 @@
                                     <constraint firstAttribute="height" constant="46" id="xdO-vl-j48"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sd0-ZY-ze0">
+                                <rect key="frame" x="-10" y="160" width="395" height="34"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="Vwm-wc-QfP"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <color key="tintColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="sortBySegmentedControllerValueChanged:" destination="pYY-x5-58Z" eventType="valueChanged" id="O3W-LX-E79"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h05-A6-pne"/>
-                        <color key="backgroundColor" red="0.97730225319999997" green="0.95034450290000005" blue="0.86668008569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="V2M-UP-woT" secondAttribute="trailing" id="61V-tV-owg"/>
                             <constraint firstItem="Yed-c3-NK0" firstAttribute="leading" secondItem="Pnk-ba-RWD" secondAttribute="leading" id="6mE-Mp-ivE"/>
-                            <constraint firstItem="AfT-kx-oWk" firstAttribute="top" secondItem="V2M-UP-woT" secondAttribute="bottom" id="9m1-ZX-zhQ"/>
+                            <constraint firstItem="Sd0-ZY-ze0" firstAttribute="leading" secondItem="Pnk-ba-RWD" secondAttribute="leading" constant="-10" id="94I-Xa-hip"/>
                             <constraint firstAttribute="bottom" secondItem="AfT-kx-oWk" secondAttribute="bottom" id="FAZ-d2-I42"/>
                             <constraint firstItem="fSP-wx-1dh" firstAttribute="top" secondItem="Yed-c3-NK0" secondAttribute="bottom" id="Fio-Av-lK1"/>
                             <constraint firstAttribute="trailing" secondItem="AfT-kx-oWk" secondAttribute="trailing" id="GMb-qt-TnV"/>
@@ -316,8 +331,11 @@
                             <constraint firstAttribute="trailing" secondItem="fSP-wx-1dh" secondAttribute="trailing" id="JYE-ne-VGa"/>
                             <constraint firstItem="AfT-kx-oWk" firstAttribute="leading" secondItem="Pnk-ba-RWD" secondAttribute="leading" id="R46-Jg-05X"/>
                             <constraint firstAttribute="trailing" secondItem="Yed-c3-NK0" secondAttribute="trailing" id="R60-jm-pPU"/>
+                            <constraint firstAttribute="trailing" secondItem="Sd0-ZY-ze0" secondAttribute="trailing" constant="-10" id="apb-8V-98O"/>
                             <constraint firstItem="V2M-UP-woT" firstAttribute="top" secondItem="Yed-c3-NK0" secondAttribute="bottom" constant="44" id="iVo-Ui-mty"/>
+                            <constraint firstItem="Sd0-ZY-ze0" firstAttribute="top" secondItem="V2M-UP-woT" secondAttribute="bottom" id="kpC-0a-BbK"/>
                             <constraint firstItem="Yed-c3-NK0" firstAttribute="top" secondItem="Pnk-ba-RWD" secondAttribute="top" id="yXE-tX-msH"/>
+                            <constraint firstItem="AfT-kx-oWk" firstAttribute="top" secondItem="Sd0-ZY-ze0" secondAttribute="bottom" constant="2" id="zCj-ap-t87"/>
                             <constraint firstItem="V2M-UP-woT" firstAttribute="leading" secondItem="Pnk-ba-RWD" secondAttribute="leading" id="zXc-uG-9gq"/>
                         </constraints>
                     </view>
@@ -328,6 +346,7 @@
                         <outlet property="searchButton" destination="m24-ag-gyh" id="5pY-go-gfT"/>
                         <outlet property="searchFourmLabel" destination="GMK-s5-hob" id="GfV-Wd-2tN"/>
                         <outlet property="searchTextField" destination="8nA-Pb-m6a" id="jad-Ck-JRw"/>
+                        <outlet property="sortBySegmentedController" destination="Sd0-ZY-ze0" id="VTs-I8-ocv"/>
                         <outlet property="topBarTitleLabel" destination="1FY-yH-AfR" id="q7b-Cf-R9s"/>
                         <outlet property="topBarView" destination="Yed-c3-NK0" id="Ca3-z0-gvH"/>
                     </connections>
