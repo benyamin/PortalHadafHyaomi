@@ -143,7 +143,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         
         self.todaysPageButton?.setTitle("st_move_to_todays_page".localize(), for: .normal)
        
-        self.noSavedLessonsMessageLable = "st_saved_lessons_not_found".localize()
+        self.noSavedLessonsMessageLable?.text = "st_saved_lessons_not_found".localize()
         self.showAllLessonsButton?.setTitle("st_show_all_lessons".localize(), for: .normal)
         
         self.addBorderToView(self.todaysPageButton)
