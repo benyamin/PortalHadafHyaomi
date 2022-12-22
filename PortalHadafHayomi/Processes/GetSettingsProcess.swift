@@ -67,12 +67,10 @@ class GetSettingsProcess: MSBaseProcess
                                  "type":"Bool"])
       
      
-        /*
-       setableItemsInfo.append(["key":"MyPages",
-                                "title":"My_Pages",
-                                "type":"Selection"])
+      // setableItemsInfo.append(["key":"MyPages",
+      //                          "title":"My_Pages",
+      //                          "type":"Selection"])
         
-        */
         
         return setableItemsInfo
     }()

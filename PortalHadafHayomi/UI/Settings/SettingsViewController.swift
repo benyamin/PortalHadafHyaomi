@@ -15,21 +15,21 @@ class SettingsViewController:MSBaseViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var settingsTableView:UITableView?
     
+    class func createWith(settings:[SetableItem]) -> SettingsViewController{
+        
+        let storyboard = UIStoryboard(name: "SettingsStoryboard", bundle: nil)
+        let settingsViewController =  storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        settingsViewController.userSettings = settings
+        
+        return settingsViewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if HadafHayomiManager.sharedManager.userSettings == nil
-        {
-            self.getUserSettings()
-        }
-        else{
-            self.userSettings =  HadafHayomiManager.sharedManager.userSettings
-            self.reloadData()
-        }
+        self.reloadData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(speechActivatoinComplete(_:)), name: NSNotification.Name(rawValue: "SpeechActivatoinComplete"), object: nil)
-
-
     }
     
     @objc func speechActivatoinComplete(_ notification: Notification)
@@ -54,23 +54,6 @@ class SettingsViewController:MSBaseViewController, UITableViewDelegate, UITableV
             }
         }
         return nil
-    }
-    
-     @objc  func getUserSettings()
-    {
-        GetUserSettingsProcess().executeWithObject(nil, onStart: { () -> Void in
-            
-        }, onComplete: { (object) -> Void in
-            
-            HadafHayomiManager.sharedManager.userSettings = object as? [SetableItem]
-           self.userSettings =  HadafHayomiManager.sharedManager.userSettings
-            
-              self.reloadData()
-            
-        },onFaile: { (object, error) -> Void in
-            
-        })
-        
     }
     
    override func reloadData() {

@@ -395,19 +395,29 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     
     @IBAction func settingsButtonClicked(_ sender: Any)
     {
-        let storyboard = UIStoryboard(name: "SettingsStoryboard", bundle: nil)
-        let settingsViewController =  storyboard.instantiateViewController(withIdentifier: "SettingsViewController")
-        
-        let navController = UINavigationController(rootViewController: settingsViewController)
-        navController.setNavigationBarHidden(true, animated: false)
-        
-        if self.navigationController != nil
-        {
-            self.navigationController?.present(navController, animated: true, completion: nil)
-        }
-        else{
-            self.view.superview?.parentViewController?.present(navController, animated: true, completion: nil)
-        }
+        GetUserSettingsProcess().executeWithObject(nil, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            if let userSettings = object as? [SetableItem] {
+                
+                HadafHayomiManager.sharedManager.userSettings = userSettings
+                
+                let settingsViewController = SettingsViewController.createWith(settings: userSettings)
+                let navController = UINavigationController(rootViewController: settingsViewController)
+                navController.setNavigationBarHidden(true, animated: false)
+                
+                if self.navigationController != nil
+                {
+                    self.navigationController?.present(navController, animated: true, completion: nil)
+                }
+                else{
+                    self.view.superview?.parentViewController?.present(navController, animated: true, completion: nil)
+                }
+            }
+            
+        },onFaile: { (object, error) -> Void in
+        })
     }
       
     func showSideMenuView()

@@ -99,9 +99,9 @@ class GetUserSettingsProcess: MSBaseProcess
                                  "title":"save_last_selected_page_in_page_summary",
                                  "type":"Bool"])
         
-       // setableItemsInfo.append(["key":"MyPages",
-       //                          "title":"My_Pages",
-       //                          "type":"Selection"])
+     //   setableItemsInfo.append(["key":"MyPages",
+      //                           "title":"My_Pages",
+     //                          "type":"Selection"])
        
         
         return setableItemsInfo

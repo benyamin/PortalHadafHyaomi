@@ -13,12 +13,16 @@ class MyPagesViewController: MSBaseViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var displaySegmentedControl:UISegmentedControl?
     @IBOutlet weak var pagesTableView:UITableView?
     
-    var masechtot:[Masechet]{
+    lazy var masechtotInfo:[(maschet:Masechet, displayPages:Bool)] = {
+       
+        var info = [(maschet:Masechet, displayPages:Bool)]()
         
-        get{
-            return HadafHayomiManager.sharedManager.masechtot
+        //Initial all maschtot with out displaying pages
+        for masechet in  HadafHayomiManager.sharedManager.masechtot{
+            info.append((maschet: masechet, displayPages: false))
         }
-    }
+        return info
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +32,8 @@ class MyPagesViewController: MSBaseViewController, UITableViewDelegate, UITableV
          self.displaySegmentedControl?.setTitle("st_pages_with_comments".localize(), forSegmentAt: 0)
         
         self.displaySegmentedControl?.selectedSegmentIndex = 2
+        
+        
         
         self.reloadData()
     }
@@ -47,7 +53,7 @@ class MyPagesViewController: MSBaseViewController, UITableViewDelegate, UITableV
     // MARK: - TableView Methods:
     
     func numberOfSections(in tableView: UITableView) -> Int {
-         return self.masechtot.count
+         return self.masechtotInfo.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
@@ -57,17 +63,30 @@ class MyPagesViewController: MSBaseViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let sectionHeader = tableView.dequeueReusableCell(withIdentifier: "MasechetTableHeaderCell") as! MSBaseTableViewCell
+        let sectionHeader = tableView.dequeueReusableCell(withIdentifier: "MasechetTableHeaderCell") as! MasechetTableHeaderCell
         
-        let masechet = self.masechtot[section]
+        let masechet = self.masechtotInfo[section].maschet
         sectionHeader.reloadWithObject(masechet)
+        sectionHeader.onToggleButtonClicked = {
+            self.masechtotInfo[section].displayPages = !self.masechtotInfo[section].displayPages
+            for cell in tableView.visibleCells{
+                if let indexPath = tableView.indexPath(for: cell)
+                    ,indexPath.section == section {
+                    tableView.beginUpdates()
+                    (cell as! MasechtPagesCell).displayPages = self.masechtotInfo[section].displayPages
+                    (cell as! MasechtPagesCell).updateDisplay()
+                    tableView.endUpdates()
+                    return
+                }
+            }
+        }
         
         return sectionHeader
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        let masechet = self.masechtot[section]
+        let masechet = self.masechtotInfo[section].maschet
         masechet.updatePagesWithNotes()
         masechet.updateMarkedPages()
         
@@ -82,7 +101,9 @@ class MyPagesViewController: MSBaseViewController, UITableViewDelegate, UITableV
         
         cell.pageSelectingCellDelegate = self
         
-        cell.reloadWithObject(self.masechtot[indexPath.section])
+        let masechetInfo = self.masechtotInfo[indexPath.section]
+        cell.displayPages = masechetInfo.displayPages
+        cell.reloadWithObject(masechetInfo.maschet)
         
         return cell
     }

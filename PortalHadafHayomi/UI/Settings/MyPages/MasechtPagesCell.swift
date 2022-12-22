@@ -19,6 +19,8 @@ class MasechtPagesCell: MSBaseTableViewCell, UICollectionViewDelegate, UICollect
     
     var selectedPagesIndexs = [Int]()
     
+    var displayPages = false
+    
     @IBOutlet weak var checkBoxButton:UIButton?
     
     @IBOutlet weak var pagesCollectionView:UICollectionView?
@@ -42,19 +44,26 @@ class MasechtPagesCell: MSBaseTableViewCell, UICollectionViewDelegate, UICollect
     {
         self.masechet = object as? Masechet
         self.pages = masechet?.pages
-        
+                
         self.reloadData()
     }
     
     override func reloadData() {
                 
-        if let pagesCount = self.pages?.count
+        self.updateDisplay()
+        self.pagesCollectionView?.reloadData()
+    }
+    
+    func updateDisplay() {
+        if self.displayPages
+            ,let pagesCount = self.pages?.count
         {
             let numberOfRows = Int(pagesCount/4) + 1//((CGFloat(savedPagesCount))/4).round(.up)
-            self.pagesCollectionViewHeightConstraint?.constant = CGFloat(numberOfRows) * self.pageCellHeight + CGFloat(2 * numberOfRows)
-            
+            self.pagesCollectionViewHeightConstraint?.constant = CGFloat(numberOfRows) * self.pageCellHeight + CGFloat(2 * numberOfRows)           
         }
-        self.pagesCollectionView?.reloadData()
+        else{
+            self.pagesCollectionViewHeightConstraint?.constant = 0
+        }
     }
     
     @IBAction func checkBoxButtonClicked(_ sener:UIButton)
