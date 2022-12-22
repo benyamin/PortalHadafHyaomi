@@ -17,6 +17,7 @@
 		224518E4250BC2A600C82C9E /* ForumAddMessageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */; };
 		224EFDB02576DDAB003532DE /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDAE2576DDAB003532DE /* nextButton.png */; };
 		224EFDB42576ECFB003532DE /* preButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDB22576ECFB003532DE /* preButton.png */; };
+		2256E49029545C80006B0495 /* GetLessonsSettingsProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E48F29545C80006B0495 /* GetLessonsSettingsProcess.swift */; };
 		2260061C28D9122100FF8386 /* StudyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */; };
 		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
 		2273A8C72471CBA7000E0390 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C52471CBA7000E0390 /* playIcon.png */; };
@@ -621,6 +622,7 @@
 		224EFDB72576ED8B003532DE /* he */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he; path = he.lproj/nextButton.png; sourceTree = "<group>"; };
 		224EFDB82576EE41003532DE /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/preButton.png; sourceTree = "<group>"; };
 		224EFDB92576EE46003532DE /* he */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he; path = he.lproj/preButton.png; sourceTree = "<group>"; };
+		2256E48F29545C80006B0495 /* GetLessonsSettingsProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLessonsSettingsProcess.swift; sourceTree = "<group>"; };
 		2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyStoryboard.storyboard; sourceTree = "<group>"; };
 		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
 		2273A8C52471CBA7000E0390 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
@@ -2377,6 +2379,7 @@
 				2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */,
 				220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */,
 				22CDDD87294E937800945E6F /* GetUserLocationProcess.swift */,
+				2256E48F29545C80006B0495 /* GetLessonsSettingsProcess.swift */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -3059,6 +3062,7 @@
 				4AF555561FCA379900A830EE /* MaggidShiur.swift in Sources */,
 				4AB16657214858AE00481B04 /* ForumPost.swift in Sources */,
 				4AEACF30209668AA00385129 /* MesurementsManager.swift in Sources */,
+				2256E49029545C80006B0495 /* GetLessonsSettingsProcess.swift in Sources */,
 				4ABAAD5F200549770023200D /* BTLoadingView.swift in Sources */,
 				4A933AE11FCF4ED600D175E1 /* UIColor+Extras.swift in Sources */,
 				4AB347242231C607002ED44C /* MasechtPagesCell.swift in Sources */,

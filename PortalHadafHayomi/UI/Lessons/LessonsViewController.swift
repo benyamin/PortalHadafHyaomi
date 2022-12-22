@@ -478,6 +478,31 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         }
     }
     
+    @IBAction func settingsButtonClicked(_ sender:UIButton){
+        
+        GetLessonsSettingsProcess().executeWithObject(nil, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            if let lessonsSettings = object as? [SetableItem] {
+                                
+                let settingsViewController = SettingsViewController.createWith(settings: lessonsSettings)
+                let navController = UINavigationController(rootViewController: settingsViewController)
+                navController.setNavigationBarHidden(true, animated: false)
+                
+                if self.navigationController != nil
+                {
+                    self.navigationController?.present(navController, animated: true, completion: nil)
+                }
+                else{
+                    self.view.superview?.parentViewController?.present(navController, animated: true, completion: nil)
+                }
+            }
+            
+        },onFaile: { (object, error) -> Void in
+        })
+    }
+    
     func setSearchLayout(visible:Bool) {
                               
         searchBar.showsCancelButton = visible
