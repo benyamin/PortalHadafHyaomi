@@ -20,6 +20,12 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>waze</string>
+		<string>comgooglemaps</string>
+		<string>comgooglemaps-x-callback</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -37,6 +43,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App_Name requires user’s location for better user experience.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Your speech will be detected after tapping the start button.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
@@ -64,14 +72,6 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App_Name requires user’s location for better user experience.</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>waze</string>
-		<string>comgooglemaps</string>
-		<string>comgooglemaps-x-callback</string>
 	</array>
 </dict>
 </plist>
