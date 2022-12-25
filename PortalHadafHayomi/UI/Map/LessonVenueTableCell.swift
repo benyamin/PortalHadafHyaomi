@@ -13,6 +13,7 @@ import UIKit
     func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, showLessonOnMap lessonVenue:LessonVenue)
     func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, showNavigationOptions lessonVenue:LessonVenue)
     func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, share lessonVenue:LessonVenue)
+    func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, connect lessonVenue:LessonVenue)
 }
 
 class LessonVenueTableCell: MSBaseTableViewCell {
@@ -25,11 +26,13 @@ class LessonVenueTableCell: MSBaseTableViewCell {
     @IBOutlet weak var informatoinLabel:UILabel!
     @IBOutlet weak var showOnMapButton:UIButton?
     @IBOutlet weak var distanceLabel:UILabel?
+    @IBOutlet weak var connectButton:UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.showOnMapButton?.setTitle("st_show_on_map".localize(), for: .normal)
+        self.connectButton?.setTitle("st_connect_venue_publisher".localize(), for: .normal)
     }
     
     override func reloadWithObject(_ object: Any)
@@ -65,11 +68,16 @@ class LessonVenueTableCell: MSBaseTableViewCell {
     
     @IBAction func navigationButtonClicked(_ sender:UIButton)
     {
-        self.delegate?.lessonVenueTableCell(self, showNavigationOptions:  self.lessonVenue)
+        self.delegate?.lessonVenueTableCell(self, showNavigationOptions: self.lessonVenue)
     }
     
     @IBAction func shareButtonClicked(_ sender:UIButton)
     {
-        self.delegate?.lessonVenueTableCell(self, share:  self.lessonVenue)
+        self.delegate?.lessonVenueTableCell(self, share: self.lessonVenue)
+    }
+    
+    @IBAction func connectButtonClicked(_ sender:UIButton)
+    {
+        self.delegate?.lessonVenueTableCell(self, connect: self.lessonVenue)
     }
 }

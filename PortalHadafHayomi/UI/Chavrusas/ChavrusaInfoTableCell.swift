@@ -45,7 +45,7 @@ class ChavrusaInfoTableCell: MSBaseTableViewCell {
         self.chavrusa = object as? Chavrusa
         
         self.nameLabel?.text = chavrusa?.fullName
-        self.dateLabel?.text = chavrusa?.pubDate
+        self.dateLabel?.text = chavrusa?.dateDisplay
         
         var locatoin = chavrusa?.regionName ?? ""
         locatoin += " - "

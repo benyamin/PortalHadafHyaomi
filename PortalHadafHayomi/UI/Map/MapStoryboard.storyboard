@@ -82,11 +82,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.49803921569999998" green="0.1687376797" blue="0.18647488949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LessonVenueTableCell" rowHeight="80" id="5ZL-hT-mEK" customClass="LessonVenueTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LessonVenueTableCell" rowHeight="110" id="5ZL-hT-mEK" customClass="LessonVenueTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ZL-hT-mEK" id="xr7-zj-5bF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yA-fx-RLC">
@@ -102,7 +102,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Da-1I-c2z">
-                                                    <rect key="frame" x="16" y="29.5" width="58" height="17.5"/>
+                                                    <rect key="frame" x="16" y="29.5" width="57.5" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -143,6 +143,19 @@
                                                         <action selector="shareButtonClicked:" destination="5ZL-hT-mEK" eventType="touchUpInside" id="Zma-Po-sTV"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmR-sT-eyk">
+                                                    <rect key="frame" x="215" y="76" width="148" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="IGA-To-Geq"/>
+                                                    </constraints>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="Connect Publisher">
+                                                        <color key="titleColor" systemColor="systemBlueColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="connectButtonClicked:" destination="5ZL-hT-mEK" eventType="touchUpInside" id="js0-2A-Zba"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="3Uo-Cw-Qkx" firstAttribute="leading" secondItem="4cN-p9-hI4" secondAttribute="trailing" constant="14" id="3fU-SD-8hx"/>
@@ -152,18 +165,21 @@
                                                 <constraint firstItem="cWn-fX-IrN" firstAttribute="top" secondItem="6Da-1I-c2z" secondAttribute="bottom" constant="8" id="B9D-se-Lu2"/>
                                                 <constraint firstItem="0yA-fx-RLC" firstAttribute="top" secondItem="xr7-zj-5bF" secondAttribute="top" constant="10" id="Lnt-jM-76Q"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cWn-fX-IrN" secondAttribute="trailing" constant="16" id="Q9n-Hz-xUO"/>
-                                                <constraint firstAttribute="bottom" secondItem="cWn-fX-IrN" secondAttribute="bottom" constant="7.5" id="SDa-0j-qwA"/>
                                                 <constraint firstItem="0yA-fx-RLC" firstAttribute="leading" secondItem="xr7-zj-5bF" secondAttribute="leading" constant="16" id="TmP-Zv-d2p"/>
                                                 <constraint firstItem="m1Z-Et-L7S" firstAttribute="leading" secondItem="3Uo-Cw-Qkx" secondAttribute="trailing" constant="14" id="UJQ-tH-ucp"/>
                                                 <constraint firstItem="6Da-1I-c2z" firstAttribute="top" secondItem="0yA-fx-RLC" secondAttribute="bottom" id="Xf6-BA-fja"/>
                                                 <constraint firstItem="4cN-p9-hI4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0yA-fx-RLC" secondAttribute="trailing" constant="8" id="ZrX-Ry-nnO"/>
+                                                <constraint firstAttribute="trailing" secondItem="gmR-sT-eyk" secondAttribute="trailing" constant="12" id="dc1-Xd-3vO"/>
                                                 <constraint firstItem="6Da-1I-c2z" firstAttribute="leading" secondItem="0yA-fx-RLC" secondAttribute="leading" id="e4O-b8-AA8"/>
                                                 <constraint firstItem="3Uo-Cw-Qkx" firstAttribute="top" secondItem="xr7-zj-5bF" secondAttribute="top" constant="10" id="eC4-Xb-QpL"/>
                                                 <constraint firstAttribute="trailing" secondItem="m1Z-Et-L7S" secondAttribute="trailing" constant="12" id="swP-Qz-2XP"/>
+                                                <constraint firstItem="gmR-sT-eyk" firstAttribute="top" secondItem="cWn-fX-IrN" secondAttribute="bottom" constant="3.5" id="u6c-KN-pRE"/>
+                                                <constraint firstAttribute="bottom" secondItem="gmR-sT-eyk" secondAttribute="bottom" constant="6" id="zPC-ct-ajs"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97577124829999995" green="0.95302349330000002" blue="0.85892361399999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="connectButton" destination="gmR-sT-eyk" id="Nw0-4k-lxG"/>
                                             <outlet property="distanceLabel" destination="6Da-1I-c2z" id="h5o-Ke-2zn"/>
                                             <outlet property="informatoinLabel" destination="cWn-fX-IrN" id="iaY-xR-z7T"/>
                                             <outlet property="titleLabel" destination="0yA-fx-RLC" id="pQT-8t-GwR"/>
@@ -375,11 +391,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.49803921569999998" green="0.1687376797" blue="0.18647488949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LessonVenueTableCell" rowHeight="71" id="U0d-rN-dl0" customClass="LessonVenueTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="71"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LessonVenueTableCell" rowHeight="104" id="U0d-rN-dl0" customClass="LessonVenueTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U0d-rN-dl0" id="OnA-6A-zom">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yI1-su-wQr">
@@ -419,30 +435,46 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDl-34-HMf">
-                                                    <rect key="frame" x="16" y="48" width="86" height="14.5"/>
+                                                    <rect key="frame" x="16" y="48" width="86" height="18.5"/>
                                                     <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                     <color key="textColor" red="0.4990494251" green="0.1687376797" blue="0.18647488949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqf-nm-CTd">
+                                                    <rect key="frame" x="215" y="70" width="148" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="5J0-fG-O0H"/>
+                                                    </constraints>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="Connect Publisher">
+                                                        <color key="titleColor" systemColor="systemBlueColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="connectButtonClicked:" destination="U0d-rN-dl0" eventType="touchUpInside" id="nlm-vB-jgp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="yI1-su-wQr" firstAttribute="leading" secondItem="OnA-6A-zom" secondAttribute="leading" constant="16" id="55Z-eh-FmD"/>
                                                 <constraint firstItem="Ll6-Qg-iDR" firstAttribute="top" secondItem="OnA-6A-zom" secondAttribute="top" constant="11" id="6dt-cJ-bjJ"/>
                                                 <constraint firstItem="rbM-lo-Wkp" firstAttribute="top" secondItem="CDl-34-HMf" secondAttribute="top" id="6z0-3s-lcc"/>
                                                 <constraint firstAttribute="trailing" secondItem="rbM-lo-Wkp" secondAttribute="trailing" constant="12" id="ABR-6A-olE"/>
+                                                <constraint firstAttribute="bottom" secondItem="mqf-nm-CTd" secondAttribute="bottom" constant="6" id="JwJ-tH-zp5"/>
                                                 <constraint firstItem="Ll6-Qg-iDR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yI1-su-wQr" secondAttribute="trailing" constant="8" id="QEF-r0-P01"/>
                                                 <constraint firstItem="W2o-yl-FJv" firstAttribute="leading" secondItem="Ll6-Qg-iDR" secondAttribute="trailing" constant="14" id="QmF-qn-6P4"/>
                                                 <constraint firstItem="CDl-34-HMf" firstAttribute="leading" secondItem="OnA-6A-zom" secondAttribute="leading" constant="16" id="ROc-ML-De4"/>
+                                                <constraint firstItem="mqf-nm-CTd" firstAttribute="top" secondItem="CDl-34-HMf" secondAttribute="bottom" constant="3.5" id="eTv-aO-YFJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="mqf-nm-CTd" secondAttribute="trailing" constant="12" id="iSk-uP-zXe"/>
                                                 <constraint firstItem="CDl-34-HMf" firstAttribute="top" secondItem="Ll6-Qg-iDR" secondAttribute="bottom" constant="8" id="lD6-nr-gUw"/>
                                                 <constraint firstAttribute="trailing" secondItem="W2o-yl-FJv" secondAttribute="trailing" constant="12" id="qjN-yC-310"/>
                                                 <constraint firstItem="yI1-su-wQr" firstAttribute="top" secondItem="OnA-6A-zom" secondAttribute="top" constant="10" id="ruz-sX-Zyf"/>
                                                 <constraint firstItem="W2o-yl-FJv" firstAttribute="top" secondItem="OnA-6A-zom" secondAttribute="top" constant="10" id="sxM-aJ-5lR"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CDl-34-HMf" secondAttribute="trailing" constant="16" id="uUt-Nv-BFD"/>
-                                                <constraint firstAttribute="bottom" secondItem="CDl-34-HMf" secondAttribute="bottom" constant="8.5" id="yXw-Iv-doE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97647058823529409" green="0.95294117647058818" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="connectButton" destination="mqf-nm-CTd" id="ggu-Lg-9V3"/>
                                             <outlet property="distanceLabel" destination="rbM-lo-Wkp" id="hZY-sG-jzs"/>
                                             <outlet property="informatoinLabel" destination="CDl-34-HMf" id="aGa-jg-Eiu"/>
                                             <outlet property="titleLabel" destination="yI1-su-wQr" id="LrF-lF-5Ne"/>
@@ -891,6 +923,9 @@
         <image name="topBar750.png" width="750" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

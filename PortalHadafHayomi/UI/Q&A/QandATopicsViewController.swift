@@ -102,6 +102,12 @@ class QandATopicsViewController: MSBaseViewController, UITableViewDelegate, UITa
     {
         let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
         
+        if topic.title == "st_ask_a_question".localize(){
+            webViewController.shareButtonDisabled = true
+        }
+        else{
+            webViewController.shareButtonDisabled = false
+        }
         webViewController.loadUrl(topic.link!, title: topic.title)
         
         self.navigationController?.pushViewController(webViewController, animated: true)

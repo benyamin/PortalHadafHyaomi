@@ -239,13 +239,15 @@
 "st_lesson_hour" = "משעה";
 "st_to_page" = "לדף";
 "st_Max_Pages_Per_Downlaod" = "מקסימום דפים לכל הורדה";
+"st_should_move_to_selected_lesson_page" = "האם לעבור לדף עבור השיעור הנבחר";
+
 
 //Lessons Page
 "st_lessons" = "שיעורים";
 "st_lesson_not_found" = "השיעור לא נמצא";
 "st_all_essons" = "כל השיעורים";
 "st_last_played_lessons" = "שיעורים אחרונים";
-"st_playlist_history" = "היסטורית האזנה";
+"st_playlist_history" = "היסטוריית האזנה";
 "st_saved_lessons" = "שיעורים שנשמרו";
 "st_sort_masechtot" = "מסכתות";
 "st_sort_magid_shiour" = "כל מגידי השיעור";
@@ -408,6 +410,7 @@
 "st_additional_information" = "מידע נוסף";
 "st_select_country" = "בחר מדינה";
 "st_select_city" = "בחר יישוב";
+"st_connect_venue_publisher" = "פנה למפרסם המודעה";
 
 //Siyum
 "Endings for Talmud" = "";

@@ -91,7 +91,7 @@ extension String {
         dateFormatter.dateFormat = fromat
         let date = dateFormatter.date(from:self)
         
-        return date!
+        return date ?? Date()
     }
     
     public func confirmToRegex(_ regEx:String) -> Bool

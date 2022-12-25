@@ -320,7 +320,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             self.lastPlayedLessonsTableView?.reloadData()
             self.lastPlayedLessonsTableView?.isHidden = false
             self.searchBar?.isHidden = true
-        }
+            self.todaysPageButton?.isHidden = true        }
     }
     
     @IBAction func mediaTypeSegmentedControllerValueChanged(_ sedner:AnyObject)
@@ -676,6 +676,8 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         else{
             self.audioPlayer?.setPlayerUrl(lesson.getUrl(), durration:lesson.durration ?? 0)
         }
+        
+        NotificationCenter.default.post(name: Notification.Name("didSelectLessonNotification"), object: nil, userInfo: ["lesson":lesson])
     }
     
     func isSavingLessonInProgress(lesson:Lesson) -> Bool

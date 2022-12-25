@@ -21,6 +21,17 @@ class Chavrusa:DataObject
     var regionName:String?
     var text:String?
     
+    var dateDisplay:String {
+        get{
+            if let date = self.pubDate?.toDate(fromat: "yyyy-MM-dd HH:mm:ss"){
+                return "\(date.hebrewDispaly())\n\(date.stringWithFormat("HH:mm"))"
+            }
+            else{
+                return pubDate ?? ""
+            }
+        }
+    }
+    
     override init(dictionary:[String:Any]) {
         super.init()
         

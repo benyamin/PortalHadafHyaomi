@@ -229,6 +229,8 @@
 "st_search_value_error_message" = "The system could not find the requested value";
 "st_loading_masechet" = "Loading masechet";
 "st_lesson_hour" = "from";
+"st_Max_Pages_Per_Downlaod" = "Max Pages Per Downlaod";
+"st_should_move_to_selected_lesson_page" = "Do you want to move to the selected lesson page";
 
 //Lessons Page
 "st_lessons" = "Lessons";
@@ -395,6 +397,7 @@
 "st_to_time" = "End time";
 "st_select_country" = "Select Country";
 "st_select_city" = "Select City";
+"st_connect_venue_publisher" = "Connect Publisher";
 
 //Siyum
 "Endings for Talmud" = "";

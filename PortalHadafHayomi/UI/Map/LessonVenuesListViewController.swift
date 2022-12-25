@@ -226,4 +226,14 @@ class LessonVenuesListViewController: MSBaseViewController, UITableViewDelegate,
             self.present(activityViewController, animated: true, completion: nil)
         }
     }
+    
+    func lessonVenueTableCell(_ lessonVenueTableCell:LessonVenueTableCell, connect lessonVenue:LessonVenue) {
+        
+        let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
+
+        let title = lessonVenue.city + " - " + lessonVenue.maggid
+        webViewController.loadUrl("http://daf-yomi.com/ContactLessons.aspx?id=\(lessonVenue.id)", title: title)
+        
+        self.navigationController?.pushViewController(webViewController, animated: true)
+    }
 }

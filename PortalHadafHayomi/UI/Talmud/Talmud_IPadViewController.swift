@@ -30,6 +30,9 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
     
      var secondaryPageDisplayType:TalmudDisplayType?
     
+    var selectedMaschet:Masechet?
+    var selectedPage:Page?
+    
     var talmudPagePickerViewController:TalmudPagePickerViewController!{
         didSet{
              self.perform( #selector(setTalmudPagePickerViewControllerDelegate), with: nil, afterDelay: 0.5)
@@ -58,7 +61,6 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         self.screenDivisionDisplayBaseView?.isHidden = true
         
         showTodaysPageButton.setTitle("st_todays_page".localize(), for: .normal)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +71,29 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
             self.firstAppearance = false
             
              self.perform( #selector(self.scrollToTodaysPage), with: nil, afterDelay: 0.4)
+        }
+        
+        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didSelectLessonNotification(notification:)), name: Notification.Name("didSelectLessonNotification"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func didSelectLessonNotification(notification: Notification){
+        
+        if let lesson = notification.userInfo?["lesson"] as? Lesson
+            ,let maschet = lesson.masechet
+            ,let page = lesson.page
+            ,page.index != (self.selectedPage?.index ?? -1)
+            ,maschet.id != (self.selectedMaschet?.id ?? ""){
+            
+            BTAlertView.show(title: "".localize(), message: "st_should_move_to_selected_lesson_page".localize(), buttonKeys: ["st_yes".localize(),"st_no".localize()]) { dismissButtonKey in
+                if dismissButtonKey == "st_yes".localize() {
+                    self.scrollToMaschet(maschet, page:page, pageSide:0, animated:false)
+                }
+            }
         }
     }
     
@@ -197,13 +222,27 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         {
             //Reduce by 1 becuse the collectoin view index starts from 0
             
+            self.selectedMaschet = maschet
+            self.selectedPage = page
+            
+            var selectedPageInfo = [String:Any]()
+            selectedPageInfo["maschetId"] = maschet.id
+            selectedPageInfo["pageIndex"] = page.index
+            selectedPageInfo["pageSide"] = pageSide
+            
+            UserDefaults.standard.set(selectedPageInfo, forKey: "selectedPageInfo")
+            UserDefaults.standard.synchronize()
+            
             let indexPath = IndexPath(row:pageIndex-1, section: 0)
             
             self.pagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+
         }
         
         self.topBarTitleLabel?.text = HadafHayomiManager.dispalyTitleForMaschet(maschet, page: page, pageSide: pageSide)
     }
+    
+    
     
     //MARK: - CollectionView Delegate methods
     

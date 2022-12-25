@@ -32,9 +32,11 @@ class LessonTableViewCell: MSBaseTableViewCell {
     
     override func reloadData() {
         
-        self.lessonPageLabel?.text = ("מסכת \(self.lesson?.masechet.name ?? "") דף \(self.lesson?.page?.symbol ?? "")")
-        self.lessonMaggidShiurLabel?.text = self.lesson?.maggidShiur.name
-        self.durationLabel?.text = self.lesson?.durationDisplay
+        if self.lesson?.masechet != nil {
+            self.lessonPageLabel?.text = ("מסכת \(self.lesson?.masechet.name ?? "") דף \(self.lesson?.page?.symbol ?? "")")
+            self.lessonMaggidShiurLabel?.text = self.lesson?.maggidShiur.name
+            self.durationLabel?.text = self.lesson?.durationDisplay
+        }
     }
     
     @IBAction func playButtonClicked(){

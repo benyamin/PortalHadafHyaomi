@@ -82,7 +82,9 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        self.getChavrusas()
+        if self.regions.count > 0 {
+            self.getChavrusas()
+        }
     }
     
     @IBAction func searchButtonClicked()
@@ -264,6 +266,9 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
     
     func showRegionOptions()
     {
+        if self.regions.count == 0 {
+            return
+        }
         self.resignFirstResponder()
         
         let tablePopUpView = UIView.loadFromNibNamed("BTTablePopUpView") as! BTTablePopUpView

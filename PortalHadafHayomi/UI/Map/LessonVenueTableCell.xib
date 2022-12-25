@@ -17,7 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="ccR-57-Xk9" customClass="LessonVenueTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="350" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="350" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMz-82-fU1">
@@ -74,10 +74,24 @@
                         <action selector="shareButtonClicked:" destination="ccR-57-Xk9" eventType="touchUpInside" id="8ek-6L-UgW"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJj-AP-2vE">
+                    <rect key="frame" x="190" y="75" width="148" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="4qX-cw-QlM"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Connect Publisher">
+                        <color key="titleColor" systemColor="systemBlueColor"/>
+                    </state>
+                    <connections>
+                        <action selector="connectButtonClicked:" destination="ccR-57-Xk9" eventType="touchUpInside" id="wja-5A-tP4"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="YUh-Qa-hjg"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="YUh-Qa-hjg" firstAttribute="trailing" secondItem="jJj-AP-2vE" secondAttribute="trailing" constant="12" id="2Pv-o3-pnq"/>
                 <constraint firstItem="nY4-HB-Ea9" firstAttribute="top" secondItem="fgl-qt-gOo" secondAttribute="bottom" constant="8" id="7Lw-GB-yEr"/>
                 <constraint firstItem="SwQ-p8-SqQ" firstAttribute="top" secondItem="ccR-57-Xk9" secondAttribute="top" constant="9" id="CGv-6W-vWc"/>
                 <constraint firstItem="lMz-82-fU1" firstAttribute="leading" secondItem="ccR-57-Xk9" secondAttribute="leading" constant="14" id="Dur-Gz-tVS"/>
@@ -87,10 +101,11 @@
                 <constraint firstItem="nY4-HB-Ea9" firstAttribute="leading" secondItem="ccR-57-Xk9" secondAttribute="leading" constant="14" id="Oe0-st-ric"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nY4-HB-Ea9" secondAttribute="trailing" constant="16" id="RCi-7o-cD5"/>
                 <constraint firstItem="fgl-qt-gOo" firstAttribute="top" secondItem="lMz-82-fU1" secondAttribute="bottom" id="Y5M-ha-2gl"/>
+                <constraint firstItem="jJj-AP-2vE" firstAttribute="top" secondItem="nY4-HB-Ea9" secondAttribute="bottom" constant="3.5" id="aJX-bM-voN"/>
                 <constraint firstItem="PSF-Nd-iv6" firstAttribute="leading" secondItem="SwQ-p8-SqQ" secondAttribute="trailing" constant="14" id="dfC-k4-RnN"/>
                 <constraint firstAttribute="trailing" secondItem="PSF-Nd-iv6" secondAttribute="trailing" constant="14" id="eIX-Bn-Rv3"/>
                 <constraint firstItem="fgl-qt-gOo" firstAttribute="leading" secondItem="lMz-82-fU1" secondAttribute="leading" id="vvw-Yh-vb2"/>
-                <constraint firstAttribute="bottom" secondItem="nY4-HB-Ea9" secondAttribute="bottom" constant="8.5" id="wPT-Op-dPN"/>
+                <constraint firstItem="YUh-Qa-hjg" firstAttribute="bottom" secondItem="jJj-AP-2vE" secondAttribute="bottom" constant="7" id="wkn-nV-J5D"/>
                 <constraint firstItem="lMz-82-fU1" firstAttribute="top" secondItem="ccR-57-Xk9" secondAttribute="top" constant="9" id="z8f-61-Rxa"/>
                 <constraint firstItem="Jmn-bZ-7RT" firstAttribute="top" secondItem="ccR-57-Xk9" secondAttribute="top" constant="10" id="zES-Ja-C7i"/>
             </constraints>
@@ -98,12 +113,13 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="connectButton" destination="jJj-AP-2vE" id="lVp-OT-P0F"/>
                 <outlet property="distanceLabel" destination="fgl-qt-gOo" id="23l-bo-nwU"/>
                 <outlet property="informatoinLabel" destination="nY4-HB-Ea9" id="fK2-ko-dEA"/>
                 <outlet property="showOnMapButton" destination="SwQ-p8-SqQ" id="75D-Su-5gv"/>
                 <outlet property="titleLabel" destination="lMz-82-fU1" id="E3e-nt-rGz"/>
             </connections>
-            <point key="canvasLocation" x="-373.1884057971015" y="-356.25"/>
+            <point key="canvasLocation" x="-373.91304347826087" y="-345.20089285714283"/>
         </view>
     </objects>
     <resources>
@@ -112,6 +128,9 @@
         <image name="shareIcon.png" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
