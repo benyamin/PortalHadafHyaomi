@@ -10,11 +10,9 @@ import Foundation
 
 open class GetTalmudQAProcess: MSBaseProcess
 {
-    var request:MSRequest?
-    
     open override func executeWithObj(_ obj:Any?)
     {
-        var searchInfo = obj as! (masechetId:Int, minPage:Int, maxPage:Int)
+        let searchInfo = obj as! (masechetId:Int, minPage:Int, maxPage:Int)
         
         var params = [String:Any]()
         params["qa"] = 1
@@ -22,26 +20,47 @@ open class GetTalmudQAProcess: MSBaseProcess
         params["minpage"] = searchInfo.minPage
         params["maxpage"] = searchInfo.maxPage
         
-        self.request = MSRequest()
+        let request = MSRequest()
      
-        request?.baseUrl = "https://daf-yomi.com"
-        request?.serviceName = "mobile/jsonservice.ashx"
-        request?.requiredResponseType = .JSON
-        request?.httpMethod = GET
-        request?.params = params
+        request.baseUrl = "https://daf-yomi.com"
+        request.serviceName = "mobile/jsonservice.ashx"
+        request.requiredResponseType = .JSON
+        request.httpMethod = GET
+        request.params = params
+        
+        self.runWebServiceWithRequest(request)
     }
     
-    func runWebServiceWithRequest(_ request:BaseRequest, dataPageNumber:Int)
-    {
+    func runWebServiceWithRequest(_ request:BaseRequest) {
+    
         NetworkingManager.sharedManager.runRequest(request, onStart: {
             
         },onComplete: { (dictionary, error) in
             
-           
+            if let examsInfo = dictionary["JsonResponse"] as? [[String:Any]]
+            {
+                var exams = [Exam]()
+                for examInfo in examsInfo{
+                    let exam = Exam(dictionary: examInfo)
+                    exams.append(exam)
+                }
+                
+                DispatchQueue.main.async {
+                    self.getExamsFullInfo(exams: exams, onReceivedExamsFullInfo:{
+                        self.onComplete?(exams)
+                    })
+                }
+            }
+            else{
+                if error == nil {
+                    self.onComplete?(dictionary)
+                }
+                else {
+                    self.onFaile?(dictionary, error!)
+                }
+            }
         },onFaile: { (object, error) in
-            
-            self.request = nil
-            
+                        
             self.onFaile?(object, error)
         })
     }
@@ -49,10 +68,35 @@ open class GetTalmudQAProcess: MSBaseProcess
     override open func cancel()
     {
         super.cancel()
-        
-        if self.request != nil
-        {
-            NetworkingManager.sharedManager.cancelRequest(self.request!)
+    }
+    
+    func getExamsFullInfo(exams:[Exam],onReceivedExamsFullInfo:(() -> Void)? = nil){
+        var examsToFatch = exams.map {$0} as! [Exam]
+        if let exam = examsToFatch.first {
+            self.getExamsQuestions(exam: exam) {
+                examsToFatch.remove(exam)
+                if examsToFatch.count > 0 {
+                    self.getExamsFullInfo(exams: examsToFatch ,onReceivedExamsFullInfo:onReceivedExamsFullInfo)
+                }
+                else{
+                    onReceivedExamsFullInfo?()
+                }
+            }
         }
+    }
+    
+    func getExamsQuestions(exam:Exam,onComplete:@escaping () -> Void){
+        
+        GetTalmudQAInfoProcess().executeWithObject(exam.id, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            exam.questions = object as? [ExamQuestion]
+            
+            onComplete()
+            
+        },onFaile: { (object, error) -> Void in
+            onComplete()
+        })
     }
 }

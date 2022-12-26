@@ -486,6 +486,9 @@
 //Siyum
 "st_Maschet_Complition" = "סיום הש׳׳ס";
 
+//Exams
+"st_Exams" = "שאלות חזרה";
+
 //Measurments
 "st_quantity" = "כמות";
 "st_convert" = "המר מ -";

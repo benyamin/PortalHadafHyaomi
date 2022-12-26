@@ -473,6 +473,9 @@
 //Siyum
 "st_Maschet_Complition" = "Siyum";
 
+//Exams
+"st_Exams" = "Q&A";
+
 //Measurments
 "st_quantity" = "Quantity";
 "st_convert" = "Convert -";

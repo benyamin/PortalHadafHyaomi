@@ -37,31 +37,31 @@
                                                     <rect key="frame" x="16" y="8" width="343" height="94"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RX-wA-i5b">
-                                                            <rect key="frame" x="298" y="8" width="37" height="19.5"/>
+                                                            <rect key="frame" x="301" y="8" width="34" height="21"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxN-L8-Fn4">
-                                                            <rect key="frame" x="275.5" y="71" width="59.5" height="15"/>
+                                                            <rect key="frame" x="268.5" y="69.5" width="66.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="14"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publish Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7K-2f-cDK">
-                                                            <rect key="frame" x="8" y="34" width="75" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Publish Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7K-2f-cDK">
+                                                            <rect key="frame" x="8" y="34" width="79.5" height="15"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="14"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publish Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avp-7q-66F">
-                                                            <rect key="frame" x="8" y="49" width="79" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Publish Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avp-7q-66F">
+                                                            <rect key="frame" x="8" y="49" width="81" height="15"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="14"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sP-l9-Hc1">
-                                                            <rect key="frame" x="8" y="3" width="106" height="29"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sP-l9-Hc1">
+                                                            <rect key="frame" x="8" y="3" width="117" height="29"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="15"/>
                                                             <state key="normal" title="View Discussions"/>
                                                             <connections>
@@ -69,13 +69,13 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Masechet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygs-Vi-me3">
-                                                            <rect key="frame" x="288.5" y="29.5" width="46.5" height="13"/>
+                                                            <rect key="frame" x="282" y="31" width="53" height="14"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments num" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKv-14-CKH">
-                                                            <rect key="frame" x="8" y="73" width="79" height="13"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Comments num" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKv-14-CKH">
+                                                            <rect key="frame" x="8" y="73" width="86" height="13"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="12"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -162,7 +162,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forums" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="1FY-yH-AfR">
-                                        <rect key="frame" x="150" y="31" width="75.5" height="26"/>
+                                        <rect key="frame" x="147" y="29" width="81.5" height="28"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -200,7 +200,7 @@
                                 <rect key="frame" x="0.0" y="70" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UW-md-pIF">
-                                        <rect key="frame" x="333" y="7" width="34" height="30"/>
+                                        <rect key="frame" x="324" y="6.5" width="43" height="31"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הירשם"/>
                                         <connections>
@@ -208,7 +208,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h8-vX-wpB">
-                                        <rect key="frame" x="8" y="13.5" width="72" height="17.5"/>
+                                        <rect key="frame" x="8" y="12.5" width="80.5" height="19"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -221,7 +221,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLP-s3-MVW">
-                                        <rect key="frame" x="247" y="7" width="70" height="30"/>
+                                        <rect key="frame" x="221" y="6.5" width="87" height="31"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הוספת הודעה"/>
                                         <connections>
@@ -253,7 +253,7 @@
                                 <rect key="frame" x="0.0" y="114" width="375" height="46"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Forum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMK-s5-hob">
-                                        <rect key="frame" x="8" y="14" width="95" height="18"/>
+                                        <rect key="frame" x="8" y="13.5" width="101" height="19"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -281,7 +281,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8nA-Pb-m6a">
-                                        <rect key="frame" x="111" y="6" width="188" height="34"/>
+                                        <rect key="frame" x="117" y="6" width="182" height="34"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -370,7 +370,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forums" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="E8i-uW-mpB">
-                                        <rect key="frame" x="150" y="41" width="75.5" height="26"/>
+                                        <rect key="frame" x="147" y="39" width="81.5" height="28"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -431,13 +431,13 @@
                                                     <rect key="frame" x="16" y="8" width="343" height="114"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Kc-oN-2tz">
-                                                            <rect key="frame" x="298" y="8" width="37" height="19.5"/>
+                                                            <rect key="frame" x="301" y="8" width="34" height="21"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Content" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-L4-eip">
-                                                            <rect key="frame" x="8" y="50.5" width="327" height="55.5"/>
+                                                            <rect key="frame" x="8" y="53.5" width="327" height="52.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -445,19 +445,19 @@
                                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                                         </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17S-XB-grG">
-                                                            <rect key="frame" x="275.5" y="31.5" width="59.5" height="15"/>
+                                                            <rect key="frame" x="268.5" y="33" width="66.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="14"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publish Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhR-m9-88f">
-                                                            <rect key="frame" x="8" y="12.5" width="75" height="15"/>
+                                                            <rect key="frame" x="8" y="12.5" width="79.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="14"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publish Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvC-Wm-bYE">
-                                                            <rect key="frame" x="8" y="27.5" width="79" height="15"/>
+                                                            <rect key="frame" x="8" y="29" width="81" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="14"/>
                                                             <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -534,7 +534,7 @@
                                 <rect key="frame" x="0.0" y="80" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Li-z3-Y1V">
-                                        <rect key="frame" x="333" y="7" width="34" height="30"/>
+                                        <rect key="frame" x="324" y="6.5" width="43" height="31"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הירשם"/>
                                         <connections>
@@ -542,7 +542,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPn-J0-oaj">
-                                        <rect key="frame" x="8" y="13.5" width="72" height="17.5"/>
+                                        <rect key="frame" x="8" y="12.5" width="80.5" height="19"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -555,7 +555,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g83-IV-bPh">
-                                        <rect key="frame" x="247" y="7" width="70" height="30"/>
+                                        <rect key="frame" x="221" y="6.5" width="87" height="31"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                         <state key="normal" title="הוספת הודעה"/>
                                         <connections>
@@ -628,7 +628,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forums" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="VpZ-6G-WtK">
-                                        <rect key="frame" x="150" y="41" width="75.5" height="26"/>
+                                        <rect key="frame" x="147" y="39" width="81.5" height="28"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -661,13 +661,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messgae Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lr6-R8-G3L">
-                                <rect key="frame" x="16" y="185" width="96" height="19"/>
+                                <rect key="frame" x="16" y="186" width="105.5" height="20"/>
                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                 <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gj7-Em-IQk">
-                                <rect key="frame" x="16" y="208" width="343" height="34"/>
+                                <rect key="frame" x="16" y="210" width="343" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -675,19 +675,19 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Masechet And Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7R-of-5A1">
-                                <rect key="frame" x="16" y="104" width="184" height="19"/>
+                                <rect key="frame" x="16" y="104" width="206" height="20"/>
                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                 <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-xL-KZj">
-                                <rect key="frame" x="230" y="123" width="0.0" height="0.0"/>
+                                <rect key="frame" x="252" y="124" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                 <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zj0-DS-MVW">
-                                <rect key="frame" x="16" y="127" width="343" height="34"/>
+                                <rect key="frame" x="16" y="128" width="343" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -695,13 +695,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messgae Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yl-qa-zQt">
-                                <rect key="frame" x="16" y="266" width="118" height="19"/>
+                                <rect key="frame" x="16" y="268" width="134.5" height="20"/>
                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                 <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rUu-yi-mgq">
-                                <rect key="frame" x="16" y="289" width="343" height="179"/>
+                                <rect key="frame" x="16" y="292" width="343" height="176"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="scrollIndicatorInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -718,7 +718,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Maschet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rg8-KC-Ss3">
-                                                <rect key="frame" x="16" y="12.5" width="106" height="19"/>
+                                                <rect key="frame" x="16" y="12" width="118" height="20"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>

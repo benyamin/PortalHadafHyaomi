@@ -18,6 +18,13 @@
 		224EFDB02576DDAB003532DE /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDAE2576DDAB003532DE /* nextButton.png */; };
 		224EFDB42576ECFB003532DE /* preButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDB22576ECFB003532DE /* preButton.png */; };
 		2256E49029545C80006B0495 /* GetLessonsSettingsProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E48F29545C80006B0495 /* GetLessonsSettingsProcess.swift */; };
+		2256E49229599398006B0495 /* Q&A_icon_ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 2256E49129599398006B0495 /* Q&A_icon_ios.png */; };
+		2256E4942959945D006B0495 /* ExamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E4932959945D006B0495 /* ExamsViewController.swift */; };
+		2256E4962959A9FD006B0495 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E4952959A9FD006B0495 /* Exam.swift */; };
+		2256E4982959B8F4006B0495 /* ExamQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E4972959B8F4006B0495 /* ExamQuestion.swift */; };
+		2256E49E2959DA48006B0495 /* ExamQuestionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E49D2959DA48006B0495 /* ExamQuestionTableCell.swift */; };
+		2256E4A02959DAC0006B0495 /* ExamAnswerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E49F2959DAC0006B0495 /* ExamAnswerTableCell.swift */; };
+		2256E4A22959E140006B0495 /* ExamAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E4A12959E140006B0495 /* ExamAnswer.swift */; };
 		2260061C28D9122100FF8386 /* StudyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */; };
 		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
 		2273A8C72471CBA7000E0390 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C52471CBA7000E0390 /* playIcon.png */; };
@@ -623,6 +630,13 @@
 		224EFDB82576EE41003532DE /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/preButton.png; sourceTree = "<group>"; };
 		224EFDB92576EE46003532DE /* he */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he; path = he.lproj/preButton.png; sourceTree = "<group>"; };
 		2256E48F29545C80006B0495 /* GetLessonsSettingsProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLessonsSettingsProcess.swift; sourceTree = "<group>"; };
+		2256E49129599398006B0495 /* Q&A_icon_ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Q&A_icon_ios.png"; sourceTree = "<group>"; };
+		2256E4932959945D006B0495 /* ExamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamsViewController.swift; sourceTree = "<group>"; };
+		2256E4952959A9FD006B0495 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
+		2256E4972959B8F4006B0495 /* ExamQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestion.swift; sourceTree = "<group>"; };
+		2256E49D2959DA48006B0495 /* ExamQuestionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestionTableCell.swift; sourceTree = "<group>"; };
+		2256E49F2959DAC0006B0495 /* ExamAnswerTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamAnswerTableCell.swift; sourceTree = "<group>"; };
+		2256E4A12959E140006B0495 /* ExamAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamAnswer.swift; sourceTree = "<group>"; };
 		2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyStoryboard.storyboard; sourceTree = "<group>"; };
 		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
 		2273A8C52471CBA7000E0390 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
@@ -1250,6 +1264,9 @@
 			isa = PBXGroup;
 			children = (
 				2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */,
+				2256E4932959945D006B0495 /* ExamsViewController.swift */,
+				2256E49D2959DA48006B0495 /* ExamQuestionTableCell.swift */,
+				2256E49F2959DAC0006B0495 /* ExamAnswerTableCell.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -1667,6 +1684,7 @@
 		4ABFB45A235290FF0079D68B /* Azarim_icons_ios_150X150 */ = {
 			isa = PBXGroup;
 			children = (
+				2256E49129599398006B0495 /* Q&A_icon_ios.png */,
 				4A999D6227F4F2C6004C9675 /* A-_icon.png */,
 				4A999D6427F4F2C7004C9675 /* A+_icon.png */,
 				4A999D6327F4F2C7004C9675 /* AH-_icon.png */,
@@ -2454,6 +2472,9 @@
 				22D69D7A2483279500525786 /* MediaLesson.swift */,
 				220C99C924FAF7890013D377 /* User.swift */,
 				22CDDD8F294F519200945E6F /* NavigationActoinSheet.swift */,
+				2256E4952959A9FD006B0495 /* Exam.swift */,
+				2256E4972959B8F4006B0495 /* ExamQuestion.swift */,
+				2256E4A12959E140006B0495 /* ExamAnswer.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -2888,6 +2909,7 @@
 				4ABFB760235291000079D68B /* hipusShas_icon_and_text.png in Resources */,
 				4ABFB777235291000079D68B /* Icon-App-72x72@2x.png in Resources */,
 				4ABFB733235291000079D68B /* contact_icon.png in Resources */,
+				2256E49229599398006B0495 /* Q&A_icon_ios.png in Resources */,
 				4ABFB72E235291000079D68B /* logo-portal.png in Resources */,
 				4ABFB76D235291000079D68B /* Icon-App-76x76@3x.png in Resources */,
 				4ABFB76F235291000079D68B /* Icon-App-20x20@1x.png in Resources */,
@@ -3034,6 +3056,7 @@
 				22D69D7B2483279500525786 /* MediaLesson.swift in Sources */,
 				4A933AF51FD35ADB00D175E1 /* BTAlertView.swift in Sources */,
 				4A2150F92216172D00BFEEF7 /* SavedPagesViewController.swift in Sources */,
+				2256E49E2959DA48006B0495 /* ExamQuestionTableCell.swift in Sources */,
 				4A65E2A81FE8FD65008BA62B /* AboutViewController.swift in Sources */,
 				4AD40999201D3EDE00A76EF0 /* HebrewMonth.swift in Sources */,
 				22CD09B32467CEA100936262 /* PageSummaryCollectionCell.swift in Sources */,
@@ -3041,6 +3064,7 @@
 				4A5884822082AFA2003EC9E5 /* GetCitiesProcess.swift in Sources */,
 				4A933AE91FD3501800D175E1 /* BTAVPlayer.swift in Sources */,
 				4A2C76B51FD48EC00074A0CC /* SaveLessonProcess.swift in Sources */,
+				2256E4A02959DAC0006B0495 /* ExamAnswerTableCell.swift in Sources */,
 				4A933AF91FD35B8100D175E1 /* BTPopUpView.swift in Sources */,
 				4A6B0BDF1FCDAABB008C1205 /* Masechet.swift in Sources */,
 				4AC483D71FE718EA000F1528 /* ArticlesViewController.swift in Sources */,
@@ -3077,6 +3101,7 @@
 				221A2DB0254B49B50040475E /* ForgotPasswordProcess.swift in Sources */,
 				4AB3473222343C68002ED44C /* Note.swift in Sources */,
 				22CDDD88294E937800945E6F /* GetUserLocationProcess.swift in Sources */,
+				2256E4962959A9FD006B0495 /* Exam.swift in Sources */,
 				4A79B04120E2C7E900C3C456 /* SearchResultsPagerViewController.swift in Sources */,
 				4AC972EA20CC80F4003AD2A5 /* SearchResultTableCell.swift in Sources */,
 				4AC972E820CC80D3003AD2A5 /* SearchTalmudViewController.swift in Sources */,
@@ -3086,6 +3111,7 @@
 				4AD149771FDDD7480038EBDF /* BTWebViewController.swift in Sources */,
 				4A733B0620ACBF6000976D55 /* HadafHayomiProjectViewController.swift in Sources */,
 				4AB166602151329D00481B04 /* GetForumDiscussionProcess.swift in Sources */,
+				2256E4A22959E140006B0495 /* ExamAnswer.swift in Sources */,
 				4A90C88120B61BC000D46BC2 /* SiyumAccessoriesViewController.swift in Sources */,
 				4A57510621535DD5009FC3B0 /* FourmDiscussoinViewController.swift in Sources */,
 				4A5884842082B0B6003EC9E5 /* Region.swift in Sources */,
@@ -3130,6 +3156,7 @@
 				4AB1662E2116607000481B04 /* ChavrusaInfoTableCell.swift in Sources */,
 				4AEACF2E20963F8500385129 /* MeasurementCalculatorViewController.swift in Sources */,
 				220C99CA24FAF7890013D377 /* User.swift in Sources */,
+				2256E4982959B8F4006B0495 /* ExamQuestion.swift in Sources */,
 				4A215101221B491200BFEEF7 /* SavedLessonsViewController.swift in Sources */,
 				22CDDD76294B24AD00945E6F /* UIButton+Extras.swift in Sources */,
 				4AD409A820262EE800A76EF0 /* JewishCallPopOver.swift in Sources */,
@@ -3156,6 +3183,7 @@
 				4A7E0DF91FEF0F5E00D84E0E /* UIImage+Extras.swift in Sources */,
 				4A933B0A1FD484B300D175E1 /* LessonsManager.swift in Sources */,
 				4A65E2AE1FEFCDB1008BA62B /* FileManager+Extras.swift in Sources */,
+				2256E4942959945D006B0495 /* ExamsViewController.swift in Sources */,
 				4A733B2520B215DC00976D55 /* PageSummaryViewController.swift in Sources */,
 				4AD1496A1FDC86960038EBDF /* AccessoriesListViewController.swift in Sources */,
 				4AF555601FCA3B2000A830EE /* MSBaseViewController.swift in Sources */,

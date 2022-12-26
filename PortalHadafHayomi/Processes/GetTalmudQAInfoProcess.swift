@@ -14,27 +14,47 @@ open class GetTalmudQAInfoProcess: MSBaseProcess
     
     open override func executeWithObj(_ obj:Any?)
     {
-        var searchInfo = obj as! (masechetId:Int, minPage:Int, maxPage:Int)
+        let examId = obj as? Int
         
         var params = [String:Any]()
-        params["questions"] = 382
+        params["questions"] = examId
         
-        self.request = MSRequest()
+        let request = MSRequest()
      
-        request?.baseUrl = "https://daf-yomi.com"
-        request?.serviceName = "mobile/jsonservice.ashx"
-        request?.requiredResponseType = .JSON
-        request?.httpMethod = GET
-        request?.params = params
+        request.baseUrl = "https://daf-yomi.com"
+        request.serviceName = "mobile/jsonservice.ashx"
+        request.requiredResponseType = .JSON
+        request.httpMethod = GET
+        request.params = params
+        
+        self.runWebServiceWithRequest(request)
     }
     
-    func runWebServiceWithRequest(_ request:BaseRequest, dataPageNumber:Int)
+    func runWebServiceWithRequest(_ request:BaseRequest)
     {
         NetworkingManager.sharedManager.runRequest(request, onStart: {
             
         },onComplete: { (dictionary, error) in
             
-           
+            if let examsQuestionsInfo = dictionary["JsonResponse"] as? [[String:Any]]
+            {
+                var questions = [ExamQuestion]()
+                
+                for questionInfo in examsQuestionsInfo {
+                    let question = ExamQuestion(dictionary: questionInfo)
+                    questions.append(question)
+                }
+                
+                self.onComplete?(questions)
+            }
+            else{
+                if error == nil {
+                    self.onComplete?(dictionary)
+                }
+                else {
+                    self.onFaile?(dictionary, error!)
+                }
+            }
         },onFaile: { (object, error) in
             
             self.request = nil

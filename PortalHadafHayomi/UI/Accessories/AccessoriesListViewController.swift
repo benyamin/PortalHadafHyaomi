@@ -28,6 +28,8 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
         
         accessoriesList.append(Accessory(id: "MS", title:  "measurements", iconImage: "Midot_icon_ios.png", dataType:"Text"))
      
+        accessoriesList.append(Accessory(id: "Exams", title: "st_Exams", iconImage: "Q&A_icon_ios.png", dataType:"Text"))
+        
         accessoriesList.append(Accessory(id: "CAL", title: "st_calculator", iconImage: "Calculator_icon_ios.png", dataType:"Text"))
         
         accessoriesList.append(Accessory(id: "LR", title: "lazay_rashi", iconImage: "rashi_icon_ios.png", dataType:"Text"))
@@ -248,6 +250,12 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
         self.navigationController?.pushViewController(calculatorViewController, animated: true)
     }
     
+    func showExams()
+    {
+        let examsViewController = UIViewController.withName("ExamsViewController", storyBoardIdentifier: "StudyStoryboard")
+        self.navigationController?.pushViewController(examsViewController, animated: true)
+    }
+    
     // MARK: - TableView Methods:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -313,7 +321,10 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
             
         case "CAL":// מחשבון מידות
             self.showCalculator()
-            
+            break
+          
+        case "Exams":// שאלות ותשובות
+            self.showExams()
             break
             
         default: break

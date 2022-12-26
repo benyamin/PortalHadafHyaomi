@@ -3,27 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in LessonVenuesListViewController.lessonVenueTableCell(_:showNavigationOptions:):LessonVenuesListViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "LessonTableViewCell.reloadData():LessonTableViewCell.swift">
+         contextName = "MapViewController.getDefaultAnnotationViewForAnnotation(_:):MapViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.lesson?.masechet">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LessonsPickerView.sortMagidShioursbyLanguage():LessonsPickerView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SavedMasechtPagesCell.checkBoxButtonClicked(_:):SavedMasechtPagesCell.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MapViewController.annotationViewButtonClicked(_:):MapViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "button.userActivity?.userInfo">
+               value = "btn.userActivity?.userInfo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -37,12 +20,6 @@
          contextName = "TalmudPageCell.reloadWithObject(_:):TalmudPageCell.swift">
       </ContextState>
       <ContextState
-         contextName = "LessonVenue.init(dictionary:):LessonVenue.swift">
-      </ContextState>
-      <ContextState
-         contextName = "AppDelegate.showAddIfRequired():AppDelegate.swift">
-      </ContextState>
-      <ContextState
          contextName = "FindChavrusaViewController.showRegionOptions():FindChavrusaViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -51,7 +28,25 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in LessonVenuesListViewController.lessonVenueTableCell(_:showNavigationOptions:):LessonVenuesListViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "LessonVenuesListViewController.updateVenues(_:withUserLocatoin:):LessonVenuesListViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "specialized closure #1 in closure #2 in GetTalmudQAProcess.runWebServiceWithRequest(_:):GetTalmudQAProcess.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ExamsViewController.getExam():ExamsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in GetTalmudQAProcess.runWebServiceWithRequest(_:):GetTalmudQAProcess.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.showAddIfRequired():AppDelegate.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SavedMasechtPagesCell.checkBoxButtonClicked(_:):SavedMasechtPagesCell.swift">
       </ContextState>
       <ContextState
          contextName = "PageSummaryCollectionCell.reloadData():PageSummaryCollectionCell.swift">
@@ -62,10 +57,44 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MapViewController.getDefaultAnnotationViewForAnnotation(_:):MapViewController.swift">
+         contextName = "ExamQuestionTableCell.tableView(_:cellForRowAt:):ExamQuestionTableCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LessonTableViewCell.reloadData():LessonTableViewCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "btn.userActivity?.userInfo">
+               value = "self.lesson?.masechet">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ExamAnswer.init(dictionary:):ExamAnswer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LessonsPickerView.sortMagidShioursbyLanguage():LessonsPickerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LessonVenue.init(dictionary:):LessonVenue.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MapViewController.annotationViewButtonClicked(_:):MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "button.userActivity?.userInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in GetTalmudQAProcess.getExamsFullInfo(exams:):GetTalmudQAProcess.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in GetTalmudQAProcess.runWebServiceWithRequest(_:):GetTalmudQAProcess.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ExamsViewController.tableView(_:heightForRowAt:):ExamsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tableView.cellForRow(at: indexPath)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
