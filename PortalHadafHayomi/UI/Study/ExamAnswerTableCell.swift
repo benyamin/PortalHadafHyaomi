@@ -18,13 +18,7 @@ class ExamAnswerTableCell: MSBaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
        
-        self.checkBoxButton?.isEnabled = false
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        self.checkBoxButton?.isSelected = selected
+        self.checkBoxButton?.isUserInteractionEnabled = false
     }
     
     override func reloadWithObject(_ object: Any) {

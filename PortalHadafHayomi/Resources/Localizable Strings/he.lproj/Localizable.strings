@@ -488,6 +488,8 @@
 
 //Exams
 "st_Exams" = "שאלות חזרה";
+"st_cehck_exams" = "בדיקת שאלון";
+"st_exam_score" = "הציון שלך: %@";
 
 //Measurments
 "st_quantity" = "כמות";

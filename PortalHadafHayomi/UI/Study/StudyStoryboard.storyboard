@@ -60,7 +60,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tGB-Hl-K5P">
-                                <rect key="frame" x="0.0" y="70" width="376" height="597"/>
+                                <rect key="frame" x="0.0" y="70" width="376" height="553"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExamQuestionTableCell" rowHeight="236" id="ECd-hn-f7E" customClass="ExamQuestionTableCell" customModule="PortalHadafHayomi" customModuleProvider="target">
@@ -119,31 +119,31 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEN-yT-vrg">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
                                                                                 <subviews>
-                                                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ro0-Lf-ot4">
-                                                                                        <rect key="frame" x="16" y="10" width="24" height="24"/>
-                                                                                        <constraints>
-                                                                                            <constraint firstAttribute="height" constant="24" id="XHz-Mt-pv9"/>
-                                                                                            <constraint firstAttribute="width" constant="24" id="rKk-7a-zcN"/>
-                                                                                        </constraints>
-                                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                                        <state key="normal" title="Button" image="Checkbox_off.png"/>
-                                                                                        <state key="selected" image="Checkbox_on.png"/>
-                                                                                    </button>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="iUl-ja-fjJ">
                                                                                         <rect key="frame" x="56" y="13.5" width="50" height="17.5"/>
                                                                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
                                                                                         <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
+                                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebt-8V-Ylp">
+                                                                                        <rect key="frame" x="16" y="10" width="24" height="24"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="height" constant="24" id="mEe-Xg-VI7"/>
+                                                                                            <constraint firstAttribute="width" constant="24" id="oin-qu-vLh"/>
+                                                                                        </constraints>
+                                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                                        <state key="normal" title="Button" image="Checkbox_off.png"/>
+                                                                                        <state key="selected" image="Checkbox_on.png"/>
+                                                                                    </button>
                                                                                 </subviews>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iUl-ja-fjJ" secondAttribute="trailing" constant="16" id="1G2-HB-qjV"/>
-                                                                                    <constraint firstItem="ro0-Lf-ot4" firstAttribute="leading" secondItem="pEN-yT-vrg" secondAttribute="leading" constant="16" id="IdJ-0q-F1a"/>
                                                                                     <constraint firstItem="iUl-ja-fjJ" firstAttribute="centerY" secondItem="pEN-yT-vrg" secondAttribute="centerY" id="SXw-EU-ClO"/>
-                                                                                    <constraint firstItem="iUl-ja-fjJ" firstAttribute="leading" secondItem="ro0-Lf-ot4" secondAttribute="trailing" constant="16" id="Zal-Z2-6Ij"/>
                                                                                     <constraint firstAttribute="height" constant="44" id="bYU-yc-paV"/>
-                                                                                    <constraint firstItem="ro0-Lf-ot4" firstAttribute="centerY" secondItem="pEN-yT-vrg" secondAttribute="centerY" id="cJE-n2-DUf"/>
+                                                                                    <constraint firstItem="ebt-8V-Ylp" firstAttribute="centerY" secondItem="pEN-yT-vrg" secondAttribute="centerY" id="djD-hD-lZ3"/>
+                                                                                    <constraint firstItem="ebt-8V-Ylp" firstAttribute="leading" secondItem="pEN-yT-vrg" secondAttribute="leading" constant="16" id="hjy-d6-Z1U"/>
+                                                                                    <constraint firstItem="iUl-ja-fjJ" firstAttribute="leading" secondItem="ebt-8V-Ylp" secondAttribute="trailing" constant="16" id="pp6-3b-0DB"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>
@@ -155,7 +155,7 @@
                                                                         </constraints>
                                                                     </tableViewCellContentView>
                                                                     <connections>
-                                                                        <outlet property="checkBoxButton" destination="ro0-Lf-ot4" id="CyP-bM-WJu"/>
+                                                                        <outlet property="checkBoxButton" destination="ebt-8V-Ylp" id="SKh-iB-nrW"/>
                                                                         <outlet property="descriptionLabel" destination="iUl-ja-fjJ" id="Xqh-MJ-SO4"/>
                                                                     </connections>
                                                                 </tableViewCell>
@@ -199,14 +199,54 @@
                                     <outlet property="delegate" destination="ueD-AB-5Oc" id="LjC-ZJ-sAb"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLT-PF-sZC">
+                                <rect key="frame" x="0.0" y="622" width="376" height="45"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVw-85-rVb">
+                                        <rect key="frame" x="0.0" y="0.0" width="376" height="1"/>
+                                        <color key="backgroundColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="gkf-aO-HJS"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-bA-xX1">
+                                        <rect key="frame" x="16" y="7" width="96" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Check Test"/>
+                                        <connections>
+                                            <action selector="checkExamButtonClicked:" destination="ueD-AB-5Oc" eventType="touchUpInside" id="S0a-dA-zAQ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn0-VR-ifR">
+                                        <rect key="frame" x="323" y="13.5" width="37" height="18"/>
+                                        <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
+                                        <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="sn0-VR-ifR" firstAttribute="centerY" secondItem="uLT-PF-sZC" secondAttribute="centerY" id="143-ml-dut"/>
+                                    <constraint firstAttribute="height" constant="45" id="90P-OC-eKM"/>
+                                    <constraint firstItem="dVw-85-rVb" firstAttribute="leading" secondItem="uLT-PF-sZC" secondAttribute="leading" id="ImZ-CP-eLq"/>
+                                    <constraint firstItem="dVw-85-rVb" firstAttribute="top" secondItem="uLT-PF-sZC" secondAttribute="top" id="LXk-pe-Be3"/>
+                                    <constraint firstItem="EYC-bA-xX1" firstAttribute="centerY" secondItem="uLT-PF-sZC" secondAttribute="centerY" id="Lap-2v-WUw"/>
+                                    <constraint firstAttribute="trailing" secondItem="sn0-VR-ifR" secondAttribute="trailing" constant="16" id="Off-KJ-45J"/>
+                                    <constraint firstAttribute="trailing" secondItem="dVw-85-rVb" secondAttribute="trailing" id="ZOr-8g-cE4"/>
+                                    <constraint firstItem="EYC-bA-xX1" firstAttribute="leading" secondItem="uLT-PF-sZC" secondAttribute="leading" constant="16" id="epD-Ul-t3e"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NFu-Bb-U1T"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="tGB-Hl-K5P" secondAttribute="bottom" id="DJ9-Qy-7pY"/>
+                            <constraint firstItem="uLT-PF-sZC" firstAttribute="leading" secondItem="Pw2-91-29I" secondAttribute="leading" id="56U-Vg-vRj"/>
+                            <constraint firstAttribute="bottom" secondItem="tGB-Hl-K5P" secondAttribute="bottom" constant="44" id="DJ9-Qy-7pY"/>
                             <constraint firstItem="hCC-h7-8ob" firstAttribute="leading" secondItem="NFu-Bb-U1T" secondAttribute="leading" id="Ons-m7-CRS"/>
+                            <constraint firstItem="uLT-PF-sZC" firstAttribute="bottom" secondItem="NFu-Bb-U1T" secondAttribute="bottom" id="RLD-Ow-6Tg"/>
                             <constraint firstItem="hCC-h7-8ob" firstAttribute="top" secondItem="Pw2-91-29I" secondAttribute="top" id="UWL-FS-3iO"/>
                             <constraint firstItem="hCC-h7-8ob" firstAttribute="trailing" secondItem="NFu-Bb-U1T" secondAttribute="trailing" id="X0h-Ve-mFF"/>
+                            <constraint firstAttribute="trailing" secondItem="uLT-PF-sZC" secondAttribute="trailing" id="Z1I-ox-5SX"/>
                             <constraint firstItem="tGB-Hl-K5P" firstAttribute="top" secondItem="hCC-h7-8ob" secondAttribute="bottom" id="cfH-0W-Oxu"/>
                             <constraint firstItem="tGB-Hl-K5P" firstAttribute="leading" secondItem="Pw2-91-29I" secondAttribute="leading" id="gzm-iN-iCx"/>
                             <constraint firstAttribute="trailing" secondItem="tGB-Hl-K5P" secondAttribute="trailing" id="pmR-sW-1Pt"/>
@@ -217,6 +257,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="376" height="667"/>
                     <connections>
+                        <outlet property="checkExamButton" destination="EYC-bA-xX1" id="Ref-kX-p6r"/>
+                        <outlet property="examScoreLabel" destination="sn0-VR-ifR" id="IaT-wS-MZj"/>
                         <outlet property="examTableView" destination="tGB-Hl-K5P" id="XAd-Yx-Qcu"/>
                         <outlet property="topBarTitleLabel" destination="WUd-EF-u7y" id="C3h-Iw-67u"/>
                     </connections>

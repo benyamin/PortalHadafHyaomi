@@ -475,6 +475,8 @@
 
 //Exams
 "st_Exams" = "Q&A";
+"st_cehck_exams" = "Check Exam";
+"st_exam_score" = "Your score: %@";
 
 //Measurments
 "st_quantity" = "Quantity";

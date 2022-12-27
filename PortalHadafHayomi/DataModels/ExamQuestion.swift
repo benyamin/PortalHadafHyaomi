@@ -30,9 +30,9 @@ class ExamQuestion:DataObject
                 
                 answers.append(answer)
             }
-            answers.shuffle()
+            //answers.shuffle()
             
-            self.answers = answers
+            self.answers = answers.sorted { $0.Adescription < $1.Adescription }
         }
     }
 }

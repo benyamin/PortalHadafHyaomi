@@ -11,6 +11,7 @@ import UIKit
 class ExamQuestionTableCell: MSBaseTableViewCell, UITableViewDelegate, UITableViewDataSource {
 
     var question:ExamQuestion?
+    var highlightCorrectAnswer = false
     
     @IBOutlet var cardView:UIView!
     @IBOutlet var headerView:UIView!
@@ -26,6 +27,8 @@ class ExamQuestionTableCell: MSBaseTableViewCell, UITableViewDelegate, UITableVi
         self.cardView.layer.cornerRadius = 3.0
         
         self.headerView?.addBottomShadow()
+        
+        self.bringSubview(toFront: self.headerView)
     }
     
     override func reloadWithObject(_ object: Any) {
@@ -50,8 +53,30 @@ class ExamQuestionTableCell: MSBaseTableViewCell, UITableViewDelegate, UITableVi
         
         if let answer =  self.question?.answers?[indexPath.row]{
             cell.reloadWithObject(answer)
+            
+            if self.highlightCorrectAnswer && answer.isCorrect {
+                cell.contentView.backgroundColor = UIColor(HexColor: "FAF2DD")
+            }
+            else{
+                cell.contentView.backgroundColor = UIColor.white
+            }
         }
         
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let answers = self.question?.answers {
+            for answer in answers {
+                answer.isSelected = false
+            }
+            let selectedAnswer = answers[indexPath.row]
+            selectedAnswer.isSelected = true
+            
+            tableView.reloadData()
+        }
     }
 }
