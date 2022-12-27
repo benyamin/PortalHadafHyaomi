@@ -94,10 +94,6 @@ class SearchArticlesViewController: MSBaseViewController, UITableViewDelegate, U
        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
-    
     func getPublishers()
     {
         GetArticlesPublishers().executeWithObject(nil, onStart: { () -> Void in

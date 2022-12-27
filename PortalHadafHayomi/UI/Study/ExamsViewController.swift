@@ -8,16 +8,37 @@
 
 import UIKit
 
-class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableViewDataSource{
+class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
 
     var exams:[Exam]?
     
     var questions:[ExamQuestion]?
     var examCompleted = false
+    var selectedMasechet:Masechet?
+    
+    let selectMasechetDefaultText = "st_all_masechtot".localize()
+    let selectPageDefaultText = "st_all".localize()
     
     @IBOutlet weak var examTableView:UITableView!
+    @IBOutlet weak var bottomBar:UIView!
     @IBOutlet weak var checkExamButton:UIButton!
     @IBOutlet weak var examScoreLabel:UILabel!
+    
+    @IBOutlet weak var pageSelectionView:UIView!
+    @IBOutlet weak var createExamView:UIView!
+    @IBOutlet weak var createExamButton:UIButton!
+    @IBOutlet weak var hideCreateExamViewButton:UIButton!
+    @IBOutlet weak var createExamViewHeightConstraint:NSLayoutConstraint!
+    
+    @IBOutlet weak var selectMasechetTextField:UITextField?
+    @IBOutlet weak var selectFromPageTextField:UITextField?
+    @IBOutlet weak var selectToPageTextField:UITextField?
+    
+    @IBOutlet weak var pagePickerBaseView:UIView?
+    @IBOutlet weak var pagePickerView:UIPickerView?
+    @IBOutlet weak var pagePickerTitleLabel:UILabel?
+    @IBOutlet weak var pagePickerSelectButton:UIButton?
+    @IBOutlet weak var pagePickerBaseViewBottomConstraint:NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +55,27 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.checkExamButton.layer.cornerRadius = 3.0
         self.checkExamButton.layer.borderColor = UIColor(HexColor:"791F23").cgColor
         self.examScoreLabel.isHidden = true
+        
+        self.bottomBar.addUpperShadow()
+        
+        self.createExamView.addBottomShadow()
+        
+        self.selectMasechetTextField?.text = selectMasechetDefaultText
+        self.selectFromPageTextField?.text = selectPageDefaultText
+        self.selectToPageTextField?.text = selectPageDefaultText
+        
+        self.pagePickerBaseView?.layer.shadowColor = UIColor.darkGray.cgColor
+        self.pagePickerBaseView?.layer.shadowOpacity = 0.5
+        self.pagePickerBaseView?.layer.shadowOffset = CGSize(width: 0.0, height: -2.0)
+        self.pagePickerBaseView?.layer.shadowRadius = 2.0
+        
+        self.pagePickerSelectButton?.setTitle("st_hide".localize(), for: .normal)
+        self.pagePickerSelectButton?.layer.borderWidth = 1.0
+        self.pagePickerSelectButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
+        
+        
+        self.examTableView.alpha = 0.2
+        self.examTableView.isUserInteractionEnabled = false
     }
     
     func getExam() {
@@ -91,6 +133,26 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.examTableView.reloadData()
     }
     
+    @IBAction func hideCreateExamViewButtonClicked(_ sender:UIButton){
+        self.hideCreateExamView()
+        self.hidePagePicker(animated: true)
+        self.examTableView.alpha = 1.0
+        self.examTableView.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func pagePickerSelectButtonClicked(_ sender:UIButton)
+    {
+        self.hidePagePicker(animated: true)
+    }
+    
+    func showCreateExamView() {
+        self.createExamViewHeightConstraint.constant = 111
+    }
+    
+    func hideCreateExamView() {
+        self.createExamViewHeightConstraint.constant = self.pageSelectionView.frame.size.height+1
+    }
+    
     //MARK: - TableView Delegate methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.questions?.count ?? 0
@@ -114,11 +176,244 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         
         return cell
     }
-    /*
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //return UITableViewAutomaticDimension
+    
+    //MARK: - UITextFieldDelegate
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        return UITableViewAutomaticDimension
+        self.showCreateExamView()
+        self.showPicker(self.pagePickerView!, animated:true)
+        self.examTableView.alpha = 0.2
+        self.examTableView.isUserInteractionEnabled = false
+        
+        return false
     }
-     */
+    
+    func showPicker(_ picker:UIPickerView, animated:Bool)
+    {
+        self.pagePickerView?.isHidden = true
+        
+        picker.isHidden = false
+        
+        self.pagePickerBaseViewBottomConstraint?.constant = 0
+        
+        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            {
+                self.view.layoutIfNeeded()
+                
+        }, completion: {_ in
+        })
+    }
+    
+    func hidePagePicker(animated:Bool)
+    {
+        self.pagePickerBaseViewBottomConstraint?.constant = -1*(self.pagePickerBaseView!.frame.size.height)
+                
+        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            {
+                self.view.layoutIfNeeded()
+                
+        }, completion: {_ in
+        })
+        
+    }
+    //MARK: - UIPickerView Delegate methods
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        switch component
+        {
+        case 0://To page
+            if let selectedMasechet = self.selectedMasechet{
+                let selectedFromPageIndex = pickerView.selectedRow(inComponent: 1)
+                return selectedFromPageIndex == 0 ? 1 : selectedMasechet.pages.count + 1
+            }
+            else{
+                return 1
+            }
+            
+        case 1://From page
+            return self.selectedMasechet?.pages.count ?? 0 + 1
+            
+        case 2://Masechet
+            return HadafHayomiManager.sharedManager.masechtot.count + 1
+            
+        default:
+            return 0
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat
+    {
+        switch component {
+            
+        case 0, 1://Page
+            return pickerView.frame.size.width/4
+            
+        case 2://Maschet
+            return pickerView.frame.size.width/2
+            
+        default:
+            return pickerView.frame.size.width/2
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat
+    {
+        return 40
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let pikerLabel = view as? UILabel ?? UILabel()
+        pikerLabel.textAlignment = .center
+        
+        pikerLabel.font = UIFont(name:"BroshMF", size: 20)!
+        pikerLabel.textColor = UIColor(HexColor: "781F24")
+        pikerLabel.text = ""
+        
+        
+        switch component
+        {
+        case 0, 1: //Page
+            
+            if row == 0
+            {
+                pikerLabel.text = "st_all_pages".localize()
+            }
+            else if let page = selectedMasechet?.pages[row-1]
+            {
+                if component == 0 // לדף
+                {
+                    pikerLabel.text = "לדף " + page.symbol
+                    
+                    if let seletedFromPageRow =  self.pagePickerView?.selectedRow(inComponent: 1){
+                        
+                        pikerLabel.alpha = row < seletedFromPageRow ? 0.3 : 1.0
+                    }
+                }
+                else if component == 1 { // מדף
+                    pikerLabel.text = "מדף " + page.symbol
+                }
+            }
+            
+            break
+            
+        case 2://masechet
+            
+            pikerLabel.text = row == 0
+            ? selectMasechetDefaultText
+            : HadafHayomiManager.sharedManager.masechtot[row-1].name
+            
+            break
+            
+        default:
+            break
+        }
+        
+        return pikerLabel
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        if component == 2 // Did select Masechet
+        {
+            if row == 0 {
+                self.didSelectMasechet(nil)
+            }
+            else
+            {
+                let masehcet = HadafHayomiManager.sharedManager.masechtot[row-1]
+                self.didSelectMasechet(masehcet)
+            }
+        }
+        
+        else  if component == 1 // From page
+        {
+            let seletedFromPageRow = pickerView.selectedRow(inComponent: component)
+            self.didSelectFromPageIndex(seletedFromPageRow)
+        }
+        
+        else  if component == 0 // To page
+        {
+            let seletedToPageRow = pickerView.selectedRow(inComponent: component)
+            self.didSelectToPageIndex(seletedToPageRow)
+        }
+    }
+    
+    func didSelectMasechet(_ masechet:Masechet?)
+    {
+        if masechet != nil
+        {
+            self.selectedMasechet = masechet
+            self.selectMasechetTextField?.text = self.selectedMasechet?.name
+        }
+        else
+        {
+            self.selectedMasechet = nil
+            self.selectMasechetTextField?.text = selectMasechetDefaultText
+        }
+        self.pagePickerView?.reloadComponent(1)// From page
+        
+        if let seletedFromPageRow = self.pagePickerView?.selectedRow(inComponent: 1)
+        {
+            self.pickerView( self.pagePickerView!, didSelectRow: seletedFromPageRow, inComponent: 1)
+        }
+    }
+    
+    func didSelectFromPageIndex(_ pageIndex:Int)
+    {
+        let selectedFromPageIndex = pageIndex
+        
+        if selectedFromPageIndex == 0
+        {
+            self.selectFromPageTextField?.text = selectPageDefaultText
+        }
+        else
+        {
+            if let page = selectedMasechet?.pages[selectedFromPageIndex-1]
+            {
+                self.selectFromPageTextField?.text =  page.symbol
+            }
+        }
+        self.pagePickerView?.reloadComponent(0)// To page
+        
+        var seletedToPageRow = self.pagePickerView!.selectedRow(inComponent: 0)
+        
+        if seletedToPageRow != 0 && seletedToPageRow < selectedFromPageIndex
+        {
+            seletedToPageRow = selectedFromPageIndex
+        }
+        self.pagePickerView?.selectRow(seletedToPageRow, inComponent: 0, animated: true)
+        self.pickerView(self.pagePickerView!, didSelectRow: seletedToPageRow, inComponent: 0)
+    }
+    
+    func didSelectToPageIndex(_ pageIndex:Int)
+    {
+        let seletedFromPageRow =  self.pagePickerView!.selectedRow(inComponent: 1)
+        
+        var seletedToPageRow = pageIndex
+        
+        if seletedToPageRow != 0 && seletedToPageRow < seletedFromPageRow
+        {
+            seletedToPageRow = seletedFromPageRow
+            
+            self.pagePickerView?.selectRow(seletedToPageRow, inComponent: 0, animated: true)
+            self.pickerView(self.pagePickerView!, didSelectRow: seletedToPageRow, inComponent: 0)
+            return
+        }
+        
+        if seletedToPageRow == 0 // From page
+        {
+            self.selectToPageTextField?.text = selectPageDefaultText
+        }
+        else
+        {
+            if let page = selectedMasechet?.pages[seletedToPageRow-1]
+            {
+                self.selectToPageTextField?.text =  page.symbol
+            }
+        }
+    }
 }
