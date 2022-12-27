@@ -44,8 +44,6 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
 
         self.setupUI()
-        
-        self.getExam()
     }
     
     func setupUI(){
@@ -73,29 +71,48 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.pagePickerSelectButton?.layer.borderWidth = 1.0
         self.pagePickerSelectButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
         
+        self.createExamButton?.setTitle("st_create_exam".localize(), for: .normal)
         
         self.examTableView.alpha = 0.2
         self.examTableView.isUserInteractionEnabled = false
+        
+        self.pageSelectionView?.setLocalizatoin()
+        
+            //self.explantionMessage = "בחר את הדפים שעליהם הינך מעוניין להיבחן"
     }
     
-    func getExam() {
+    func createExam() {
+        
+        self.examCompleted = false
         
         Util.showDefaultLoadingView()
         
-        let  examInfo = (masechetId:1, minPage:3, maxPage:6)
-        GetTalmudQAProcess().executeWithObject(examInfo, onStart: { () -> Void in
+        if let masechet = self.selectedMasechet
+        ,let fromPage =  self.pagePickerView?.selectedRow(inComponent: 1)
+        ,let toPage =  self.pagePickerView?.selectedRow(inComponent: 0){
             
-        }, onComplete: { (object) -> Void in
-            
-            Util.hideDefaultLoadingView()
-            
-            self.exams = object as? [Exam]
-            self.questions = self.getRandomQuestionsFromExams(self.exams!)
-            self.reloadData()
-            
-        },onFaile: { (object, error) -> Void in
-            
-        })
+            let  examInfo = (masechetId:masechet.id, minPage:fromPage+1, maxPage:toPage+1)
+            GetTalmudQAProcess().executeWithObject(examInfo, onStart: { () -> Void in
+                
+            }, onComplete: { (object) -> Void in
+                
+                Util.hideDefaultLoadingView()
+                
+                self.exams = object as? [Exam]
+                self.questions = self.getRandomQuestionsFromExams(self.exams!)
+                self.reloadData()
+                
+                if self.questions == nil || self.questions!.count == 0 {
+                    BTAlertView.show(title: "st_create_exam".localize(), message: "st_no_exam_found_for_selected_pages".localize(), buttonKeys: ["st_ok".localize()]) { dismissButtonKey in }
+                }
+                else{
+                    self.setDefaultLayout()
+                }
+                
+            },onFaile: { (object, error) -> Void in
+                Util.hideDefaultLoadingView()
+            })
+        }
     }
     
     override func reloadData() {
@@ -107,8 +124,12 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         for exam in exams {
             allQuestions.append(contentsOf: exam.questions ?? [ExamQuestion]())
         }
-        
-        return allQuestions[randomPick: (allQuestions.count-1) >= 10 ? 10 : allQuestions.count-1]
+        if allQuestions.count == 0 {
+            return allQuestions
+        }
+        else{
+            return allQuestions[randomPick: (allQuestions.count-1) >= 10 ? 10 : allQuestions.count-1]
+        }
     }
     
     @IBAction func checkExamButtonClicked(_ sender:UIButton){
@@ -134,15 +155,16 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func hideCreateExamViewButtonClicked(_ sender:UIButton){
-        self.hideCreateExamView()
-        self.hidePagePicker(animated: true)
-        self.examTableView.alpha = 1.0
-        self.examTableView.isUserInteractionEnabled = true
+        self.setDefaultLayout()
     }
     
     @IBAction func pagePickerSelectButtonClicked(_ sender:UIButton)
     {
         self.hidePagePicker(animated: true)
+    }
+    
+    @IBAction func createExamButtonClicked(_ sender:UIButton){
+        self.createExam()
     }
     
     func showCreateExamView() {
@@ -151,6 +173,13 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     
     func hideCreateExamView() {
         self.createExamViewHeightConstraint.constant = self.pageSelectionView.frame.size.height+1
+    }
+    
+    func setDefaultLayout(){
+        self.hideCreateExamView()
+        self.hidePagePicker(animated: true)
+        self.examTableView.alpha = 1.0
+        self.examTableView.isUserInteractionEnabled = true
     }
     
     //MARK: - TableView Delegate methods
@@ -237,7 +266,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
             return self.selectedMasechet?.pages.count ?? 0 + 1
             
         case 2://Masechet
-            return HadafHayomiManager.sharedManager.masechtot.count + 1
+            return HadafHayomiManager.sharedManager.masechtot.count
             
         default:
             return 0
@@ -301,10 +330,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
             break
             
         case 2://masechet
-            
-            pikerLabel.text = row == 0
-            ? selectMasechetDefaultText
-            : HadafHayomiManager.sharedManager.masechtot[row-1].name
+            pikerLabel.text = HadafHayomiManager.sharedManager.masechtot[row].name
             
             break
             
@@ -319,14 +345,8 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     {
         if component == 2 // Did select Masechet
         {
-            if row == 0 {
-                self.didSelectMasechet(nil)
-            }
-            else
-            {
-                let masehcet = HadafHayomiManager.sharedManager.masechtot[row-1]
-                self.didSelectMasechet(masehcet)
-            }
+            let masehcet = HadafHayomiManager.sharedManager.masechtot[row]
+            self.didSelectMasechet(masehcet)
         }
         
         else  if component == 1 // From page
@@ -344,16 +364,9 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     
     func didSelectMasechet(_ masechet:Masechet?)
     {
-        if masechet != nil
-        {
-            self.selectedMasechet = masechet
-            self.selectMasechetTextField?.text = self.selectedMasechet?.name
-        }
-        else
-        {
-            self.selectedMasechet = nil
-            self.selectMasechetTextField?.text = selectMasechetDefaultText
-        }
+        self.selectedMasechet = masechet
+        self.selectMasechetTextField?.text = self.selectedMasechet?.name
+        
         self.pagePickerView?.reloadComponent(1)// From page
         
         if let seletedFromPageRow = self.pagePickerView?.selectedRow(inComponent: 1)
@@ -395,9 +408,9 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         
         var seletedToPageRow = pageIndex
         
-        if seletedToPageRow != 0 && seletedToPageRow < seletedFromPageRow
+        if seletedToPageRow != 0 && seletedToPageRow <= seletedFromPageRow
         {
-            seletedToPageRow = seletedFromPageRow
+            seletedToPageRow = seletedFromPageRow+1
             
             self.pagePickerView?.selectRow(seletedToPageRow, inComponent: 0, animated: true)
             self.pickerView(self.pagePickerView!, didSelectRow: seletedToPageRow, inComponent: 0)

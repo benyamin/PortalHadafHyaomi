@@ -490,6 +490,7 @@
 "st_Exams" = "שאלות חזרה";
 "st_cehck_exams" = "בדיקת שאלון";
 "st_exam_score" = "הציון שלך: %@";
+"st_create_exam"= "צור שאלון";
 
 //Measurments
 "st_quantity" = "כמות";

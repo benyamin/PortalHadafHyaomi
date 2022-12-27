@@ -259,6 +259,9 @@
                                                 <color key="backgroundColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Create Exam"/>
+                                                <connections>
+                                                    <action selector="createExamButtonClicked:" destination="ueD-AB-5Oc" eventType="touchUpInside" id="4aA-UB-0PK"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -436,6 +439,7 @@
                     <connections>
                         <outlet property="bottomBar" destination="uLT-PF-sZC" id="ogW-ZD-B8x"/>
                         <outlet property="checkExamButton" destination="EYC-bA-xX1" id="Ref-kX-p6r"/>
+                        <outlet property="createExamButton" destination="dEz-Py-4fd" id="DDO-4s-2GA"/>
                         <outlet property="createExamView" destination="IZm-w1-FsY" id="0Ta-vf-zoK"/>
                         <outlet property="createExamViewHeightConstraint" destination="Jdb-3P-a1q" id="lNI-K1-jIT"/>
                         <outlet property="examScoreLabel" destination="sn0-VR-ifR" id="IaT-wS-MZj"/>

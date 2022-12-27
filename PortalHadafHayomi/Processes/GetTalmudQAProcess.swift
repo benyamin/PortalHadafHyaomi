@@ -12,7 +12,7 @@ open class GetTalmudQAProcess: MSBaseProcess
 {
     open override func executeWithObj(_ obj:Any?)
     {
-        let searchInfo = obj as! (masechetId:Int, minPage:Int, maxPage:Int)
+        let searchInfo = obj as! (masechetId:String, minPage:Int, maxPage:Int)
         
         var params = [String:Any]()
         params["qa"] = 1
@@ -45,10 +45,15 @@ open class GetTalmudQAProcess: MSBaseProcess
                     exams.append(exam)
                 }
                 
-                DispatchQueue.main.async {
-                    self.getExamsFullInfo(exams: exams, onReceivedExamsFullInfo:{
-                        self.onComplete?(exams)
-                    })
+                if exams.count == 0 {
+                    self.onComplete?(exams)
+                }
+                else{
+                    DispatchQueue.main.async {
+                        self.getExamsFullInfo(exams: exams, onReceivedExamsFullInfo:{
+                            self.onComplete?(exams)
+                        })
+                    }
                 }
             }
             else{
