@@ -362,10 +362,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mn0-SM-2Kb">
-                                <rect key="frame" x="48" y="230" width="280" height="120"/>
+                                <rect key="frame" x="43" y="230" width="290" height="120"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cly-HD-VPE">
-                                        <rect key="frame" x="94.5" y="50.5" width="91" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cly-HD-VPE">
+                                        <rect key="frame" x="99.5" y="50.5" width="91" height="19.5"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -378,7 +378,7 @@
                                     <constraint firstItem="cly-HD-VPE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mn0-SM-2Kb" secondAttribute="leading" constant="16" id="eeO-eW-QQW"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cly-HD-VPE" secondAttribute="bottom" constant="16" id="gah-hc-CAP"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cly-HD-VPE" secondAttribute="trailing" constant="16" id="oQu-Jg-C6v"/>
-                                    <constraint firstAttribute="width" constant="280" id="qR8-b4-ROz"/>
+                                    <constraint firstAttribute="width" constant="290" id="qR8-b4-ROz"/>
                                     <constraint firstItem="cly-HD-VPE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mn0-SM-2Kb" secondAttribute="top" constant="16" id="sso-zS-8kA"/>
                                     <constraint firstAttribute="height" constant="120" id="wSH-gw-ZsH"/>
                                 </constraints>
@@ -400,7 +400,7 @@
                                                     <color key="titleColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="pagePickerSelectButtonClicked:" destination="ueD-AB-5Oc" eventType="touchUpInside" id="EUq-7A-jBF"/>
+                                                    <action selector="pagePickerHideButtonClicked:" destination="ueD-AB-5Oc" eventType="touchUpInside" id="Yg7-rw-MTx"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZU-AV-PLh">
@@ -489,7 +489,7 @@
                         <outlet property="hideCreateExamViewButton" destination="gHX-3I-FtG" id="8eJ-3B-SLk"/>
                         <outlet property="pagePickerBaseView" destination="LhM-PQ-jGU" id="cf7-dI-Skn"/>
                         <outlet property="pagePickerBaseViewBottomConstraint" destination="zHJ-B7-Tqf" id="kIV-0K-jv1"/>
-                        <outlet property="pagePickerSelectButton" destination="Zj6-D8-tvU" id="XgI-CN-Ng6"/>
+                        <outlet property="pagePickerHideButton" destination="Zj6-D8-tvU" id="Dtl-j4-a1F"/>
                         <outlet property="pagePickerView" destination="hqh-tM-osh" id="aHf-oY-UsD"/>
                         <outlet property="pageSelectionView" destination="fDC-yj-GLS" id="fz1-Ib-rlg"/>
                         <outlet property="selectFromPageTextField" destination="rP8-bP-RcK" id="bBm-i6-4su"/>

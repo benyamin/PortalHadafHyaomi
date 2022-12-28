@@ -34,7 +34,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var pagePickerBaseView:UIView?
     @IBOutlet weak var pagePickerView:UIPickerView?
-    @IBOutlet weak var pagePickerSelectButton:UIButton?
+    @IBOutlet weak var pagePickerHideButton:UIButton?
     @IBOutlet weak var pagePickerBaseViewBottomConstraint:NSLayoutConstraint?
     @IBOutlet weak var todaysPageButton:UIButton?
     
@@ -64,9 +64,11 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.pagePickerBaseView?.layer.shadowOffset = CGSize(width: 0.0, height: -2.0)
         self.pagePickerBaseView?.layer.shadowRadius = 2.0
         
-        self.pagePickerSelectButton?.setTitle("st_hide".localize(), for: .normal)
-        self.pagePickerSelectButton?.layer.borderWidth = 1.0
-        self.pagePickerSelectButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
+        self.pagePickerHideButton?.setTitle("st_hide".localize(), for: .normal)
+        self.pagePickerHideButton?.layer.borderWidth = 1.0
+        self.pagePickerHideButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
+        
+        self.hideCreateExamViewButton?.setTitle("st_hide".localize(), for: .normal)
         
         self.todaysPageButton?.setTitle("st_move_to_todays_page".localize(), for: .normal)
         self.todaysPageButton?.layer.borderWidth = 1.0
@@ -95,7 +97,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
             ,let maschent = HadafHayomiManager.sharedManager.getMasechetById(maschetId)
             ,let pageIndex = selectedPageInfo["pageIndex"] as? Int{
             
-            self.select(maseceht: maschent, fromPageIndex: pageIndex, toPageIndex: pageIndex)
+            self.select(maseceht: maschent, fromPageIndex: pageIndex-1, toPageIndex: pageIndex-1)
         }
         else{
             self.scrollToTodaysPage()
@@ -105,6 +107,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     func createExam() {
         
         self.examCompleted = false
+        self.examScoreLabel.isHidden = true
         
         self.createExamButton.isUserInteractionEnabled = false
         
@@ -206,9 +209,9 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.setDefaultLayout()
     }
     
-    @IBAction func pagePickerSelectButtonClicked(_ sender:UIButton)
+    @IBAction func pagePickerHideButtonClicked(_ sender:UIButton)
     {
-        self.hidePagePicker(animated: true)
+        self.setDefaultLayout()
     }
     
     @IBAction func createExamButtonClicked(_ sender:UIButton){
@@ -223,7 +226,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         if let todaysMaschet = HadafHayomiManager.sharedManager.todaysMaschet
             ,let todaysPage = HadafHayomiManager.sharedManager.todaysPage {
             
-            self.select(maseceht: todaysMaschet, fromPageIndex: todaysPage.index, toPageIndex: todaysPage.index)
+            self.select(maseceht: todaysMaschet, fromPageIndex: todaysPage.index-1, toPageIndex: todaysPage.index-1)
         }
     }
     
@@ -234,12 +237,17 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
             self.didSelectMasechet(maseceht)
             
             //Select from page
-            self.pagePickerView?.selectRow(fromPageIndex, inComponent: 1, animated: false)
-            self.didSelectFromPageIndex(fromPageIndex)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.pagePickerView?.selectRow(fromPageIndex, inComponent: 1, animated: false)
+                self.didSelectFromPageIndex(fromPageIndex)
+            }
+          
             
             //Select to page
-            self.pagePickerView?.selectRow(toPageIndex, inComponent: 0, animated: false)
-            self.didSelectToPageIndex(toPageIndex)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.pagePickerView?.selectRow(toPageIndex, inComponent: 0, animated: false)
+                self.didSelectToPageIndex(toPageIndex)
+            }
         }
     }
     
