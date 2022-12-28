@@ -491,6 +491,9 @@
 "st_cehck_exams" = "בדיקת שאלון";
 "st_exam_score" = "הציון שלך: %@";
 "st_create_exam"= "צור שאלון";
+"st_exam_instructions" = "";
+"st_exam_instructions" = "יש לבחור את הדפים שהינך מעוניין להיבחן עליהם\nניתן לבחור עד עשרה דפים להיבחן עליהם";
+"st_no_exam_found_for_selected_pages" = "לא נמצאו מבחנים על הדפים שנבחרו";
 
 //Measurments
 "st_quantity" = "כמות";

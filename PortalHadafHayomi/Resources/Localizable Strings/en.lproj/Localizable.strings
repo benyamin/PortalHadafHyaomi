@@ -492,6 +492,8 @@
 "st_cehck_exams" = "Check Exam";
 "st_exam_score" = "Your score: %@";
 "st_create_exam"= "Create Exam";
+"st_exam_instructions" = "Select the pages you want to be tests on.\nYou can select up to ten pages";
+"st_no_exam_found_for_selected_pages" = "No Exams found for the selected pages";
 
 //Measurments
 "st_quantity" = "Quantity";

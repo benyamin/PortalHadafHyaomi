@@ -39,6 +39,10 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var pagePickerTitleLabel:UILabel?
     @IBOutlet weak var pagePickerSelectButton:UIButton?
     @IBOutlet weak var pagePickerBaseViewBottomConstraint:NSLayoutConstraint?
+    @IBOutlet weak var todaysPageButton:UIButton?
+    
+    @IBOutlet weak var explantionView:UIView!
+    @IBOutlet weak var explantionMessageLabel:UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +75,11 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.pagePickerSelectButton?.layer.borderWidth = 1.0
         self.pagePickerSelectButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
         
+        self.todaysPageButton?.setTitle("st_move_to_todays_page".localize(), for: .normal)
+        self.todaysPageButton?.layer.borderWidth = 1.0
+        self.todaysPageButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
+        
+        
         self.createExamButton?.setTitle("st_create_exam".localize(), for: .normal)
         
         self.examTableView.alpha = 0.2
@@ -78,7 +87,11 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         
         self.pageSelectionView?.setLocalizatoin()
         
-            //self.explantionMessage = "בחר את הדפים שעליהם הינך מעוניין להיבחן"
+        self.explantionMessageLabel.text = "st_exam_instructions".localize()
+        
+        explantionView.layer.borderWidth = 1.0
+        explantionView.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
+        explantionView.layer.cornerRadius = 3.0
     }
     
     func createExam() {
@@ -167,6 +180,26 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.createExam()
     }
     
+    @IBAction func todaysPageButtonClicked(_ sender:UIButton){
+        
+        if let todaysMaschet = HadafHayomiManager.sharedManager.todaysMaschet
+            ,let todaysMaschetIndex = HadafHayomiManager.sharedManager.masechtot.index(of: todaysMaschet){
+            self.pagePickerView?.selectRow(todaysMaschetIndex, inComponent: 2, animated: false)
+            self.didSelectMasechet(todaysMaschet)
+            
+            if let todaysPage = HadafHayomiManager.sharedManager.todaysPage {
+                //Select from page
+                self.pagePickerView?.selectRow(todaysPage.index-1, inComponent: 1, animated: false)
+                self.didSelectFromPageIndex(todaysPage.index-1)
+                
+                //Select to page
+                self.pagePickerView?.selectRow(todaysPage.index, inComponent: 0, animated: false)
+                self.didSelectToPageIndex(todaysPage.index)
+            }
+        }
+    }
+    
+    
     func showCreateExamView() {
         self.createExamViewHeightConstraint.constant = 111
     }
@@ -176,6 +209,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     }
     
     func setDefaultLayout(){
+        self.explantionView.isHidden = true
         self.hideCreateExamView()
         self.hidePagePicker(animated: true)
         self.examTableView.alpha = 1.0
@@ -209,6 +243,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     //MARK: - UITextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
+        self.explantionView.isHidden = false
         self.showCreateExamView()
         self.showPicker(self.pagePickerView!, animated:true)
         self.examTableView.alpha = 0.2
@@ -411,6 +446,15 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         if seletedToPageRow != 0 && seletedToPageRow <= seletedFromPageRow
         {
             seletedToPageRow = seletedFromPageRow+1
+            
+            self.pagePickerView?.selectRow(seletedToPageRow, inComponent: 0, animated: true)
+            self.pickerView(self.pagePickerView!, didSelectRow: seletedToPageRow, inComponent: 0)
+            return
+        }
+        
+        if seletedToPageRow > seletedFromPageRow+10
+        {
+            seletedToPageRow = seletedFromPageRow+10
             
             self.pagePickerView?.selectRow(seletedToPageRow, inComponent: 0, animated: true)
             self.pickerView(self.pagePickerView!, didSelectRow: seletedToPageRow, inComponent: 0)
