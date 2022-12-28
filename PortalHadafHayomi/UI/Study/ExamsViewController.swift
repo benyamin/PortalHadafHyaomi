@@ -123,10 +123,15 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
                 
                 if let exams = object as? [Exam] {
                     self.questions = self.getRandomQuestionsFromExams(exams)
+                    
+                    if self.questions != nil && self.questions!.count > 0 {
+                        self.showCreaditsForExams(exams)
+                    }
                 }
                 else{
                     self.questions = nil
                 }
+                
                 self.reloadData()
                 
                 if self.questions == nil || self.questions!.count == 0 {
@@ -161,6 +166,18 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         else{
             return allQuestions[randomPick: (allQuestions.count-1) >= 10 ? 10 : allQuestions.count-1]
         }
+    }
+    
+    func showCreaditsForExams(_ exams:[Exam]){
+        
+        var creditMessage  = ""
+        for exam in exams {
+            if let examTitle = exam.title {
+                creditMessage += examTitle
+                creditMessage += "\n"
+            }
+        }
+        BTAlertView.show(title: "st_exam_credits_message".localize(), message: creditMessage, buttonKeys: ["st_ok".localize()]) { dismissButtonKey in }
     }
     
     @IBAction func checkExamButtonClicked(_ sender:UIButton){

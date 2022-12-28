@@ -494,6 +494,7 @@
 "st_exam_instructions" = "";
 "st_exam_instructions" = "יש לבחור את הדפים שהינך מעוניין להיבחן עליהם\nניתן לבחור עד עשרה דפים להיבחן עליהם";
 "st_no_exam_found_for_selected_pages" = "לא נמצאו מבחנים על הדפים שנבחרו";
+"st_exam_credits_message" = "המבחן נבנה מתוך המבחנים הבאים";
 
 //Measurments
 "st_quantity" = "כמות";
