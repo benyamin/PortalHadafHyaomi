@@ -1182,8 +1182,8 @@
             filePath = "PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "getExamsFullInfo(exams:onReceivedExamsFullInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1198,8 +1198,8 @@
             filePath = "PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "getExamsFullInfo(exams:onReceivedExamsFullInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1255,22 +1255,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4B77ACB9-E38C-484A-84CA-AA085B7A5E6C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/UI/Study/ExamsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "createExam()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "45FA1DB1-0492-45F2-95F7-B89F48A637E8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -1278,25 +1262,9 @@
             filePath = "PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "runWebServiceWithRequest(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B16A3061-5C98-46B6-B4E3-97CDF05ECD3D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/UI/Study/ExamsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "createExam()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1310,8 +1278,8 @@
             filePath = "PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "runWebServiceWithRequest(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1319,16 +1287,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EE8885C9-AE0D-4137-B9F3-80B6D01A4796"
+            uuid = "62638328-E622-464B-8E0B-5AB6A8CBFF35"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
+            filePath = "PortalHadafHayomi/UI/Study/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "runWebServiceWithRequest(_:)"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
+            landmarkName = "pickerView(_:didSelectRow:inComponent:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C50546D-8F44-40B7-8B20-422C784D500C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/UI/Study/ExamsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
+            landmarkName = "didSelectToPageIndex(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

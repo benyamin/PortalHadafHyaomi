@@ -12,13 +12,23 @@ open class GetTalmudQAProcess: MSBaseProcess
 {
     open override func executeWithObj(_ obj:Any?)
     {
-        let searchInfo = obj as! (masechetId:String, minPage:Int, maxPage:Int)
+        let searchInfo = obj as! (masechetId:Int, minPage:Int, maxPage:Int)
+        
+        //יש באג בפורטל שהאינדקס של מסכת ראש השנה משנה את הסדר של חלק מהמסכתות
+       
+        var requestMasechetID = searchInfo.masechetId
+        if searchInfo.masechetId == 9{ //ראש השנה
+            requestMasechetID = 6
+        }
+        if searchInfo.masechetId >= 6 && searchInfo.masechetId <= 8{
+            requestMasechetID = searchInfo.masechetId+1
+        }
         
         var params = [String:Any]()
         params["qa"] = 1
-        params["massechet"] = searchInfo.masechetId
-        params["minpage"] = searchInfo.minPage
-        params["maxpage"] = searchInfo.maxPage
+        params["massechet"] = requestMasechetID
+        params["minpage"] = searchInfo.minPage*2+1//pages are calculated by page side
+        params["maxpage"] = searchInfo.maxPage*2+2
         
         let request = MSRequest()
      

@@ -17,15 +17,15 @@
          contextName = "LessonsPickerView.setDisplayedMaggidShiours():LessonsPickerView.swift">
       </ContextState>
       <ContextState
-         contextName = "TalmudPageCell.reloadWithObject(_:):TalmudPageCell.swift">
-      </ContextState>
-      <ContextState
          contextName = "FindChavrusaViewController.showRegionOptions():FindChavrusaViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.regions">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TalmudPageCell.reloadWithObject(_:):TalmudPageCell.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in LessonVenuesListViewController.lessonVenueTableCell(_:showNavigationOptions:):LessonVenuesListViewController.swift">
@@ -68,10 +68,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ExamAnswer.init(dictionary:):ExamAnswer.swift">
+         contextName = "LessonsPickerView.sortMagidShioursbyLanguage():LessonsPickerView.swift">
       </ContextState>
       <ContextState
-         contextName = "LessonsPickerView.sortMagidShioursbyLanguage():LessonsPickerView.swift">
+         contextName = "ExamAnswer.init(dictionary:):ExamAnswer.swift">
       </ContextState>
       <ContextState
          contextName = "LessonVenue.init(dictionary:):LessonVenue.swift">
@@ -86,6 +86,14 @@
       </ContextState>
       <ContextState
          contextName = "closure #2 in GetTalmudQAProcess.getExamsFullInfo(exams:):GetTalmudQAProcess.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ExamsViewController.pickerView(_:viewForRow:forComponent:reusing:):ExamsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedMasechet?.pages">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #2 in GetTalmudQAProcess.runWebServiceWithRequest(_:):GetTalmudQAProcess.swift">
