@@ -23,6 +23,7 @@ class ArticlesManager
         articlesCategorys.append(ArticleCategory(id: "4", title: "expand", iconImage: "Learchiv_icon_ios.png"))
         articlesCategorys.append(ArticleCategory(id: "5", title: "page_articles", iconImage: "Maamarim_icon_ios.png"))
         articlesCategorys.append(ArticleCategory(id: "6", title: "recommended_books", iconImage: "Books_icon_ios.png"))
+        articlesCategorys.append(ArticleCategory(id: "7", title: "st_Exams", iconImage: "Q&A_icon_ios.png"))
         
         return articlesCategorys
     }()

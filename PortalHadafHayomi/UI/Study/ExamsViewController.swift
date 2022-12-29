@@ -14,6 +14,8 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     var examCompleted = false
     var selectedMasechet:Masechet?
     
+    var initalData:(masechet:Masechet, page:Page)?
+    
     let selectMasechetDefaultText = "st_all_masechtot".localize()
     let selectPageDefaultText = "st_all".localize()
     
@@ -75,6 +77,8 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.todaysPageButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
         
         self.createExamButton?.setTitle("st_create_exam".localize(), for: .normal)
+        self.createExamButton?.layer.borderWidth = 1.0
+        self.createExamButton?.layer.borderColor = UIColor(HexColor:"FAF2DD").cgColor
         
         self.examTableView.alpha = 0.2
         self.examTableView.isUserInteractionEnabled = false
@@ -91,8 +95,14 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        //Did inital VC with masechetn and page
+        if let maschent = self.initalData?.masechet
+            ,let pageIndex = self.initalData?.page.index{
+            
+            self.select(maseceht: maschent, fromPageIndex: pageIndex-1, toPageIndex: pageIndex-1)
+        }
         //Current selected display page in Talmud VC
-        if let selectedPageInfo = UserDefaults.standard.object(forKey: "selectedPageInfo") as? [String:Any]
+        else if let selectedPageInfo = UserDefaults.standard.object(forKey: "selectedPageInfo") as? [String:Any]
             ,let maschetId = selectedPageInfo["maschetId"] as? String
             ,let maschent = HadafHayomiManager.sharedManager.getMasechetById(maschetId)
             ,let pageIndex = selectedPageInfo["pageIndex"] as? Int{
@@ -102,6 +112,14 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         else{
             self.scrollToTodaysPage()
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.createExam()
+        }
+    }
+    
+    override func reloadWithObject(_ object: Any) {
+        self.initalData = object as? (masechet:Masechet, page:Page)
     }
     
     func createExam() {
@@ -222,6 +240,10 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.scrollToTodaysPage()
     }
     
+    @IBAction func showSelectPagesLayoutButtonClicked(_ sender:UIButton){
+        self.setSelectPageLayout()
+    }
+    
     func scrollToTodaysPage(){
         if let todaysMaschet = HadafHayomiManager.sharedManager.todaysMaschet
             ,let todaysPage = HadafHayomiManager.sharedManager.todaysPage {
@@ -267,6 +289,14 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         self.examTableView.isUserInteractionEnabled = true
     }
     
+    func setSelectPageLayout(){
+        self.explantionView.isHidden = false
+        self.showCreateExamView()
+        self.showPicker(self.pagePickerView!, animated:true)
+        self.examTableView.alpha = 0.2
+        self.examTableView.isUserInteractionEnabled = false
+    }
+    
     //MARK: - TableView Delegate methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.questions?.count ?? 0
@@ -293,15 +323,11 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     
     //MARK: - UITextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        self.explantionView.isHidden = false
-        self.showCreateExamView()
-        self.showPicker(self.pagePickerView!, animated:true)
-        self.examTableView.alpha = 0.2
-        self.examTableView.isUserInteractionEnabled = false
-        
+    
+        self.setSelectPageLayout()
         return false
     }
+    
     
     func showPicker(_ picker:UIPickerView, animated:Bool)
     {

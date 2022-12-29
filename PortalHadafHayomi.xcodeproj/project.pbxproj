@@ -14,6 +14,7 @@
 		221A2DB2254B8FA00040475E /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221A2DB1254B8FA00040475E /* shareIcon.png */; };
 		223508BD2581684C0049D467 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223508BC2581684C0049D467 /* LessonTableViewCell.swift */; };
 		223A7BEA247C721D00FC6E37 /* GetLessonsInfoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */; };
+		223FA352295D87E0005363CC /* Q&A_icon_ios_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 223FA351295D87E0005363CC /* Q&A_icon_ios_dark.png */; };
 		224518E4250BC2A600C82C9E /* ForumAddMessageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */; };
 		224EFDB02576DDAB003532DE /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDAE2576DDAB003532DE /* nextButton.png */; };
 		224EFDB42576ECFB003532DE /* preButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDB22576ECFB003532DE /* preButton.png */; };
@@ -622,6 +623,7 @@
 		221A2DB1254B8FA00040475E /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
 		223508BC2581684C0049D467 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLessonsInfoProcess.swift; sourceTree = "<group>"; };
+		223FA351295D87E0005363CC /* Q&A_icon_ios_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Q&A_icon_ios_dark.png"; sourceTree = "<group>"; };
 		224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumAddMessageProcess.swift; sourceTree = "<group>"; };
 		224EFDAF2576DDAB003532DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/nextButton.png; sourceTree = "<group>"; };
 		224EFDB32576ECFB003532DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/preButton.png; sourceTree = "<group>"; };
@@ -1684,6 +1686,7 @@
 		4ABFB45A235290FF0079D68B /* Azarim_icons_ios_150X150 */ = {
 			isa = PBXGroup;
 			children = (
+				223FA351295D87E0005363CC /* Q&A_icon_ios_dark.png */,
 				2256E49129599398006B0495 /* Q&A_icon_ios.png */,
 				4A999D6227F4F2C6004C9675 /* A-_icon.png */,
 				4A999D6427F4F2C7004C9675 /* A+_icon.png */,
@@ -2757,6 +2760,7 @@
 				4ABFB708235291000079D68B /* homeButton.png in Resources */,
 				4ABFB755235291000079D68B /* talmus_icon.png in Resources */,
 				4ABFB6FA235291000079D68B /* snail_icon.png in Resources */,
+				223FA352295D87E0005363CC /* Q&A_icon_ios_dark.png in Resources */,
 				4ABFB8AC235291000079D68B /* localization.plist in Resources */,
 				22FD992E29527D8C00F73BDD /* nextLesson.png in Resources */,
 				4ABFB6EA235291000079D68B /* Checkbox_off.png in Resources */,

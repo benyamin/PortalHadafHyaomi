@@ -238,9 +238,10 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
         self.selectedMasechet = masechet
         self.selectedPage = page
         
-        let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: 1)
-        UserDefaults.standard.set(["selectedPageIndex":pageIndex], forKey: "lastViewdPageArticles")
-        UserDefaults.standard.synchronize()
+        if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: 1){
+            UserDefaults.standard.set(["selectedPageIndex":pageIndex], forKey: "lastViewdPageArticles")
+            UserDefaults.standard.synchronize()
+        }
         
         Util.showDefaultLoadingView()
         self.topBarTitleLabel?.text = "מסכת " + masechet.name + " " + "דף " + page.symbol
@@ -319,9 +320,20 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
         
         let articleCategory = self.articlesCategorys[indexPath.row]
         
-        self.articlesViewController.reloadWithObject(articleCategory)
-        
-        self.navigationController?.pushViewController(self.articlesViewController, animated: true)
+        if articleCategory.id == "7" {//Exams
+            let examsViewController = UIViewController.withName("ExamsViewController", storyBoardIdentifier: "StudyStoryboard") as! ExamsViewController
+            
+            if let masechet = self.selectedMasechet
+                ,let page = self.selectedPage {
+                examsViewController.reloadWithObject((masechet:masechet,page:page))
+            }
+            self.navigationController?.pushViewController(examsViewController, animated: true)
+        }
+        else{
+            self.articlesViewController.reloadWithObject(articleCategory)
+            
+            self.navigationController?.pushViewController(self.articlesViewController, animated: true)
+        }
     }
     
     //MARK: = TalmudPagePickerView delegate meothods

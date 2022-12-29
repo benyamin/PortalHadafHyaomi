@@ -89,7 +89,8 @@ open class GetArticalesProcess: MSBaseProcess
                         }
                     }
                 }
-                
+                //Add Exams option
+                articlesCategorys.append(ArticleCategory(id: "7", title: "Exams", iconImage: "Q&A_icon_ios.png"))
                let sortedArticlesCategorys = articlesCategorys.sorted(by: { $0.id < $1.id })
 
                 self.onComplete?(sortedArticlesCategorys)
