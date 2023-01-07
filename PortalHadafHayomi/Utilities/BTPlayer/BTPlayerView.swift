@@ -34,9 +34,13 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     @IBOutlet weak var errorLabel:UILabel!
     
     @IBOutlet weak var rateSpeedButton:UIButton?
+
+    @IBOutlet weak var lockButton:UIButton!
     
     @IBOutlet weak var jumpForwardButton:UIButton?
     @IBOutlet weak var jumpBackButton:UIButton?
+    
+    var lockView:UIView?
         
     var onReadyToPlay:(() -> Void)?
     var onLessonNotFound:(() -> Void)?
@@ -320,6 +324,47 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             }
             
             self.setDuration(Int(newDuratoin))
+        }
+    }
+    
+    
+    @IBAction func lockButtonClicked(_ sender:UIButton){
+        self.lockButton.isSelected = !self.lockButton.isSelected
+        
+        if self.lockButton.isSelected {
+            self.lockView = UIView(frame: self.bounds)
+            self.lockView?.backgroundColor = UIColor.white
+            self.lockView?.alpha = 0.2
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.lockViewTap(_:)))
+            self.lockView?.addGestureRecognizer(tap)
+            
+            self.addSubview(lockView!)
+        }
+        else{
+            self.unlock()
+        }
+    }
+    
+    func unlock() {
+        if let gestureRecognizers = self.lockView?.gestureRecognizers {
+            for gestreRecognizer in gestureRecognizers {
+                self.lockView?.removeGestureRecognizer(gestreRecognizer)
+            }
+        }
+        self.lockView?.removeFromSuperview()
+        self.lockButton.isSelected = false
+    }
+    
+    @objc func lockViewTap(_ sender: UITapGestureRecognizer) {
+        self.displayLockAlert()
+    }
+    
+    func displayLockAlert(){
+        BTAlertView.show(title: "Lock", message: "the player is locked for changes", buttonKeys: ["unlock", "Keep Locked"]) { dismissButtonKey in
+            if dismissButtonKey == "unlock" {
+                self.unlock()
+            }
         }
     }
     

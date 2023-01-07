@@ -449,6 +449,11 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     
     @IBAction func  playPauseButtonClicked (_ sender:UIButton) {
         
+        if self.audioPlayer?.lockButton.isSelected ?? false {
+            self.audioPlayer?.displayLockAlert()
+            return
+        }
+        
         if self.playPauseButton.isSelected == false {
             
             self.playSelectedLesson()

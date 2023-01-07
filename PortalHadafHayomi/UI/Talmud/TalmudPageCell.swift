@@ -12,7 +12,6 @@ import PDFKit
 
 class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelegate
 {
-    
     @IBOutlet var pagPDFView: PDFView?
     
     @IBOutlet weak var pageWebView:WKWebView!
@@ -96,9 +95,13 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                 self.pageWebView.isHidden = true
                 
                 if let savedPageFilePath = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex:self.pageIndex, type: TalmudDisplayType.Vagshal)
-                {
-                    let pageUrl =  URL(fileURLWithPath: savedPageFilePath)
-                    self.pageWebView.load(URLRequest(url:pageUrl))
+                    ,let pdfDocument = PDFDocument(url: URL(fileURLWithPath: savedPageFilePath)) {
+                    
+                    self.loadingView.isHidden = true
+                    self.loadingIndicatorView.stopAnimating()
+                    self.pagPDFView?.document = pdfDocument
+                    return
+                    
                 }
                 else{
                     urlString = ("https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")

@@ -15,6 +15,8 @@
 		223508BD2581684C0049D467 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223508BC2581684C0049D467 /* LessonTableViewCell.swift */; };
 		223A7BEA247C721D00FC6E37 /* GetLessonsInfoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */; };
 		223FA352295D87E0005363CC /* Q&A_icon_ios_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 223FA351295D87E0005363CC /* Q&A_icon_ios_dark.png */; };
+		223FA38829622F37005363CC /* lock-close-y.png in Resources */ = {isa = PBXBuildFile; fileRef = 223FA38629622F37005363CC /* lock-close-y.png */; };
+		223FA38929622F37005363CC /* lock-open-y.png in Resources */ = {isa = PBXBuildFile; fileRef = 223FA38729622F37005363CC /* lock-open-y.png */; };
 		224518E4250BC2A600C82C9E /* ForumAddMessageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */; };
 		224EFDB02576DDAB003532DE /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDAE2576DDAB003532DE /* nextButton.png */; };
 		224EFDB42576ECFB003532DE /* preButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 224EFDB22576ECFB003532DE /* preButton.png */; };
@@ -624,6 +626,8 @@
 		223508BC2581684C0049D467 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLessonsInfoProcess.swift; sourceTree = "<group>"; };
 		223FA351295D87E0005363CC /* Q&A_icon_ios_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Q&A_icon_ios_dark.png"; sourceTree = "<group>"; };
+		223FA38629622F37005363CC /* lock-close-y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-close-y.png"; sourceTree = "<group>"; };
+		223FA38729622F37005363CC /* lock-open-y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-open-y.png"; sourceTree = "<group>"; };
 		224518E3250BC2A600C82C9E /* ForumAddMessageProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumAddMessageProcess.swift; sourceTree = "<group>"; };
 		224EFDAF2576DDAB003532DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/nextButton.png; sourceTree = "<group>"; };
 		224EFDB32576ECFB003532DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/preButton.png; sourceTree = "<group>"; };
@@ -1849,6 +1853,8 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				223FA38629622F37005363CC /* lock-close-y.png */,
+				223FA38729622F37005363CC /* lock-open-y.png */,
 				22FD9938295364CC00F73BDD /* favoriteUser.png */,
 				22FD99302952F06600F73BDD /* add-friend.png */,
 				22CDDD952951A40E00945E6F /* copy.png */,
@@ -2681,6 +2687,7 @@
 				4ABFB70C235291000079D68B /* arrowLeft.png in Resources */,
 				4ABFB770235291000079D68B /* Icon-App-83.5x83.5@2x.png in Resources */,
 				4ABFB752235291000079D68B /* hipusShas_icon.png in Resources */,
+				223FA38829622F37005363CC /* lock-close-y.png in Resources */,
 				4ABFB6E3235291000079D68B /* arrowContinue.png in Resources */,
 				4ABFB6DA235291000079D68B /* Home_button icon.png in Resources */,
 				4ABFB76B235291000079D68B /* Icon-Small-50x50@2x.png in Resources */,
@@ -2830,6 +2837,7 @@
 				22CDDD962951A40E00945E6F /* copy.png in Resources */,
 				4ABFB6DB235291000079D68B /* midot_icon.png in Resources */,
 				4AC1F25A236789B300133263 /* nikud_on.png in Resources */,
+				223FA38929622F37005363CC /* lock-open-y.png in Resources */,
 				4A999D6927F4F2C8004C9675 /* AH+_icon.png in Resources */,
 				4ABFB722235291000079D68B /* boxShadow.png in Resources */,
 				4ABFB763235291000079D68B /* azarim_icon.png in Resources */,
@@ -3454,7 +3462,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 11.1;
+				MARKETING_VERSION = 11.2;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3485,7 +3493,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 11.1;
+				MARKETING_VERSION = 11.2;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

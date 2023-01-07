@@ -335,6 +335,16 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
         }
         
        // sortedMagidShiours = HadafHayomiManager.sharedManager.sortMaggidShiursArrayByLastPlayed(maggidShiursArray: sortedMagidShiours)
+             
+        //Put last playes maggid shiur on top
+        if let lastPlayedMaggidShiursIds = UserDefaults.standard.object(forKey: "lastPlayedMaggidShiurs") as? [String]
+            ,let lastPlayedMaggidShiurId = lastPlayedMaggidShiursIds.last{
+            
+            if let maggidShiur = sortedMagidShiours.first(where: { $0.id == lastPlayedMaggidShiurId }) {
+                sortedMagidShiours.remove(maggidShiur)
+                sortedMagidShiours.insert(maggidShiur, at: 0)
+            }
+        }
         
         return sortedMagidShiours
     }
