@@ -37,6 +37,8 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     @IBOutlet weak var rateUsButtonLabel:UILabel?
     @IBOutlet weak var contactUsButtonLabel:UILabel?
     
+    @IBOutlet weak var whatsAppButton:UIButton?
+    
     weak var dispalyedViewController:UIViewController?
     
     lazy var talmudPagePickerViewController:TalmudPagePickerViewController = {
@@ -418,6 +420,30 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             
         },onFaile: { (object, error) -> Void in
         })
+    }
+    
+    @IBAction func whatsAppButtonClicked(){
+        
+        GetSubtitlesProcess().executeWithObject(nil, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+          
+            
+        },onFaile: { (object, error) -> Void in
+        })
+        
+        /*
+        let phoneNumber =  "+972544931075"
+        let appURL = URL(string: "https://api.whatsapp.com/send?phone=\(phoneNumber)")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+            }
+            else {
+                UIApplication.shared.openURL(appURL)
+            }
+        }
+         */
     }
       
     func showSideMenuView()

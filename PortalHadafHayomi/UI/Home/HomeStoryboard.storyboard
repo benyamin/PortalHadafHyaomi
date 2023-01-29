@@ -154,6 +154,18 @@
                                             <action selector="settingsButtonClicked:" destination="DBr-AN-zC1" eventType="touchUpInside" id="Von-f1-oB2"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2No-Cq-cOX">
+                                        <rect key="frame" x="8" y="10" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="cNX-Zr-mr9"/>
+                                            <constraint firstAttribute="height" constant="33" id="hhv-pf-KPd"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="whatsapp.png"/>
+                                        <connections>
+                                            <action selector="whatsAppButtonClicked" destination="DBr-AN-zC1" eventType="touchUpInside" id="L9A-OW-fQo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.94901960784313721" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -161,6 +173,7 @@
                                     <constraint firstItem="jNH-08-3xw" firstAttribute="centerX" secondItem="qeI-gb-t0H" secondAttribute="centerX" id="34j-Y0-pwJ"/>
                                     <constraint firstAttribute="trailing" secondItem="9zZ-22-shB" secondAttribute="trailing" id="4BU-o6-Z3b"/>
                                     <constraint firstItem="ma8-Ve-Me8" firstAttribute="top" secondItem="qeI-gb-t0H" secondAttribute="top" constant="30" id="5ZP-S8-r2p"/>
+                                    <constraint firstItem="2No-Cq-cOX" firstAttribute="top" secondItem="qeI-gb-t0H" secondAttribute="top" constant="10" id="E8v-gS-vgY"/>
                                     <constraint firstItem="jNH-08-3xw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IbS-6s-vbA" secondAttribute="bottom" constant="6" id="FZt-Bn-OW2"/>
                                     <constraint firstItem="PT2-0b-O11" firstAttribute="top" secondItem="ma8-Ve-Me8" secondAttribute="bottom" id="Q9r-6N-man"/>
                                     <constraint firstItem="IbS-6s-vbA" firstAttribute="centerX" secondItem="qeI-gb-t0H" secondAttribute="centerX" id="SgY-Kn-38y"/>
@@ -168,6 +181,7 @@
                                     <constraint firstItem="IbS-6s-vbA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qeI-gb-t0H" secondAttribute="leading" constant="8" id="UTu-2V-r34"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IbS-6s-vbA" secondAttribute="trailing" constant="8" id="Zl3-5U-ruT"/>
                                     <constraint firstAttribute="bottom" secondItem="9zZ-22-shB" secondAttribute="bottom" id="c8a-23-Pco"/>
+                                    <constraint firstItem="2No-Cq-cOX" firstAttribute="leading" secondItem="qeI-gb-t0H" secondAttribute="leading" constant="8" id="cYO-yg-e5L"/>
                                     <constraint firstItem="9zZ-22-shB" firstAttribute="top" secondItem="jNH-08-3xw" secondAttribute="bottom" id="fwP-lr-OST"/>
                                     <constraint firstAttribute="trailing" secondItem="cQm-I3-PsG" secondAttribute="trailing" constant="8" id="g65-x4-T5I"/>
                                     <constraint firstItem="9zZ-22-shB" firstAttribute="leading" secondItem="qeI-gb-t0H" secondAttribute="leading" id="pD2-XT-5XN"/>
@@ -382,6 +396,7 @@
                         <outlet property="sideMenuTableView" destination="ptZ-W1-IQR" id="YXQ-yd-58h"/>
                         <outlet property="sideMenuView" destination="7Jh-kb-qup" id="o9K-bO-qob"/>
                         <outlet property="topBarView" destination="dIN-5S-RWQ" id="L59-MI-Pnz"/>
+                        <outlet property="whatsAppButton" destination="2No-Cq-cOX" id="T4H-Lx-Zb5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rf-ne-bbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -457,5 +472,6 @@
         <image name="logo-portal.png" width="3117" height="579"/>
         <image name="tchanim_icon.png" width="61" height="70"/>
         <image name="topBar750.png" width="750" height="120"/>
+        <image name="whatsapp.png" width="512" height="512"/>
     </resources>
 </document>

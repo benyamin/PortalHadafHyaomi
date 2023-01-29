@@ -34,6 +34,14 @@
          contextName = "LessonVenuesListViewController.updateVenues(_:withUserLocatoin:):LessonVenuesListViewController.swift">
       </ContextState>
       <ContextState
+         contextName = "closure #1 in MSWebService.runServiceOperation(_:):MSWebService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "serviceOperation.request.responseData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "specialized closure #1 in closure #2 in GetTalmudQAProcess.runWebServiceWithRequest(_:):GetTalmudQAProcess.swift">
       </ContextState>
       <ContextState

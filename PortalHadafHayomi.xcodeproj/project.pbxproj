@@ -32,6 +32,8 @@
 		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
 		2273A8C72471CBA7000E0390 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C52471CBA7000E0390 /* playIcon.png */; };
 		2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C62471CBA7000E0390 /* stopIcon.png */; };
+		2283944C2985DF0A003B7239 /* GetSubtitlesProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */; };
+		2283944E2985E54B003B7239 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2283944D2985E54B003B7239 /* whatsapp.png */; };
 		22CD09B32467CEA100936262 /* PageSummaryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */; };
 		22CDDD76294B24AD00945E6F /* UIButton+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */; };
 		22CDDD7D294B571400945E6F /* showPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7B294B571400945E6F /* showPlayer.png */; };
@@ -647,6 +649,8 @@
 		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
 		2273A8C52471CBA7000E0390 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
 		2273A8C62471CBA7000E0390 /* stopIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopIcon.png; sourceTree = "<group>"; };
+		2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubtitlesProcess.swift; sourceTree = "<group>"; };
+		2283944D2985E54B003B7239 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
 		22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSummaryCollectionCell.swift; sourceTree = "<group>"; };
 		22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extras.swift"; sourceTree = "<group>"; };
 		22CDDD7B294B571400945E6F /* showPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showPlayer.png; path = ../../../../../../../Downloads/showPlayer.png; sourceTree = "<group>"; };
@@ -1476,13 +1480,6 @@
 			path = Dictionary;
 			sourceTree = "<group>";
 		};
-		4A79B04220EC011800C3C456 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		4A7B14AB209E6A7A00C62929 /* BTAddView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1968,6 +1965,7 @@
 		4ABFB4FF235290FF0079D68B /* Main_page */ = {
 			isa = PBXGroup;
 			children = (
+				2283944D2985E54B003B7239 /* whatsapp.png */,
 				4ABFB500235290FF0079D68B /* logo-portal.png */,
 				4ABFB502235290FF0079D68B /* lower_bar */,
 				4ABFB50D235290FF0079D68B /* menu_icon.png */,
@@ -2244,7 +2242,6 @@
 		4AD4098D201B730500A76EF0 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				4A79B04220EC011800C3C456 /* New Group */,
 				4AD4098E201B735300A76EF0 /* CalendarStoryboard.storyboard */,
 				4AD40990201B738900A76EF0 /* CalendarViewController.swift */,
 				4AD4099E201F9C1000A76EF0 /* JewishCallCollectionHeaderView.swift */,
@@ -2407,6 +2404,7 @@
 				220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */,
 				22CDDD87294E937800945E6F /* GetUserLocationProcess.swift */,
 				2256E48F29545C80006B0495 /* GetLessonsSettingsProcess.swift */,
+				2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -2665,6 +2663,7 @@
 				4ABFB757235291000079D68B /* ContactUs_icon.png in Resources */,
 				4AC972E620CC809A003AD2A5 /* SearchTalmudStoryboard.storyboard in Resources */,
 				4ABFB742235291000079D68B /* milon_icon.png in Resources */,
+				2283944E2985E54B003B7239 /* whatsapp.png in Resources */,
 				4ABFB70E235291000079D68B /* FullPage_On.png in Resources */,
 				4ABFB77E235291000079D68B /* Icon-App-40x40@3x.png in Resources */,
 				4ABFB6CB235290FF0079D68B /* sipurim_icon_and_text.png in Resources */,
@@ -3183,6 +3182,7 @@
 				4AF5554A1FCA378D00A830EE /* BaseRequest.swift in Sources */,
 				4A50C23C27DD59FC009B894B /* GetSeferHearuchValuesProcess.swift in Sources */,
 				4A9BF0972097600E0051D48A /* GetSettingsProcess.swift in Sources */,
+				2283944C2985DF0A003B7239 /* GetSubtitlesProcess.swift in Sources */,
 				4A7537211FD6B6070013BCD9 /* GetLessonsProcess.swift in Sources */,
 				4A2151242225E0DC00BFEEF7 /* SettableItemReminderCell.swift in Sources */,
 				4A7E0DED1FEB224800D84E0E /* TalmudPagePickerView.swift in Sources */,
@@ -3381,7 +3381,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -3435,7 +3435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -3460,7 +3460,7 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 11.2;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
@@ -3491,7 +3491,7 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 11.2;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
