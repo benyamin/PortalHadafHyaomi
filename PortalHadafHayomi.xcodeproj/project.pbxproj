@@ -53,6 +53,8 @@
 		22D3B82B29173A5B003FE3E0 /* QandATestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */; };
 		22D69D7B2483279500525786 /* MediaLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D69D7A2483279500525786 /* MediaLesson.swift */; };
 		22DEFE3325080D40005CB2FF /* ForumAddMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */; };
+		22E14F29298F04A800468EA9 /* Subtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E14F27298F04A800468EA9 /* Subtitles.swift */; };
+		22E14F2A298F04A800468EA9 /* AVPlayerViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E14F28298F04A800468EA9 /* AVPlayerViewControllerExtension.swift */; };
 		22FD992E29527D8C00F73BDD /* nextLesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD992C29527D8C00F73BDD /* nextLesson.png */; };
 		22FD992F29527D8C00F73BDD /* preLesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD992D29527D8C00F73BDD /* preLesson.png */; };
 		22FD99312952F06600F73BDD /* add-friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD99302952F06600F73BDD /* add-friend.png */; };
@@ -670,6 +672,8 @@
 		22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QandATestViewController.swift; sourceTree = "<group>"; };
 		22D69D7A2483279500525786 /* MediaLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLesson.swift; sourceTree = "<group>"; };
 		22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumAddMessageViewController.swift; sourceTree = "<group>"; };
+		22E14F27298F04A800468EA9 /* Subtitles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subtitles.swift; sourceTree = "<group>"; };
+		22E14F28298F04A800468EA9 /* AVPlayerViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerViewControllerExtension.swift; sourceTree = "<group>"; };
 		22FD992C29527D8C00F73BDD /* nextLesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextLesson.png; sourceTree = "<group>"; };
 		22FD992D29527D8C00F73BDD /* preLesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preLesson.png; sourceTree = "<group>"; };
 		22FD99302952F06600F73BDD /* add-friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friend.png"; sourceTree = "<group>"; };
@@ -1288,6 +1292,15 @@
 				22CF571C250EA3F500273D07 /* LoginView.xib */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		22E14F26298F04A800468EA9 /* PlayerSubTitles */ = {
+			isa = PBXGroup;
+			children = (
+				22E14F27298F04A800468EA9 /* Subtitles.swift */,
+				22E14F28298F04A800468EA9 /* AVPlayerViewControllerExtension.swift */,
+			);
+			path = PlayerSubTitles;
 			sourceTree = "<group>";
 		};
 		4A2150F42216172D00BFEEF7 /* SavedPagesManager */ = {
@@ -2331,6 +2344,7 @@
 		4AF555441FCA378D00A830EE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				22E14F26298F04A800468EA9 /* PlayerSubTitles */,
 				4ACC35212299DAE1003EE563 /* LanguageManager.swift */,
 				4ABAAD5B200549200023200D /* Util.swift */,
 				4A933ADB1FCF4EA300D175E1 /* Extensions */,
@@ -3015,6 +3029,7 @@
 				4AD40993201CFA0200A76EF0 /* JewishCallCollectionCell.swift in Sources */,
 				4A59302D21E179F4001A3360 /* URLSessionDataTask+Extras.swift in Sources */,
 				4AC483071FE5BD81000F1528 /* CategoryTableCell.swift in Sources */,
+				22E14F29298F04A800468EA9 /* Subtitles.swift in Sources */,
 				4A90C8AD20C07EA200D46BC2 /* SearchTalmudProcess.swift in Sources */,
 				22CDDD8A294F171700945E6F /* CGPoint+Extras.swift in Sources */,
 				4AFC249A1FCB5FB30056E726 /* SQLmanager.swift in Sources */,
@@ -3065,6 +3080,7 @@
 				4A2C76B21FD48E5A0074A0CC /* MSBaseProcess.swift in Sources */,
 				4AB1663A212A1E5200481B04 /* SavedSearchTableCell.swift in Sources */,
 				22D69D7B2483279500525786 /* MediaLesson.swift in Sources */,
+				22E14F2A298F04A800468EA9 /* AVPlayerViewControllerExtension.swift in Sources */,
 				4A933AF51FD35ADB00D175E1 /* BTAlertView.swift in Sources */,
 				4A2150F92216172D00BFEEF7 /* SavedPagesViewController.swift in Sources */,
 				2256E49E2959DA48006B0495 /* ExamQuestionTableCell.swift in Sources */,

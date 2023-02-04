@@ -424,15 +424,6 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     
     @IBAction func whatsAppButtonClicked(){
         
-        GetSubtitlesProcess().executeWithObject(nil, onStart: { () -> Void in
-            
-        }, onComplete: { (object) -> Void in
-          
-            
-        },onFaile: { (object, error) -> Void in
-        })
-        
-        /*
         let phoneNumber =  "+972544931075"
         let appURL = URL(string: "https://api.whatsapp.com/send?phone=\(phoneNumber)")!
         if UIApplication.shared.canOpenURL(appURL) {
@@ -443,7 +434,6 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
                 UIApplication.shared.openURL(appURL)
             }
         }
-         */
     }
       
     func showSideMenuView()

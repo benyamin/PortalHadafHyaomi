@@ -53,7 +53,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                 
                 return a_player
             }
-           
+            
             return a_player
         }
         set
@@ -62,10 +62,10 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         }
     }
     
-
+    
     func setup()
     {
-          NotificationCenter.default.addObserver(self, selector: #selector(self.itemDidFinishPlaying(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.itemDidFinishPlaying(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
             self.setRate(playerRateSpeed)
@@ -76,33 +76,48 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     {
         if self.currentItemType() == "Video"
         {
-            let playerViewController = AVPlayerViewController()
-            
-            playerViewController.delegate = self
-            
-            if var topController = UIApplication.shared.keyWindow?.rootViewController
-            {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = presentedViewController
-                }
-                
-                topController.present(playerViewController, animated: true) {
-                    
-                    playerViewController.player = self.player
-                   // playerViewController.player!.play()
-                    playerViewController.player!.playImmediately(atRate: 1.0)
-                }
-            }
-          
+            self.playVideo()
         }
         else
         {
-           // self.player.play()
+            // self.player.play()
             self.player.playImmediately(atRate: 1.0)
             self.player.rate = self.playerRate
-
+            
         }
-
+        
+    }
+    
+    func playVideo(){
+        
+        let moviePlayer = AVPlayerViewController()
+        
+        moviePlayer.delegate = self
+        
+        if var topController = UIApplication.shared.keyWindow?.rootViewController
+        {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            
+            topController.present(moviePlayer, animated: true) {
+                
+                moviePlayer.player = self.player
+                
+                // Add subtitles
+                moviePlayer.addSubtitles()
+                
+                if let subtitlePath = self.currentPlayerItemPath?.replacingOccurrences(of: "mp4", with: "srt"){
+                    let subtitleRemoteUrl = URL(string:subtitlePath)
+                    moviePlayer.open(fileFromRemote: subtitleRemoteUrl!)
+                    
+                    // Change text properties
+                    moviePlayer.subtitleLabel?.backgroundColor = UIColor.darkGray.withAlphaComponent(0.4)
+                    moviePlayer.subtitleLabel?.textColor = UIColor.white
+                }
+                moviePlayer.player!.playImmediately(atRate: 1.0)
+            }
+        }
     }
     
  

@@ -57,20 +57,23 @@ open class GetSubtitlesProcess: MSBaseProcess
         })
     }
     
-    func mapSrt(srt:String) -> [[String:String]]{
-        var srtMap = [[String:String]]()
+    func mapSrt(srt:String) -> [[String:Any]]{
+        var srtMap = [[String:Any]]()
         let scanner = Scanner(string: srt)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
         
         while !scanner.isAtEnd{
             _ = scanner.scanUpToCharacters(from: NSCharacterSet.newlines)
-            let startString = scanner.scanUpToString(" --> ")
+            guard let startString = scanner.scanUpToString(" --> ")?.components(separatedBy:",").first else{continue}
             _ = scanner.scanString("-->")
-            let endString = scanner.scanUpToCharacters(from: NSCharacterSet.newlines)
+            guard let endString = scanner.scanUpToCharacters(from: NSCharacterSet.newlines)?.components(separatedBy:",").first else{continue}
             let textString = scanner.scanUpToCharacters(from: NSCharacterSet.newlines)
             
-            var dict = [String:String]()
-            dict["startString"] = startString
-            dict["endString"] = endString
+            var dict = [String:Any]()
+            dict["startTime"] = dateFormatter.date(from: startString)
+            dict["endSTime"] = dateFormatter.date(from: endString)
             dict["textString"] = textString
             
             srtMap.append(dict)

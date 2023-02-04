@@ -802,6 +802,38 @@
             endingLineNumber = "201"
             landmarkName = "getRegions()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3CB3CD03-D88D-41F7-91BF-22E14486963A - 7fd8920fde9b6829"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.FindChavrusaViewController.getRegions() -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Chavrusas/FindChavrusaViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
+                  offsetFromSymbolStart = "53">
+               </Location>
+               <Location
+                  uuid = "3CB3CD03-D88D-41F7-91BF-22E14486963A - 7fd8920fde9b6829"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.FindChavrusaViewController.getRegions() -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Chavrusas/FindChavrusaViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
+                  offsetFromSymbolStart = "107">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1074,6 +1106,53 @@
             endingLineNumber = "86"
             landmarkName = "didSelectLessonNotification(notification:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DF0AF10C-F5E9-4264-8270-8954FBB1E1A9 - a0761b4fe3705eb1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.Talmud_IPadViewController.didSelectLessonNotification(notification: Foundation.Notification) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Talmud/Talmud_IPadViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "DF0AF10C-F5E9-4264-8270-8954FBB1E1A9 - a0761b4fe3705eb1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.Talmud_IPadViewController.didSelectLessonNotification(notification: Foundation.Notification) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Talmud/Talmud_IPadViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "556">
+               </Location>
+               <Location
+                  uuid = "DF0AF10C-F5E9-4264-8270-8954FBB1E1A9 - a0761b4fe3705eb1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.Talmud_IPadViewController.didSelectLessonNotification(notification: Foundation.Notification) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Talmud/Talmud_IPadViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "2747">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1154,6 +1233,38 @@
             endingLineNumber = "72"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C03F8E70-4F90-4B62-8459-17E8AD02E4FB - a4c3b77544008b19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.ExamQuestionTableCell.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Study/ExamQuestionTableCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "157">
+               </Location>
+               <Location
+                  uuid = "C03F8E70-4F90-4B62-8459-17E8AD02E4FB - a4c3b77544008b19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.ExamQuestionTableCell.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Study/ExamQuestionTableCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "319">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1202,6 +1313,53 @@
             endingLineNumber = "52"
             landmarkName = "runWebServiceWithRequest(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8FEE4173-4E3F-4346-83C0-B1575E0A72C5 - 3b5f1338515eb29f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in PortalHadafHayomi.GetTalmudQAProcess.runWebServiceWithRequest(PortalHadafHayomi.BaseRequest) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "651">
+               </Location>
+               <Location
+                  uuid = "8FEE4173-4E3F-4346-83C0-B1575E0A72C5 - 52c03964bc6cc08b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #2 (Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in PortalHadafHayomi.GetTalmudQAProcess.runWebServiceWithRequest(PortalHadafHayomi.BaseRequest) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "41">
+               </Location>
+               <Location
+                  uuid = "8FEE4173-4E3F-4346-83C0-B1575E0A72C5 - b66891ba6848b55b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 @Swift.MainActor () -&gt; () in closure #2 (Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in PortalHadafHayomi.GetTalmudQAProcess.runWebServiceWithRequest(PortalHadafHayomi.BaseRequest) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/Processes/GetTalmudQAProcess.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "65">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1232,7 +1390,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "326"
                   endingLineNumber = "326"
-                  offsetFromSymbolStart = "754">
+                  offsetFromSymbolStart = "1132">
                </Location>
                <Location
                   uuid = "00FAB89F-8517-45E1-9133-3AFA13B976AF - 585ba800ef25e168"
@@ -1247,7 +1405,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "326"
                   endingLineNumber = "326"
-                  offsetFromSymbolStart = "803">
+                  offsetFromSymbolStart = "1181">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1298,6 +1456,38 @@
             endingLineNumber = "99"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "184212EB-283F-4905-860D-C6369DA9D493 - f2b87d79e7795055"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.ExamsViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Study/ExamsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "421">
+               </Location>
+               <Location
+                  uuid = "184212EB-283F-4905-860D-C6369DA9D493 - f2b87d79e7795055"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.ExamsViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/UI/Study/ExamsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "544">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1330,6 +1520,38 @@
             endingLineNumber = "129"
             landmarkName = "setPlayerUrl(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "817EE048-E0E1-436A-9265-AE0194CE631B - 805a84298d6eb978"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.BTPlayerView.setPlayerUrl(Swift.Optional&lt;Foundation.URL&gt;) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/Utilities/BTPlayer/BTPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "129"
+                  endingLineNumber = "129"
+                  offsetFromSymbolStart = "323">
+               </Location>
+               <Location
+                  uuid = "817EE048-E0E1-436A-9265-AE0194CE631B - 805a84298d6eb978"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.BTPlayerView.setPlayerUrl(Swift.Optional&lt;Foundation.URL&gt;) -&gt; ()"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/Utilities/BTPlayer/BTPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "129"
+                  endingLineNumber = "129"
+                  offsetFromSymbolStart = "822">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1415,16 +1637,112 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5C2FEA23-0782-4D37-A079-FAA1943E4F51"
+            uuid = "E3D4A720-1D6F-4CA7-BBF4-88400955615E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PortalHadafHayomi/Processes/GetSubtitlesProcess.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "mapSrt(srt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6CD6D92C-8144-4A01-B0C1-63DAA60D0DE6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/Utilities/BTPlayer/BTPlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "547"
+            endingLineNumber = "547"
+            landmarkName = "updatePlayer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "545F3034-CC8E-4F33-B918-AB7566EA2096"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/Utilities/BTPlayer/BTPlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
+            landmarkName = "sliderTappedAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F716D5F6-8F28-4DEE-B435-60F8EFA7F9A0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/Utilities/BTPlayer/BTPlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
+            landmarkName = "sliderDidFinishSliding(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CFDC5C0A-CB54-4F29-A9AC-EE80A003615D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/Utilities/BTPlayer/BTPlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
+            landmarkName = "play()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0846CD8-5399-4D9D-A17F-31B563D11D09"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/Utilities/BTPlayer/BTAVPlayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
             endingLineNumber = "79"
-            landmarkName = "mapSrt(srt:)"
+            landmarkName = "play()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C5AB711-F1C4-4CCB-B0AE-42ECCA1EFE8A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/Utilities/BTPlayer/BTAVPlayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "playVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
