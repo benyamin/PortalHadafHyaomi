@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SubtitleView" customModule="PortalHadafHayomi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g60-Kp-wCZ">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeX-p9-8C1">
+                            <rect key="frame" x="332" y="9" width="33" height="33"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="7Nt-CL-Gd2"/>
+                                <constraint firstAttribute="height" constant="33" id="nD5-9q-lxn"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button" image="showSubtitles.png"/>
+                            <state key="selected" image="hideSubtitles.png"/>
+                            <connections>
+                                <action selector="toggleButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Z6e-Uk-y2w"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nad-vI-rJo">
+                            <rect key="frame" x="8" y="8" width="316" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="jeX-p9-8C1" firstAttribute="leading" secondItem="nad-vI-rJo" secondAttribute="trailing" constant="8" id="A3M-Dl-LDy"/>
+                        <constraint firstAttribute="trailing" secondItem="jeX-p9-8C1" secondAttribute="trailing" constant="28" id="M1z-Mu-wrq"/>
+                        <constraint firstItem="nad-vI-rJo" firstAttribute="leading" secondItem="g60-Kp-wCZ" secondAttribute="leading" constant="8" id="SZo-3O-hSU"/>
+                        <constraint firstItem="jeX-p9-8C1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="g60-Kp-wCZ" secondAttribute="top" constant="8" id="ctP-D8-SB6"/>
+                        <constraint firstAttribute="bottom" secondItem="nad-vI-rJo" secondAttribute="bottom" constant="8" id="kaX-z3-NBw"/>
+                        <constraint firstAttribute="bottom" secondItem="jeX-p9-8C1" secondAttribute="bottom" constant="8" id="lVp-OG-8dU"/>
+                        <constraint firstItem="nad-vI-rJo" firstAttribute="top" secondItem="g60-Kp-wCZ" secondAttribute="top" constant="8" id="pfu-lP-fzg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59966517857142854" colorSpace="custom" customColorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="g60-Kp-wCZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CsM-5G-N6J"/>
+                <constraint firstItem="g60-Kp-wCZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KZ7-ja-9fs"/>
+                <constraint firstAttribute="trailing" secondItem="g60-Kp-wCZ" secondAttribute="trailing" id="Pf5-0a-BU4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="g60-Kp-wCZ" secondAttribute="bottom" id="pKZ-Tt-3ba"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="g60-Kp-wCZ" id="qDh-ic-GLc"/>
+                <outlet property="textLabel" destination="nad-vI-rJo" id="gDN-pT-SI9"/>
+                <outlet property="toggleButton" destination="jeX-p9-8C1" id="EUp-Wy-0Pk"/>
+            </connections>
+            <point key="canvasLocation" x="136.64122137404578" y="195.77464788732397"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="hideSubtitles.png" width="180" height="180"/>
+        <image name="showSubtitles.png" width="135" height="135"/>
+    </resources>
+</document>

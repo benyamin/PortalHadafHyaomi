@@ -5,7 +5,7 @@
 <lesson masechtId="01" magidShior="הרב יהודה אליהו" magidShiorId="24" audioBaseUrl="http://files.daf-yomi.com/files/eliyahu/brachot/DafYomiBrachot" language="עברית | שמע" additionlSuffix="" type="audio"/>
 <lesson masechtId="01" magidShior="הרב דוד קלופפר" magidShiorId="15" audioBaseUrl="http://files.daf-yomi.com/files/klopfer/Brachot/BrachotDaf" language="עברית | שמע" additionlSuffix="00" type="audio"/>
 <lesson masechtId="01" magidShior="הרב בנימין מילצקי" magidShiorId="37" audioBaseUrl="http://files.daf-yomi.com/files/miltski-binyamin/brachot/" language="עברית | שמע" additionlSuffix="" type="audio"/>
-<lesson masechtId="01" magidShior="הרב פנחס אקרב" magidShiorId="98" audioBaseUrl="http://files.daf-yomi.com/files/pinchas-akrav/brachot/brachot-pya-" language="עברית | שמע" additionlSuffix="" type="audio"/>
+<lesson masechtId="01" magidShior="הרב פנחס אקרב" magidShiorId="98" audioBaseUrl="http://files.daf-yomi.com/files/pinchas-akrav/brachot/brachot-pya-" language="עברית | שמע" additionlSuffix="" type="audio" subtitles="YES"/>
 <lesson masechtId="01" magidShior="הרב שפרכר - דרשו" magidShiorId="114" audioBaseUrl="http://files.daf-yomi.com/files/shpercher/shpercher-hebrew-audio/brachot/brachot_" language="עברית | שמע" additionlSuffix="0" type="audio"/>
 <lesson masechtId="01" magidShior="הרב אביחי קצין" magidShiorId="88" audioBaseUrl="http://files.daf-yomi.com/files/katsin-longer-audio/brachot/brachot" language="עברית | שמע" additionlSuffix="00" type="audio"/>
 <lesson masechtId="01" magidShior="הרב יחזקאל טשינגל" magidShiorId="43" audioBaseUrl="http://files.daf-yomi.com/files/tshingel/brachot/brachot" language="עברית | שמע" additionlSuffix="" type="audio"/>

@@ -112,8 +112,8 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                     moviePlayer.open(fileFromRemote: subtitleRemoteUrl!)
                     
                     // Change text properties
-                    moviePlayer.subtitleLabel?.backgroundColor = UIColor.darkGray.withAlphaComponent(0.4)
-                    moviePlayer.subtitleLabel?.textColor = UIColor.white
+                   // moviePlayer.subtitleView?.textLabel.backgroundColor = UIColor.darkGray.withAlphaComponent(0.4)
+                  //  moviePlayer.subtitleView?.textLabel.textColor = UIColor.white
                 }
                 moviePlayer.player!.playImmediately(atRate: 1.0)
             }

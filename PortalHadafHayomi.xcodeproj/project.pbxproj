@@ -34,6 +34,8 @@
 		2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C62471CBA7000E0390 /* stopIcon.png */; };
 		2283944C2985DF0A003B7239 /* GetSubtitlesProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */; };
 		2283944E2985E54B003B7239 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2283944D2985E54B003B7239 /* whatsapp.png */; };
+		22BF402429905F540053161D /* SubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF402329905F540053161D /* SubtitleView.swift */; };
+		22BF402629905F610053161D /* SubtitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF402529905F610053161D /* SubtitleView.xib */; };
 		22CD09B32467CEA100936262 /* PageSummaryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */; };
 		22CDDD76294B24AD00945E6F /* UIButton+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */; };
 		22CDDD7D294B571400945E6F /* showPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7B294B571400945E6F /* showPlayer.png */; };
@@ -50,6 +52,8 @@
 		22CF56F0250D6D3C00273D07 /* FourmUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */; };
 		22CF571B250EA3E700273D07 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF571A250EA3E700273D07 /* LoginView.swift */; };
 		22CF571D250EA3F500273D07 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CF571C250EA3F500273D07 /* LoginView.xib */; };
+		22D298B7299303E2006EEC9A /* hideSubtitles.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D298B5299303E2006EEC9A /* hideSubtitles.png */; };
+		22D298B8299303E2006EEC9A /* showSubtitles.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D298B6299303E2006EEC9A /* showSubtitles.png */; };
 		22D3B82B29173A5B003FE3E0 /* QandATestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */; };
 		22D69D7B2483279500525786 /* MediaLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D69D7A2483279500525786 /* MediaLesson.swift */; };
 		22DEFE3325080D40005CB2FF /* ForumAddMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */; };
@@ -653,6 +657,8 @@
 		2273A8C62471CBA7000E0390 /* stopIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopIcon.png; sourceTree = "<group>"; };
 		2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubtitlesProcess.swift; sourceTree = "<group>"; };
 		2283944D2985E54B003B7239 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
+		22BF402329905F540053161D /* SubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleView.swift; sourceTree = "<group>"; };
+		22BF402529905F610053161D /* SubtitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubtitleView.xib; sourceTree = "<group>"; };
 		22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSummaryCollectionCell.swift; sourceTree = "<group>"; };
 		22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extras.swift"; sourceTree = "<group>"; };
 		22CDDD7B294B571400945E6F /* showPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showPlayer.png; path = ../../../../../../../Downloads/showPlayer.png; sourceTree = "<group>"; };
@@ -669,6 +675,8 @@
 		22CF56EF250D6D3C00273D07 /* FourmUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourmUserInfoView.swift; sourceTree = "<group>"; };
 		22CF571A250EA3E700273D07 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		22CF571C250EA3F500273D07 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		22D298B5299303E2006EEC9A /* hideSubtitles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hideSubtitles.png; sourceTree = "<group>"; };
+		22D298B6299303E2006EEC9A /* showSubtitles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showSubtitles.png; sourceTree = "<group>"; };
 		22D3B82A29173A5B003FE3E0 /* QandATestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QandATestViewController.swift; sourceTree = "<group>"; };
 		22D69D7A2483279500525786 /* MediaLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLesson.swift; sourceTree = "<group>"; };
 		22DEFE3225080D40005CB2FF /* ForumAddMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumAddMessageViewController.swift; sourceTree = "<group>"; };
@@ -1299,6 +1307,8 @@
 			children = (
 				22E14F27298F04A800468EA9 /* Subtitles.swift */,
 				22E14F28298F04A800468EA9 /* AVPlayerViewControllerExtension.swift */,
+				22BF402329905F540053161D /* SubtitleView.swift */,
+				22BF402529905F610053161D /* SubtitleView.xib */,
 			);
 			path = PlayerSubTitles;
 			sourceTree = "<group>";
@@ -1863,6 +1873,8 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				22D298B5299303E2006EEC9A /* hideSubtitles.png */,
+				22D298B6299303E2006EEC9A /* showSubtitles.png */,
 				223FA38629622F37005363CC /* lock-close-y.png */,
 				223FA38729622F37005363CC /* lock-open-y.png */,
 				22FD9938295364CC00F73BDD /* favoriteUser.png */,
@@ -2813,6 +2825,7 @@
 				4ABFB78D235291000079D68B /* locations.xml in Resources */,
 				4ABFB78A235291000079D68B /* Laaz_rashi.sqlite in Resources */,
 				4A65E2A61FE8FCED008BA62B /* AboutStoryboard.storyboard in Resources */,
+				22D298B8299303E2006EEC9A /* showSubtitles.png in Resources */,
 				4A733B1A20ACEC1700976D55 /* BTTextViewController.xib in Resources */,
 				4ABFB725235291000079D68B /* move_center@2x.png in Resources */,
 				4A2C76AD1FD48D380074A0CC /* pause-btn_ipad.png in Resources */,
@@ -2882,6 +2895,7 @@
 				4A21512B2225E74E00BFEEF7 /* BTTimePickerview.xib in Resources */,
 				4ABFB6D3235291000079D68B /* toldot_icon_and_text.png in Resources */,
 				4ABFB6A8235290FF0079D68B /* Hadran.png in Resources */,
+				22D298B7299303E2006EEC9A /* hideSubtitles.png in Resources */,
 				4ABFB781235291000079D68B /* Lilmod_icon_ios.png in Resources */,
 				4A5E42B626F3FFC5006CC9E6 /* calculator_icon.png in Resources */,
 				4A7537351FD9839D0013BCD9 /* AramicDictioanryStoryboard.storyboard in Resources */,
@@ -2967,6 +2981,7 @@
 				4ABFB78C235291000079D68B /* InfoPlist.strings in Resources */,
 				4ABFB6C2235290FF0079D68B /* Dot3.png in Resources */,
 				4ABFB744235291000079D68B /* mifal_icon.png in Resources */,
+				22BF402629905F610053161D /* SubtitleView.xib in Resources */,
 				4ABFB6FE235291000079D68B /* sefira1.png in Resources */,
 				4ABFB711235291000079D68B /* TranslationIcon_off.png in Resources */,
 				4ABFB6A7235290FF0079D68B /* btn_bg_B_click.png in Resources */,
@@ -3060,6 +3075,7 @@
 				4AC483DC1FE855AC000F1528 /* LessonVenueTableCell.swift in Sources */,
 				4AB166362128BFE200481B04 /* Survey.swift in Sources */,
 				4A7E0E281FF57C8400D84E0E /* ExpressionsTableCell.swift in Sources */,
+				22BF402429905F540053161D /* SubtitleView.swift in Sources */,
 				4A933AE31FD34D4900D175E1 /* BTProgressCircleView.swift in Sources */,
 				4A7E0E201FF575AF00D84E0E /* GetMusagimProcess.swift in Sources */,
 				4A90C88320B61C2700D46BC2 /* SiyumTopicTableCell.swift in Sources */,

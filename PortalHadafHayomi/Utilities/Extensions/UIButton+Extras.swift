@@ -26,8 +26,13 @@ extension UIButton
     func setImageTintColor(_ tintColor:UIColor) {
         if let image = self.image(for: .normal) {
             self.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
-            self.setImage(image.withRenderingMode(.alwaysTemplate), for: .highlighted)
-            self.tintColor = tintColor
         }
+        if let image = self.image(for: .highlighted) {
+            self.setImage(image.withRenderingMode(.alwaysTemplate), for: .highlighted)
+        }
+        if let image = self.image(for: .selected) {
+            self.setImage(image.withRenderingMode(.alwaysTemplate), for: .selected)
+        }
+        self.tintColor = tintColor
     }
 }

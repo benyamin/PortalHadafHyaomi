@@ -17,21 +17,23 @@ public extension AVPlayerViewController {
         static var SubtitleKey = "SubtitleKey"
         static var SubtitleHeightKey = "SubtitleHeightKey"
         static var PayloadKey = "PayloadKey"
+        static var SubtitleViewKey = "SubtitleViewKey"
     }
     
     // MARK: - Public properties
     
-    var subtitleLabel: UILabel? {
-        get { return objc_getAssociatedObject(self, &AssociatedKeys.SubtitleKey) as? UILabel }
-        set (value) { objc_setAssociatedObject(self, &AssociatedKeys.SubtitleKey, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    fileprivate var subtitleView: SubtitleView? {
+        get { return objc_getAssociatedObject(self, &AssociatedKeys.SubtitleViewKey) as? SubtitleView }
+        set (value) { objc_setAssociatedObject(self, &AssociatedKeys.SubtitleViewKey, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
+ 
     
-    // MARK: - Private properties
-    
-    fileprivate var subtitleLabelHeightConstraint: NSLayoutConstraint? {
+    fileprivate var subtitleViewHeightConstraint: NSLayoutConstraint? {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.SubtitleHeightKey) as? NSLayoutConstraint }
         set (value) { objc_setAssociatedObject(self, &AssociatedKeys.SubtitleHeightKey, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
+    
+    // MARK: - Private properties
     
     fileprivate var parsedPayload: NSDictionary? {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.PayloadKey) as? NSDictionary }
@@ -42,7 +44,7 @@ public extension AVPlayerViewController {
     
     func addSubtitles() {
         // Create label
-        addSubtitleLabel()
+        addSubtitleView()
     }
     
     func open(fileFromLocal filePath: URL, encoding: String.Encoding = .utf8) throws {
@@ -51,7 +53,7 @@ public extension AVPlayerViewController {
     }
     
     func open(fileFromRemote filePath: URL, encoding: String.Encoding = .utf8) {
-        subtitleLabel?.text = "..."
+        subtitleView?.textLabel?.text = "..."
         let dataTask = URLSession.shared.dataTask(with: filePath) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 let statusCode = httpResponse.statusCode
@@ -65,7 +67,7 @@ public extension AVPlayerViewController {
             
             // Update UI elements on main thread
             DispatchQueue.main.async {
-                self.subtitleLabel?.text = ""
+                self.subtitleView?.textLabel.text = ""
                 if let checkData = data as Data?, let contents = String(data: checkData, encoding: encoding) {
                     self.show(subtitles: contents)
                 }
@@ -94,7 +96,7 @@ public extension AVPlayerViewController {
         // Add periodic notifications
         let interval = CMTimeMake(1, 60)
         self.player?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
-            guard let strongSelf = self, let label = strongSelf.subtitleLabel else {
+            guard let strongSelf = self, let label = strongSelf.subtitleView?.textLabel else {
                 return
             }
             
@@ -105,45 +107,48 @@ public extension AVPlayerViewController {
             let baseSize = CGSize(width: label.bounds.width, height: .greatestFiniteMagnitude)
             let rect = label.sizeThatFits(baseSize)
             if label.text != nil {
-                strongSelf.subtitleLabelHeightConstraint?.constant = rect.height + 5.0
+                strongSelf.subtitleViewHeightConstraint?.constant = rect.height + 5.0
             } else {
-                strongSelf.subtitleLabelHeightConstraint?.constant = rect.height
+                strongSelf.subtitleViewHeightConstraint?.constant = rect.height
             }
         }
     }
     
-    fileprivate func addSubtitleLabel() {
-        guard subtitleLabel == nil else {
+    fileprivate func addSubtitleView() {
+        guard subtitleView == nil else {
             return
         }
         
         // Label
-        subtitleLabel = UILabel()
-        subtitleLabel?.layer.cornerRadius = 3.0
-        subtitleLabel?.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel?.backgroundColor = UIColor.clear
-        subtitleLabel?.textAlignment = .center
-        subtitleLabel?.numberOfLines = 0
-        let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 22.0
-        subtitleLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
-        subtitleLabel?.textColor = .white
-        subtitleLabel?.layer.shadowColor = UIColor.black.cgColor
-        subtitleLabel?.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-        subtitleLabel?.layer.shadowOpacity = 0.9
-        subtitleLabel?.layer.shadowRadius = 1.0
-        subtitleLabel?.layer.shouldRasterize = true
-        subtitleLabel?.layer.rasterizationScale = UIScreen.main.scale
-        subtitleLabel?.lineBreakMode = .byWordWrapping
+        subtitleView = SubtitleView.create()
+        subtitleView?.translatesAutoresizingMaskIntoConstraints = false
+        subtitleView?.layer.cornerRadius = 6
+        //let fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 22.0
+        //subtitleView?.textLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
+       // subtitleView?.textLabel?.shadowOffset = CGSize(width: 1.0, height: 1.0)
+       // subtitleView?.textLabel?.layer.shadowOpacity = 0.9
+       // subtitleView?.textLabel?.layer.shadowRadius = 1.0
+       // subtitleView?.textLabel?.layer.shouldRasterize = true
+       // subtitleView?.textLabel?.layer.rasterizationScale = UIScreen.main.scale
+       // subtitleView?.textLabel?.lineBreakMode = .byWordWrapping
         
-        contentOverlayView?.addSubview(subtitleLabel!)
+        contentOverlayView?.addSubview(subtitleView!)
+        subtitleView!.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        subtitleView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        subtitleView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -20).isActive = true
+        subtitleView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+
         
         // Position
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(20)-[l]-(20)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["l" : subtitleLabel!])
+        /*
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(20)-[l]-(20)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["l" : subtitleView!])
         contentOverlayView?.addConstraints(constraints)
-        constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[l]-(30)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["l" : subtitleLabel!])
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[l]-(30)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["l" : subtitleView!])
         contentOverlayView?.addConstraints(constraints)
-        subtitleLabelHeightConstraint = NSLayoutConstraint(item: subtitleLabel!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1.0, constant: 30.0)
-        contentOverlayView?.addConstraint(subtitleLabelHeightConstraint!)
+        subtitleViewHeightConstraint = NSLayoutConstraint(item: subtitleView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1.0, constant: 30.0)
+        
+        contentOverlayView?.addConstraint(subtitleViewHeightConstraint!)
+         */
     }
     
 }
