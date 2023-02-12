@@ -67,7 +67,6 @@ class SaveLessonProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDownlo
         }
         
         do {
-            
             let fileNamed = self.fileNamedForLesson(self.lesson)
             
             let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "mp3")
@@ -105,9 +104,13 @@ class SaveLessonProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDownlo
         
         SQLmanager.insertOrReplaceData(dataDictionary: lesonDictionary, toTable: "savedLessons", toDBFile: "DafYomi.sqlite")
         
-         self.onComplete?(self.lesson)
-        
-        self.lesson = nil
+        if lesson.maggidShiur.hasSubtitles{
+            self.saveLessonSubtitles()
+        }
+        else{
+            self.onComplete?(self.lesson)
+            self.lesson = nil
+        }
     }
     
     func fileNamedForLesson(_ lesson:Lesson) -> String
@@ -130,6 +133,47 @@ class SaveLessonProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDownlo
         DispatchQueue.main.async(execute: {() -> Void in
             self.onFaile?(self.lesson, error! as NSError)
         })
+    }
+    
+    func saveLessonSubtitles(){
+        
+        if let subtitlePath = self.lesson.urlPath()?.replacingOccurrences(of: "mp4", with: "srt")
+            ,let url = URL(string: subtitlePath){
+            let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let httpResponse = response as? HTTPURLResponse {
+                    let statusCode = httpResponse.statusCode
+                    
+                    //Check status code
+                    if statusCode != 200 {
+                        NSLog("Subtitle Error: \(httpResponse.statusCode) - \(error?.localizedDescription ?? "")")
+                        
+                        self.onComplete?(self.lesson)
+                        self.lesson = nil
+                        
+                        return
+                    }
+                }
+                
+                // Update UI elements on main thread
+                DispatchQueue.main.async {
+                    if let checkData = data as Data?, let subtitles = String(data: checkData, encoding: .utf8) {
+                        
+                        let fileNamed = self.fileNamedForLesson(self.lesson)
+                        let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "srt")
+                        
+                        //writing
+                          do {
+                              try subtitles.write(to: filePath, atomically: false, encoding: .utf8)
+                          }
+                          catch {/* error handling here */}
+                    }
+                    
+                    self.onComplete?(self.lesson)
+                    self.lesson = nil
+                }
+            }
+            dataTask.resume()
+        }
     }
 }
 

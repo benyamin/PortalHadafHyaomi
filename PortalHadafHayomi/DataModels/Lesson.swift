@@ -94,7 +94,9 @@ class Lesson:DataObject
            ,let magidShiorName = dictionary["magidShior"] as? String
            ,let language =  dictionary["language"] as? String {
             
-            self.maggidShiur = MaggidShiur(  id: magidShiorId, name: magidShiorName, language:language, mediaType:mediaType ?? .All)
+            let subtitles = (dictionary["subtitles"] as? String ?? "NO") == "YES" ? true : false
+            
+            self.maggidShiur = MaggidShiur(id: magidShiorId, name: magidShiorName, language:language, mediaType:mediaType ?? .All , subtitles:subtitles )
         }
     }
     

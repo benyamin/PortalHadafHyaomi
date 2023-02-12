@@ -23,7 +23,12 @@ class LessonPickerMaggidShiourCell: UIView {
     func reloadWithMaggidShiour(_ maggidShiour:MaggidShiur)
     {
         self.titleLabel.text = maggidShiour.name
-        self.subTitleLabel.text = maggidShiour.language
+        
+        var subTitle = maggidShiour.language!
+        if maggidShiour.hasSubtitles{
+            subTitle += " | \("st_subtitles".localize())"
+        }
+        self.subTitleLabel.text = subTitle
         
         self.titleLabel.textColor = maggidShiour.hasSavedLessons ?  UIColor(HexColor: "08506E") : UIColor(HexColor: "781F24")
         self.subTitleLabel.textColor = maggidShiour.hasSavedLessons ?  UIColor(HexColor: "08506E") : UIColor(HexColor: "781F24")

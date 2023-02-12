@@ -606,8 +606,8 @@
             filePath = "PortalHadafHayomi/DataModels/MaggidShiur.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "isFavorite"
             landmarkType = "24">
          </BreakpointContent>
@@ -1695,22 +1695,6 @@
             startingLineNumber = "145"
             endingLineNumber = "145"
             landmarkName = "addSubtitleView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1DE911C5-28D8-423B-912F-FBFFD09B7159"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/DataModels/MediaLesson.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "init(dictionary:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

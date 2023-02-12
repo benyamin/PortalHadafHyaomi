@@ -15,6 +15,7 @@ class  MaggidShiur:DataObject
     var language:String!
     var mediaType:MediaType = .All
     var localizedName:String!
+    var hasSubtitles:Bool = false
     
     var isFavorite:Bool = false {
         didSet{
@@ -50,7 +51,7 @@ class  MaggidShiur:DataObject
         super.init()
     }
     
-    init(id:String, name:String, language:String, mediaType:MediaType) {
+    init(id:String, name:String, language:String, mediaType:MediaType, subtitles:Bool) {
         
         super.init()
         
@@ -58,6 +59,7 @@ class  MaggidShiur:DataObject
         self.name = name
         self.language = language
         self.mediaType = mediaType
+        self.hasSubtitles = subtitles
         
         if self.id != nil
         {

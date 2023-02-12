@@ -278,6 +278,7 @@
 
 "st_Continue_from_where_you_left_off_alert_title" = "";
 "st_Continue_from_where_you_left_off_alert_message" = "Continue rabbi's %@ on Masechet %@ page %@ from where you left off?";
+"st_subtitles" = "Subtitles";
 
 //Lessons Map page
 "st_lessons_map" = "Lessons map";

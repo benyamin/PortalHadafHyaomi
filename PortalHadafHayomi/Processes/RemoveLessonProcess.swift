@@ -31,6 +31,12 @@ class RemoveLessonProcess: MSBaseProcess//, LessonDownLoaderDelegate, UIAlertVie
             do{
                 try FileManager.default.removeItem(atPath:path)
                 
+                if lesson.maggidShiur.hasSubtitles{
+                    let subtitlesFilePath = path.replacingOccurrences(of: "mp4", with: "srt")
+                    
+                    try FileManager.default.removeItem(atPath:subtitlesFilePath)
+                }
+                
                 let lesonDictionary:[String:String] = ["magidShior":lesson.maggidShiur.name,
                                                        "maschet":lesson.masechet.name,
                                                        "page":lesson.page!.symbol]
