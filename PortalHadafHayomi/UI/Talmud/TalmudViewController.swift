@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TalmudPagePickerViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource
+class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TalmudPagePickerViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UISearchBarDelegate
 {
     @IBOutlet weak var pagesCollectionView:UICollectionView!
      @IBOutlet weak var pagesCollectionBottomConstraint:NSLayoutConstraint?
@@ -49,6 +49,9 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var increaseTextSizeButton:UIButton!
     @IBOutlet weak var dicreaseTextSizeButton:UIButton!
+    
+    @IBOutlet weak var searchBar:UISearchBar!
+    @IBOutlet weak var searchBarTrailingConstraintToView:NSLayoutConstraint!
     
     var displyedPicker:UIView?{
         didSet{
@@ -1095,6 +1098,11 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                     
         cell.reloadWithObject((self.selectedDisplayType, indexPath.row+1))
         
+        if let searchText = self.searchBar.text
+            ,!searchText.isEmpty {
+            cell.highlightText(searchText)
+        }
+        
         return cell
     }
     
@@ -1252,5 +1260,31 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         {
             self.setAudioUrl()
         }
+    }
+    
+    //MARK: UISearchBarDelegate
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBarTrailingConstraintToView?.priority = UILayoutPriority(900)
+        self.searchBar.searchBarStyle = .default
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchBarTrailingConstraintToView?.priority = UILayoutPriority(500)
+        self.searchBar.searchBarStyle = .minimal
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        for cell in self.pagesCollectionView.visibleCells{
+            (cell as? TalmudPageCell)?.highlightText(searchText)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.text = ""
     }
 }

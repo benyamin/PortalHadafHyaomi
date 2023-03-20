@@ -361,8 +361,8 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     }
     
     func displayLockAlert(){
-        BTAlertView.show(title: "Lock", message: "the player is locked for changes", buttonKeys: ["unlock", "Keep Locked"]) { dismissButtonKey in
-            if dismissButtonKey == "unlock" {
+        BTAlertView.show(title: "st_player_locked_alert_title".localize(), message: "st_player_locked_alert_Message".localize(), buttonKeys: ["st_unlock_button".localize(), "st_keppLocked_button".localize()]) { dismissButtonKey in
+            if dismissButtonKey == "st_unlock_button".localize() {
                 self.unlock()
             }
         }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -148,6 +148,17 @@
                                     <outlet property="delegate" destination="Jai-r2-lgz" id="zsp-Ng-qKR"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DKM-e9-dg2">
+                                <rect key="frame" x="0.0" y="105" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Gyy-Th-7M5"/>
+                                    <constraint firstAttribute="width" priority="750" constant="44" id="QZ7-W2-4kL"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Jai-r2-lgz" id="1am-aN-0Xy"/>
+                                </connections>
+                            </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CU-qn-65E">
                                 <rect key="frame" x="334" y="113" width="33" height="33"/>
                                 <constraints>
@@ -531,6 +542,7 @@
                             <constraint firstItem="iXH-Fj-72o" firstAttribute="top" secondItem="6XK-vw-AZT" secondAttribute="bottom" constant="6" id="0Db-gZ-RLt"/>
                             <constraint firstItem="khj-Z1-3kN" firstAttribute="leading" secondItem="zyy-A8-skH" secondAttribute="trailing" id="0j3-eY-WuN"/>
                             <constraint firstAttribute="trailing" secondItem="UgW-NQ-GQb" secondAttribute="trailing" id="1Qh-QC-ZV4"/>
+                            <constraint firstAttribute="trailing" secondItem="DKM-e9-dg2" secondAttribute="trailing" priority="500" id="1Wd-3b-yAv"/>
                             <constraint firstItem="Gtt-Vg-Jeg" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="5N9-F5-azG"/>
                             <constraint firstItem="zVD-0l-dn5" firstAttribute="top" secondItem="d41-67-OzN" secondAttribute="bottom" id="8S2-DC-v2x"/>
                             <constraint firstItem="d41-67-OzN" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="B9e-7B-OhT"/>
@@ -544,6 +556,7 @@
                             <constraint firstAttribute="trailing" secondItem="khj-Z1-3kN" secondAttribute="trailing" id="QYt-fT-cT1"/>
                             <constraint firstAttribute="trailing" secondItem="zsp-Gh-zwb" secondAttribute="trailing" constant="8" id="Qxl-5z-OxX"/>
                             <constraint firstItem="e3S-8u-bB1" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="T3R-cC-3ew"/>
+                            <constraint firstItem="DKM-e9-dg2" firstAttribute="top" secondItem="cxP-Kk-WIo" secondAttribute="bottom" id="TQb-Ka-YP6"/>
                             <constraint firstItem="e3S-8u-bB1" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="bottom" constant="35" id="W9Q-72-7TC"/>
                             <constraint firstAttribute="bottomMargin" secondItem="zyy-A8-skH" secondAttribute="bottom" id="c53-bn-coE"/>
                             <constraint firstItem="cxP-Kk-WIo" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="cCy-bz-dhh"/>
@@ -561,6 +574,7 @@
                             <constraint firstAttribute="trailing" secondItem="d41-67-OzN" secondAttribute="trailing" id="miU-Qg-RwB"/>
                             <constraint firstItem="UgW-NQ-GQb" firstAttribute="top" secondItem="Qye-yT-nQL" secondAttribute="bottom" id="n9r-Ko-ONZ"/>
                             <constraint firstItem="tw4-s9-hff" firstAttribute="leading" secondItem="zVD-0l-dn5" secondAttribute="trailing" constant="1" id="npw-La-tFj"/>
+                            <constraint firstItem="DKM-e9-dg2" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="nto-2J-0w3"/>
                             <constraint firstItem="tw4-s9-hff" firstAttribute="top" secondItem="5Sk-sJ-IN1" secondAttribute="bottom" id="o3c-1x-rjl"/>
                             <constraint firstItem="cxP-Kk-WIo" firstAttribute="width" secondItem="zVD-0l-dn5" secondAttribute="width" id="qUo-Cg-WjK"/>
                             <constraint firstItem="iXH-Fj-72o" firstAttribute="top" secondItem="khj-Z1-3kN" secondAttribute="bottom" id="rXy-sp-qCd"/>
@@ -588,6 +602,8 @@
                         <outlet property="pagesCollectionView" destination="e3S-8u-bB1" id="R0Y-WR-53C"/>
                         <outlet property="saveMultiplePageButton" destination="8aq-g3-dl1" id="cbm-CZ-CcC"/>
                         <outlet property="saveOrDeletePageButton" destination="1fD-PZ-PnB" id="tWi-cQ-ae6"/>
+                        <outlet property="searchBar" destination="DKM-e9-dg2" id="Ttr-Ug-uf9"/>
+                        <outlet property="searchBarTrailingConstraintToView" destination="1Wd-3b-yAv" id="Od5-ca-SOQ"/>
                         <outlet property="selectDisplayTypeButton" destination="tw4-s9-hff" id="4OC-Ke-aWX"/>
                         <outlet property="selectLessonButton" destination="UgW-NQ-GQb" id="qg6-vK-OyO"/>
                         <outlet property="selectPageButton" destination="zVD-0l-dn5" id="faa-Hj-Xk3"/>

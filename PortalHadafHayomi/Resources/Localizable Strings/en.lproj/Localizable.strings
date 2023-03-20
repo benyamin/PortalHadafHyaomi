@@ -222,6 +222,10 @@
 "st_Lesson_Skip_Interval" = "Player Jump Duration";
 "st_Lesson_Skip_Interval_description" = "";
 "selectedLessonSkipInterval" = "Player Jump Duration";
+"st_player_locked_alert_title" = "Locked";
+"st_player_locked_alert_Message" = "The player is locked for changes";
+"st_unlock_button" = "Unlock";
+"st_keppLocked_button" = "Keep Locked";
 
 //Talmud page
 "st_display_palyer" = "Show player";

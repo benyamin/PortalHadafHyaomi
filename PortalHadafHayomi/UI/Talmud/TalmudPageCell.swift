@@ -27,6 +27,8 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
     
     var getWebPageProcess:MSBaseProcess?
     
+    var searchText:String = ""
+    
     let basicfontSize = 100
     
     override func awakeFromNib() {
@@ -100,6 +102,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                     self.loadingView.isHidden = true
                     self.loadingIndicatorView.stopAnimating()
                     self.pagPDFView?.document = pdfDocument
+                                        
                     return
                     
                 }
@@ -163,6 +166,9 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                                     self.loadingView.isHidden = true
                                     self.loadingIndicatorView.stopAnimating()
                                     self.pagPDFView?.document = PDFDocument(data: actualData)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                        self.markPDF()
+                                    }
                                 }
                             }
                         }
@@ -175,8 +181,33 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         }
     }
     
+    func markPDF(){
+        // Find all instances of the text in the PDF document
+        let highlightText = "Â‡"
+        let selections = pagPDFView?.document?.findString(highlightText, withOptions: .caseInsensitive)
+
+        // Loop through the selections and add a highlight annotation for each one
+        if let currentPage = pagPDFView?.currentPage{
+            if let selections = selections, !selections.isEmpty {
+                for selection in selections {
+                    let highlight = PDFAnnotation(bounds: selection.bounds(for: currentPage), forType: .highlight, withProperties: nil)
+                    highlight.color = UIColor.yellow.withAlphaComponent(0.5)
+                    pagPDFView?.currentPage?.addAnnotation(highlight)
+                }
+            }
+        }
+    }
+    
     override func reloadData() {
         self.setTextSize()
+    }
+    
+    func highlightText(_ text:String){
+        self.searchText = text
+        pageWebView.clearHighlightedText()
+        if self.searchText.count > 0 {
+            pageWebView.highlightText(self.searchText)
+        }
     }
     
     func setEnglishDispaly()
@@ -224,8 +255,11 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                     
                     self.loadingView.isHidden = true
                     self.loadingIndicatorView.stopAnimating()
+                    
+                    if self.searchText.count > 0 {
+                        self.pageWebView.highlightText(self.searchText)
+                    }
                 }
-               
             }
             else if let pageURL = object as? URL {
                  self.pageWebView.load(URLRequest.init(url: pageURL))
@@ -288,6 +322,10 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
      
         self.loadingView.isHidden = true
         self.loadingIndicatorView.stopAnimating()
+        
+        if self.searchText.count > 0 {
+            pageWebView.highlightText(self.searchText)
+        }
     }
         
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

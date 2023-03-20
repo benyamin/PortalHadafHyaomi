@@ -44,6 +44,28 @@ open class  HadafHayomiManager
         }
     }
     
+    lazy var vagshalEncoding:[String:Any] = {
+        
+        if let path = Bundle.main.path(forResource: "VagshalEncoding", ofType: "json")
+            ,let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+        {
+            if let jsonResponse =  try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] {
+                return jsonResponse
+            }
+        }
+        return [String:Any]()
+    }()
+    
+    func convertTextToVagshalEncoding(text:String) -> [String] {
+        var convertedResults = [String]()
+        
+        for char in text {
+            print("character = \(char)")
+        }
+        return convertedResults
+    }
+    
+    
     lazy var savedNotes:[Note] = {
         
         var savedNotes = [Note]()
