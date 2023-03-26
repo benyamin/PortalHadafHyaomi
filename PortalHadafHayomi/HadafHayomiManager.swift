@@ -56,13 +56,23 @@ open class  HadafHayomiManager
         return [String:Any]()
     }()
     
-    func convertTextToVagshalEncoding(text:String) -> [String] {
-        var convertedResults = [String]()
+    func convertTextToVagshalEncoding(text:String) -> String {
         
-        for char in text {
-            print("character = \(char)")
+        var encoding = ""
+        let gemara = self.vagshalEncoding["gemara"] as! [String:String]
+        
+        let letters = text.map { String($0) }
+        for letter in letters{
+            
+            if let letterIncuding = gemara.first(where: { $0.value == letter })?.key{
+                encoding += letterIncuding
+            }
+            else{
+                encoding += letter
+            }
         }
-        return convertedResults
+       
+        return String(encoding.reversed())
     }
     
     

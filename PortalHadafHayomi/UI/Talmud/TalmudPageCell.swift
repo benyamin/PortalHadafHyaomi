@@ -22,6 +22,8 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
     @IBOutlet weak var loadingMessageLabel:UILabel!
     @IBOutlet weak var loadingIndicatorView:UIActivityIndicatorView!
     
+    var heightLightedAnnotatoins = [PDFAnnotation]()
+    
     var displayType:TalmudDisplayType = .Vagshal
     var pageIndex:Int!
     
@@ -183,7 +185,16 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
     
     func markPDF(){
         // Find all instances of the text in the PDF document
-        let highlightText = "Â‡"
+        //let highlightText = "Â‡"
+        let highlightText = "ÚÓ˘"
+    
+        for annotation in self.heightLightedAnnotatoins {
+            pagPDFView?.currentPage?.removeAnnotation(annotation)
+        }
+        
+        self.heightLightedAnnotatoins.removeAll()
+        
+       // let highlightText = HadafHayomiManager.sharedManager.convertTextToVagshalEncoding(text: self.searchText)
         let selections = pagPDFView?.document?.findString(highlightText, withOptions: .caseInsensitive)
 
         // Loop through the selections and add a highlight annotation for each one
@@ -192,6 +203,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                 for selection in selections {
                     let highlight = PDFAnnotation(bounds: selection.bounds(for: currentPage), forType: .highlight, withProperties: nil)
                     highlight.color = UIColor.yellow.withAlphaComponent(0.5)
+                    self.heightLightedAnnotatoins.append(highlight)
                     pagPDFView?.currentPage?.addAnnotation(highlight)
                 }
             }
@@ -207,6 +219,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         pageWebView.clearHighlightedText()
         if self.searchText.count > 0 {
             pageWebView.highlightText(self.searchText)
+            self.markPDF()
         }
     }
     
