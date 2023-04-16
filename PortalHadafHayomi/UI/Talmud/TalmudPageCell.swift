@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import PDFKit
 
-class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelegate
+class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelegate, PDFViewDelegate
 {
     @IBOutlet var pagPDFView: PDFView?
     
@@ -31,6 +31,25 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
     
     var searchText:String = ""
     
+    lazy var bookmarkView:BookmarkView? = {
+        if let pdfDocumentView = self.pagPDFView?.documentView {
+            let bookmarkView = BookmarkView(frame: pdfDocumentView.bounds)
+            bookmarkView.onDidMoveTo = { [weak self] (point) in
+                var savedBookmarks = UserDefaults.standard.value(forKey: "bookmarks") as? [String:Double] ?? [String:Double]()
+                
+                if let selectedPageIndex = self?.pageIndex {
+                    savedBookmarks["\(selectedPageIndex)"] = point.y
+                    UserDefaults.standard.set(savedBookmarks, forKey: "bookmarks")
+                    UserDefaults.standard.synchronize()
+                }
+          }
+            return bookmarkView
+        }
+        else{
+            return nil
+        }
+    }()
+    
     let basicfontSize = 100
     
     override func awakeFromNib() {
@@ -46,6 +65,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         pagPDFView?.displayMode = .singlePageContinuous
         pagPDFView?.autoScales = true
         pagPDFView?.displayDirection = .vertical
+        pagPDFView?.delegate = self
     }
     
     override func reloadWithObject(_ object: Any)
@@ -168,6 +188,8 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                                     self.loadingView.isHidden = true
                                     self.loadingIndicatorView.stopAnimating()
                                     self.pagPDFView?.document = PDFDocument(data: actualData)
+                                    
+                                    self.addBookmark()
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                                         self.markPDF()
                                     }
@@ -183,10 +205,27 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         }
     }
     
+     func addBookmark(){
+         
+         if let pdfDocumentView = self.pagPDFView?.documentView
+                , let bookmarkView = self.bookmarkView{
+             pdfDocumentView.addSubview(bookmarkView)
+         }
+         
+         let savedBookmarks = UserDefaults.standard.value(forKey: "bookmarks") as? [String:Double] ?? [String:Double]()
+         if let selectedPageIndex = self.pageIndex
+                ,let savedOrigenY = savedBookmarks["\(selectedPageIndex)"] {
+             self.bookmarkView?.scroll(to:savedOrigenY, animated:false)
+         }
+         else{
+             self.bookmarkView?.scroll(to:30, animated:false)
+         }
+     }
+        
     func markPDF(){
         // Find all instances of the text in the PDF document
         //let highlightText = "Â‡"
-        let highlightText = "ÚÓ˘"
+        //let highlightText = " ̇"
     
         for annotation in self.heightLightedAnnotatoins {
             pagPDFView?.currentPage?.removeAnnotation(annotation)
@@ -194,7 +233,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         
         self.heightLightedAnnotatoins.removeAll()
         
-       // let highlightText = HadafHayomiManager.sharedManager.convertTextToVagshalEncoding(text: self.searchText)
+        let highlightText = HadafHayomiManager.sharedManager.convertTextToVagshalEncoding(text: self.searchText)
         let selections = pagPDFView?.document?.findString(highlightText, withOptions: .caseInsensitive)
 
         // Loop through the selections and add a highlight annotation for each one
@@ -220,6 +259,12 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         if self.searchText.count > 0 {
             pageWebView.highlightText(self.searchText)
             self.markPDF()
+        }
+        else{
+            for annotation in self.heightLightedAnnotatoins {
+                pagPDFView?.currentPage?.removeAnnotation(annotation)
+            }
+            self.heightLightedAnnotatoins.removeAll()
         }
     }
     
@@ -349,5 +394,10 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         }
         self.loadingIndicatorView.stopAnimating()
     }
+    
+    func pdfViewWillCopy(_ sender: PDFView) {
+         // Your code here
+         print("User selected Copy")
+     }
     
 }

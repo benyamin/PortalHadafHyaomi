@@ -33,8 +33,10 @@
 		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
 		2273A8C72471CBA7000E0390 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C52471CBA7000E0390 /* playIcon.png */; };
 		2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C62471CBA7000E0390 /* stopIcon.png */; };
+		227B64C829EB34FF004B74B9 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B64C729EB34FF004B74B9 /* BookmarkView.swift */; };
 		2283944C2985DF0A003B7239 /* GetSubtitlesProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */; };
 		2283944E2985E54B003B7239 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2283944D2985E54B003B7239 /* whatsapp.png */; };
+		22B2F7D329E88CEB00B7C972 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B2F7D229E88CEB00B7C972 /* bookmark.png */; };
 		22BF402429905F540053161D /* SubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF402329905F540053161D /* SubtitleView.swift */; };
 		22BF402629905F610053161D /* SubtitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF402529905F610053161D /* SubtitleView.xib */; };
 		22CD09B32467CEA100936262 /* PageSummaryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */; };
@@ -659,8 +661,10 @@
 		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
 		2273A8C52471CBA7000E0390 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
 		2273A8C62471CBA7000E0390 /* stopIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopIcon.png; sourceTree = "<group>"; };
+		227B64C729EB34FF004B74B9 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubtitlesProcess.swift; sourceTree = "<group>"; };
 		2283944D2985E54B003B7239 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
+		22B2F7D229E88CEB00B7C972 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		22BF402329905F540053161D /* SubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleView.swift; sourceTree = "<group>"; };
 		22BF402529905F610053161D /* SubtitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubtitleView.xib; sourceTree = "<group>"; };
 		22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSummaryCollectionCell.swift; sourceTree = "<group>"; };
@@ -1583,6 +1587,7 @@
 				4AB3472F22343249002ED44C /* NoteViewController.swift */,
 				4A74B4CC270F8C1300DD20E6 /* TalmudPageRangePickerView.swift */,
 				4A74B4CE270F8D7F00DD20E6 /* TalmudPageRangePickerView.xib */,
+				227B64C729EB34FF004B74B9 /* BookmarkView.swift */,
 			);
 			path = Talmud;
 			sourceTree = "<group>";
@@ -1898,6 +1903,7 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				22B2F7D229E88CEB00B7C972 /* bookmark.png */,
 				22D298B5299303E2006EEC9A /* hideSubtitles.png */,
 				22D298B6299303E2006EEC9A /* showSubtitles.png */,
 				223FA38629622F37005363CC /* lock-close-y.png */,
@@ -2951,6 +2957,7 @@
 				4ABFB713235291000079D68B /* play@2x.png in Resources */,
 				4ABFB71D235291000079D68B /* launch_Screen_ios_Logo.png in Resources */,
 				4ABFB759235291000079D68B /* talmud_icon_and_text.png in Resources */,
+				22B2F7D329E88CEB00B7C972 /* bookmark.png in Resources */,
 				4A74B4CB270F83EC00DD20E6 /* MultiplePageDownload.png in Resources */,
 				4ABFB788235291000079D68B /* Toldot.sqlite in Resources */,
 				4ABFB76C235291000079D68B /* Icon-App-40x40@1x.png in Resources */,
@@ -3056,6 +3063,7 @@
 				4AD1496C1FDC8B480038EBDF /* AccessoryTableCell.swift in Sources */,
 				4A733B3420B2350B00976D55 /* GetSurveysProcess.swift in Sources */,
 				4A65E1761FE801F2008BA62B /* LessonVenue.swift in Sources */,
+				227B64C829EB34FF004B74B9 /* BookmarkView.swift in Sources */,
 				4A7E0DEF1FEC48DA00D84E0E /* PickerRawDefaultview.swift in Sources */,
 				4AF5554B1FCA378D00A830EE /* MSWebService.swift in Sources */,
 				4A7E0E221FF5768300D84E0E /* GetRabbisHistoryProcess.swift in Sources */,

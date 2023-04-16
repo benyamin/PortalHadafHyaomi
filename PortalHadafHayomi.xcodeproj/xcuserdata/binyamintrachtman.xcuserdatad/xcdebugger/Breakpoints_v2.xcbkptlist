@@ -158,8 +158,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "reloadWithObject(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -382,8 +382,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "runProcess(process:withInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -816,7 +816,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "201"
                   endingLineNumber = "201"
-                  offsetFromSymbolStart = "53">
+                  offsetFromSymbolStart = "36">
                </Location>
                <Location
                   uuid = "3CB3CD03-D88D-41F7-91BF-22E14486963A - 7fd8920fde9b6829"
@@ -831,7 +831,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "201"
                   endingLineNumber = "201"
-                  offsetFromSymbolStart = "107">
+                  offsetFromSymbolStart = "100">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1120,7 +1120,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
                   endingLineNumber = "86"
-                  offsetFromSymbolStart = "148">
+                  offsetFromSymbolStart = "188">
                </Location>
                <Location
                   uuid = "DF0AF10C-F5E9-4264-8270-8954FBB1E1A9 - a0761b4fe3705eb1"
@@ -1135,7 +1135,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
                   endingLineNumber = "86"
-                  offsetFromSymbolStart = "556">
+                  offsetFromSymbolStart = "524">
                </Location>
                <Location
                   uuid = "DF0AF10C-F5E9-4264-8270-8954FBB1E1A9 - a0761b4fe3705eb1"
@@ -1150,7 +1150,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
                   endingLineNumber = "86"
-                  offsetFromSymbolStart = "2747">
+                  offsetFromSymbolStart = "2232">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1247,7 +1247,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "72"
                   endingLineNumber = "72"
-                  offsetFromSymbolStart = "157">
+                  offsetFromSymbolStart = "172">
                </Location>
                <Location
                   uuid = "C03F8E70-4F90-4B62-8459-17E8AD02E4FB - a4c3b77544008b19"
@@ -1262,7 +1262,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "72"
                   endingLineNumber = "72"
-                  offsetFromSymbolStart = "319">
+                  offsetFromSymbolStart = "320">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1327,7 +1327,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "52"
                   endingLineNumber = "52"
-                  offsetFromSymbolStart = "651">
+                  offsetFromSymbolStart = "656">
                </Location>
                <Location
                   uuid = "8FEE4173-4E3F-4346-83C0-B1575E0A72C5 - 52c03964bc6cc08b"
@@ -1342,7 +1342,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "52"
                   endingLineNumber = "52"
-                  offsetFromSymbolStart = "41">
+                  offsetFromSymbolStart = "52">
                </Location>
                <Location
                   uuid = "8FEE4173-4E3F-4346-83C0-B1575E0A72C5 - b66891ba6848b55b"
@@ -1357,7 +1357,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "52"
                   endingLineNumber = "52"
-                  offsetFromSymbolStart = "65">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1390,7 +1390,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "326"
                   endingLineNumber = "326"
-                  offsetFromSymbolStart = "1132">
+                  offsetFromSymbolStart = "1120">
                </Location>
                <Location
                   uuid = "00FAB89F-8517-45E1-9133-3AFA13B976AF - 585ba800ef25e168"
@@ -1405,7 +1405,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "326"
                   endingLineNumber = "326"
-                  offsetFromSymbolStart = "1181">
+                  offsetFromSymbolStart = "1176">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1470,7 +1470,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "99"
                   endingLineNumber = "99"
-                  offsetFromSymbolStart = "421">
+                  offsetFromSymbolStart = "480">
                </Location>
                <Location
                   uuid = "184212EB-283F-4905-860D-C6369DA9D493 - f2b87d79e7795055"
@@ -1485,7 +1485,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "99"
                   endingLineNumber = "99"
-                  offsetFromSymbolStart = "544">
+                  offsetFromSymbolStart = "588">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1532,8 +1532,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "reloadWithObject(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1548,8 +1548,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "reloadWithObject(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1564,8 +1564,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "reloadWithObject(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1733,22 +1733,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "407B50EE-D1C1-4057-890C-F8137F2D48D8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/UI/Talmud/TalmudViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1277"
-            endingLineNumber = "1277"
-            landmarkName = "searchBar(_:textDidChange:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4FB5707D-8266-46CE-B3DC-B1C35762EB77"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -1756,8 +1740,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "webView(_:didFinish:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1765,33 +1749,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5FD0BE47-8D4A-47C2-9857-8BABB86B9600"
+            uuid = "1ABC68E5-9C91-4E40-84CD-28F975FF5B5B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "markPDF()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A8BBF9FD-6CB5-42AC-81E7-E57B5B1F3CEB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/UI/Talmud/TalmudPageCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "markPDF()"
-            landmarkType = "7">
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "TalmudPageCell"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
