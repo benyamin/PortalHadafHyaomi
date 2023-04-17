@@ -114,10 +114,21 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
                 
                 if let masechet = HadafHayomiManager.sharedManager.maschetForDate(date)
                     , let page = HadafHayomiManager.sharedManager.pageForDate(date, addOnePage:true){
-                    self.displayTalmudView()
                     
-                    if let talmudViewController = self.talmudNavigationController.viewControllers.first as? TalmudViewController {
-                        talmudViewController.scrollToMaschet(masechet, page: page, pageSide:0,  animated: false)
+                    //For IPad
+                    if(UIDevice.current.userInterfaceIdiom == .pad)
+                    {
+                        if let mainIpadViewController = UIApplication.shared.keyWindow?.rootViewController as? Main_IPadViewController {
+                            
+                            mainIpadViewController.talmudViewController.scrollToMaschet(masechet, page: page, pageSide:0,  animated: false)
+                        }
+                    }
+                    else{
+                          self.present(self.talmudNavigationController, animated: false, completion: nil)
+                        
+                        if let talmudViewController = self.talmudNavigationController.viewControllers.first as? TalmudViewController {
+                            talmudViewController.scrollToMaschet(masechet, page: page, pageSide:0,  animated: false)
+                        }
                     }
                 }
             }

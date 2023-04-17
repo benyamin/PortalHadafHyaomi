@@ -235,8 +235,9 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
             
             let indexPath = IndexPath(row:pageIndex-1, section: 0)
             
-            self.pagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
-
+            if self.pagesCollectionView != nil {
+                self.pagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+            }
         }
         
         self.topBarTitleLabel?.text = HadafHayomiManager.dispalyTitleForMaschet(maschet, page: page, pageSide: pageSide)
