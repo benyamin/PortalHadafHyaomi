@@ -107,7 +107,22 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     
     lazy var calendarNavigationController:UINavigationController = {
         
-        return self.navControllerForStoryBoard("CalendarStoryboard", rootViewController: "CalendarViewController")
+        let calendarNavigationController = self.navControllerForStoryBoard("CalendarStoryboard", rootViewController: "CalendarViewController")
+        
+        if let calendarViewController = calendarNavigationController.viewControllers.first as? CalendarViewController {
+            calendarViewController.onDisplayPageForDate = { (date) in
+                
+                if let masechet = HadafHayomiManager.sharedManager.maschetForDate(date)
+                    , let page = HadafHayomiManager.sharedManager.pageForDate(date, addOnePage:true){
+                    self.displayTalmudView()
+                    
+                    if let talmudViewController = self.talmudNavigationController.viewControllers.first as? TalmudViewController {
+                        talmudViewController.scrollToMaschet(masechet, page: page, pageSide:0,  animated: false)
+                    }
+                }
+            }
+        }
+        return calendarNavigationController
     }()
     
     lazy var hadafHayomiProjectNavigationController:UINavigationController = {
@@ -493,22 +508,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             
         case "Talmud":
             
-            //For IPad
-            if(UIDevice.current.userInterfaceIdiom == .pad)
-            {
-                if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-                    ,rootViewController is Main_IPadViewController
-                {
-                    //Connect the talmudPagePicker to the Talmud view controller of the ipad
-                    let mainViewController = rootViewController as! Main_IPadViewController
-                    mainViewController.talmudViewController.talmudPagePickerViewController = self.talmudPagePickerViewController
-                }
-                
-                 self.present(self.talmudPagePickerViewController, animated: false, completion: nil)
-            }
-            else{
-                  self.present(self.talmudNavigationController, animated: false, completion: nil)
-            }
+            self.displayTalmudView()
           
             break
             
@@ -606,6 +606,27 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             
         }
     }
+    
+    func displayTalmudView(){
+        
+        //For IPad
+        if(UIDevice.current.userInterfaceIdiom == .pad)
+        {
+            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                ,rootViewController is Main_IPadViewController
+            {
+                //Connect the talmudPagePicker to the Talmud view controller of the ipad
+                let mainViewController = rootViewController as! Main_IPadViewController
+                mainViewController.talmudViewController.talmudPagePickerViewController = self.talmudPagePickerViewController
+            }
+            
+             self.present(self.talmudPagePickerViewController, animated: false, completion: nil)
+        }
+        else{
+              self.present(self.talmudNavigationController, animated: false, completion: nil)
+        }
+    }
+    
     func navControllerForStoryBoard(_  storyBoardIdentifier:String, rootViewController VCIdentifier:String) -> UINavigationController
     {
         let storyboard = UIStoryboard(name: storyBoardIdentifier, bundle: nil)

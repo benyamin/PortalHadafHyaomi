@@ -34,6 +34,8 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     
     var popover:Popover?
     
+    open var onDisplayPageForDate:((_ date:Date) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -429,6 +431,13 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, dismissButtonClicked button:UIButton)
     {
         self.popover?.dismiss()
+    }
+    
+    func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, didSelectDisplayPageForDate date:Date){
+                
+        self.popover?.dismiss()
+
+        self.onDisplayPageForDate?(date)
     }
     
     //MARK: = TalmudPagePickerView delegate meothods

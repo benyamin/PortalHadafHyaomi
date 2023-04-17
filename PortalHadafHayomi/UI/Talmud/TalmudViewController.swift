@@ -905,14 +905,17 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.displyedPage = page
         self.displyedPageSide =  pageSide
         
-        if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(maschet, page: page, pageSide: pageSide)
-        {
-            //Reduce by 1 becuse the collectoin view index starts from 0
-            let indexPath = IndexPath(row:pageIndex-1, section: 0)
+        if self.pagesCollectionView != nil {
             
-            self.pagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+            if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(maschet, page: page, pageSide: pageSide)
+            {
+                //Reduce by 1 becuse the collectoin view index starts from 0
+                let indexPath = IndexPath(row:pageIndex-1, section: 0)
+                
+                self.pagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+            }
+            self.onDidSelectPage()
         }
-        self.onDidSelectPage()
         
         self.saveSelectedPage()
     }

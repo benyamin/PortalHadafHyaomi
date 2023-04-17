@@ -12,6 +12,7 @@ import UIKit
 {
     func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, didChangeStatusForDate date:Date)
     func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, dismissButtonClicked button:UIButton)
+    func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, didSelectDisplayPageForDate date:Date)
 }
 
 class JewishCallPopOver: UIView, UITextViewDelegate
@@ -82,6 +83,11 @@ class JewishCallPopOver: UIView, UITextViewDelegate
         {
             self.deleteMessage()
         }
+    }
+    
+    @IBAction func displayPageButtonClicked(_ sender:AnyObject)
+    {
+        self.delegate?.JewishCallPopOver(self, didSelectDisplayPageForDate: self.date)
     }
     
    func saveMessage()
