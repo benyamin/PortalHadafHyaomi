@@ -66,6 +66,7 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         
         showTodaysPageButton.setTitle("st_todays_page".localize(), for: .normal)
         
+        self.searchBar.isHidden = true
         self.searchButton.layer.borderWidth = 1.0
         self.searchButton.layer.cornerRadius = 3
         self.searchButton.layer.borderColor = UIColor(HexColor:"6A2423").cgColor

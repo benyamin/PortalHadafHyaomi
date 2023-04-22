@@ -72,9 +72,23 @@ class MidotAndShiourimViewController: MSBaseViewController, UITableViewDelegate,
             let title = "measurements".localize()
             webViewController.loadUrl(refrence.path!, title: title)
             
-            self.navigationController?.pushViewController(webViewController, animated: true)
+            if(UIDevice.current.userInterfaceIdiom == .pad)
+            {
+                if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                    ,rootViewController is Main_IPadViewController
+                {
+                    let mainViewController = rootViewController as! Main_IPadViewController
+                    
+                    mainViewController.presentViewController(webViewController, onContainer: mainViewController.mainContainerView)
+                }
+            }
+            else{
+                self.navigationController?.pushViewController(webViewController, animated: true)
+
+            }
         }
     }
+    
     
     func showCalculator()
     {
