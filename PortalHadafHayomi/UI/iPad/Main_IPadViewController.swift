@@ -14,9 +14,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
     @IBOutlet weak var mainContainerView:UIView!
     @IBOutlet weak var sideContainerViewWidthConstraint:NSLayoutConstraint!
     
-    @IBOutlet weak var lockRotationContentView:UIView!
     @IBOutlet weak var lockRotationButton:UIButton!
-    @IBOutlet weak var lockRotationArrowImageView:UIImageView!
     
     @IBOutlet weak var fullScreenButton:UIButton!
     
@@ -103,7 +101,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         {
             if let topBar = viewController.topBarView
             {
-                self.topBarButtonsContentViewTopConstraint.constant = topBar.frame.size.height/2 - self.lockRotationContentView.frame.size.height/2
+                self.topBarButtonsContentViewTopConstraint.constant = topBar.frame.size.height/2 - 15
             }
              self.mainContainerView.bringSubview(toFront: self.topBarButtonsContentView)
         }
@@ -151,7 +149,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
     {
         if self.lockRotationButton.isSelected
         {
-            self.lockRotationArrowImageView.rotateAnimation(duration: 0.6, repeatCount:2.0)
+            self.lockRotationButton.rotateAnimation(duration: 0.6, repeatCount:2.0)
             
             return
         }
@@ -187,7 +185,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         rootViewController.view.addSubview(self.mainContainerView)
         self.mainContainerView.center = colletoinCenterOnRootView
         
-        let rotationAngle = UIDevice.current.orientation == .portrait ?  Double.pi/2 : -Double.pi/2
+        let rotationAngle = UIDevice.current.orientation == .portrait ?  -Double.pi/2 : Double.pi/2
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
             {

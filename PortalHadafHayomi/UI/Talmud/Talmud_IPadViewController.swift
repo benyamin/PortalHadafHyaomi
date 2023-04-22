@@ -14,6 +14,10 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
     @IBOutlet weak var showTodaysPageButton:UIButton!
     
     @IBOutlet weak var displayTranslationButton:UIButton!
+    @IBOutlet weak var searchButton:UIButton!
+    
+    @IBOutlet weak var searchBar:UISearchBar!
+    @IBOutlet weak var searchBarTopConstraint:NSLayoutConstraint!
     
     @IBOutlet weak var screenDivisionDisplayBaseView:UIView?
     @IBOutlet weak var centerScreensButton:UIButton?
@@ -61,6 +65,12 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         self.screenDivisionDisplayBaseView?.isHidden = true
         
         showTodaysPageButton.setTitle("st_todays_page".localize(), for: .normal)
+        
+        self.searchButton.layer.borderWidth = 1.0
+        self.searchButton.layer.cornerRadius = 3
+        self.searchButton.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
+        
+        self.searchBarTopConstraint.constant = -1*(self.searchBar.frame.size.height)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -100,6 +110,10 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
     @IBAction func showTodaysPageButtonClicked(_ sender:UIButton)
     {
         self.scrollToTodaysPage()
+    }
+    
+    @IBAction func searchButtonClicked(_ sender:UIButton){
+        self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant == 0 ? -1*(self.searchBar.frame.size.height) : 0
     }
     
     @IBAction func displayTranslationButtonClicked(_ sender:UIButton)

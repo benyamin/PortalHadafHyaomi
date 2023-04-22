@@ -36,6 +36,8 @@
 		227B64C829EB34FF004B74B9 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B64C729EB34FF004B74B9 /* BookmarkView.swift */; };
 		2283944C2985DF0A003B7239 /* GetSubtitlesProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */; };
 		2283944E2985E54B003B7239 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2283944D2985E54B003B7239 /* whatsapp.png */; };
+		22A6BCA429F1D91E007B3EB1 /* lockRotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A6BCA229F1D91E007B3EB1 /* lockRotation.png */; };
+		22A6BCA529F1D91E007B3EB1 /* unlockRotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A6BCA329F1D91E007B3EB1 /* unlockRotation.png */; };
 		22B2F7D329E88CEB00B7C972 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B2F7D229E88CEB00B7C972 /* bookmark.png */; };
 		22BF402429905F540053161D /* SubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF402329905F540053161D /* SubtitleView.swift */; };
 		22BF402629905F610053161D /* SubtitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF402529905F610053161D /* SubtitleView.xib */; };
@@ -664,6 +666,8 @@
 		227B64C729EB34FF004B74B9 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubtitlesProcess.swift; sourceTree = "<group>"; };
 		2283944D2985E54B003B7239 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
+		22A6BCA229F1D91E007B3EB1 /* lockRotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockRotation.png; sourceTree = "<group>"; };
+		22A6BCA329F1D91E007B3EB1 /* unlockRotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlockRotation.png; sourceTree = "<group>"; };
 		22B2F7D229E88CEB00B7C972 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		22BF402329905F540053161D /* SubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleView.swift; sourceTree = "<group>"; };
 		22BF402529905F610053161D /* SubtitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubtitleView.xib; sourceTree = "<group>"; };
@@ -1903,6 +1907,8 @@
 		4ABFB4AD235290FF0079D68B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				22A6BCA229F1D91E007B3EB1 /* lockRotation.png */,
+				22A6BCA329F1D91E007B3EB1 /* unlockRotation.png */,
 				22B2F7D229E88CEB00B7C972 /* bookmark.png */,
 				22D298B5299303E2006EEC9A /* hideSubtitles.png */,
 				22D298B6299303E2006EEC9A /* showSubtitles.png */,
@@ -2687,6 +2693,7 @@
 				22FD992F29527D8C00F73BDD /* preLesson.png in Resources */,
 				4AD149781FDDD7480038EBDF /* BTWebViewController.xib in Resources */,
 				4ABFB6C8235290FF0079D68B /* AddOnMap_Icon_ios.png in Resources */,
+				22A6BCA529F1D91E007B3EB1 /* unlockRotation.png in Resources */,
 				4ABFB737235291000079D68B /* contact_icon_and_text.png in Resources */,
 				4A58848D2085C602003EC9E5 /* TablePopUpViewCell.xib in Resources */,
 				4ABFB73F235291000079D68B /* forum_icon.png in Resources */,
@@ -2808,6 +2815,7 @@
 				4ABFB6B2235290FF0079D68B /* title_2.png in Resources */,
 				4ABFB738235291000079D68B /* lower_bar_empty_4.png in Resources */,
 				4ABFB778235291000079D68B /* defaultIcon.png in Resources */,
+				22A6BCA429F1D91E007B3EB1 /* lockRotation.png in Resources */,
 				22CDDD7E294B571400945E6F /* hidePlayer.png in Resources */,
 				4ABFB710235291000079D68B /* move_left@3x.png in Resources */,
 				4ABFB8AB235291000079D68B /* rasheyTeivot.plist in Resources */,
@@ -3530,7 +3538,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 11.4;
+				MARKETING_VERSION = 11.5;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3561,7 +3569,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 11.4;
+				MARKETING_VERSION = 11.5;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -32,6 +32,21 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
     var getSteinsaltzPageProcess:GetSteinsaltzPageProcess?
     var getPageTextProcess:GetPageTextProcess?
     
+    lazy var bookmarkView:BookmarkView = {
+        
+        let bookmarkView = BookmarkView(frame: self.bounds)
+        bookmarkView.onDidMoveTo = { [weak self] (point) in
+            var savedBookmarks = UserDefaults.standard.value(forKey: "bookmarks") as? [String:Double] ?? [String:Double]()
+            
+            if let selectedPageIndex = self?.pageIndex {
+                savedBookmarks["\(selectedPageIndex)"] = point.y
+                UserDefaults.standard.set(savedBookmarks, forKey: "bookmarks")
+                UserDefaults.standard.synchronize()
+            }
+        }
+        return bookmarkView
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -60,6 +75,8 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
         
         var urlString:String = ""
         
+        self.bookmarkView.isHidden = true
+        
         if displayType == .Vagshal
         {
             //Check if page is saved in documnets
@@ -73,6 +90,8 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
             else{
                 urlString = ("https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")
             }
+            
+            self.addBookmark()
         }
         else if displayType == .Text
             || displayType == .TextWithScore
@@ -96,6 +115,23 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
                 self.pageWebView.stopLoading()
             }
             self.pageWebView.loadRequest(requestObj)
+        }
+    }
+    
+    func addBookmark(){
+        
+        self.pageWebView.addSubview(self.bookmarkView)
+        self.bookmarkView.isHidden = false
+        self.bookmarkView.height = self.bounds.size.height
+        bookmarkView.location = .left
+        
+        let savedBookmarks = UserDefaults.standard.value(forKey: "bookmarks") as? [String:Double] ?? [String:Double]()
+        if let selectedPageIndex = self.pageIndex
+               ,let savedOrigenY = savedBookmarks["\(selectedPageIndex)"] {
+            self.bookmarkView.scroll(to:savedOrigenY, animated:false)
+        }
+        else{
+            self.bookmarkView.scroll(to:30, animated:false)
         }
     }
     

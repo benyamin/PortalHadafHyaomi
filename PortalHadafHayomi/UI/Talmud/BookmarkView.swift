@@ -8,14 +8,33 @@
 
 import UIKit
 
+enum BookmarkViewLocatoin {
+    case left
+    case right
+}
+
 class BookmarkView: UIView {
 
     private var locationIndicatorView:UIView!
+    private var barView:UIView!
+    private var bookMarkImageView:UIImageView!
     
     open var onDidMoveTo:((_ point:CGPoint) -> Void)?
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    open var location:BookmarkViewLocatoin!{
+        didSet {
+            if location == .left{
+                self.frame.origin.x = 6
+                self.barView.frame.origin.x = 14
+                self.locationIndicatorView.frame.origin.x = 8
+                self.bookMarkImageView.frame.origin.x = 0
+                self.bookMarkImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
+            }
+        }
     }
     
     override init(frame: CGRect) {
@@ -27,7 +46,7 @@ class BookmarkView: UIView {
         self.backgroundColor = .clear
         
         let barViewWidh = CGFloat(6)
-        let barView = UIView(frame: CGRect(x: bookmarkWidth - 14 , y: 0, width: barViewWidh, height: self.bounds.height))
+        self.barView = UIView(frame: CGRect(x: bookmarkWidth - 14 , y: 0, width: barViewWidh, height: self.bounds.height))
         barView.backgroundColor = .lightGray
         barView.layer.borderColor = UIColor.blue.cgColor
         barView.layer.borderWidth = 1
@@ -43,7 +62,7 @@ class BookmarkView: UIView {
         locationLineView.alpha = 0.4
         self.locationIndicatorView.addSubview(locationLineView)
         
-        let bookMarkImageView = UIImageView(frame:CGRect(x: self.locationIndicatorView.frame.size.width-30, y: self.locationIndicatorView.frame.size.height/2-10, width: 30, height: 20))
+        self.bookMarkImageView = UIImageView(frame:CGRect(x: self.locationIndicatorView.frame.size.width-30, y: self.locationIndicatorView.frame.size.height/2-10, width: 30, height: 20))
         bookMarkImageView.image = UIImage(named: "bookmark.png")
         bookMarkImageView.contentMode = .scaleAspectFit
         self.locationIndicatorView.addSubview(bookMarkImageView)
@@ -56,6 +75,16 @@ class BookmarkView: UIView {
         self.locationIndicatorView.addGestureRecognizer(panGesture)
      
         self.clipsToBounds = false
+    }
+    
+    var height:CGFloat {
+        get{
+            return self.frame.size.height
+        }
+        set{
+            self.frame.size.height = height
+            self.barView.frame.size.height = height
+        }
     }
         
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
