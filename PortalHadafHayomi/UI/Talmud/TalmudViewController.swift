@@ -47,6 +47,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var shareButton:UIButton?
     
+    @IBOutlet weak var bookmarkButton:UIButton!
+    
     @IBOutlet weak var increaseTextSizeButton:UIButton!
     @IBOutlet weak var dicreaseTextSizeButton:UIButton!
     
@@ -357,6 +359,16 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         },onFaile: { (object, error) -> Void in
             
         })
+    }
+    
+    @IBAction func bookmarkButtonButtonClicked(_ sender:UIButton){
+        self.bookmarkButton.isSelected = !self.bookmarkButton.isSelected
+        
+        for cell in self.pagesCollectionView.visibleCells {
+            (cell as? TalmudPageCell)?.bookmarkView?.isHidden = !(self.bookmarkButton.isSelected)
+            UserDefaults.standard.setValue(self.bookmarkButton.isSelected, forKey:"displayDafBookMark")
+            UserDefaults.standard.synchronize()
+        }
     }
     
     @IBAction func saveMultiplePageButtonClicked(_ sender:UIButton) {

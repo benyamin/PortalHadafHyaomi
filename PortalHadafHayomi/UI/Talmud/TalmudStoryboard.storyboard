@@ -484,6 +484,18 @@
                                             <action selector="shareButtonClicked" destination="Jai-r2-lgz" eventType="touchUpInside" id="22C-8l-rom"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8a-m9-Ref">
+                                        <rect key="frame" x="102" y="31" width="30" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="3eR-Kl-bpS"/>
+                                            <constraint firstAttribute="width" constant="30" id="beo-im-y35"/>
+                                        </constraints>
+                                        <state key="normal" image="addBookmark.png"/>
+                                        <state key="selected" image="removeBookmark.png"/>
+                                        <connections>
+                                            <action selector="bookmarkButtonButtonClicked:" destination="Jai-r2-lgz" eventType="touchUpInside" id="P0s-Af-eOD"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -492,6 +504,7 @@
                                     <constraint firstAttribute="bottom" secondItem="oma-Al-xFl" secondAttribute="bottom" constant="15" id="7XW-K0-XeL"/>
                                     <constraint firstAttribute="bottom" secondItem="8aq-g3-dl1" secondAttribute="bottom" constant="16" id="8kE-GN-wLH"/>
                                     <constraint firstItem="iEe-e7-9qT" firstAttribute="leading" secondItem="Gtt-Vg-Jeg" secondAttribute="leading" constant="40" id="A76-ev-SzF"/>
+                                    <constraint firstItem="X8a-m9-Ref" firstAttribute="leading" secondItem="oma-Al-xFl" secondAttribute="trailing" constant="6" id="A7z-qd-dMf"/>
                                     <constraint firstAttribute="bottom" secondItem="Omk-88-gA9" secondAttribute="bottom" constant="16" id="CJH-ak-deL"/>
                                     <constraint firstItem="xp5-oI-U2O" firstAttribute="leading" secondItem="Gtt-Vg-Jeg" secondAttribute="leading" id="LRb-Yw-ia9"/>
                                     <constraint firstAttribute="trailing" secondItem="Omk-88-gA9" secondAttribute="trailing" constant="6" id="Oj6-dV-TFy"/>
@@ -505,6 +518,7 @@
                                     <constraint firstItem="Nr3-LU-cUC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gtt-Vg-Jeg" secondAttribute="leading" constant="16" id="lkd-NX-uqc"/>
                                     <constraint firstItem="Nr3-LU-cUC" firstAttribute="centerX" secondItem="Gtt-Vg-Jeg" secondAttribute="centerX" id="nA1-BS-qYg"/>
                                     <constraint firstItem="1fD-PZ-PnB" firstAttribute="leading" secondItem="8aq-g3-dl1" secondAttribute="trailing" constant="8" id="o7j-hL-53B"/>
+                                    <constraint firstAttribute="bottom" secondItem="X8a-m9-Ref" secondAttribute="bottom" constant="15" id="rxJ-K7-sAE"/>
                                     <constraint firstItem="xp5-oI-U2O" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="top" id="xAW-WQ-vji"/>
                                 </constraints>
                             </view>
@@ -587,6 +601,7 @@
                     </view>
                     <connections>
                         <outlet property="addNoteButton" destination="iEe-e7-9qT" id="3UP-eW-vP5"/>
+                        <outlet property="bookmarkButton" destination="X8a-m9-Ref" id="3Zf-DW-sL0"/>
                         <outlet property="creaditView" destination="khj-Z1-3kN" id="M5d-Le-kje"/>
                         <outlet property="dicreaseTextSizeButton" destination="6XK-vw-AZT" id="EZJ-3c-RF0"/>
                         <outlet property="displayTypePickerView" destination="5Sk-sJ-IN1" id="qib-Tf-W1b"/>
