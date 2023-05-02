@@ -366,8 +366,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/TalmudDoublePageCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "setPlaneTextDisplay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1147,8 +1147,8 @@
             filePath = "PortalHadafHayomi/UI/Talmud/Talmud_IPadViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "didSelectLessonNotification(notification:)"
             landmarkType = "7">
             <Locations>

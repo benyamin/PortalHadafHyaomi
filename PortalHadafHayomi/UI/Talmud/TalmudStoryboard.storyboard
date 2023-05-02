@@ -970,7 +970,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0h9-SM-5R9">
-                                        <rect key="frame" x="390.5" y="23" width="33" height="33"/>
+                                        <rect key="frame" x="382.5" y="23" width="33" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="33" id="36Q-z4-VIl"/>
                                             <constraint firstAttribute="height" constant="33" id="eyC-1B-a9g"/>
@@ -986,7 +986,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7T5-XX-r7P">
-                                        <rect key="frame" x="341.5" y="22" width="33" height="33"/>
+                                        <rect key="frame" x="333.5" y="22" width="33" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="bNM-FU-ZXk"/>
                                             <constraint firstAttribute="width" constant="33" id="s6Z-9J-bAF"/>
@@ -1004,16 +1004,16 @@
                                             <constraint firstAttribute="width" constant="1" id="zqs-ip-5yE"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVv-5l-UVQ">
-                                        <rect key="frame" x="439.5" y="23" width="33" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bV1-CE-RKc">
+                                        <rect key="frame" x="431.5" y="23" width="33" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="Mcf-HA-qb1"/>
-                                            <constraint firstAttribute="width" constant="33" id="VjG-LJ-Q2P"/>
+                                            <constraint firstAttribute="height" constant="33" id="GJq-wK-6RQ"/>
+                                            <constraint firstAttribute="width" constant="33" id="yKF-6o-3S5"/>
                                         </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Button" image="searchIcon.png"/>
+                                        <state key="normal" image="addBookmark.png"/>
+                                        <state key="selected" image="removeBookmark.png"/>
                                         <connections>
-                                            <action selector="searchButtonClicked:" destination="hrG-X4-g6i" eventType="touchUpInside" id="RZ6-gn-7cw"/>
+                                            <action selector="bookmarkButtonButtonClicked:" destination="hrG-X4-g6i" eventType="touchUpInside" id="d36-UD-shI"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1024,18 +1024,18 @@
                                     <constraint firstItem="UVw-2u-1hR" firstAttribute="centerX" secondItem="OYi-6C-ADx" secondAttribute="centerX" id="65R-ds-HGB"/>
                                     <constraint firstItem="gW5-3k-SsL" firstAttribute="leading" secondItem="OhN-Qm-dVX" secondAttribute="trailing" constant="26" id="6gi-ny-dl5"/>
                                     <constraint firstAttribute="bottom" secondItem="7T5-XX-r7P" secondAttribute="bottom" constant="15" id="7zQ-3e-ont"/>
-                                    <constraint firstAttribute="bottom" secondItem="JVv-5l-UVQ" secondAttribute="bottom" constant="14" id="DTr-7E-dzB"/>
                                     <constraint firstItem="UVw-2u-1hR" firstAttribute="top" secondItem="vFx-BO-hpM" secondAttribute="top" id="Ik0-Z6-Edg"/>
                                     <constraint firstItem="OYi-6C-ADx" firstAttribute="leading" secondItem="vFx-BO-hpM" secondAttribute="leading" id="J1T-PV-5GV"/>
-                                    <constraint firstItem="JVv-5l-UVQ" firstAttribute="leading" secondItem="0h9-SM-5R9" secondAttribute="trailing" constant="16" id="LOR-Lo-GaL"/>
                                     <constraint firstAttribute="bottom" secondItem="0h9-SM-5R9" secondAttribute="bottom" constant="14" id="MxO-Zm-AG6"/>
                                     <constraint firstAttribute="height" constant="70" id="N2d-7o-Nac"/>
                                     <constraint firstAttribute="trailing" secondItem="VLs-6Y-4WT" secondAttribute="trailing" constant="8" id="PQ7-1L-c5Z"/>
+                                    <constraint firstItem="bV1-CE-RKc" firstAttribute="leading" secondItem="0h9-SM-5R9" secondAttribute="trailing" constant="16" id="Z2i-6F-BrC"/>
                                     <constraint firstAttribute="trailing" secondItem="OYi-6C-ADx" secondAttribute="trailing" id="a8J-d6-3fK"/>
                                     <constraint firstAttribute="bottom" secondItem="UVw-2u-1hR" secondAttribute="bottom" constant="20" id="b6a-ga-Osr"/>
                                     <constraint firstAttribute="bottom" secondItem="VLs-6Y-4WT" secondAttribute="bottom" constant="10" id="gou-Tc-ftn"/>
+                                    <constraint firstAttribute="bottom" secondItem="bV1-CE-RKc" secondAttribute="bottom" constant="14" id="oXI-LX-d1Y"/>
                                     <constraint firstAttribute="bottom" secondItem="OYi-6C-ADx" secondAttribute="bottom" id="q8R-yt-WVj"/>
-                                    <constraint firstItem="7T5-XX-r7P" firstAttribute="leading" secondItem="UVw-2u-1hR" secondAttribute="trailing" constant="16" id="sdq-km-gps"/>
+                                    <constraint firstItem="7T5-XX-r7P" firstAttribute="leading" secondItem="UVw-2u-1hR" secondAttribute="trailing" constant="8" id="sdq-km-gps"/>
                                     <constraint firstAttribute="bottom" secondItem="OhN-Qm-dVX" secondAttribute="bottom" constant="14" id="uLD-4z-qQX"/>
                                     <constraint firstItem="OYi-6C-ADx" firstAttribute="top" secondItem="vFx-BO-hpM" secondAttribute="top" id="xPz-XY-L4h"/>
                                     <constraint firstItem="OhN-Qm-dVX" firstAttribute="leading" secondItem="vFx-BO-hpM" secondAttribute="leading" constant="8" id="xzV-oU-HTE"/>
@@ -1065,6 +1065,7 @@
                     </view>
                     <size key="freeformSize" width="650" height="667"/>
                     <connections>
+                        <outlet property="bookmarkButton" destination="bV1-CE-RKc" id="K8C-jc-mro"/>
                         <outlet property="centerScreensButton" destination="6pO-gj-N3b" id="Cw0-gJ-IPk"/>
                         <outlet property="displayExplantionButton" destination="7T5-XX-r7P" id="Kg8-n2-gAJ"/>
                         <outlet property="displayTranslationButton" destination="0h9-SM-5R9" id="vmc-lM-Htp"/>
@@ -1074,7 +1075,6 @@
                         <outlet property="screenDivisionDisplayBaseView" destination="gW5-3k-SsL" id="Pfh-Of-3Zb"/>
                         <outlet property="searchBar" destination="sCi-De-DtD" id="wZ9-NB-6x7"/>
                         <outlet property="searchBarTopConstraint" destination="NkB-kL-LRH" id="BGs-In-YPm"/>
-                        <outlet property="searchButton" destination="JVv-5l-UVQ" id="71j-er-48R"/>
                         <outlet property="showTodaysPageButton" destination="OhN-Qm-dVX" id="IE5-WR-Yhw"/>
                         <outlet property="topBarTitleLabel" destination="VLs-6Y-4WT" id="rAR-LY-Eur"/>
                         <outlet property="topBarView" destination="vFx-BO-hpM" id="02Z-yy-8kg"/>
@@ -1209,6 +1209,7 @@
         <image name="MultiplePageDownload.png" width="200" height="241"/>
         <image name="TranslationIcon_off.png" width="120" height="120"/>
         <image name="TranslationIcon_on.png" width="120" height="120"/>
+        <image name="addBookmark.png" width="120" height="120"/>
         <image name="backButton.png" width="99" height="99"/>
         <image name="hidePlayer.png" width="160" height="160"/>
         <image name="move_center.png" width="36" height="33"/>
@@ -1216,11 +1217,11 @@
         <image name="move_right.png" width="36" height="33"/>
         <image name="nikud_off.png" width="120" height="120"/>
         <image name="nikud_on.png" width="120" height="120"/>
+        <image name="removeBookmark.png" width="120" height="120"/>
         <image name="safaira2.jpg" width="360" height="360"/>
         <image name="save.png" width="102" height="102"/>
         <image name="saveIcon.png" width="120" height="120"/>
         <image name="save_highlighted.png" width="100" height="100"/>
-        <image name="searchIcon.png" width="128" height="128"/>
         <image name="shareIcon.png" width="128" height="128"/>
         <image name="showPlayer.png" width="160" height="160"/>
         <image name="topBar1100.png" width="1100" height="120"/>

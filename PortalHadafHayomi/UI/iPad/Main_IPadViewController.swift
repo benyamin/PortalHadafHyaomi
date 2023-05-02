@@ -185,7 +185,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         rootViewController.view.addSubview(self.mainContainerView)
         self.mainContainerView.center = colletoinCenterOnRootView
         
-        let rotationAngle = UIDevice.current.orientation == .portrait ?  -Double.pi/2 : Double.pi/2
+        let rotationAngle = UIDevice.current.orientation == .portrait ?  Double.pi/2 : -Double.pi/2
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
             {

@@ -14,7 +14,7 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
     @IBOutlet weak var showTodaysPageButton:UIButton!
     
     @IBOutlet weak var displayTranslationButton:UIButton!
-    @IBOutlet weak var searchButton:UIButton!
+    @IBOutlet weak var bookmarkButton:UIButton!
     
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var searchBarTopConstraint:NSLayoutConstraint!
@@ -67,9 +67,7 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         showTodaysPageButton.setTitle("st_todays_page".localize(), for: .normal)
         
         self.searchBar.isHidden = true
-        self.searchButton.layer.borderWidth = 1.0
-        self.searchButton.layer.cornerRadius = 3
-        self.searchButton.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
+      
         
         self.searchBarTopConstraint.constant = -1*(self.searchBar.frame.size.height)
     }
@@ -116,6 +114,17 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
     @IBAction func searchButtonClicked(_ sender:UIButton){
         self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant == 0 ? -1*(self.searchBar.frame.size.height) : 0
     }
+    
+    @IBAction func bookmarkButtonButtonClicked(_ sender:UIButton){
+        self.bookmarkButton.isSelected = !self.bookmarkButton.isSelected
+        
+        for cell in self.pagesCollectionView.visibleCells {
+            (cell as? TalmudDoublePageCell)?.bookmarkView.isHidden = !(self.bookmarkButton.isSelected)
+            UserDefaults.standard.setValue(self.bookmarkButton.isSelected, forKey:"displayDafBookMark")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     
     @IBAction func displayTranslationButtonClicked(_ sender:UIButton)
     {

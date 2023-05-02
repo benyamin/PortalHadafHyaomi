@@ -133,6 +133,9 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
         else{
             self.bookmarkView.scroll(to:30, animated:false)
         }
+        
+        let displayDafBookMark =  UserDefaults.standard.bool(forKey: "displayDafBookMark")
+        self.bookmarkView.isHidden = !displayDafBookMark
     }
     
     func setSecondaryPageDispaly()
