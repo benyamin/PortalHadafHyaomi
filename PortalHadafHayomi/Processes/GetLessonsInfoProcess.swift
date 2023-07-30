@@ -42,7 +42,7 @@ open class GetLessonsInfoProcess: MSBaseProcess
         params["dir"] = "1"
         
         let request = MSRequest()
-        request.baseUrl = "http://daf-yomi.com"
+        request.baseUrl = "https://app.daf-yomi.com"
         request.serviceName = "AjaxHandler.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET

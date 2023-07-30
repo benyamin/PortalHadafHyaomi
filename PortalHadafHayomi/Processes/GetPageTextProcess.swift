@@ -26,7 +26,7 @@ open class GetPageTextProcess: MSBaseProcess
     {
             dataTask?.cancel()
         
-        let baseUrl = "https://daf-yomi.com/DafYomi_Page.aspx"
+        let baseUrl = "https://app.daf-yomi.com/DafYomi_Page.aspx"
 
             if var urlComponents = URLComponents(string: baseUrl) {
                 urlComponents.query = "vt=\(scoring ? 3 : 2)&context=1&id=\(pageIndex)&mobile=1"

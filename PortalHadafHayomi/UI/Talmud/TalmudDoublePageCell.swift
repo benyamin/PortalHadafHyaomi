@@ -103,7 +103,7 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
             if let masechet = HadafHayomiManager.sharedManager.getMasechetForPageIndex(self.pageIndex)
             {
                 let maschentNumber = 282 + Int(masechet.id!)!
-                urlString = ("https://daf-yomi.com/mobile/textrashi.aspx?massechet=\(maschentNumber)&page=\(pageIndex!)")
+                urlString = ("https://app.daf-yomi.com/mobile/textrashi.aspx?massechet=\(maschentNumber)&page=\(pageIndex!)")
             }
         }
         if let url = URL(string: urlString)

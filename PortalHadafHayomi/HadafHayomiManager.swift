@@ -900,13 +900,13 @@ open class  HadafHayomiManager
         case .Vagshal:
             return "https://app.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex).pdf"
         case .Text:
-            return "https://daf-yomi.com/DafYomi_Page.aspx?vt=2&context=1&id=\(pageIndex)&mobile=1"
+            return "https://app.daf-yomi.com/DafYomi_Page.aspx?vt=2&context=1&id=\(pageIndex)&mobile=1"
         case .TextWithScore:
-            return "https://daf-yomi.com/DafYomi_Page.aspx?vt=3&context=1&id=\(pageIndex)&mobile=1"
+            return "https://app.daf-yomi.com/DafYomi_Page.aspx?vt=3&context=1&id=\(pageIndex)&mobile=1"
         case .Meorot:
             if let masechet = HadafHayomiManager.sharedManager.getMasechetForPageIndex(pageIndex) {
                 let maschentNumber = 282 + Int(masechet.id!)!
-                return ("https://daf-yomi.com/mobile/textrashi.aspx?massechet=\(maschentNumber)&page=\(pageIndex)")
+                return ("https://app.daf-yomi.com/mobile/textrashi.aspx?massechet=\(maschentNumber)&page=\(pageIndex)")
             }
             else{
                 return nil

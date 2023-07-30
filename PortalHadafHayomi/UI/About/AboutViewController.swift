@@ -18,7 +18,7 @@ class AboutViewController: MSBaseViewController {
 
         //Set selected index to show About information
         self.displaySegmentedControlr.selectedSegmentIndex = 0
-        self.loadWebWithPath("https://daf-yomi.com/mobile/content.aspx?id=241")
+        self.loadWebWithPath("https://app.daf-yomi.com/mobile/content.aspx?id=241")
         
         self.displaySegmentedControlr.setTitle("st_about".localize(), forSegmentAt: 0)
         
@@ -40,17 +40,17 @@ class AboutViewController: MSBaseViewController {
     {
         if self.displaySegmentedControlr.selectedSegmentIndex == 0//Show About Information
         {
-            self.loadWebWithPath("https://daf-yomi.com/mobile/content.aspx?id=241")
+            self.loadWebWithPath("https://app.daf-yomi.com/mobile/content.aspx?id=241")
         }
         
         else if self.displaySegmentedControlr.selectedSegmentIndex == 1//Show messages
         {
-            self.loadWebWithPath("http://daf-yomi.com/mobile/content.aspx?id=288")
+            self.loadWebWithPath("https://app.daf-yomi.com/mobile/content.aspx?id=288")
         }
         
        else if self.displaySegmentedControlr.selectedSegmentIndex == 2//Show Terms and conditions
         {
-            self.loadWebWithPath("https://daf-yomi.com/mobile/content.aspx?id=242")
+            self.loadWebWithPath("https://app.daf-yomi.com/mobile/content.aspx?id=242")
         }
     }
     

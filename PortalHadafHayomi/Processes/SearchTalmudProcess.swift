@@ -31,7 +31,7 @@ open class SearchTalmudProcess: MSBaseProcess
              searchText = self.searchText
         }
        
-        var baseUrl = "http://daf-yomi.com/DafYomi_Page_Search.aspx?"
+        var baseUrl = "https://app.daf-yomi.com/DafYomi_Page_Search.aspx?"
         baseUrl += "text=" + searchText
         baseUrl += "&source=" + params["searchInId"]!
         baseUrl += "&massechet=" + params["massechet"]!

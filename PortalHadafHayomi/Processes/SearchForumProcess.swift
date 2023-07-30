@@ -24,13 +24,13 @@ open class SearchForumProcess: MSBaseProcess
         params["order"] = "0"
         
         self.request = MSRequest()
-        request?.baseUrl = "https://daf-yomi.com/mobile"
+        request?.baseUrl = "https://app.daf-yomi.com/mobile"
         request?.serviceName = "jsonservice.ashx"
         request?.requiredResponseType = .JSON
         request?.httpMethod = GET
         request?.params = params
         
-       // http://daf-yomi.com/mobile/jsonservice.ashx?forumid=1&page=1&pagesize=20&chofshi=%D7%9B%D7%94%D7%A0%D7%99%D7%9D%20%D7%94%D7%9E%D7%95%D7%9C%D7%99%D7%9B%D7%99%D7%9D
+       // https://app.daf-yomi.com/mobile/jsonservice.ashx?forumid=1&page=1&pagesize=20&chofshi=%D7%9B%D7%94%D7%A0%D7%99%D7%9D%20%D7%94%D7%9E%D7%95%D7%9C%D7%99%D7%9B%D7%99%D7%9D
         
         self.runWebServiceWithRequest(request!)
     }

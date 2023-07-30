@@ -17,14 +17,14 @@ open class GetChavrusasProcess: MSBaseProcess
         params["board"] = "1"
         
         let request = MSRequest()
-        request.baseUrl = "https://daf-yomi.com/mobile"
+        request.baseUrl = "https://app.daf-yomi.com/mobile"
         request.serviceName = "jsonservice.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET
         request.params = params
         
         
-      //  http://daf-yomi.com/mobile/jsonservice.ashx?board=1&chofshi={}&city={}&ezor={}&page={}&pagesize={}
+      //  https://app.daf-yomi.com/mobile/jsonservice.ashx?board=1&chofshi={}&city={}&ezor={}&page={}&pagesize={}
         self.runWebServiceWithRequest(request)
     }
     

@@ -20,7 +20,7 @@ class GetPagSummaryProcess: MSBaseProcess
         params["summary"] = "1"
         
         self.request = MSRequest()
-        self.request?.baseUrl = "http://daf-yomi.com/mobile"
+        self.request?.baseUrl = "https://app.daf-yomi.com/mobile"
         self.request?.serviceName = "jsonservice.ashx"
         self.request?.requiredResponseType = .JSON
         self.request?.httpMethod = GET

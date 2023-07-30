@@ -197,7 +197,7 @@
 "st_at_page" = "at %@ page";
 "st_Donation" = "Donation";
 "st_Donation_description" = "Donations for maintenance and operation of the site and application are welcome";
-"st_donation_page_link" = "http://daf-yomi.com/mobile/content.aspx?id=352";
+"st_donation_page_link" = "https://app.daf-yomi.com/mobile/content.aspx?id=352";
 
 "st_Auto_Lock_description" = "Prevent the screen from turning off while the app is running";
 "st_Default_Page_Type_description" = "Set Default page display type";

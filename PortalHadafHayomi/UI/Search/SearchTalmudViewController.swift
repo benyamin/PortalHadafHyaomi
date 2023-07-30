@@ -531,7 +531,7 @@ class SearchTalmudViewController: MSBaseViewController, UITableViewDelegate, UIT
         
         if let link = self.selectedSearchResult?.link
         {
-            let mobileLink = "http://daf-yomi.com/" + link + "&mobile=1"
+            let mobileLink = "https://app.daf-yomi.com/" + link + "&mobile=1"
             let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
             webViewController.delegate = self
             

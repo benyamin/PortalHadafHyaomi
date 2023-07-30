@@ -18,7 +18,7 @@ open class GetRegionsProcess: MSBaseProcess
         params["regions"] = "1"
         
         let request = MSRequest()
-        request.baseUrl = "http://daf-yomi.com/mobile"
+        request.baseUrl = "https://app.daf-yomi.com/mobile"
         request.serviceName = "jsonservice.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET

@@ -29,7 +29,7 @@ open class ForumAddMessageProcess: MSBaseProcess
         params["token"] = requiredInfo.user.token
         
         let request = MSRequest()
-        request.baseUrl = "https://daf-yomi.com/mobile/jsonservice.ashx?forumaddmessagetoken=1"
+        request.baseUrl = "https://app.daf-yomi.com/mobile/jsonservice.ashx?forumaddmessagetoken=1"
         request.serviceName = ""//"login.aspx"
         request.requiredResponseType = .JSON
         request.httpMethod = POST

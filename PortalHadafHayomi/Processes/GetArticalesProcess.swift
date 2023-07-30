@@ -33,7 +33,7 @@ open class GetArticalesProcess: MSBaseProcess
         params["pn"] = "\(pageIndex! + 1)"
         
         let request = MSRequest()
-        request.baseUrl = "https://daf-yomi.com/mobile"
+        request.baseUrl = "https://app.daf-yomi.com/mobile"
         request.serviceName = "jsonservice.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET

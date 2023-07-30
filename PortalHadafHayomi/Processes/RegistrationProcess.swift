@@ -16,7 +16,7 @@ open class RegistrationProcess: MSBaseProcess
         
         let request = MSRequest()
         request.baseUrl =
-        "https://daf-yomi.com/mobile/jsonservice.ashx?forumregistertoken=1"
+        "https://app.daf-yomi.com/mobile/jsonservice.ashx?forumregistertoken=1"
         request.serviceName = ""
         request.requiredResponseType = .JSON
         request.httpMethod = POST

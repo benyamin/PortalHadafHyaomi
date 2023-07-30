@@ -19,7 +19,7 @@ open class LoginProcess: MSBaseProcess
        // params["password"] = "ggyamin1"
         
         let request = MSRequest()
-        request.baseUrl = "https://daf-yomi.com/mobile/jsonservice.ashx?forumlogintoken=1"
+        request.baseUrl = "https://app.daf-yomi.com/mobile/jsonservice.ashx?forumlogintoken=1"
         request.serviceName = ""
         request.requiredResponseType = .JSON
         request.httpMethod = POST
@@ -66,7 +66,7 @@ open class LoginProcess: MSBaseProcess
     }
 }
 
-//http://daf-yomi.com/forums/members/login.aspx?fp=%2fforums%2fforum.aspx%3fid%3d1&PageId=156&msg=
+//https://app.daf-yomi.com/forums/members/login.aspx?fp=%2fforums%2fforum.aspx%3fid%3d1&PageId=156&msg=
 /*
  __VIEWSTATE: /wEPDwULLTE0OTQxNDYyMzQPZBYCAgIPZBYCAgUPD2QWAh4Hb25jbGljawUVcmV0dXJuIGZWYWxpZGF0Rm9ybSgpZGRNN0Z3y9buOarhoqW8KVAjkah0u/QubWulwMsbdo+OMQ==
  __VIEWSTATEGENERATOR: 5D025943

@@ -20,7 +20,7 @@ open class ForgotPasswordProcess: MSBaseProcess
        // params["email"] = "binyamin.mishour@gmail.com"
         
         let request = MSRequest()
-        request.baseUrl = "https://daf-yomi.com/mobile/jsonservice.ashx?forgotpassword=1"
+        request.baseUrl = "https://app.daf-yomi.com/mobile/jsonservice.ashx?forgotpassword=1"
         request.serviceName = ""
         request.requiredResponseType = .JSON
         request.httpMethod = POST

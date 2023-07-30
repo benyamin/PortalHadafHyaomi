@@ -25,7 +25,7 @@ open class GetForumDiscussionProcess: MSBaseProcess
         params["id"] = ("\(self.discussoin!.id ?? 0)")
         
         self.request = MSRequest()
-        request?.baseUrl = "https://daf-yomi.com/mobile"
+        request?.baseUrl = "https://app.daf-yomi.com/mobile"
         request?.serviceName = "jsonservice.ashx"
         request?.requiredResponseType = .JSON
         request?.httpMethod = GET

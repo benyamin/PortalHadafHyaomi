@@ -37,11 +37,11 @@ class Article:DataObject
         {
             if link_type == 2
             {
-                self.link = ("https://daf-yomi.com/Data/UploadedFiles/DY_Item/\(self.id!)-sFile.pdf")
+                self.link = ("https://app.daf-yomi.com/Data/UploadedFiles/DY_Item/\(self.id!)-sFile.pdf")
             }
             else if link_type == 3
             {
-                self.link = ("https://daf-yomi.com/mobile/DYItem.aspx?itemId=\(self.id!)")
+                self.link = ("https://app.daf-yomi.com/mobile/DYItem.aspx?itemId=\(self.id!)")
             }
             
         }

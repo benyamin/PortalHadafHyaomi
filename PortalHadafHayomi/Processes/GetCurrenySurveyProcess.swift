@@ -17,7 +17,7 @@ open class GetCurrenySurveyProcess: MSBaseProcess
         
         let request = MSRequest()
         
-        request.baseUrl = "https://daf-yomi.com/mobile2"
+        request.baseUrl = "https://app.daf-yomi.com/mobile2"
         request.serviceName = "poll.aspx"
         
         request.httpMethod = GET
@@ -60,7 +60,7 @@ open class GetCurrenySurveyProcess: MSBaseProcess
                             {
                                 if checkedServeys.contains(currentPollId)
                                 {
-                                    currentSurveyLink = "https://daf-yomi.com/pollResults.aspx?mobile=1&id=" + currentPollId
+                                    currentSurveyLink = "https://app.daf-yomi.com/pollResults.aspx?mobile=1&id=" + currentPollId
                                 }
                             }
                         }

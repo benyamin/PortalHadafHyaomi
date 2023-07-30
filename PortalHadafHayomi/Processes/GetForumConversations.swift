@@ -23,7 +23,7 @@ open class GetForumConversations: MSBaseProcess
         params["order"] = "0" //assanding, 1 for desanding
         
         let request = MSRequest()
-        request.baseUrl = "http://daf-yomi.com/mobile"
+        request.baseUrl = "https://app.daf-yomi.com/mobile"
         request.serviceName = "jsonservice.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET

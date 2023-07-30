@@ -32,7 +32,7 @@ open class GetTalmudQAProcess: MSBaseProcess
         
         let request = MSRequest()
      
-        request.baseUrl = "https://daf-yomi.com"
+        request.baseUrl = "https://app.daf-yomi.com"
         request.serviceName = "mobile/jsonservice.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET

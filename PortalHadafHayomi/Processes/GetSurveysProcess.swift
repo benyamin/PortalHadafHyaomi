@@ -16,7 +16,7 @@ open class GetSurveysProcess: MSBaseProcess
     {
         let request = MSRequest()
         
-        request.baseUrl = "http://daf-yomi.com"
+        request.baseUrl = "https://app.daf-yomi.com"
          request.serviceName = "Polls.aspx"
         
         request.requiredResponseType = .JSON

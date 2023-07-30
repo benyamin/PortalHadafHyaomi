@@ -73,7 +73,7 @@ class SurveyViewController: MSBaseViewController, WKNavigationDelegate, WKUIDele
         })
         
         /*
-        if let currentSurveyUrl = URL(string: "https://daf-yomi.com/mobile2/poll.aspx")
+        if let currentSurveyUrl = URL(string: "https://app.daf-yomi.com/mobile2/poll.aspx")
         {
             let request = URLRequest(url: currentSurveyUrl)
             
@@ -127,7 +127,7 @@ class SurveyViewController: MSBaseViewController, WKNavigationDelegate, WKUIDele
             {
                 self.saveServeyId(currentSurveyId)
                 
-                let currentSurveyLink = "https://daf-yomi.com/pollResults.aspx?mobile=1&id=" + currentSurveyId
+                let currentSurveyLink = "https://app.daf-yomi.com/pollResults.aspx?mobile=1&id=" + currentSurveyId
                 if let currentSurveyUrl = URL(string: currentSurveyLink)
                 {
                     let request = URLRequest(url: currentSurveyUrl)

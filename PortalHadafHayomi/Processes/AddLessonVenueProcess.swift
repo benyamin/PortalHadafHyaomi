@@ -17,7 +17,7 @@ open class AddLessonVenueProcess: MSBaseProcess
         params["lessonadd"] = "1"
         
         let request = MSRequest()
-        request.baseUrl = "http://daf-yomi.com/mobile"//"http://daf-yomi.com/Mobile"
+        request.baseUrl = "https://app.daf-yomi.com/mobile"//"https://app.daf-yomi.com/Mobile"
         request.serviceName = "jsonservice.ashx"
         request.requiredResponseType = .JSON
         request.httpMethod = GET

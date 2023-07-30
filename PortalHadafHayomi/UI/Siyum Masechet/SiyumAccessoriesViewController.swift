@@ -15,13 +15,13 @@ class SiyumAccessoriesViewController: MSBaseViewController, UITableViewDelegate,
         
         var topicstList = [SiyumTopic]()
       
-        topicstList.append(SiyumTopic(id: "7", title: "סיומים למסכתות", iconImage: "star.png", link:"http://daf-yomi.com/mobile/content.aspx?id=43"))
+        topicstList.append(SiyumTopic(id: "7", title: "סיומים למסכתות", iconImage: "star.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=43"))
         /*
-           topicstList.append(SiyumTopic(id: "6", title: "סיום מסכת", iconImage: "star.png", link:"http://daf-yomi.com/mobile/content.aspx?id=335"))
+           topicstList.append(SiyumTopic(id: "6", title: "סיום מסכת", iconImage: "star.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=335"))
         */
-        topicstList.append(SiyumTopic(id: "8", title: "דיני הסיום וביאורים", iconImage: "star.png", link:"http://daf-yomi.com/mobile/content.aspx?id=42"))
+        topicstList.append(SiyumTopic(id: "8", title: "דיני הסיום וביאורים", iconImage: "star.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=42"))
         
-           topicstList.append(SiyumTopic(id: "12", title: "ספרים", iconImage: "star.png", link:"http://daf-yomi.com/mobile/content.aspx?id=70"))
+           topicstList.append(SiyumTopic(id: "12", title: "ספרים", iconImage: "star.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=70"))
         
         topicstList.append(SiyumTopic(id: "9", title: "נוסח ההדרן", iconImage: "star.png", link:"Hadran"))
         

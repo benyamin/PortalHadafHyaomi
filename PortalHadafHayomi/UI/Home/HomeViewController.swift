@@ -417,7 +417,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
         
         self.contactUsWebView.backButton.isHidden = true
         
-        let contactUsLink = "https://daf-yomi.com/ContactUs.aspx"
+        let contactUsLink = "https://app.daf-yomi.com/ContactUs.aspx"
         self.contactUsWebView.loadUrl(contactUsLink, title:"ContactUs".localize())
     }
     

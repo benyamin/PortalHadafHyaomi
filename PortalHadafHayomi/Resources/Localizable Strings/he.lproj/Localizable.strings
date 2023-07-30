@@ -184,7 +184,7 @@
 "st_at_page" = "בדף ה%@";
 "st_Donation" = "תרומה";
 "st_Donation_description" = "תרומות עבור אחזקת ותפעול האתר והאפליקציה יתקבלו בברכה";
-"st_donation_page_link" = "http://daf-yomi.com/mobile/content.aspx?id=270";
+"st_donation_page_link" = "https://app.daf-yomi.com/mobile/content.aspx?id=270";
 "st_Lesson_Skip_Interval" = "משך זמן דילוג בנגן";
 
 "st_Auto_Lock_description" = "מנע כיבוי המסך בזמן שהאפליקציה פועלת";

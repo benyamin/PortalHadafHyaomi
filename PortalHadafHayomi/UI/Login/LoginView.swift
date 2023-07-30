@@ -104,7 +104,7 @@ class LoginView: UIView, UITextFieldDelegate {
     }
     
     @objc func showRegulations(){
-        let openingScreeLink = "http://daf-yomi.com/mobile/content.aspx?id=90"
+        let openingScreeLink = "https://app.daf-yomi.com/mobile/content.aspx?id=90"
         
         let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
         

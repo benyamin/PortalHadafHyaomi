@@ -32,7 +32,7 @@ open class GetMidotAndShiurimInfoProcess: MSBaseProcess
         
          linksInfo.append(["title":"st_hidorai_measurments_title",
                            "subTitle":"st_hidorai_measurments_subtitle",
-                           "link":"http://daf-yomi.com/BookFiles.aspx?type=1&id=362"])
+                           "link":"https://app.daf-yomi.com/BookFiles.aspx?type=1&id=362"])
         
         linksInfo.append(["title":"st_rambam_measurements_title",
                           "subTitle":"st_rambam_measurements_subtitle",
@@ -48,12 +48,12 @@ open class GetMidotAndShiurimInfoProcess: MSBaseProcess
         
         linksInfo.append(["title":"st_detailed_measurements_table_title",
                           "subTitle":"st_detailed_measurements_table_subtitle",
-                          "link":"http://daf-yomi.com/data/uploadedfiles/userfiles/tafrit-kleyezer-midotveshiurim-tavla.pdf"])
+                          "link":"https://app.daf-yomi.com/data/uploadedfiles/userfiles/tafrit-kleyezer-midotveshiurim-tavla.pdf"])
         
     
         linksInfo.append(["title":"st_torah_weights_title",
                           "subTitle":"st_torah_weights_subtitle",
-                          "link":"http://daf-yomi.com/Data/UploadedFiles/UserFilesCK/tafrit-kleyezer-midotveshiurim-swed.doc"])
+                          "link":"https://app.daf-yomi.com/Data/UploadedFiles/UserFilesCK/tafrit-kleyezer-midotveshiurim-swed.doc"])
       /*
         linksInfo.append(["title":"מידה כנגד מידה",
                           "subTitle":"אפליקציה להמרת מידות חז׳׳ל למידות מודרניות",

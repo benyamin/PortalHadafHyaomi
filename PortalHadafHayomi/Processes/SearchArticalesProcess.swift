@@ -25,9 +25,9 @@ open class SearchArticalesProcess: MSBaseProcess
             }
            
         }
-       // https://daf-yomi.com/AjaxHandler.ashx?searchlist=1&dir=1&massechet=322&sort=iorder&page=1&category=9&term=%D7%90%D7%91%D7%99%D7%99&titleonly=0&pagesize=50
+       // https://app.daf-yomi.com/AjaxHandler.ashx?searchlist=1&dir=1&massechet=322&sort=iorder&page=1&category=9&term=%D7%90%D7%91%D7%99%D7%99&titleonly=0&pagesize=50
         
-        //https://daf-yomi.com/AjaxHandler.ashx?searchlist=1&page=1&massechet=322&medaf=2&addaf=73&publisher=&category=9&titleonly=0&term=&sort=iorder&dir=1
+        //https://app.daf-yomi.com/AjaxHandler.ashx?searchlist=1&page=1&massechet=322&medaf=2&addaf=73&publisher=&category=9&titleonly=0&term=&sort=iorder&dir=1
         
         var params = [String:Any]()
         params["searchlist"] = "1"
@@ -45,7 +45,7 @@ open class SearchArticalesProcess: MSBaseProcess
         
         self.request = MSRequest()
      
-        request?.baseUrl = "https://daf-yomi.com"
+        request?.baseUrl = "https://app.daf-yomi.com"
         request?.serviceName = "AjaxHandler.ashx"
         request?.requiredResponseType = .JSON
         request?.httpMethod = GET

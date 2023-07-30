@@ -23,9 +23,9 @@ class QandATopicsViewController: MSBaseViewController, UITableViewDelegate, UITa
         
         topicstList.append(HadafHayomiProjectTopic(id: "4", title: "st_general_qa".localize(), iconImage: "star_icon.png", link:"general_Questions"))
         
-          topicstList.append(HadafHayomiProjectTopic(id: "5", title: "st_ask_a_question".localize(), iconImage: "ask_questions_icon.png", link:"http://daf-yomi.com/qnaAdd.aspx"))
+          topicstList.append(HadafHayomiProjectTopic(id: "5", title: "st_ask_a_question".localize(), iconImage: "ask_questions_icon.png", link:"https://app.daf-yomi.com/qnaAdd.aspx"))
         
-         topicstList.append(HadafHayomiProjectTopic(id: "6", title: "st_the_daf_yomi_qa_book".localize(), iconImage: "Sefer_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=332"))
+         topicstList.append(HadafHayomiProjectTopic(id: "6", title: "st_the_daf_yomi_qa_book".localize(), iconImage: "Sefer_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=332"))
         
         
         return topicstList

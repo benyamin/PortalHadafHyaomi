@@ -14,19 +14,19 @@ class HadafHayomiProjectViewController: MSBaseViewController, UITableViewDelegat
     lazy var topicstList:[HadafHayomiProjectTopic] = {
         
         var topicstList = [HadafHayomiProjectTopic]()
-        topicstList.append(HadafHayomiProjectTopic(id: "1", title: "תולדות הדף היומי", iconImage: "star_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=30"))
+        topicstList.append(HadafHayomiProjectTopic(id: "1", title: "תולדות הדף היומי", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=30"))
         
-        topicstList.append(HadafHayomiProjectTopic(id: "2", title: "תולדות מהר׳׳ם שפירא", iconImage: "star_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=140"))
+        topicstList.append(HadafHayomiProjectTopic(id: "2", title: "תולדות מהר׳׳ם שפירא", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=140"))
         
-        topicstList.append(HadafHayomiProjectTopic(id: "3", title: "חשיבות לימוד הדף היומי", iconImage: "star_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=69"))
+        topicstList.append(HadafHayomiProjectTopic(id: "3", title: "חשיבות לימוד הדף היומי", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=69"))
         
-        topicstList.append(HadafHayomiProjectTopic(id: "4", title: "כתבות בענייני דף יומי", iconImage: "star_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=36"))
+        topicstList.append(HadafHayomiProjectTopic(id: "4", title: "כתבות בענייני דף יומי", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=36"))
         
-        topicstList.append(HadafHayomiProjectTopic(id: "5", title: "סיפורים אישיים", iconImage: "star_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=229"))
+        topicstList.append(HadafHayomiProjectTopic(id: "5", title: "סיפורים אישיים", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=229"))
         
-         topicstList.append(HadafHayomiProjectTopic(id: "5", title: "סיומי הש׳׳ס", iconImage: "star_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=335"))
+         topicstList.append(HadafHayomiProjectTopic(id: "5", title: "סיומי הש׳׳ס", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=335"))
         
-        topicstList.append(HadafHayomiProjectTopic(id: "5", title: "משנה יומית לדף היומי", iconImage: "star_icon.png", link:"http://daf-yomi.com/mobile/content.aspx?id=247"))
+        topicstList.append(HadafHayomiProjectTopic(id: "5", title: "משנה יומית לדף היומי", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=247"))
         
        
         return topicstList

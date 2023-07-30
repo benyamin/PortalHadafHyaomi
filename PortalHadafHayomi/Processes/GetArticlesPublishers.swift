@@ -26,7 +26,7 @@ open class GetArticlesPublishers: MSBaseProcess
         //params["allpublishers"] = "1"
         
         self.request = MSRequest()
-        request?.baseUrl = "http://daf-yomi.com/AjaxHandler.ashx"
+        request?.baseUrl = "https://app.daf-yomi.com/AjaxHandler.ashx"
         request?.serviceName = ""
         request?.requiredResponseType = .JSON
         request?.httpMethod = GET

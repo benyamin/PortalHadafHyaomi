@@ -61,7 +61,7 @@ class ArticleSearchResult:DataObject
                  var fullPath = ""
                 if link.hasPrefix("http") == false
                 {
-                    fullPath = "http://daf-yomi.com"
+                    fullPath = "https://app.daf-yomi.com"
                     if link.hasPrefix("/") == false
                     {
                         fullPath += "/"

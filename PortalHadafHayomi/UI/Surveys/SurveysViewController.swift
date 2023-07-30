@@ -85,13 +85,13 @@ class SurveysViewController: MSBaseViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //http://daf-yomi.com/pollResults.aspx?id=903
+        //https://app.daf-yomi.com/pollResults.aspx?id=903
         
          let survey = self.surveys[indexPath.row]
         if let surveyId = survey.Id
         {
             let webTitle = "st_survey".localize()
-            let surveyUrl =  "http://daf-yomi.com/pollResults.aspx?mobile=1&id=" + surveyId
+            let surveyUrl =  "https://app.daf-yomi.com/pollResults.aspx?mobile=1&id=" + surveyId
             
             let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
             webViewController.delegate = self

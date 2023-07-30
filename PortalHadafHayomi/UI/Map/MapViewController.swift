@@ -345,7 +345,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
             
             let title = lessonVenue.city + " - " + lessonVenue.maggid
-            webViewController.loadUrl("http://daf-yomi.com/ContactLessons.aspx?id=\(lessonId)", title: title)
+            webViewController.loadUrl("https://app.daf-yomi.com/ContactLessons.aspx?id=\(lessonId)", title: title)
             webViewController.shareButtonDisabled = true
             
             self.present(webViewController , animated: true, completion: nil)

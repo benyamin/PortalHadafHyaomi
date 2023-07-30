@@ -419,7 +419,7 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
     {
         if let chavrusaId = chavrusa?.Id
         {
-            let contactUrl = ("https://daf-yomi.com/ContactBoard.aspx?id=\(chavrusaId)")
+            let contactUrl = ("https://app.daf-yomi.com/ContactBoard.aspx?id=\(chavrusaId)")
             
             let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
             webViewController.scalesPageToFit = false
@@ -437,7 +437,7 @@ class FindChavrusaViewController: MSBaseViewController, UITableViewDelegate, UIT
         webViewController.shareButtonDisabled = true
         
         let title = "st_chavrusa".localize()
-        webViewController.loadUrl("https://daf-yomi.com/BoardAdd.aspx", title: title)
+        webViewController.loadUrl("https://app.daf-yomi.com/BoardAdd.aspx", title: title)
         
         self.navigationController?.pushViewController(webViewController, animated: true)
     }

@@ -159,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        let openingScreeLink = "http://daf-yomi.com/mobile/content.aspx?id=331"
+        let openingScreeLink = "https://app.daf-yomi.com/mobile/content.aspx?id=331"
         if let url = URL(string:openingScreeLink)
             ,UIApplication.shared.canOpenURL(url)
         {

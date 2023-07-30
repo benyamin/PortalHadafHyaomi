@@ -142,7 +142,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
             
             self.webView?.isHidden = true
             var request = URLRequest(url: self.url!)
-            request.addValue("http://daf-yomi.com", forHTTPHeaderField: "Referer")
+            request.addValue("https://app.daf-yomi.com", forHTTPHeaderField: "Referer")
         
             self.webView?.load(request)
             
