@@ -24,7 +24,7 @@ open class SavePageProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDow
     
     func savePage(_ pageInfo:(pageIndex:Int, type:TalmudDisplayType))
     {
-        var pageUrlPath = ("https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageInfo.pageIndex).pdf")
+        var pageUrlPath = ("https://app.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageInfo.pageIndex).pdf")
         
         if pageInfo.type == .Chavruta {
             pageUrlPath = "http://files.daf-yomi.com/files/app/chavruta/\(pageInfo.pageIndex).pdf"

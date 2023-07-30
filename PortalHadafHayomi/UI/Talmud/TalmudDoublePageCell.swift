@@ -88,7 +88,7 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
                 self.pageWebView.loadRequest(URLRequest(url: URL(fileURLWithPath: path)))
             }
             else{
-                urlString = ("https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")
+                urlString = ("https://app.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")
             }
             
             self.addBookmark()

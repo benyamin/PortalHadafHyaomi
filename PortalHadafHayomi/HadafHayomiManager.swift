@@ -898,7 +898,7 @@ open class  HadafHayomiManager
         
         switch displayType {
         case .Vagshal:
-            return "https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex).pdf"
+            return "https://app.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex).pdf"
         case .Text:
             return "https://daf-yomi.com/DafYomi_Page.aspx?vt=2&context=1&id=\(pageIndex)&mobile=1"
         case .TextWithScore:

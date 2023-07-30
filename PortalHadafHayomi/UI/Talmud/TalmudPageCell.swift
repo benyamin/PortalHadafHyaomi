@@ -129,7 +129,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                     
                 }
                 else{
-                    urlString = ("https://www.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")
+                    urlString = ("https://app.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")
                 }
             }
             else if displayType == .Text

@@ -16,7 +16,7 @@ open class GetLessonsInfoProcess: MSBaseProcess
     {
         let lesson = obj as! Lesson
         
-        //http://www.daf-yomi.com/AjaxHandler.ashx?medialist=1&pagesize=15&page=1&massechet=284&medaf=80&addaf=80&safa=&maggid=&chofshi=&sort=massechet&dir=1
+        //http://app.daf-yomi.com/AjaxHandler.ashx?medialist=1&pagesize=15&page=1&massechet=284&medaf=80&addaf=80&safa=&maggid=&chofshi=&sort=massechet&dir=1
              
         var params = [String:String]()
         

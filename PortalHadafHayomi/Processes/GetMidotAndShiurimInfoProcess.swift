@@ -40,11 +40,11 @@ open class GetMidotAndShiurimInfoProcess: MSBaseProcess
         
         linksInfo.append(["title":"st_measurments_ratio_title",
                           "subTitle":"st_measurments_ratio_subtitle",
-                          "link":"http://www.daf-yomi.com/data/uploadedfiles/userfiles/tafrit-kleyezer-midotveshiurim-matbehot.pdf"])
+                          "link":"http://app.daf-yomi.com/data/uploadedfiles/userfiles/tafrit-kleyezer-midotveshiurim-matbehot.pdf"])
         
         linksInfo.append(["title":"st_volume_ratio_title",
                           "subTitle":"st_volume_ratio_subtitle",
-                          "link":"http://www.daf-yomi.com/data/uploadedfiles/userfiles/tafrit-kleyezer-midotveshiurim-nefach.pdf"])
+                          "link":"http://app.daf-yomi.com/data/uploadedfiles/userfiles/tafrit-kleyezer-midotveshiurim-nefach.pdf"])
         
         linksInfo.append(["title":"st_detailed_measurements_table_title",
                           "subTitle":"st_detailed_measurements_table_subtitle",
