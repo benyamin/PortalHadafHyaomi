@@ -1,0 +1,58 @@
+{
+  "buildCommand" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : true,
+    "targets" : null
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "bc58cf39b932ba5e734863ed10a56730c2b4b5a9284ac51572241be3d7a18d2c"
+    }
+  ],
+  "containerPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "indexbuild",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator16.4",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData/PortalHadafHayomi/Index.noindex/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData/PortalHadafHayomi/Index.noindex/Build/Products",
+      "derivedDataPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData/PortalHadafHayomi/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData/PortalHadafHayomi/Index.noindex/PrecompiledHeaders",
+      "indexRegularBuildIntermediatesPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData/PortalHadafHayomi/Build/Intermediates.noindex",
+      "indexRegularBuildProductsPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData/PortalHadafHayomi/Build/Products",
+      "pchPath" : "/Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/DerivedData/PortalHadafHayomi/Index.noindex/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "qos" : "utility",
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
