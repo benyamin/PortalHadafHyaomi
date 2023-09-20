@@ -2,3 +2,12 @@
 PortalHadafHayomi.xcodeproj/xcuserdata/Binyamin.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 
 PortalHadafHayomi.xcodeproj/project.xcworkspace/xcuserdata/Binyamin.xcuserdatad/UserInterfaceState.xcuserstate
+
+*.xcuserstate
+
+*.sdkstatcache
+
+DerivedData/
+build/
+xcuserdata/
+.DS_Store

@@ -1,3 +1,0 @@
-Target dependency graph (2 targets)
-PortalHadafHayomi in PortalHadafHayomi, no dependencies
-PortalHadafHayomi in PortalHadafHayomi, no dependencies
