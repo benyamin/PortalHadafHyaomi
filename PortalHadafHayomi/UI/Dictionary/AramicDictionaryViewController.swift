@@ -149,16 +149,28 @@ class AramicDictionaryViewController: MSBaseViewController, UITableViewDelegate,
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
-        var filterdWords = [TranslatedWord]()
+        var priamryFilterdWords = [TranslatedWord]()
+        var secondaryFilterdWords = [TranslatedWord]()
+        var otherFilterdWords = [TranslatedWord]()
         for word in self.selectedDictionary
         {
-            if word.key.hasPrefix(searchText)
-            {
-                filterdWords.append(word)
+            if word.key.hasPrefix(searchText){
+                priamryFilterdWords.append(word)
+            }
+            else{
+                let subWords = word.key.components(separatedBy: " ")
+                for subWord in subWords{
+                    if subWord.hasPrefix(searchText) {
+                        secondaryFilterdWords.append(word)
+                    }
+                    else if subWord.contains(searchText){
+                        otherFilterdWords.append(word)
+                    }
+                }
             }
         }
         
-        self.displayedDiactionary = filterdWords
+        self.displayedDiactionary = priamryFilterdWords + secondaryFilterdWords + otherFilterdWords
         self.aramicListTableView.reloadData()
     }
     

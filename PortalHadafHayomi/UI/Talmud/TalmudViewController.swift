@@ -55,6 +55,9 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var searchBarTrailingConstraintToView:NSLayoutConstraint!
     
+    @IBOutlet weak var nextPageButton:UIButton?
+    @IBOutlet weak var prePageButton:UIButton?
+    
     var displyedPicker:UIView?{
         didSet{
             
@@ -527,6 +530,26 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.pagesCollectionView.reloadData()
     }
     
+    @IBAction func nextPageButtonClicked(_ sender:UIButton){
+        let currentIndex = self.pagesCollectionView.indexPathsForVisibleItems.first!
+
+              let nextIndexPath = IndexPath(item: currentIndex.item + 1, section: 0)
+
+              if nextIndexPath.item < self.talmudNumberOfPages {
+                  self.pagesCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
+              }
+    }
+
+    @IBAction func prePageButtonClicked(_ sender:UIButton){
+        
+        let currentIndex = self.pagesCollectionView.indexPathsForVisibleItems.first!
+
+              let preIndexPath = IndexPath(item: currentIndex.item - 1, section: 0)
+
+              if preIndexPath.item >= 0 {
+                  self.pagesCollectionView.scrollToItem(at: preIndexPath, at: .centeredHorizontally, animated: true)
+              }
+    }
     
     @objc func blockViewTap(_ sender: UITapGestureRecognizer) {
         

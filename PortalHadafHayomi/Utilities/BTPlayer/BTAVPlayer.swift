@@ -42,7 +42,8 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                 a_player = AVPlayer()
                 
                 do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options: .duckOthers)
+              
                     print("Playback OK")
                     try AVAudioSession.sharedInstance().setActive(true)
                     print("Session is Active")
