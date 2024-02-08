@@ -23,6 +23,7 @@ class BTPlayerRateSpeedView: UIView
     @IBOutlet weak var rateSpeedSlider:UISlider?
     @IBOutlet weak var rightRateLabel:UILabel?
     @IBOutlet weak var leftRateLabel:UILabel?
+    @IBOutlet var rateButtonsCollectoion:[UIButton]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,8 +37,17 @@ class BTPlayerRateSpeedView: UIView
         
         if let currentLanguage = Locale.current.languageCode
             ,currentLanguage.hasSuffix("he"){
-            self.rightRateLabel?.text = "x0.5"
-            self.leftRateLabel?.text = "x2.0"
+            //self.rateSpeedSlider?.semanticContentAttribute = .forceRightToLeft
+            self.rateSpeedSlider?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+
+            //self.rightRateLabel?.text = "x0.5"
+           // self.leftRateLabel?.text = "x2.0"
+        }
+        
+        for button in self.rateButtonsCollectoion{
+            button.layer.borderColor = UIColor(HexColor: "FFDB77").cgColor
+            button.layer.borderWidth = 1.0
+            button.layer.cornerRadius = 3
         }
         /*
         let snailImage = UIImage(named:"snail_icon.png")
@@ -56,8 +66,18 @@ class BTPlayerRateSpeedView: UIView
     
     @IBAction func sliderChanged(_ slider:UISlider)
     {
-        self.rateSpeedTitleLabel?.text = "\("st_speed_rate".localize()) \(String(format: "%.1f",  slider.value))"
+        self.setRateValue(value: slider.value)
+    }
+    
+    @IBAction func rateButtonClicked(_ button:UIButton){
+        let value = Float(button.tag)/100.0
+        self.rateSpeedSlider?.value = value
+        self.setRateValue(value: value)
+    }
+    
+    func setRateValue(value:Float){
+        self.rateSpeedTitleLabel?.text = "\("st_speed_rate".localize()) \(String(format: "%.1f", value))"
 
-        self.delegate?.rateSpeedView(self, valueChanged: slider.value)
+        self.delegate?.rateSpeedView(self, valueChanged: value)
     }
 }

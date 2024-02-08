@@ -271,6 +271,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         switch event.subtype {
         case .remoteControlPlay:
             self.play()
+            self.rateSpeedButton
             break
             
         case .remoteControlPause:

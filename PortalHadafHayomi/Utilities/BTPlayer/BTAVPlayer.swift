@@ -82,11 +82,10 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         else
         {
             // self.player.play()
-            self.player.playImmediately(atRate: 1.0)
+            self.player.playImmediately(atRate: self.playerRate)
             self.player.rate = self.playerRate
             
         }
-        
     }
     
     func playVideo(){
@@ -320,10 +319,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     func setRate(_ rate:Float)
     {
         self.playerRate = rate
-        if self.isPlaying()
-        {
-            self.player.rate = self.playerRate
-        }
+        self.player.rate = self.playerRate
     }
     
     func rate() -> Float
