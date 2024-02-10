@@ -97,7 +97,7 @@ class MeasurementCalculatorViewController: MSBaseViewController, UITextFieldDele
     {
         self.pickerBaseViewBottomConstraint?.constant = 0
         
-        UIView.animate(withDuration:0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration:0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -109,7 +109,7 @@ class MeasurementCalculatorViewController: MSBaseViewController, UITextFieldDele
     {
         self.pickerBaseViewBottomConstraint?.constant = -1 * (self.pickerBaseView?.frame.size.height ?? 300)
         
-        UIView.animate(withDuration:0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration:0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 

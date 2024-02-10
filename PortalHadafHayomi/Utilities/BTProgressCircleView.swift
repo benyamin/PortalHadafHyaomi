@@ -61,7 +61,7 @@ class BTProgressCircleView: UIView {
         self.addSubview(precentageLabel)
         self.precentageLabel.isHidden = true
         
-        self.activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        self.activityIndicatorView = UIActivityIndicatorView(style: .gray)
         self.activityIndicatorView.center = precentageLabel.center
         self.addSubview(activityIndicatorView)
         self.activityIndicatorView.startAnimating()

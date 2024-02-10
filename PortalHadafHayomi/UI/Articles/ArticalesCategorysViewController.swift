@@ -200,7 +200,7 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
             
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -299,7 +299,7 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableCell", for:indexPath) as! MSBaseTableViewCell
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         cell.reloadWithObject(self.articlesCategorys[indexPath.row])
         
@@ -307,12 +307,12 @@ class ArticalesCategorysViewController: MSBaseViewController, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     

@@ -205,7 +205,7 @@ class BTSpeechSynthesizer:NSObject, SFSpeechRecognizerDelegate, AVSpeechSynthesi
     func recordAndRecognizeSpeech() {
         
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord)
         } catch {
             // handle errors
         }
@@ -287,7 +287,7 @@ class BTSpeechSynthesizer:NSObject, SFSpeechRecognizerDelegate, AVSpeechSynthesi
     open func play(_ audioFileName:String, onComplete:@escaping () -> Void)
     {
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         } catch {
             
         }

@@ -68,7 +68,7 @@ class JewishCallCollectionHeaderView: UICollectionReusableView {
         gregorianDateDispalyText += " )"
         text += hebrowDateDispalyText + " " + gregorianDateDispalyText
         
-        let attributedText = text.addAttribute(["name":NSAttributedStringKey.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 11)], ToSubString: gregorianDateDispalyText, ignoreCase:true)
+        let attributedText = text.addAttribute(["name":NSAttributedString.Key.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 11)], ToSubString: gregorianDateDispalyText, ignoreCase:true)
         
         return attributedText
     }
@@ -106,7 +106,7 @@ class JewishCallCollectionHeaderView: UICollectionReusableView {
         hebrewDateDispalyText += " )"
         text += gregorianDateDispalyText + " " + hebrewDateDispalyText
         
-        let attributedText = text.addAttribute(["name":NSAttributedStringKey.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 11)], ToSubString: hebrewDateDispalyText, ignoreCase:true)
+        let attributedText = text.addAttribute(["name":NSAttributedString.Key.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 11)], ToSubString: hebrewDateDispalyText, ignoreCase:true)
         
         return attributedText
     }

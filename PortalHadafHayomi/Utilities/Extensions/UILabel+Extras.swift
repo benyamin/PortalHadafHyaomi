@@ -57,7 +57,7 @@ public extension UILabel
             self.isUserInteractionEnabled = true
         }
         
-        self.attributedText =  self.text?.addAttribute(["name":NSAttributedStringKey.foregroundColor.rawValue,"value": UIColor.blue], ToSubString: subString, ignoreCase:false)
+        self.attributedText =  self.text?.addAttribute(["name":NSAttributedString.Key.foregroundColor.rawValue,"value": UIColor.blue], ToSubString: subString, ignoreCase:false)
         
         clickableSubstring = subString
         tapTarget = target

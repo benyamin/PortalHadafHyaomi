@@ -97,7 +97,7 @@ class MyPagesViewController: MSBaseViewController, UITableViewDelegate, UITableV
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MasechtPagesCell", for:indexPath) as! MasechtPagesCell
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         cell.pageSelectingCellDelegate = self
         
@@ -109,12 +109,12 @@ class MyPagesViewController: MSBaseViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     //MARK: - PageSelectingCellDelegate

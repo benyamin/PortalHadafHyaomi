@@ -163,7 +163,7 @@ class LessonsPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource
         self.pickerView.dataSource = self
         
         self.addSubview(self.pickerView)
-        self.sendSubview(toBack: self.pickerView)
+        self.sendSubviewToBack(self.pickerView)
         
         self.pickerView.semanticContentAttribute = .forceLeftToRight
 

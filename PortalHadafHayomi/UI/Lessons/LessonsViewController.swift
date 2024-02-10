@@ -524,7 +524,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             self.searchBar.resignFirstResponder()
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 

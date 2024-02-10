@@ -18,7 +18,7 @@ class TableSelectionCell: MSBaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
     }
     
     override func reloadWithObject(_ object: Any) {

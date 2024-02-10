@@ -424,18 +424,18 @@ class SearchTalmudViewController: MSBaseViewController, UITableViewDelegate, UIT
             }
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
        
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -612,7 +612,7 @@ class SearchTalmudViewController: MSBaseViewController, UITableViewDelegate, UIT
         
         self.tableViewBottomConstraint?.constant = self.pagePickerBaseView?.frame.size.height ?? 0
         
-        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -628,7 +628,7 @@ class SearchTalmudViewController: MSBaseViewController, UITableViewDelegate, UIT
         
         self.tableViewBottomConstraint?.constant = 0
         
-        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 

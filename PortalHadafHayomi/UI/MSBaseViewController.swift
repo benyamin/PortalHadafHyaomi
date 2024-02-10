@@ -94,7 +94,7 @@ class MSBaseViewController: UIViewController {
                 self.topBarHeightConstraint?.constant = 60
             }
             
-            self.view.bringSubview(toFront: self.topBarView!)
+            self.view.bringSubviewToFront(self.topBarView!)
             
             if self.homeButton.tag == 1
             {
@@ -135,9 +135,9 @@ class MSBaseViewController: UIViewController {
             self.isPresenterdModaly = true
         }
                 
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillDisappear(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "applicationWillTerminate"), object: nil)
@@ -147,8 +147,8 @@ class MSBaseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-           NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func reloadWithObject(_ object:Any){

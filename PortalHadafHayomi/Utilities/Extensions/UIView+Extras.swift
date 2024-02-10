@@ -103,16 +103,16 @@ extension UIView
     {
         if let superView = self.superview
         {
-            let bottomConstraint = NSLayoutConstraint(item:  self, attribute: .bottom, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .bottom, multiplier: 1, constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item:  self, attribute: .bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .bottom, multiplier: 1, constant: 0)
             superView.addConstraint(bottomConstraint)
             
-            let topConstraint = NSLayoutConstraint(item:  self, attribute: .top, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .top, multiplier: 1, constant: 0)
+            let topConstraint = NSLayoutConstraint(item:  self, attribute: .top, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .top, multiplier: 1, constant: 0)
             superView.addConstraint(topConstraint)
             
-            let leadingConstraint = NSLayoutConstraint(item:  self, attribute: .leading, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .leading, multiplier: 1, constant: 0)
+            let leadingConstraint = NSLayoutConstraint(item:  self, attribute: .leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .leading, multiplier: 1, constant: 0)
             superView.addConstraint(leadingConstraint)
             
-            let trailingConstraint = NSLayoutConstraint(item:  self, attribute: .trailing, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .trailing, multiplier: 1, constant: 0)
+            let trailingConstraint = NSLayoutConstraint(item:  self, attribute: .trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .trailing, multiplier: 1, constant: 0)
             superView.addConstraint(trailingConstraint)
             
             // self.leadingAnchor.constraint(equalTo: superView.layoutMarginsGuide.leadingAnchor).isActive = true
@@ -128,26 +128,26 @@ extension UIView
         {
             if top
             {
-                let topConstraint = NSLayoutConstraint(item:  self, attribute: .top, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .top, multiplier: 1, constant: 0)
+                let topConstraint = NSLayoutConstraint(item:  self, attribute: .top, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .top, multiplier: 1, constant: 0)
                 superView.addConstraint(topConstraint)
             }
             
             if bottom
             {
-                let bottomConstraint = NSLayoutConstraint(item:  self, attribute: .bottom, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .bottom, multiplier: 1, constant: 0)
+                let bottomConstraint = NSLayoutConstraint(item:  self, attribute: .bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .bottom, multiplier: 1, constant: 0)
                 superView.addConstraint(bottomConstraint)
             }
             
             
             if leading
             {
-                let leadingConstraint = NSLayoutConstraint(item:  self, attribute: .leading, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .leading, multiplier: 1, constant: 0)
+                let leadingConstraint = NSLayoutConstraint(item:  self, attribute: .leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .leading, multiplier: 1, constant: 0)
                 superView.addConstraint(leadingConstraint)
             }
             
             if trailing
             {
-                let trailingConstraint = NSLayoutConstraint(item:  self, attribute: .trailing, relatedBy: NSLayoutRelation.equal, toItem:  superView, attribute: .trailing, multiplier: 1, constant: 0)
+                let trailingConstraint = NSLayoutConstraint(item:  self, attribute: .trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  superView, attribute: .trailing, multiplier: 1, constant: 0)
                 superView.addConstraint(trailingConstraint)
             }
         }
@@ -170,7 +170,7 @@ extension UIView
         self.layer.add(rotateAnimation, forKey: nil)
     }
     
-    public func constraintForAttribute(_ attirbute:NSLayoutAttribute) -> NSLayoutConstraint?
+    public func constraintForAttribute(_ attirbute:NSLayoutConstraint.Attribute) -> NSLayoutConstraint?
     {
         for constraint in self.constraints
         {
@@ -188,7 +188,7 @@ extension UIView
         return self.getConstrintForAttribute(.bottom)
     }
     
-    public func getConstrintForAttribute(_ attirbute:NSLayoutAttribute) -> NSLayoutConstraint?
+    public func getConstrintForAttribute(_ attirbute:NSLayoutConstraint.Attribute) -> NSLayoutConstraint?
     {
         for constraint in self.constraints
         {

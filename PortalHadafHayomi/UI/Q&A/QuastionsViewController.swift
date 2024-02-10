@@ -78,11 +78,11 @@ class QuastionsViewController: MSBaseViewController, UITableViewDelegate, UITabl
     //MARK: - Keyboard notifications
     @objc override func keyboardWillAppear(_ notification: Notification)
     {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         {
             self.tableViewBottomConstrains.constant = keyboardSize.height
             
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.view.setNeedsLayout()
                     
@@ -96,7 +96,7 @@ class QuastionsViewController: MSBaseViewController, UITableViewDelegate, UITabl
     {
         self.tableViewBottomConstrains.constant = 0
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.setNeedsLayout()
                 
@@ -114,7 +114,7 @@ class QuastionsViewController: MSBaseViewController, UITableViewDelegate, UITabl
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuastionTopicTableCell", for:indexPath) as! QuastionTopicTableCell
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         cell.reloadWithObject(self.displayedExpressions[indexPath.row])
         
@@ -122,12 +122,12 @@ class QuastionsViewController: MSBaseViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

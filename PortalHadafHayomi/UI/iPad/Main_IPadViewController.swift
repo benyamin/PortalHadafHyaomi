@@ -64,14 +64,14 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         super.viewWillAppear(animated)
         
         NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,7 +103,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
             {
                 self.topBarButtonsContentViewTopConstraint.constant = topBar.frame.size.height/2 - 15
             }
-             self.mainContainerView.bringSubview(toFront: self.topBarButtonsContentView)
+            self.mainContainerView.bringSubviewToFront(self.topBarButtonsContentView)
         }
       /*
         viewController.topBarHeightConstraint?.constant = 60
@@ -187,7 +187,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         
         let rotationAngle = UIDevice.current.orientation == .portrait ?  Double.pi/2 : -Double.pi/2
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.mainContainerView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
                 
@@ -220,7 +220,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         rootViewController.view.addSubview(self.mainContainerView)
         self.mainContainerView.center = colletoinCenterOnRootView
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.mainContainerView.transform = .identity
 
@@ -248,7 +248,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
             currentIndex = self.talmudViewController.pagesCollectionView.indexPathsForVisibleItems.first!
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.mainContainerView.transform = .identity
                 
@@ -267,7 +267,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         }, completion: {_ in
             
             self.view.addSubview(self.mainContainerView)
-            self.view.sendSubview(toBack: self.mainContainerView)
+            self.view.sendSubviewToBack(self.mainContainerView)
         })
     }
     

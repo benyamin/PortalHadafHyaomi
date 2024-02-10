@@ -115,7 +115,7 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
             
             self.jewishCallCollectionView.scrollToItem(at: IndexPath(row: 0, section: sectoin), at: .top, animated: false)
             
-             let reusableHeaderview = self.jewishCallCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JewishCallCollectionHeaderView", for: IndexPath(row: 0, section: 0)) as! JewishCallCollectionHeaderView
+            let reusableHeaderview = self.jewishCallCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "JewishCallCollectionHeaderView", for: IndexPath(row: 0, section: 0)) as! JewishCallCollectionHeaderView
             
             let contentOffSet = CGPoint(x:  self.jewishCallCollectionView.contentOffset.x, y:  self.jewishCallCollectionView.contentOffset.y - reusableHeaderview.frame.size.height)
             self.jewishCallCollectionView.setContentOffset(contentOffSet, animated: false)
@@ -241,7 +241,7 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     {
          self.dateSelectionViewTopConstraint.constant = 0
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -253,7 +253,7 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     {
         self.dateSelectionViewTopConstraint.constant = -1 * self.dateSelectionView.frame.size.height
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -280,9 +280,9 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             
-            let reusableHeaderview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JewishCallCollectionHeaderView", for: indexPath) as! JewishCallCollectionHeaderView
+            let reusableHeaderview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "JewishCallCollectionHeaderView", for: indexPath) as! JewishCallCollectionHeaderView
             
             if self.displayedCalendar == Calendar.hebrew
             {
@@ -483,7 +483,7 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
         self.talmudPagePickerBaseViewBottomConstraint.constant = -1 * self.talmudPagePickerBaseView.frame.size.height
         
         if animated {
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.view.layoutIfNeeded()
                     
@@ -499,7 +499,7 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
         
         self.talmudPagePickerBaseViewBottomConstraint.constant = 0
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 

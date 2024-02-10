@@ -68,7 +68,7 @@ class SearchResultTableCell: MSBaseTableViewCell {
             {
                 
                 let boldFont = UIFont.boldSystemFont(ofSize: self.resultTextLabel!.font.pointSize+1)
-                attributedText.addAttribute(NSAttributedStringKey.font, value: boldFont, range: result.range)
+                attributedText.addAttribute(NSAttributedString.Key.font, value: boldFont, range: result.range)
             }
             
             return attributedText
@@ -90,7 +90,7 @@ class SearchResultTableCell: MSBaseTableViewCell {
         }
         
         // bold attribute
-        let boldAttr = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: myLabel.font.pointSize)]
+        let boldAttr = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: myLabel.font.pointSize)]
         
         // check if label text contains search text
         if let matchRange: Range = labelText.lowercased().range(of: searchText.lowercased()) {

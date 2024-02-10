@@ -69,7 +69,7 @@ extension String {
             subStringRange = (self as NSString).range(of: subString)
         }
         
-        attributedString.addAttribute(NSAttributedStringKey(rawValue: attribute["name"] as! String), value: attribute["value"] as Any, range: subStringRange)
+        attributedString.addAttribute(NSAttributedString.Key(rawValue: attribute["name"] as! String), value: attribute["value"] as Any, range: subStringRange)
         
         return attributedString
     }

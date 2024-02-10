@@ -94,7 +94,7 @@ public extension AVPlayerViewController {
     
     func addPeriodicNotification(parsedPayload: NSDictionary) {
         // Add periodic notifications
-        let interval = CMTimeMake(1, 60)
+        let interval = CMTimeMake(value: 1, timescale: 60)
         self.player?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             guard let strongSelf = self, let label = strongSelf.subtitleView?.textLabel else {
                 return

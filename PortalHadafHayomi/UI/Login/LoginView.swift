@@ -96,9 +96,9 @@ class LoginView: UIView, UITextFieldDelegate {
         
          self.loadingGifImageview.isHidden = true
         
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillDisappear(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         self.setLoginLayout(animated:false)
     }
@@ -130,7 +130,7 @@ class LoginView: UIView, UITextFieldDelegate {
         if animated == false {
             duraion = 0
         }
-        UIView.animate(withDuration:duraion, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration:duraion, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.layoutIfNeeded()
                 
@@ -167,7 +167,7 @@ class LoginView: UIView, UITextFieldDelegate {
         self.addinitalInfoViewHeightConstraint.priority = UILayoutPriority(rawValue: 500)
         self.confirmButtonSecondaryTopConstriant.priority = UILayoutPriority(rawValue: 500)
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.layoutIfNeeded()
                 

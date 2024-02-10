@@ -101,7 +101,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
         super.viewDidAppear(animated)
         
         NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -217,7 +217,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
             rotationAngle = -Double.pi/2
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                self.webView?.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
                 
@@ -253,7 +253,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
         self.topBarView!.addSubview(self.lockRotationContentView)
         self.lockRotationContentView.center = lockRotationCenter
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                self.webView?.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
                 self.lockRotationContentView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
@@ -268,7 +268,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
             let webViewCenter = rootViewController.view.convert(self.webView!.center, to:self.view)
             self.view.addSubview(self.webView!)
             self.webView!.center = webViewCenter
-            self.view.sendSubview(toBack: self.webView!)
+            self.view.sendSubviewToBack(self.webView!)
 
         })
     }

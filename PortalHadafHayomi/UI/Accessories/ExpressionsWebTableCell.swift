@@ -37,7 +37,7 @@ class ExpressionsWebTableCell: MSBaseTableViewCell, UIWebViewDelegate
     }
     
     //MARK: - UIWebView Delegate methods
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool
     {
         //Loading a sub url
         if request.url?.absoluteString.hasPrefix("http") ?? false

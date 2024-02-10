@@ -153,7 +153,7 @@ class SavedLessonsViewController: MSBaseViewController, UITableViewDelegate, UIT
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonSelectionCell", for:indexPath) as! MSBaseTableViewCell
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
          let masechet = self.masechtotWithSavedLessons![indexPath.section]
         let lesson = masechet.savedLessons![indexPath.row]
@@ -164,12 +164,12 @@ class SavedLessonsViewController: MSBaseViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
 

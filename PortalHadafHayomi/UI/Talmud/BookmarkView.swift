@@ -108,7 +108,7 @@ class BookmarkView: UIView {
     
     func scroll(to point:Double, animated:Bool){
         
-        UIView.animate(withDuration: animated ? 0.4 : 0.0, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: animated ? 0.4 : 0.0, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
             self.locationIndicatorView.center = CGPoint(x:self.locationIndicatorView.center.x , y: point)
         }, completion: {_ in

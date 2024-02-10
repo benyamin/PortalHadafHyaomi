@@ -29,7 +29,7 @@ public extension UIImage
         let img:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        let flippedImage:UIImage = UIImage(cgImage: img.cgImage!, scale:1.0, orientation:UIImageOrientation.downMirrored)
+        let flippedImage:UIImage = UIImage(cgImage: img.cgImage!, scale:1.0, orientation:UIImage.Orientation.downMirrored)
         
         return flippedImage;
     }

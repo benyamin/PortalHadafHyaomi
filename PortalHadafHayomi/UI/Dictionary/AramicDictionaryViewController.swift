@@ -132,12 +132,12 @@ class AramicDictionaryViewController: MSBaseViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     //Mark: - UISearchBarDelegate
@@ -193,7 +193,7 @@ class AramicDictionaryViewController: MSBaseViewController, UITableViewDelegate,
     //MARK: - Keyboard notifications
     @objc override func keyboardWillAppear(_ notification: Notification)
     {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         {
              let applicationWindow = UIApplication.shared.keyWindow!
             let bottomPadding = applicationWindow.frame.size.height - self.view.frame.size.height
@@ -201,7 +201,7 @@ class AramicDictionaryViewController: MSBaseViewController, UITableViewDelegate,
             self.freeTextViewBottomConstrains.constant = keyboardSize.height - bottomPadding
             self.aramicListTableViewBottomConstrains.constant = keyboardSize.height - bottomPadding
             
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.view.setNeedsLayout()
                     
@@ -217,7 +217,7 @@ class AramicDictionaryViewController: MSBaseViewController, UITableViewDelegate,
         {
             self.aramicListTableViewBottomConstrains.constant = 0
             
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.view.setNeedsLayout()
                     

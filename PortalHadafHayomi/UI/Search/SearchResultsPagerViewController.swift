@@ -41,7 +41,7 @@ class SearchResultsPagerViewController: MSBaseViewController, UICollectionViewDe
         super.viewWillAppear(animated)
         
         NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     
@@ -122,7 +122,7 @@ class SearchResultsPagerViewController: MSBaseViewController, UICollectionViewDe
             rotationAngle = -Double.pi/2
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.pagesCollectionView?.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
                 
@@ -177,7 +177,7 @@ class SearchResultsPagerViewController: MSBaseViewController, UICollectionViewDe
         self.topBarView!.addSubview(self.lockRotationContentView)
         self.lockRotationContentView.center = lockRotationCenter
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.pagesCollectionView?.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
                 self.lockRotationContentView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
@@ -199,7 +199,7 @@ class SearchResultsPagerViewController: MSBaseViewController, UICollectionViewDe
             let colletoinCenter = rootViewController.view.convert(self.pagesCollectionView!.center, to:self.view)
             self.view.addSubview(self.pagesCollectionView!)
             self.pagesCollectionView?.center = colletoinCenter
-            self.view.sendSubview(toBack: self.pagesCollectionView!)
+            self.view.sendSubviewToBack(self.pagesCollectionView!)
             
             
         })

@@ -123,11 +123,11 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
     //MARK: - Keyboard notifications
     @objc override func keyboardWillAppear(_ notification: Notification)
     {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         {
             self.tableViewBottomConstrains.constant = keyboardSize.height
             
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.view.setNeedsLayout()
                     
@@ -141,7 +141,7 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
     {
         self.tableViewBottomConstrains.constant = 0
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.setNeedsLayout()
                 
@@ -188,7 +188,7 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
         cell.textSize = self.textDisplaySize
         cell.delegate = self
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         cell.reloadWithObject(self.displayedExpressions[indexPath.row])
         
@@ -196,12 +196,12 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     //Mark: - UISearchBarDelegate

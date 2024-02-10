@@ -190,7 +190,7 @@ class TablePickerView: UIView, UITableViewDataSource, UITableViewDelegate
               contentView.addSubview(rowView!)
       
       cell.addSubview(contentView)
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         return cell
     }

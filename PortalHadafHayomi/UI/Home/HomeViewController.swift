@@ -678,7 +678,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             
             if self.bottomBarCollectionView != nil
             {
-                self.view.bringSubview(toFront: self.bottomBarCollectionView!)
+                self.view.bringSubviewToFront(self.bottomBarCollectionView!)
             }
         }
     }
@@ -820,12 +820,12 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

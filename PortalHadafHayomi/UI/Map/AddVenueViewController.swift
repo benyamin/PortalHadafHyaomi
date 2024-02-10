@@ -255,7 +255,7 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
     
     @objc override func keyboardWillAppear(_ notification: Notification)
     {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         {
             if let bottomContraint = self.scrollView?.constraintForAttribute(.bottom)
             {
@@ -430,7 +430,7 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
         
         self.timePickerBottomConstraint.constant = 0
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                         {
             self.view.layoutIfNeeded()
             
@@ -446,7 +446,7 @@ class AddVenueViewController: MSBaseViewController, UITextFieldDelegate, BTTable
             self.timePickerBottomConstraint.constant = -self.timePickerBaseView.frame.size.height
             
             if animated {
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                                 {
                     self.view.layoutIfNeeded()
                     

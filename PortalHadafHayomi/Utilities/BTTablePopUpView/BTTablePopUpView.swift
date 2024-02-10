@@ -98,19 +98,19 @@ public class BTTablePopUpView:UIView, UITableViewDelegate, UITableViewDataSource
             
             cell.setSelected("\(selectedOption!)" == optionTitle)
             
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
         }
         
         return cell
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)

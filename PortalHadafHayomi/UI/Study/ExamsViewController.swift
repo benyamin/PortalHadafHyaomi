@@ -337,7 +337,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
         
         self.pagePickerBaseViewBottomConstraint?.constant = 0
         
-        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -349,7 +349,7 @@ class ExamsViewController: MSBaseViewController, UITableViewDelegate, UITableVie
     {
         self.pagePickerBaseViewBottomConstraint?.constant = -1*(self.pagePickerBaseView!.frame.size.height)
                 
-        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration:animated ? 0.4 : 0.0, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 

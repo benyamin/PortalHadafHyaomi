@@ -177,7 +177,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
         contentView.addSubview(pagesPickerView)
         
         pagesPickerView.addSidedConstraints()
-        self.sendSubview(toBack:pagesPickerView)
+        self.sendSubviewToBack(pagesPickerView)
         
         self.showAllPages()
         
@@ -187,7 +187,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     
     @IBAction func toggleButtonClicked(_ sender:UIButton)
     {
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.isDisplyed ? self.hide() : self.show()
                 self.layoutIfNeeded()

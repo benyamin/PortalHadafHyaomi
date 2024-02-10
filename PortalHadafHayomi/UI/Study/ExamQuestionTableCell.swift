@@ -28,7 +28,7 @@ class ExamQuestionTableCell: MSBaseTableViewCell, UITableViewDelegate, UITableVi
         
         self.headerView?.addBottomShadow()
         
-        self.bringSubview(toFront: self.headerView)
+        self.bringSubviewToFront(self.headerView)
     }
     
     override func reloadWithObject(_ object: Any) {

@@ -81,10 +81,10 @@ public class BTPopUpView:UIView
         }
         else{
             
-            let leadingConstraint = NSLayoutConstraint(item:  view, attribute: .leading, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem:  self, attribute: .leading, multiplier: 1, constant: 20)
+            let leadingConstraint = NSLayoutConstraint(item:  view, attribute: .leading, relatedBy: NSLayoutConstraint.Relation.greaterThanOrEqual, toItem:  self, attribute: .leading, multiplier: 1, constant: 20)
             self.addConstraint(leadingConstraint)
             
-            let trailingConstraint = NSLayoutConstraint(item:  view, attribute: .trailing, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem:  self, attribute: .trailing, multiplier: 1, constant: 20)
+            let trailingConstraint = NSLayoutConstraint(item:  view, attribute: .trailing, relatedBy: NSLayoutConstraint.Relation.greaterThanOrEqual, toItem:  self, attribute: .trailing, multiplier: 1, constant: 20)
             self.addConstraint(trailingConstraint)
             
             
@@ -99,13 +99,13 @@ public class BTPopUpView:UIView
             self.addConstraint(verticalConstraint)
         }
         
-        UIView.animate(withDuration: 0.10, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.10, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.backGroundView.alpha = 0.6
                 
         }, completion: {_ in
             
-            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     view.alpha = 1.0
                     
@@ -118,13 +118,13 @@ public class BTPopUpView:UIView
     
     @objc public func dismiss()
     {
-        UIView.animate(withDuration: 0.15, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.15, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.alpha = 0.0
                 
         }, completion: {_ in
             
-            UIView.animate(withDuration: 0.10, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.10, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.backGroundView.alpha = 0.0
                     

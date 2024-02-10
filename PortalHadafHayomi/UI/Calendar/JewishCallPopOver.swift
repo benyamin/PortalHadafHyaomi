@@ -175,7 +175,7 @@ class JewishCallPopOver: UIView, UITextViewDelegate
             self.closeButtonConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 500)
             self.closeButtonEqualWidthConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 500)
             
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.layoutIfNeeded()
                     
@@ -190,7 +190,7 @@ class JewishCallPopOver: UIView, UITextViewDelegate
             self.closeButtonConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 900)
             self.closeButtonEqualWidthConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 900)
             
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.layoutIfNeeded()
                     
@@ -203,7 +203,7 @@ class JewishCallPopOver: UIView, UITextViewDelegate
     
     func animateToCenterPoint(_ point:CGPoint)
     {
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.superview!.center = point
                 

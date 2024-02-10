@@ -145,7 +145,7 @@ class SavedPagesViewController: MSBaseViewController, UITableViewDelegate, UITab
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedMasechtPagesCell", for:indexPath) as! MSBaseTableViewCell
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         cell.reloadWithObject(self.masechtotWithSavedPages![indexPath.row])
         
@@ -153,11 +153,11 @@ class SavedPagesViewController: MSBaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }

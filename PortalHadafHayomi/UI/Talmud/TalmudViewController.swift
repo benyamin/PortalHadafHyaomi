@@ -68,7 +68,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 }
                 self.blockView .frame = self.pagesCollectionView.bounds
                 self.blockView.isHidden = false
-                self.pagesCollectionView.bringSubview(toFront: self.blockView)
+                self.pagesCollectionView.bringSubviewToFront(self.blockView)
             }
             else{
                 self.blockView.isHidden = true
@@ -192,7 +192,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         
         self.talmudPagePickerView.delegate = self
         
-        self.view.bringSubview(toFront:  self.topBarView!)
+        self.view.bringSubviewToFront(self.topBarView!)
         
         self.showPlayerButton?.layer.shadowColor = UIColor.darkGray.cgColor
         self.showPlayerButton?.layer.shadowOpacity = 0.5
@@ -297,7 +297,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         super.viewDidAppear(animated)
                 
         NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         if self.firstAppearance == true
         {
@@ -463,7 +463,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     {
         self.showPlayerButton?.isSelected = !self.showPlayerButton!.isSelected
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 if self.showPlayerButton!.isSelected
                 {
@@ -583,7 +583,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         
         if animated
         {
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.view.layoutIfNeeded()
                     
@@ -742,7 +742,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -806,7 +806,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             }
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -863,7 +863,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.scrollToTodaysPage()
         self.closPicker(self.talmudPagePickerView, animated:false)
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                  self.pagesCollectionView.isUserInteractionEnabled = true
                 self.pagesCollectionView.alpha = 1.0
@@ -893,7 +893,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             self.displyedPicker = self.displayTypePickerView
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -1006,7 +1006,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             rotationAngle = -Double.pi/2
         }
    
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.pagesCollectionView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
                 
@@ -1056,7 +1056,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.topBarView!.addSubview(self.lockRotationContentView)
         self.lockRotationContentView.center = lockRotationCenter
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.pagesCollectionView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
                 self.lockRotationContentView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
@@ -1076,7 +1076,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 let colletoinCenter = rootViewController.view.convert(self.pagesCollectionView.center, to:self.view)
                 self.view.addSubview(self.pagesCollectionView)
                 self.pagesCollectionView.center = colletoinCenter
-                self.view.sendSubview(toBack: self.pagesCollectionView)
+            self.view.sendSubviewToBack(self.pagesCollectionView)
         })
     }
     
@@ -1282,7 +1282,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 
                 lessonPickerText += " \(lessonType)"
                 
-                pikerLabel.attributedText = lessonPickerText.addAttribute(["name":NSAttributedStringKey.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 12)], ToSubString: lessonType, ignoreCase: true)
+                pikerLabel.attributedText = lessonPickerText.addAttribute(["name":NSAttributedString.Key.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 12)], ToSubString: lessonType, ignoreCase: true)
             }
             else{
                 pikerLabel.text = lessonPickerText

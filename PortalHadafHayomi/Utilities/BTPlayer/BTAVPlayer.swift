@@ -42,7 +42,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                 a_player = AVPlayer()
                 
                 do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options: .duckOthers)
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: .duckOthers)
               
                     print("Playback OK")
                     try AVAudioSession.sharedInstance().setActive(true)
@@ -66,7 +66,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     
     func setup()
     {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.itemDidFinishPlaying(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.itemDidFinishPlaying(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
             self.setRate(playerRateSpeed)
@@ -86,6 +86,8 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
             self.player.rate = self.playerRate
             
         }
+        
+        self.updateNowPlayingInfo()
     }
     
     func playVideo(){
@@ -185,7 +187,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         commandCenter.seekBackwardCommand.isEnabled = true
         
         commandCenter.playCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-            //self?.player.play()
+            self?.player.play()
             
             self?.player.playImmediately(atRate: 1.0)
             return .success
@@ -199,7 +201,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                     let newTime = playerCurrentTime + 30
                     if newTime < CMTimeGetSeconds(duration)
                     {
-                        let selectedTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
+                        let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
                         self?.player.seek(to: selectedTime)
                     }
                     self?.player.pause()
@@ -219,7 +221,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                          let newTime = playerCurrentTime - 30
                          if newTime < CMTimeGetSeconds(duration)
                          {
-                             let selectedTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
+                             let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
                              self?.player.seek(to: selectedTime)
                          }
                          self?.player.pause()
@@ -288,7 +290,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
             switch (status)
             {
                 
-            case AVPlayerStatus.readyToPlay.rawValue:
+            case AVPlayer.Status.readyToPlay.rawValue:
                 
                 print ("PLAYER Status ReadyToPlay")
                
@@ -307,10 +309,30 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         }
     }
     
+    func updateNowPlayingInfo() {
+           guard let player = player else { return }
+           
+           // Retrieve metadata from AVPlayerItem or set your custom metadata
+           let title = "Your Title"
+           let artist = "Artist Name"
+           /*let artwork = MPMediaItemArtwork(boundsSize: CGSize(width: 300, height: 300)) { _ in
+               //return yourArtworkImage
+           }*/
+           
+           // Set Now Playing Info
+           MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+               MPMediaItemPropertyTitle: title,
+               MPMediaItemPropertyArtist: artist,
+               //MPMediaItemPropertyArtwork: artwork,
+               // Other metadata properties
+           ]
+       }
+    
     func status() -> String
     {
         if self.player.status == .readyToPlay
         {
+            self.updateNowPlayingInfo()
             return "ReadyToPlay"
         }
         return ""

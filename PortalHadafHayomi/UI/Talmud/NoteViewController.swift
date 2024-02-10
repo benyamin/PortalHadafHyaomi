@@ -123,7 +123,7 @@ class NoteViewController: MSBaseViewController, UITextViewDelegate
     //MARK: - Keyboard notifications
     @objc override func keyboardWillAppear(_ notification: Notification)
     {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         {
             var bottomBarHeight:CGFloat = 0
             if let superViewHeight = self.navigationController?.view.superview?.frame.size.height
@@ -133,7 +133,7 @@ class NoteViewController: MSBaseViewController, UITextViewDelegate
            
             self.noteTextViewBottomConstraint?.constant = (keyboardSize.height + 16) - bottomBarHeight
             
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
                 {
                     self.view.setNeedsLayout()
                     
@@ -146,7 +146,7 @@ class NoteViewController: MSBaseViewController, UITextViewDelegate
     {
         self.noteTextViewBottomConstraint?.constant = 16
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.allowUserInteraction, animations:
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
                 self.view.setNeedsLayout()
                 

@@ -30,7 +30,7 @@ class ChavrusaInfoTableCell: MSBaseTableViewCell {
         
        // self.messagTextView?.contentInset = UIEdgeInsetsMake(0,0,0,0);
        // self.messagTextView?.textContainerInset = UIEdgeInsets.zero
-          self.messagTextView?.textContainerInset =  UIEdgeInsetsMake(0,0,-25,0)
+        self.messagTextView?.textContainerInset =  UIEdgeInsets(top: 0,left: 0,bottom: -25,right: 0)
         self.messagTextView?.textContainer.lineFragmentPadding = 0
         
         self.selectButton?.layer.borderWidth = 1.0

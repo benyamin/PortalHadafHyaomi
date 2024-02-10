@@ -235,7 +235,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonVenueTableCell", for:indexPath) as! LessonVenueTableCell
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.delegate = self
         
         cell.reloadWithObject(self.lessonVenues[indexPath.row])
@@ -247,12 +247,12 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     //Mark: - UISearchBarDelegate

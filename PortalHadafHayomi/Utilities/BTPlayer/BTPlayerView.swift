@@ -34,14 +34,14 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     @IBOutlet weak var errorLabel:UILabel!
     
     @IBOutlet weak var rateSpeedButton:UIButton?
-
+    
     @IBOutlet weak var lockButton:UIButton!
     
     @IBOutlet weak var jumpForwardButton:UIButton?
     @IBOutlet weak var jumpBackButton:UIButton?
     
     var lockView:UIView?
-        
+    
     var onReadyToPlay:(() -> Void)?
     var onLessonNotFound:(() -> Void)?
     var onPlayerDidStop:(() -> Void)?
@@ -73,14 +73,14 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     var title:String = "" {
         didSet{
             self.player.setTitle(self.title)
-          
+            
             self.titleLabel?.text = self.title
         }
     }
     
     var subTitle:String = "" {
         didSet{
-           self.player.setSubTitle(self.subTitle)
+            self.player.setSubTitle(self.subTitle)
             
             self.subTitleLabel?.text = self.subTitle
         }
@@ -102,9 +102,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     }
     
     func setPlayerUrl(_ url:URL?, durration:Int
-        ,onReadyToPlay:@escaping () -> Void
-        ,onLessonNotFound:@escaping () -> Void
-        ,onPlayerDidStop:@escaping () -> Void)
+                      ,onReadyToPlay:@escaping () -> Void
+                      ,onLessonNotFound:@escaping () -> Void
+                      ,onPlayerDidStop:@escaping () -> Void)
     {
         self.onReadyToPlay = onReadyToPlay
         self.onLessonNotFound = onLessonNotFound
@@ -112,7 +112,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         self.setPlayerUrl(url, durration: durration)
     }
-   
+    
     func setPlayerUrl(_ url:URL?, durration:Int)
     {
         if durration > 0
@@ -128,7 +128,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         //If the url is the sampe as the current url, do not update player
         if let newUrl = url
             ,let currentPlayerUrl = self.playerUrl
-        , currentPlayerUrl.absoluteString == newUrl.absoluteString
+            , currentPlayerUrl.absoluteString == newUrl.absoluteString
         {
             return
         }
@@ -137,10 +137,10 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         if selectedUrl != nil
         {
-             print ("SelectedAudioUrl:\(selectedUrl!.absoluteString)")
+            print ("SelectedAudioUrl:\(selectedUrl!.absoluteString)")
         }
         else{
-             print ("setAudioUrlForLesson failed")
+            print ("setAudioUrlForLesson failed")
         }
         
         self.playerUrl = selectedUrl
@@ -184,7 +184,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         self.updatePlayer()
         
-       self.setPalyerNotifications()
+        self.setPalyerNotifications()
     }
     
     func setReadyToPlayLayout()
@@ -196,18 +196,18 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         if self.startAutomatically
         {
-             self.play()
+            self.play()
             /*
-            if let enablesAutomaticPlaying = UserDefaults.standard.object(forKey: "setableItem_EnablesAutomaticPlaying") as? Bool
-            ,enablesAutomaticPlaying == false
-            {
-                 self.setPrepareToPlayLayout()
-            }
-            else{
-               
-                self.play()
-            }
- */
+             if let enablesAutomaticPlaying = UserDefaults.standard.object(forKey: "setableItem_EnablesAutomaticPlaying") as? Bool
+             ,enablesAutomaticPlaying == false
+             {
+             self.setPrepareToPlayLayout()
+             }
+             else{
+             
+             self.play()
+             }
+             */
         }
         else{
             self.setPrepareToPlayLayout()
@@ -235,11 +235,11 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     override func awakeFromNib() {
         super.awakeFromNib()
         /*
-        self.playButton.accessibilityIdentifier = "Play"
-        self.pauseButton.accessibilityIdentifier = "Pause"
-        self.jumpForwardButton?.accessibilityIdentifier = "Jump Forward"
-        self.jumpBackButton?.accessibilityIdentifier = "Jump Back"
-        */
+         self.playButton.accessibilityIdentifier = "Play"
+         self.pauseButton.accessibilityIdentifier = "Pause"
+         self.jumpForwardButton?.accessibilityIdentifier = "Jump Forward"
+         self.jumpBackButton?.accessibilityIdentifier = "Jump Back"
+         */
         self.loadingActivityIndicator.isHidden = true
         self.pauseButton.isHidden = true
         self.errorLabel.isHidden = true
@@ -254,15 +254,16 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         let jumpDuratoin =  UserDefaults.standard.object(forKey: "selectedLessonSkipInterval") as? String ?? "30"
         self.jumpBackButton?.setTitle(jumpDuratoin, for: .normal)
         self.jumpForwardButton?.setTitle(jumpDuratoin, for: .normal)
-                      
+        
         self.becomeFirstResponder()
-        UIApplication.shared.beginReceivingRemoteControlEvents()
+        //UIApplication.shared.beginReceivingRemoteControlEvents()
+        
+       // self.addActionsToControlCenter()
         
         if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
             self.rateSpeedButton?.setTitle( String(format: "%.1f", playerRateSpeed), for: .normal)
         }
     }
-  
     
     override func remoteControlReceived(with event: UIEvent?) {
         guard let event = event else {
@@ -271,7 +272,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         switch event.subtype {
         case .remoteControlPlay:
             self.play()
-            self.rateSpeedButton
+           // self.rateSpeedButton
             break
             
         case .remoteControlPause:
@@ -377,13 +378,13 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             
             let options = [
                 .type(.down)
-                ] as [PopoverOption]
+            ] as [PopoverOption]
             
             let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
             
             var inView:UIView = self
-             if let rootNavController = UIApplication.shared.keyWindow?.rootViewController
-             {
+            if let rootNavController = UIApplication.shared.keyWindow?.rootViewController
+            {
                 inView = rootNavController.view
             }
             popover.show(playerRateSpeedView, fromView: self.rateSpeedButton!, inView: inView)
@@ -414,7 +415,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
                 if self.playButton.isHidden
                 {
                     self.player.play()
-                     self.delegate?.didPlay(player:self)
+                    self.delegate?.didPlay(player:self)
                 }
             }
         }
@@ -449,18 +450,18 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         if let playerDuration = self.player.duration()
         {
             let timeScale = playerDuration.timescale
-            let time = CMTimeMakeWithSeconds(Double(duration), timeScale);
+            let time = CMTimeMakeWithSeconds(Double(duration), preferredTimescale: timeScale);
             
             if self.isPaused
             {
-                self.player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero){ (Bool) in
+                self.player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero){ (Bool) in
                 }
                 
             }
             else
             {
                 self.player.pause()
-                self.player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero){ (Bool) in
+                self.player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero){ (Bool) in
                 }
             }
         }
@@ -475,7 +476,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         let timeLeft = Int( self.progressSlider.maximumValue) - duration
         self.timeLeftLabel.text = self.timeDisplayForSeconds(seconds: timeLeft)
-
+        
     }
     
     @IBAction func sliderDidFinishSliding(_ sender:AnyObject)
@@ -488,6 +489,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
                 if self.playButton.isHidden
                 {
                     self.player.play()
+                    self.updateInfoCenter()
                     self.delegate?.didPlay(player:self)
                 }
             }
@@ -504,7 +506,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     {
         self.play()
         
-       self.setIsPlayingLayout()
+        self.setIsPlayingLayout()
     }
     
     func play()
@@ -525,6 +527,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         }
         
         self.player.play()
+        self.updateInfoCenter()
         
         self.setIsPlayingLayout()
         
@@ -569,7 +572,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
                 self.setIsPlayingLayout()
             }
         }
-    
+        
         self.timePassedLabel.text = self.timeDisplayForSeconds(seconds: timeNow)
         
         self.progressSlider.value = Float(timeNow)
@@ -631,7 +634,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             SpeechManager.sharedManager.listen()
         }
     }
-
+    
     func moveToDesiredStartDuration(_ desiredStartDuration:Float)
     {
         self.desiredStartDuration = desiredStartDuration
@@ -642,13 +645,13 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             {
                 
                 let timeScale = self.player.duration()!.timescale;
-                let time = CMTimeMakeWithSeconds(Double(self.desiredStartDuration), timeScale);
+                let time = CMTimeMakeWithSeconds(Double(self.desiredStartDuration), preferredTimescale: timeScale);
                 
-                self.player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero){ (Bool) in
+                self.player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero){ (Bool) in
                     
-                self.updateDurationLayout(duration:Int(desiredStartDuration))
-
-                     self.desiredStartDuration = 0.0
+                    self.updateDurationLayout(duration:Int(desiredStartDuration))
+                    
+                    self.desiredStartDuration = 0.0
                 }
             }
         }
@@ -657,9 +660,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     @objc func itemDidFinishPlaying(notification:NSNotification)  {
         
         let timeScale = self.player.duration()!.timescale;
-        let time = CMTimeMakeWithSeconds(0.0, timeScale);
+        let time = CMTimeMakeWithSeconds(0.0, preferredTimescale: timeScale);
         
-        self.player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero){ (Bool) in
+        self.player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero){ (Bool) in
             
             self.desiredStartDuration = 0.0
         }
@@ -699,7 +702,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         if let duration = self.player.duration()
         {
             self.moveToDesiredStartDuration(self.desiredStartDuration)
-
+            
             let seconds = CMTimeGetSeconds(duration)
             
             if seconds > 0
@@ -718,7 +721,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         self.onLessonNotFound?()
         self.setLessonNotFoundLayout()
     }
-        
+    
     func playerDidStop(player:IPlayerProtocol) {
         
         self.onPlayerDidStop?()
@@ -729,7 +732,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     func addPeriodicTimeObserver()
     {
-         self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, 1), queue: DispatchQueue.main) { [weak self] time in
+        self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
             
             if (self?.player.isActive())!
             {
@@ -752,13 +755,13 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             MPMediaItemPropertyPlaybackDuration: NSNumber(value: CMTimeGetSeconds(self.playingItem.asset.duration)),
             MPNowPlayingInfoPropertyPlaybackRate: NSNumber(value: 1)
         ]
-
+        
     }
     
-     func playerFailed(player:IPlayerProtocol)
-     {
-       self.onLessonNotFound?()
-         self.setLessonNotFoundLayout()
+    func playerFailed(player:IPlayerProtocol)
+    {
+        self.onLessonNotFound?()
+        self.setLessonNotFoundLayout()
     }
     
     func playerDidUpdateInfo(player: IPlayerProtocol) {
@@ -770,7 +773,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     func rateSpeedView(_ rateSpeedView:BTPlayerRateSpeedView, valueChanged value:Float)
     {
         self.rateSpeedButton?.setTitle( String(format: "%.1f", value), for: .normal)
-      
+        
         UserDefaults.standard.set(value, forKey: "lessonPlayerRateSpeed")
         UserDefaults.standard.synchronize()
         
@@ -780,6 +783,105 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     func currentPlayingDuration() -> Double {
         
         return self.player.currentTime().seconds
+    }
+    
+    func addActionsToControlCenter(){
+        addActionToPlayCommand()
+        addActionToPauseCommnd()
+        addActionToPreviousCommand()
+        addActionToNextCommand()
+        addActionToChangePlayBackPosition()
+        addActionToseekForwardCommand()
+        addActionToseekBackwordCommand()
+        
+        MPRemoteCommandCenter.shared().skipForwardCommand.addTarget { [weak self] event in
+                  // Handle forward button press event here
+                  if let commandEvent = event as? MPSkipIntervalCommandEvent {
+                      let skipInterval = commandEvent.interval
+                    
+                      return .success
+                  }
+                  return .commandFailed
+              }
+    }
+    
+    func addActionToPlayCommand(){
+        MPRemoteCommandCenter.shared().playCommand.isEnabled = true
+        MPRemoteCommandCenter.shared().playCommand.addTarget(self, action: #selector(playCommand))
+    }
+    func addActionToPauseCommnd(){
+        MPRemoteCommandCenter.shared().pauseCommand.isEnabled = true
+        MPRemoteCommandCenter.shared().pauseCommand.addTarget(self, action: #selector(pauseCommand))
+    }
+    func addActionToPreviousCommand(){MPRemoteCommandCenter.shared().previousTrackCommand.isEnabled = true   
+        MPRemoteCommandCenter.shared().previousTrackCommand.addTarget(self, action: #selector(previousButtonTapped))
+    }
+    func addActionToNextCommand(){MPRemoteCommandCenter.shared().nextTrackCommand.isEnabled = true
+        MPRemoteCommandCenter.shared().nextTrackCommand.addTarget(self, action: #selector(nextButtonTapped))
+    }
+    func addActionToChangePlayBackPosition(){
+        MPRemoteCommandCenter.shared().changePlaybackPositionCommand.isEnabled = true
+        MPRemoteCommandCenter.shared().changePlaybackPositionCommand.addTarget(self, action: #selector(changePlaybackPosition))
+    }
+    func addActionToseekForwardCommand(){
+        MPRemoteCommandCenter.shared().seekForwardCommand.isEnabled = true
+        MPRemoteCommandCenter.shared().playCommand.addTarget(self, action: #selector(seekForward))
+    }
+    func addActionToseekBackwordCommand(){
+        MPRemoteCommandCenter.shared().seekBackwardCommand.isEnabled = true
+        MPRemoteCommandCenter.shared().playCommand.addTarget(self, action: #selector(seekBackword))
+    }
+    
+    @objc func playCommand() -> MPRemoteCommandHandlerStatus {
+        self.play()
+        return .success
+    }
+    
+    @objc func pauseCommand() -> MPRemoteCommandHandlerStatus {
+        // Your implementation to handle play command
+        self.pause()
+        return .success
+    }
+    
+    @objc func previousButtonTapped() -> MPRemoteCommandHandlerStatus {
+        // Your implementation to handle play command
+        return .success
+    }
+    
+    @objc func nextButtonTapped() -> MPRemoteCommandHandlerStatus {
+        // Your implementation to handle play command
+        return .success
+    }
+    
+    @objc func changePlaybackPosition() -> MPRemoteCommandHandlerStatus {
+        // Your implementation to handle play command
+        return .success
+    }
+    
+    @objc func seekForward() -> MPRemoteCommandHandlerStatus {
+        // Your implementation to handle play command
+        return .success
+    }
+    
+    @objc func seekBackword() -> MPRemoteCommandHandlerStatus {
+        // Your implementation to handle play command
+        return .success
+    }
+
+    func updateInfoCenter() {
+        
+        let nowPlayingInfo: [String: Any] = [
+            MPMediaItemPropertyTitle: "Song Title",
+            MPMediaItemPropertyArtist: "Artist Name",
+            /* MPMediaItemPropertyArtwork: MPMediaItemArtwork(boundsSize: CGSize(width: 100, height: 100)) { _ in
+             return yourArtworkImage
+             },*/
+            MPNowPlayingInfoPropertyPlaybackRate: 1.0, // Playback rate (e.g., 1.0 for normal speed)
+            /* MPMediaItemPropertyPlaybackDuration: CMTimeGetSeconds(player.currentItem?.duration ?? CMTime.zero), // Total playback duration*/
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: CMTimeGetSeconds(player.currentTime()) // Elapsed playback time
+        ]
+        
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
 }
 

@@ -26,11 +26,11 @@ class AboutViewController: MSBaseViewController {
         
         self.displaySegmentedControlr.setTitle("st_regulations".localize(), forSegmentAt: 2)
         
-        let segmentFontAttribute = [NSAttributedStringKey.font: UIFont(name: "BroshMF", size: 18)!,
-                                    NSAttributedStringKey.foregroundColor: UIColor(HexColor: "FAF2DD")]
+        let segmentFontAttribute = [NSAttributedString.Key.font: UIFont(name: "BroshMF", size: 18)!,
+                                    NSAttributedString.Key.foregroundColor: UIColor(HexColor: "FAF2DD")]
         
-        let segmentSelectedFontAttribute = [NSAttributedStringKey.font: UIFont(name: "BroshMF", size: 18)!,
-                                            NSAttributedStringKey.foregroundColor: UIColor(HexColor:"7F2B30")]
+        let segmentSelectedFontAttribute = [NSAttributedString.Key.font: UIFont(name: "BroshMF", size: 18)!,
+                                            NSAttributedString.Key.foregroundColor: UIColor(HexColor:"7F2B30")]
         
         displaySegmentedControlr.setTitleTextAttributes(segmentFontAttribute, for: .normal)
         displaySegmentedControlr.setTitleTextAttributes(segmentSelectedFontAttribute, for: .selected)        
