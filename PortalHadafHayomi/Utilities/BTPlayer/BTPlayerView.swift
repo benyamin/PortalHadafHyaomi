@@ -730,6 +730,11 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         self.delegate?.didPause(player: self)
     }
     
+    func playerDidPlay(player:IPlayerProtocol) {
+        self.setIsPlayingLayout()
+        self.delegate?.didPlay(player:self)
+    }
+    
     func addPeriodicTimeObserver()
     {
         self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
@@ -748,13 +753,23 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     func setBackgourndPlayer()
     {
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-            MPMediaItemPropertyArtist: self.titleLabel?.text ?? "",
+      
+       
+  //  MPMediaItemPropertyArtwork: artwork,
+
+        var playingInfo = [MPMediaItemPropertyArtist: self.titleLabel?.text ?? "",
             MPMediaItemPropertyTitle: self.subTitleLabel?.text ?? "",
-            // MPMediaItemPropertyArtwork: UIImage(named: "defualt.png")!,
             MPMediaItemPropertyPlaybackDuration: NSNumber(value: CMTimeGetSeconds(self.playingItem.asset.duration)),
-            MPNowPlayingInfoPropertyPlaybackRate: NSNumber(value: 1)
-        ]
+                MPNowPlayingInfoPropertyPlaybackRate: NSNumber(value: 1)] as [String : Any]
+        
+        if let image = UIImage(named: "Icon-App-60x60@3x.png") {
+            let artwork = MPMediaItemArtwork(boundsSize: CGSize(width: 300, height: 300)) { _ in
+                image
+            }
+            playingInfo[MPMediaItemPropertyArtwork] = artwork
+        }
+        
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = playingInfo
         
     }
     
@@ -869,19 +884,7 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     }
 
     func updateInfoCenter() {
-        
-        let nowPlayingInfo: [String: Any] = [
-            MPMediaItemPropertyTitle: "Song Title",
-            MPMediaItemPropertyArtist: "Artist Name",
-            /* MPMediaItemPropertyArtwork: MPMediaItemArtwork(boundsSize: CGSize(width: 100, height: 100)) { _ in
-             return yourArtworkImage
-             },*/
-            MPNowPlayingInfoPropertyPlaybackRate: 1.0, // Playback rate (e.g., 1.0 for normal speed)
-            /* MPMediaItemPropertyPlaybackDuration: CMTimeGetSeconds(player.currentItem?.duration ?? CMTime.zero), // Total playback duration*/
-            MPNowPlayingInfoPropertyElapsedPlaybackTime: CMTimeGetSeconds(player.currentTime()) // Elapsed playback time
-        ]
-        
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        self.setBackgourndPlayer()
     }
 }
 

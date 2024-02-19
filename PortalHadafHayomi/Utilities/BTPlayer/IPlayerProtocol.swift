@@ -15,6 +15,7 @@ protocol IPlayerProtocolDelegate: class {
     func playerFailed(player:IPlayerProtocol)
     func playerDidUpdateInfo(player:IPlayerProtocol)
     func playerDidStop(player:IPlayerProtocol)
+    func playerDidPlay(player:IPlayerProtocol)
 }
 
 protocol  IPlayerProtocol

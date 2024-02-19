@@ -10,3 +10,6 @@ PortalHadafHayomi.xcodeproj/project.xcworkspace/xcuserdata/Binyamin.xcuserdatad/
 DerivedData/
 build/
 xcuserdata/
+*.history
+
+.DS_Store

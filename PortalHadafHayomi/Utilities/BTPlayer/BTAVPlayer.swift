@@ -42,7 +42,9 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                 a_player = AVPlayer()
                 
                 do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: .duckOthers)
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: [
+                        .allowBluetooth
+                     ])
               
                     print("Playback OK")
                     try AVAudioSession.sharedInstance().setActive(true)
@@ -71,6 +73,15 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
             self.setRate(playerRateSpeed)
         }
+        
+        MPRemoteCommandCenter.shared().playCommand.addTarget { [unowned self] event in
+                 if self.player.rate == 0.0 { // <- is stopped?
+                     // do your stuff and say to the OS that everything worked
+                     return .success
+                 }
+                 // if the command does not run properly you must inform the OS
+                 return .commandFailed
+             }
     }
     
     func play()
@@ -187,9 +198,8 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         commandCenter.seekBackwardCommand.isEnabled = true
         
         commandCenter.playCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.player.play()
-            
-            self?.player.playImmediately(atRate: 1.0)
+            self?.play()
+            self?.delegate.playerDidPlay(player: self!)
             return .success
         }
         commandCenter.nextTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
@@ -204,8 +214,8 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                         let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
                         self?.player.seek(to: selectedTime)
                     }
-                    self?.player.pause()
-                    self?.player.play()
+                    self?.pause()
+                    self?.play()
                 }
             }
             
@@ -224,8 +234,8 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                              let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
                              self?.player.seek(to: selectedTime)
                          }
-                         self?.player.pause()
-                         self?.player.play()
+                         self?.pause()
+                         self?.play()
                      }
                  }
                  
@@ -233,9 +243,11 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
              }
         
         commandCenter.pauseCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-                  self?.player.pause()
-                  return .success
-              }
+            self?.pause()
+            self?.delegate.playerDidStop(player: self!)
+            
+            return .success
+        }
         
     }
     
@@ -318,7 +330,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
            /*let artwork = MPMediaItemArtwork(boundsSize: CGSize(width: 300, height: 300)) { _ in
                //return yourArtworkImage
            }*/
-           
+           /*
            // Set Now Playing Info
            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
                MPMediaItemPropertyTitle: title,
@@ -326,6 +338,7 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                //MPMediaItemPropertyArtwork: artwork,
                // Other metadata properties
            ]
+            */
        }
     
     func status() -> String
