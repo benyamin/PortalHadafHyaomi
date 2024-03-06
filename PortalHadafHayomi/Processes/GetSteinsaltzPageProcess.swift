@@ -166,6 +166,7 @@ open class GetSteinsaltzPageProcess: MSBaseProcess
                 fullText += self.buildTextDispalyFromData(element)
             }
         }
+        
         return fullText
     }
     

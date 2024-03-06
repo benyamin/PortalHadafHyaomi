@@ -321,5 +321,117 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "608160A7-3A30-46F3-87A7-891696768C99"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/Processes/GetSteinsaltzPageProcess.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "buildTextDispalyFromData(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "608160A7-3A30-46F3-87A7-891696768C99 - fb0988044075018b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.GetSteinsaltzPageProcess.buildTextDispalyFromData(Any) -&gt; Swift.String"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/Processes/GetSteinsaltzPageProcess.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "880">
+               </Location>
+               <Location
+                  uuid = "608160A7-3A30-46F3-87A7-891696768C99 - fb0988044075018b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortalHadafHayomi.GetSteinsaltzPageProcess.buildTextDispalyFromData(Any) -&gt; Swift.String"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/Processes/GetSteinsaltzPageProcess.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "896">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "56857B84-BB6C-4C37-8604-F4FBBC020678"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/HadafHayomiManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
+            landmarkName = "todaysMaschet"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "56857B84-BB6C-4C37-8604-F4FBBC020678 - 623be9bb8680a2ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; Swift.Optional&lt;Swift.Int&gt; in PortalHadafHayomi.HadafHayomiManager.talmudNumberOfPages.getter : Swift.Optional&lt;Swift.Int&gt;"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/HadafHayomiManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "328"
+                  endingLineNumber = "328"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "56857B84-BB6C-4C37-8604-F4FBBC020678 - a2f4d9244c3de716"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; Swift.Optional&lt;PortalHadafHayomi.Page&gt; in PortalHadafHayomi.HadafHayomiManager.todaysPage.getter : Swift.Optional&lt;PortalHadafHayomi.Page&gt;"
+                  moduleName = "PortalHadafHayomi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/binyamintrachtman/Development/Binyamin/PortalHadafHyaomi/PortalHadafHayomi/HadafHayomiManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "329"
+                  endingLineNumber = "329"
+                  offsetFromSymbolStart = "588">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53D3A166-1E49-4FEF-9990-5146D438BBF8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortalHadafHayomi/HadafHayomiManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
+            landmarkName = "getTodaysMasechetName()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

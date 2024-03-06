@@ -307,19 +307,24 @@ open class  HadafHayomiManager
     
     lazy var todaysMaschet:Masechet? = {
         
-        let st = Date().stringWithFormat("yyyy-MM-dd") + " 00:00"
-        let startDayDate = Date.dateFromString(st, withFormat:"yyyy-MM-dd HH:mm")
-        
-       
-        return self.maschetForDate(startDayDate!)
+        let st = Date().stringWithFormat("yyyy-MM-dd")
+        if let startDayDate = Date.dateFromString(st, withFormat:"yyyy-MM-dd") {
+            return self.maschetForDate(startDayDate)
+        }
+        else {
+            return nil
+        }
     }()
         
     lazy var todaysPage:Page? = {
         
-        let st = Date().stringWithFormat("yyyy-MM-dd") + " 00:00"
-        let startDayDate = Date.dateFromString(st, withFormat:"yyyy-MM-dd HH:mm")
-        
-        return self.pageForDate(startDayDate!, addOnePage:true)
+        let st = Date().stringWithFormat("yyyy-MM-dd")
+        if let startDayDate = Date.dateFromString(st, withFormat:"yyyy-MM-dd"){
+            return self.pageForDate(startDayDate, addOnePage:true)
+        }
+        else{
+            return nil
+        }
     }()
     
     lazy var talmudNumberOfPages:Int! = {
