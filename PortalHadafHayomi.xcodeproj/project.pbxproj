@@ -45,8 +45,6 @@
 		22BF402629905F610053161D /* SubtitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF402529905F610053161D /* SubtitleView.xib */; };
 		22CD09B32467CEA100936262 /* PageSummaryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */; };
 		22CDDD76294B24AD00945E6F /* UIButton+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */; };
-		22CDDD7D294B571400945E6F /* showPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7B294B571400945E6F /* showPlayer.png */; };
-		22CDDD7E294B571400945E6F /* hidePlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD7C294B571400945E6F /* hidePlayer.png */; };
 		22CDDD82294BB3FF00945E6F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 22CDDD81294BB3FF00945E6F /* refresh.png */; };
 		22CDDD88294E937800945E6F /* GetUserLocationProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD87294E937800945E6F /* GetUserLocationProcess.swift */; };
 		22CDDD8A294F171700945E6F /* CGPoint+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDDD89294F171700945E6F /* CGPoint+Extras.swift */; };
@@ -677,8 +675,6 @@
 		22BF402529905F610053161D /* SubtitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubtitleView.xib; sourceTree = "<group>"; };
 		22CD09B22467CEA100936262 /* PageSummaryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSummaryCollectionCell.swift; sourceTree = "<group>"; };
 		22CDDD75294B24AD00945E6F /* UIButton+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extras.swift"; sourceTree = "<group>"; };
-		22CDDD7B294B571400945E6F /* showPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showPlayer.png; path = ../../../../../../../Downloads/showPlayer.png; sourceTree = "<group>"; };
-		22CDDD7C294B571400945E6F /* hidePlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hidePlayer.png; path = ../../../../../../../Downloads/hidePlayer.png; sourceTree = "<group>"; };
 		22CDDD81294BB3FF00945E6F /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		22CDDD87294E937800945E6F /* GetUserLocationProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLocationProcess.swift; sourceTree = "<group>"; };
 		22CDDD89294F171700945E6F /* CGPoint+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extras.swift"; sourceTree = "<group>"; };
@@ -1924,8 +1920,6 @@
 				22FD99302952F06600F73BDD /* add-friend.png */,
 				22CDDD952951A40E00945E6F /* copy.png */,
 				22CDDD81294BB3FF00945E6F /* refresh.png */,
-				22CDDD7C294B571400945E6F /* hidePlayer.png */,
-				22CDDD7B294B571400945E6F /* showPlayer.png */,
 				4A74B4C9270F83EC00DD20E6 /* MultiplePageDownload.png */,
 				4A74B4C8270F83EA00DD20E6 /* pageDownload.png */,
 				221A2DB1254B8FA00040475E /* shareIcon.png */,
@@ -2813,7 +2807,6 @@
 				4A47E6011FF9043600785929 /* Main_IPadStoryboard.storyboard in Resources */,
 				223DEF1729C6926B009977A4 /* VagshalEncoding.json in Resources */,
 				4ABFB768235291000079D68B /* Icon-App-76x76@2x.png in Resources */,
-				22CDDD7D294B571400945E6F /* showPlayer.png in Resources */,
 				4AEC802221727122003459AF /* BTPlayerRateSpeedView.xib in Resources */,
 				4ABFB6CE235290FF0079D68B /* hasivut_icon_and_text.png in Resources */,
 				2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */,
@@ -2822,7 +2815,6 @@
 				4ABFB738235291000079D68B /* lower_bar_empty_4.png in Resources */,
 				4ABFB778235291000079D68B /* defaultIcon.png in Resources */,
 				22A6BCA429F1D91E007B3EB1 /* lockRotation.png in Resources */,
-				22CDDD7E294B571400945E6F /* hidePlayer.png in Resources */,
 				4ABFB710235291000079D68B /* move_left@3x.png in Resources */,
 				4ABFB8AB235291000079D68B /* rasheyTeivot.plist in Resources */,
 				4ABFB6B3235290FF0079D68B /* Sefer_btn.png in Resources */,
