@@ -8,8 +8,10 @@
 
 import UIKit
 
-class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, JewishCallPopOverDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate,TalmudPagePickerViewDelegate
+class CalendarViewController: UIViewController, UICollectionViewDelegate, JewishCallPopOverDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate,TalmudPagePickerViewDelegate
 {
+    @IBOutlet weak var topBarView:UIView!
+    @IBOutlet weak var topBarTitleLabel:UILabel!
     @IBOutlet weak var jewishCallCollectionView:UICollectionView!
     @IBOutlet weak var dateSelectionView:UIView!
     @IBOutlet weak var datePicker:UIDatePicker!
@@ -27,6 +29,25 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     @IBOutlet weak var talmudPagePickerBaseViewBottomConstraint:NSLayoutConstraint!
     @IBOutlet weak var talmudPagePickerView:TalmudPagePickerView!
     
+    @IBOutlet weak var filterPagesBaseView:UIView!
+    @IBOutlet weak var displayLearnedPagesButton:UIButton!
+    @IBOutlet weak var displayNonLearnedPagesButton:UIButton!
+    @IBOutlet weak var displayAllPagesButton:UIButton!
+    
+    var masechtot:[Masechet]{
+        return HadafHayomiManager.sharedManager.masechtot
+    }
+    
+    var displayByMasechtot:Bool {
+        return self.dispalyTypeSegmentedControl.selectedSegmentIndex == 0
+    }
+    var displayByHebrewCalendar:Bool {
+        return self.dispalyTypeSegmentedControl.selectedSegmentIndex == 1
+    }
+    var displayByGregorianCalendar:Bool {
+        return self.dispalyTypeSegmentedControl.selectedSegmentIndex == 2
+    }
+            
     var firstDisplayedMonth:CallendarMonth!
     var displayedCalendar = Calendar.hebrew
     
@@ -50,6 +71,8 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
         self.dispalyTypeSegmentedControlValueChanged(self.dispalyTypeSegmentedControl)
         
         self.selectDateLabel?.text = Calendar.hebrew.dayDisaplyName(from: Date(), forLocal: "he_IL")
+        
+        self.topBarTitleLabel.text = "Calendar".localize()
         
         let calendarImageName = UIImage(named: "Calender_icon_empty.png")
         let calendarImage = UIImage.imageWithTintColor(calendarImageName!, color: UIColor(HexColor: "781F24"))
@@ -88,12 +111,37 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
         self.selectDateButton?.setTitle("st_select".localize(), for: .normal)
         self.cancelSelecttionDateButton?.setTitle("st_cancel".localize(), for: .normal)
         
-        self.dispalyTypeSegmentedControl.setTitle("st_hebrew_calendar".localize(), forSegmentAt: 0)
-        self.dispalyTypeSegmentedControl.setTitle("st_gregorian_calendar".localize(), forSegmentAt: 1)
+        self.dispalyTypeSegmentedControl.setTitle("st_sort_masechtot".localize(), forSegmentAt: 0)
+        self.dispalyTypeSegmentedControl.setTitle("st_hebrew_calendar".localize(), forSegmentAt: 1)
+        self.dispalyTypeSegmentedControl.setTitle("st_gregorian_calendar".localize(), forSegmentAt: 2)
         
         self.selectPageButton!.setTitle("st_select".localize(), for: .normal)
         self.dismissTalmudPagePickerButton!.setTitle("st_cancel".localize(), for: .normal)
         
+        self.view.setSemanticContentAtributeRecursive(.forceRightToLeft)
+        
+        self.setDefaultlayoutforFilterButons()
+        
+        self.view.bringSubviewToFront(self.dateSelectionView)
+        self.view.bringSubviewToFront(self.topBarView)
+    }
+    
+    func setDefaultlayoutforFilterButons(){
+        self.displayLearnedPagesButton.layer.cornerRadius = 16
+        self.displayNonLearnedPagesButton.layer.cornerRadius = 16
+        self.displayAllPagesButton.layer.cornerRadius = 16
+        
+        self.displayLearnedPagesButton.layer.borderColor = UIColor.lightGray.cgColor
+        self.displayNonLearnedPagesButton.layer.borderColor = UIColor.lightGray.cgColor
+        self.displayAllPagesButton.layer.borderColor = UIColor.lightGray.cgColor
+        
+        self.displayLearnedPagesButton.layer.borderWidth = 1.0
+        self.displayNonLearnedPagesButton.layer.borderWidth = 1.0
+        self.displayAllPagesButton.layer.borderWidth = 1.0
+        
+        self.displayLearnedPagesButton.backgroundColor = UIColor.white
+        self.displayNonLearnedPagesButton.backgroundColor = UIColor.white
+        self.displayAllPagesButton.backgroundColor = UIColor.white
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,24 +157,66 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
             self.jewishCallCollectionView.delegate = self
             self.jewishCallCollectionView.dataSource = self
             
-              self.jewishCallCollectionView.reloadData()
+              self.reloadData()
             
             let sectoin = displayedCalendar.monthBetweenDates(firstDate: self.firstDisplayedMonth.startDayDate, secondDate: Date())
             
-            self.jewishCallCollectionView.scrollToItem(at: IndexPath(row: 0, section: sectoin), at: .top, animated: false)
-            
-            let reusableHeaderview = self.jewishCallCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "JewishCallCollectionHeaderView", for: IndexPath(row: 0, section: 0)) as! JewishCallCollectionHeaderView
-            
-            let contentOffSet = CGPoint(x:  self.jewishCallCollectionView.contentOffset.x, y:  self.jewishCallCollectionView.contentOffset.y - reusableHeaderview.frame.size.height)
-            self.jewishCallCollectionView.setContentOffset(contentOffSet, animated: false)
+            if (self.displayByMasechtot){
+                
+                self.scrollToDate(Date(), animated: false)
+            }
+            else{
+                self.jewishCallCollectionView.scrollToItem(at: IndexPath(row: 0, section: sectoin), at: .top, animated: false)
+            }
+           // self.jewishCallCollectionView.setContentOffset(contentOffSet, animated: false)
             
             self.jewishCallCollectionView.isHidden = false
             
-            self.datePickerTypeSegmentedController.selectedSegmentIndex = 0 //HebrowCalendar
+            self.datePickerTypeSegmentedController.selectedSegmentIndex = 0 //Mesechtot
             self.datePickerTypeSegmentedControllerValueChanged( self.datePickerTypeSegmentedController)
         }
         
         self.setTalmudPagePickerView()
+        
+        self.updateSavedPagesStatus()
+    }
+    
+    func updateSavedPagesStatus() {
+        
+        if  HadafHayomiManager.sharedManager.savedPagesStatus.count > 0 {return}
+        
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            MSGetPagesStatusProcess().executeWithObject(nil,
+                onStart: {},
+                onComplete: { object in
+                        HadafHayomiManager.sharedManager.savedPagesStatus = object as! [String:[String:Any]]
+                        
+                      
+                        DispatchQueue.main.async {
+                        self.jewishCallCollectionView.reloadData()
+                    }
+                },
+                onFaile: { _, error in
+                    // Handle error, optionally on main thread
+                }
+            )
+        }
+    }
+    
+    func displayedPagesForMasechet(masechet:Masechet) -> [Page]{
+        
+        if self.displayLearnedPagesButton.isSelected {
+            return masechet.learnedPages ?? [Page]()
+        }
+        else if self.displayNonLearnedPagesButton.isSelected {
+            return masechet.nonLearnedPages ?? [Page]()
+        }
+        else {
+            return masechet.pages
+        }
+        //return masechet.pages
+       // return masechet.learnedPages ?? [Page]()
     }
     
     func setTalmudPagePickerView()
@@ -140,14 +230,16 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     
     @IBAction func dispalyTypeSegmentedControlValueChanged(_ sedner:AnyObject)
     {
-        if dispalyTypeSegmentedControl.selectedSegmentIndex == 0//hebrew calendar
+        self.filterPagesBaseView.isHidden =  !self.displayByMasechtot
+        
+        if self.displayByHebrewCalendar || self.displayByMasechtot
         {
             self.displayedCalendar = .hebrew
             
             self.firstDisplayedMonth = HebrewMonth.monthForDate(Date(year: 1995, month: 1, day: 1))
         }
         
-        else if dispalyTypeSegmentedControl.selectedSegmentIndex == 1//gregorian calendar
+        else if self.displayByGregorianCalendar//gregorian calendar
         {
             self.displayedCalendar = .gregorian
             
@@ -155,7 +247,7 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
             
         }
         
-        self.jewishCallCollectionView.reloadData()
+        self.reloadData()
         
         //If view did appear
          if self.jewishCallCollectionView.isHidden == false //view did appear
@@ -164,17 +256,34 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
         }
     }
     
+    @IBAction func displayFilterButtonClicked(_ sender:UIButton){
+        self.displayLearnedPagesButton.isSelected = false
+        self.displayNonLearnedPagesButton.isSelected = false
+        self.displayAllPagesButton.isSelected = false
+        
+        self.setDefaultlayoutforFilterButons()
+        
+        sender.isSelected = true
+        sender.layer.borderColor = UIColor(HexColor: "781F24").cgColor
+        
+        self.jewishCallCollectionView.reloadData()
+    }
+    
+    @IBAction func loginButtonClicked(_ sender:UIButton){
+    }
+    
     @IBAction func datePickerTypeSegmentedControllerValueChanged(_ sedner:AnyObject)
     {
-         if  datePickerTypeSegmentedController.selectedSegmentIndex == 0//Show Hebrew dates Picker
+        if self.displayByHebrewCalendar
          {
             self.datePicker.calendar = Calendar.hebrew
             self.datePicker.locale = Locale(identifier: "he_IL")
             
             //self.datePicker.semanticContentAttribute = .forceRightToLeft
         }
-         else if datePickerTypeSegmentedController.selectedSegmentIndex == 1//Show Gregorian dates Picker
+        else if self.displayByGregorianCalendar
          {
+            self.filterPagesBaseView.isHidden = true
             self.datePicker.calendar = Calendar.gregorian
             self.datePicker.locale = Locale(identifier: "en_US")
         }
@@ -219,8 +328,7 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     @IBAction func dateSelectionDisplayButtonClicked(_ sender:AnyObject)
     {
         //If date picker is hidden
-        if self.dateSelectionViewTopConstraint.constant != 0
-        {
+        if self.dateSelectionViewTopConstraint.constant != 0 {
             self.showDatePicker()
         }
     }
@@ -263,17 +371,54 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     
     func scrollToDate(_ date:Date, animated:Bool)
     {
-        let section = displayedCalendar.monthBetweenDates(firstDate: self.firstDisplayedMonth.startDayDate, secondDate: date)
-        
-        if section < self.numberOfSections(in: self.jewishCallCollectionView)
-        {
-            self.jewishCallCollectionView.scrollToItem(at: IndexPath(row: 0, section: section), at: .top, animated: animated)
+        if self.displayByMasechtot {
+           
+            if  let masechet = HadafHayomiManager.sharedManager.masechetForDate(date)
+                    ,let page = HadafHayomiManager.sharedManager.pageForDate(date, addOnePage:true)
+                    ,let masechetIndex = self.masechtot.firstIndex(of: masechet){
+                
+                let numberOfSections = jewishCallCollectionView.numberOfSections
+                
+                if masechetIndex < numberOfSections {
+                    let numberOfItems = jewishCallCollectionView.numberOfItems(inSection: masechetIndex)
+                    if page.index < numberOfItems {
+                        self.jewishCallCollectionView.scrollToItem(at: IndexPath(row: page.index, section: masechetIndex), at: .centeredVertically, animated: animated)
+                    }
+                }
+               
+            }
+         
         }
+        else{
+            let section = displayedCalendar.monthBetweenDates(firstDate: self.firstDisplayedMonth.startDayDate, secondDate: date)
+            
+            if section < self.numberOfSections(in: self.jewishCallCollectionView)
+            {
+                
+                let selectedDateIndexPath = IndexPath(row: date.day()-1, section: section)
+                
+                if self.jewishCallCollectionView.isCellVisible(at: selectedDateIndexPath) == false {
+                    
+                    self.jewishCallCollectionView.scrollToItem(at: selectedDateIndexPath, at: .top, animated: false)
+                }
+                
+                self.reloadData()
+
+            }
+        }
+    }
+    
+    func reloadData(){
+       
+        self.jewishCallCollectionView.reloadData()
     }
     
     //MARK: - CollectoinView Delegate Mthods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
+        if self.displayByMasechtot {
+            return self.masechtot.count
+        }
         return self.numberOfMonths
     }
     
@@ -284,7 +429,22 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
             
             let reusableHeaderview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "JewishCallCollectionHeaderView", for: indexPath) as! JewishCallCollectionHeaderView
             
-            if self.displayedCalendar == Calendar.hebrew
+            reusableHeaderview.onTap = { [weak self] month in
+                guard let self = self else {return}
+                
+                if month != nil {
+                    self.datePicker.setDate(month!.startDayDate, animated: false)
+                }
+                
+                self.dateSelectionViewTopConstraint.constant != 0
+                ? self.showDatePicker()
+                : self.hideDatePicker()
+            }
+            if displayByMasechtot {
+                reusableHeaderview.reloadWithMasechet(self.masechtot[indexPath.section])
+            }
+            
+            else if self.displayedCalendar == Calendar.hebrew
             {
                 let month = HebrewMonth.monthByAddingNumberOfMonth(indexPath.section, toMonth: self.firstDisplayedMonth as! HebrewMonth)
                 
@@ -305,6 +465,9 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
+        if self.displayByMasechtot{
+            return self.displayedPagesForMasechet(masechet: self.masechtot[section]).count
+        }
         var month = CallendarMonth()
         if self.displayedCalendar == Calendar.hebrew
         {
@@ -324,29 +487,67 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
+        var date:Date
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JewishCallCollectionCell", for: indexPath) as! JewishCallCollectionCell
         
-        var month = CallendarMonth()
-        if self.displayedCalendar == .hebrew
-        {
-            month = HebrewMonth.monthByAddingNumberOfMonth(indexPath.section, toMonth: self.firstDisplayedMonth as! HebrewMonth)
+        if self.displayByMasechtot{
+            
+            let masechet = self.masechtot[indexPath.section]
+            let page = self.displayedPagesForMasechet(masechet: masechet)[indexPath.row]
+           
+           // let pageNumber = masechet.firstPageIndex + page.index-1
+            date = HadafHayomiManager.sharedManager.dateFor(masechet: masechet, page: page) ?? Date()
+            
+            if indexPath.row == 0 {
+               // print ("\(masechet.name): \(page.symbol)")
+                //print ("date:\(date.stringWithFormat("dd,mm,yyyu"))")
+            }
         }
-        else{
-            month = GregorianMonth.monthByAddingNumberOfMonth(indexPath.section, toMonth: self.firstDisplayedMonth as! GregorianMonth)
+        else {
+            var month = CallendarMonth()
+            if self.displayedCalendar == .hebrew
+            {
+                month = HebrewMonth.monthByAddingNumberOfMonth(indexPath.section, toMonth: self.firstDisplayedMonth as! HebrewMonth)
+            }
+            else{
+                month = GregorianMonth.monthByAddingNumberOfMonth(indexPath.section, toMonth: self.firstDisplayedMonth as! GregorianMonth)
+            }
+            
+            let prefixDayes = month.startDay! - 1
+            let firstDisplayedDate = Date(timeInterval: TimeInterval(-1*prefixDayes*24*60*60), since: month.startDayDate)
+            
+            date = Date(timeInterval: TimeInterval(indexPath.row*24*60*60), since: firstDisplayedDate).localTimeZoneDate()
+            let timezoneOffset =  TimeZone.current.secondsFromGMT()
+            let epochDate = date.timeIntervalSince1970
+            let timezoneEpochOffset = (epochDate + Double(timezoneOffset))
+            date = Date(timeIntervalSince1970: timezoneEpochOffset)
+            
+            if date.isBetweenDates(month.startDayDate, secondDate: month.endDayDate)
+                || date.isEqual(to: month.startDayDate)
+            {
+                cell.setEnabledLayout()
+            }
+            else{
+                cell.setDisabledLayout()
+            }
         }
         
-         let prefixDayes = month.startDay! - 1
-        let firstDisplayedDate = Date(timeInterval: TimeInterval(-1*prefixDayes*24*60*60), since: month.startDayDate)
-        
-        var date = Date(timeInterval: TimeInterval(indexPath.row*24*60*60), since: firstDisplayedDate).localTimeZoneDate()
-        let timezoneOffset =  TimeZone.current.secondsFromGMT()
-        let epochDate = date.timeIntervalSince1970
-        let timezoneEpochOffset = (epochDate + Double(timezoneOffset))
-        date = Date(timeIntervalSince1970: timezoneEpochOffset)
-        
+        cell.isSelectedDate = date.isEqualDayAsDate(self.datePicker.date)
         cell.reloadWithObject(date)
         
-       if self.displayedCalendar == Calendar.hebrew
+        if self.displayByMasechtot {
+            if  let page = HadafHayomiManager.sharedManager.pageForDate(date, addOnePage:true)
+            {
+                cell.mainDateLabel.text = "דף \(page.symbol!)"
+                cell.secondaryDateLabel.text = ""
+                cell.pageLabel.text = "\(Calendar.hebrew.dayDisaplyName(from: date, forLocal: "he_IL")) \(Calendar.hebrew.monthDisaplyName(from: date, forLocal: "he_IL"))\n\(Calendar.hebrew.yearDisaplyName(from: date, forLocal: "he_IL"))"
+            }
+            
+            cell.setEnabledLayout()
+        }
+        
+        else if self.displayedCalendar == Calendar.hebrew
         {
             cell.mainDateLabel.text =  Calendar.hebrew.dayDisaplyName(from: date, forLocal: "he_IL")
             cell.secondaryDateLabel.text =  Calendar.gregorian.dayDisaplyName(from: date, forLocal: "en_US")
@@ -355,36 +556,8 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
             cell.mainDateLabel.text = Calendar.gregorian.dayDisaplyName(from: date, forLocal: "en_US")
             cell.secondaryDateLabel.text = Calendar.hebrew.dayDisaplyName(from: date, forLocal: "he_IL")
         }
-      
         
-        if date.isBetweenDates(month.startDayDate, secondDate: month.endDayDate)
-            || date.isEqual(to: month.startDayDate)
-        {
-            cell.setEnabledLayout()
-        }
-        else{
-             cell.setDisabledLayout()
-        }
-        
-        cell.mainDateLabel.textColor = UIColor(HexColor: "6A2423")
-        cell.secondaryDateLabel.textColor = UIColor(HexColor: "6A2423")
-        cell.pageLabel.textColor = UIColor(HexColor: "6A2423")
-        
-        if date.isToday()
-        {
-            cell.backgroundColor = UIColor(HexColor: "F9F3DB")
-        }
-        else if date.isEqualDayAsDate(self.datePicker.date)
-        {
-            cell.backgroundColor = UIColor(HexColor: "6A2423")
-            
-            cell.mainDateLabel.textColor = UIColor(HexColor: "F9F3DB")
-            cell.secondaryDateLabel.textColor = UIColor(HexColor: "F9F3DB")
-            cell.pageLabel.textColor = UIColor(HexColor: "F9F3DB")
-        }
-        else{
-            cell.backgroundColor = UIColor(HexColor: "DCDCDC")
-        }
+       
         
         return cell
     }
@@ -403,14 +576,14 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
         }
         let cell = collectionView.cellForItem(at: indexPath)
         self.showPopOverForCell(cell as! JewishCallCollectionCell)
-        
     }
     
     func showPopOverForCell(_ cell:JewishCallCollectionCell) {
         
         if let jewishCallPopOver = UIView.viewWithNib("JewishCallPopOver") as? JewishCallPopOver
+            ,let date = cell.date
         {
-            jewishCallPopOver.reloadWithDate(cell.date)
+            jewishCallPopOver.reloadWithDate(date)
             jewishCallPopOver.delegate = self
             
             let options = [
@@ -425,10 +598,11 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
     //MARK: = JewishCallPopOver Delegate methods
     func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, didChangeStatusForDate date:Date)
     {
-        self.jewishCallCollectionView.reloadData()
+        self.reloadData()
+        self.popover?.dismiss()
     }
     
-    func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, dismissButtonClicked button:UIButton)
+    func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, dismissButtonClicked button:UIButton?)
     {
         self.popover?.dismiss()
     }
@@ -453,28 +627,20 @@ class CalendarViewController: MSBaseViewController, UICollectionViewDelegate, Je
         self.hideTalmudPagePickerView(animated: true)
     }
     
+
+    
     @IBAction func selectPageButtonClicked() {
         
         if let selectedMasechet = talmudPagePickerView.selectedMasechet
             , let selectedPage = talmudPagePickerView.selectedPage {
             
-            if let todayMasecht = HadafHayomiManager.sharedManager.todaysMaschet
-            ,let todaysPage = HadafHayomiManager.sharedManager.todaysPage {
-                
-                let todaysPageIndex = todayMasecht.firstPageNumber + todaysPage.index
-                
-                let selectedPageIndex = selectedMasechet.firstPageNumber + selectedPage.index
-                
-                var numberOfDaysToSelectedPage = selectedPageIndex - todaysPageIndex
-                if numberOfDaysToSelectedPage < 0 {
-                    numberOfDaysToSelectedPage = HadafHayomiManager.sharedManager.numberOfDaysToCycleComplition() + selectedPageIndex
-                }
-                let selectedDate = Date().addingTimeInterval(TimeInterval(24*60*60*numberOfDaysToSelectedPage))
+            if let selectedDate = HadafHayomiManager.sharedManager.dateFor(masechet: selectedMasechet, page: selectedPage) {
                 self.datePicker.setDate(selectedDate, animated: false)
                 self.scrollToDate(selectedDate, animated: false)
                 self.jewishCallCollectionView.reloadItems(at: self.jewishCallCollectionView.indexPathsForVisibleItems)
             }
         }
+        
         self.hideTalmudPagePickerView(animated: true)
     }
     

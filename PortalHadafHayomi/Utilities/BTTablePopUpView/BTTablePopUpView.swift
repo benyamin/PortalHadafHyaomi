@@ -34,7 +34,7 @@ public class BTTablePopUpView:UIView, UITableViewDelegate, UITableViewDataSource
     public var options:[String]!
     public var selectedOption:String!
     
-    public var identifier:String!
+    //public var identifier:String!
     
     let tableCellIdentifier = "TablePopUpViewCell"
     

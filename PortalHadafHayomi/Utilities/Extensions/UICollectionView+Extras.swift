@@ -61,4 +61,15 @@ public extension UICollectionView
         return closestCellIndex
         
     }
+    
+    func isCellVisible(at indexPath: IndexPath) -> Bool {
+        for cell in visibleCells {
+            if let visibleIndexPath = indexPathForItem(at: cell.center) {
+                if visibleIndexPath == indexPath {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }

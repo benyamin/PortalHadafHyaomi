@@ -8,15 +8,17 @@
 
 import UIKit
 
-class JewishCallCollectionCell: MSBaseCollectionViewCell
+class JewishCallCollectionCell: UICollectionViewCell
 {
     @IBOutlet weak var mainDateLabel:UILabel!
     @IBOutlet weak var secondaryDateLabel:UILabel!
     @IBOutlet weak var pageLabel:UILabel!
     @IBOutlet weak var stripeImageView:UIImageView!
     @IBOutlet weak var backGroundImageView:UIImageView!
+    @IBOutlet weak var noteImageView:UIImageView!
     
-    var date:Date!
+    var date:Date?
+    var isSelectedDate = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,46 +29,73 @@ class JewishCallCollectionCell: MSBaseCollectionViewCell
         self.setLocalizatoin()
     }
     
-    override func reloadWithObject(_ object: Any)
+    func reloadWithObject(_ object: Any)
     {
         self.date = object as? Date
-                
-        let markAsLearned = self.date.isMarkedAsLearned() ? true : false
-        let hasSavedInformation = self.date.hasSavedInformation()
-        
-         self.stripeImageView.isHidden = false
-        if markAsLearned == true && hasSavedInformation == true
-        {
-            self.stripeImageView.image = UIImage(named: "Strip_With_Dot3.png")
-        }
-        else if markAsLearned == true && hasSavedInformation == false
-        {
-            self.stripeImageView.image = UIImage(named: "Strip3.png")
-        }
-        else if markAsLearned == false && hasSavedInformation == true
-        {
-            self.stripeImageView.image = UIImage(named: "Dot3.png")
-        }
-        else if markAsLearned == false && hasSavedInformation == false
-        {
-           self.stripeImageView.isHidden = true
-        }
-        
-        if self.date.isToday(){
-            print ("")
-        }
-        
-        if let masechet = HadafHayomiManager.sharedManager.maschetForDate(self.date)
-            , let page = HadafHayomiManager.sharedManager.pageForDate(self.date, addOnePage:true)
-        {
-            
-            let masechetName = HadafHayomiManager.sharedManager.getMasechetNameforMasechet(masechet, page: page)
-            self.pageLabel.text = "\(masechetName)\nדף \(page.symbol!)"
-        }
-      
-        self.backGroundImageView.image = self.isSelected ? UIImage(named: "boxShadow.png") :  UIImage(named: "kal_tile.png")
-        
+        self.reloadData()
     }
+    
+   func reloadData() {
+       
+       guard let date = self.date else {return;}
+       
+       self.mainDateLabel.textColor = UIColor(HexColor: "6A2423")
+       self.secondaryDateLabel.textColor = UIColor(HexColor: "6A2423")
+       self.pageLabel.textColor = UIColor(HexColor: "6A2423")
+       
+       if self.isUserInteractionEnabled == false {
+           self.backgroundColor = UIColor(HexColor: "DCDCDC66")
+       }
+       else {
+           if date.isToday() {
+               self.backgroundColor = UIColor(HexColor: "F9F3DB")
+           }
+           else if self.isSelectedDate
+           {
+               self.backgroundColor = UIColor(HexColor: "6A2423")
+               
+               self.mainDateLabel.textColor = UIColor(HexColor: "F9F3DB")
+               self.secondaryDateLabel.textColor = UIColor(HexColor: "F9F3DB")
+               self.pageLabel.textColor = UIColor(HexColor: "F9F3DB")
+           }
+           else{
+               self.backgroundColor = UIColor(HexColor: "DCDCDC")
+           }
+       }
+       
+       let status = date.status()
+       self.noteImageView.isHidden = !date.hasSavedInformation()
+       
+       if status == "none"{
+           self.stripeImageView.isHidden = true
+       }
+       else if status == "learned"{
+           self.stripeImageView.isHidden = false
+           self.stripeImageView.image = UIImage(named: "Strip_L.png")
+       }
+       else if status == "notLearned"{
+           self.stripeImageView.isHidden = false
+           self.stripeImageView.image = UIImage(named: "Strip_Red_L")
+       }
+       else if status == "hafhLearned"{
+           self.stripeImageView.isHidden = false
+           self.stripeImageView.image = UIImage(named: "Strip_RG_L")
+       }
+       
+       if date.isToday(){
+           print ("")
+       }
+       
+       if let masechet = HadafHayomiManager.sharedManager.maschetForDate(date)
+            , let page = HadafHayomiManager.sharedManager.pageForDate(date, addOnePage:true)
+       {
+           
+           let masechetName = HadafHayomiManager.sharedManager.getMasechetNameforMasechet(masechet, page: page)
+           self.pageLabel.text = "\(masechetName)\nדף \(page.symbol!)"
+       }
+       
+       self.backGroundImageView.image = self.isSelected ? UIImage(named: "boxShadow.png") :  UIImage(named: "kal_tile.png")
+   }
     
     override func reloadInputViews() {
         super.reloadInputViews()
@@ -76,18 +105,12 @@ class JewishCallCollectionCell: MSBaseCollectionViewCell
     
     func setEnabledLayout()
     {
-        self.backgroundColor = UIColor(HexColor: "DCDCDC")
         
         self.isUserInteractionEnabled = true
         
         self.mainDateLabel.isHidden = false
         self.secondaryDateLabel.isHidden = false
         self.pageLabel.isHidden = false
-        
-        if self.date.isMarkedAsLearned()
-        {
-            self.stripeImageView.isHidden = false
-        }
         
         self.alpha = 1.0
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CallendarMonth:DataObject
+class CallendarMonth:NSObject
 {
     var name:String!
     var numberOfDays:Int!
@@ -17,4 +17,12 @@ class CallendarMonth:DataObject
     var endDayDate:Date!
     var startDay:Int?
     var endDay:Int?
+    
+    override init() {
+        super.init()
+    }
+    
+    init(dictionary:[String:Any]) {
+        super.init()
+    }
 }

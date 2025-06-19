@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nh1-e4-kcT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nh1-e4-kcT">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,8 +23,8 @@
                                     <constraint firstAttribute="width" constant="375" id="5Ny-UV-xkO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNt-mY-15Y">
-                                <rect key="frame" x="-2" y="0.0" width="650" height="768"/>
+                            <view contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" translatesAutoresizingMaskIntoConstraints="NO" id="mNt-mY-15Y">
+                                <rect key="frame" x="0.0" y="0.0" width="650" height="768"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hy5-1s-wdo">
                                         <rect key="frame" x="252.5" y="160" width="75" height="30"/>
@@ -78,9 +78,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="iwW-BM-gXI" secondAttribute="bottom" id="1GR-JR-21x"/>
-                            <constraint firstItem="mNt-mY-15Y" firstAttribute="leading" secondItem="Ckc-2v-Dmg" secondAttribute="leading" id="1gq-uc-9kL"/>
                             <constraint firstAttribute="trailing" secondItem="iwW-BM-gXI" secondAttribute="trailing" id="APP-Fn-yHk"/>
                             <constraint firstItem="mNt-mY-15Y" firstAttribute="bottom" secondItem="Ckc-2v-Dmg" secondAttribute="bottom" id="OA7-fZ-zO8"/>
+                            <constraint firstItem="mNt-mY-15Y" firstAttribute="leading" secondItem="xHr-xA-SLH" secondAttribute="leading" id="hG1-kt-gO6"/>
                             <constraint firstItem="iwW-BM-gXI" firstAttribute="leading" secondItem="mNt-mY-15Y" secondAttribute="trailing" id="i00-AF-DfR"/>
                             <constraint firstItem="iwW-BM-gXI" firstAttribute="top" secondItem="xHr-xA-SLH" secondAttribute="top" id="xSA-yN-7KP"/>
                             <constraint firstItem="mNt-mY-15Y" firstAttribute="top" secondItem="xHr-xA-SLH" secondAttribute="top" id="xgm-QA-TSr"/>

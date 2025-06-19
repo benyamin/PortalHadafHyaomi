@@ -23,6 +23,9 @@ class Masechet:DataObject
 
     var hasSavedLessons = false
     var hasSavedPages = false
+    
+    var nonLearnedPages:[Page]?
+    var learnedPages:[Page]?
         
     var index:Int {
         get {
@@ -99,6 +102,13 @@ class Masechet:DataObject
         let amodAlef = "א"
         
         self.lastPageIndex = self.firstPageIndex + (self.numberOfPages * 2) - (self.lastPageSide == amodAlef ? 1 : 0) - 1
+        
+        self.refreshPagesStatus()
+    }
+    
+    func refreshPagesStatus(){
+      //  self.reloadLearnedPages()
+       // self.refreshNotLearnedPages()
     }
     
     func hasSavedLessonForMaggidShiour(_ maggidShiour:MaggidShiur?, andPage page:Page?) -> Bool
@@ -287,7 +297,7 @@ class Masechet:DataObject
         {
             if let dateForPage = HadafHayomiManager.sharedManager.dateForPageNumber(self.firstPageIndex + page.index-1)
             {
-                if dateForPage.isMarkedAsLearned()
+                if dateForPage.hasSavedInformation()
                 {
                     page.isMarkedAsLearned = true
                 }
@@ -296,5 +306,33 @@ class Masechet:DataObject
                 }
             }
         }
+    }
+    
+    func reloadLearnedPages(){
+        var pages = [Page]()
+        
+        for page in self.pages {
+            
+            let date = HadafHayomiManager.sharedManager.dateFor(masechet: self, page: page) ?? Date()
+          
+            if  date.status() == "learned" {
+                pages.append(page)
+            }
+        }
+        self.learnedPages = pages
+    }
+    
+    func reloadNonLearnedPages(){
+        var pages = [Page]()
+        
+        for page in self.pages {
+            let date = HadafHayomiManager.sharedManager.dateFor(masechet: self, page: page) ?? Date()
+            let dateStatus = date.status()
+            if  dateStatus == "notLearned" || dateStatus == "hafhLearned" {
+                pages.append(page)
+            }
+        }
+        
+        self.nonLearnedPages = pages
     }
 }

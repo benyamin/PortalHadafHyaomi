@@ -8,10 +8,9 @@
 
 import UIKit
 
-@objc protocol JewishCallPopOverDelegate: class
-{
+@objc protocol JewishCallPopOverDelegate {
     func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, didChangeStatusForDate date:Date)
-    func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, dismissButtonClicked button:UIButton)
+    func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, dismissButtonClicked button:UIButton?)
     func JewishCallPopOver(_ jewishCallPopOver:JewishCallPopOver, didSelectDisplayPageForDate date:Date)
 }
 
@@ -21,14 +20,14 @@ class JewishCallPopOver: UIView, UITextViewDelegate
     
     var centerPoint:CGPoint?
     
-    var isEditingMessage = false
-    
+    var seletedStatus = "none"
+        
     var placeHolderText = "st_add_comment".localize()
     
     @IBOutlet weak var messageTextView:UITextView!
-    @IBOutlet weak var saveRemoveButton:UIButton!
-    @IBOutlet weak var saveMessageButton:UIButton!
+    @IBOutlet weak var bottomBarView:UIView!
     @IBOutlet weak var closeButton:UIButton!
+    @IBOutlet var statusButtonsCollection:[UIButton]!
     
     @IBOutlet weak var closeButtonConstraintToSaveRemoveButton:NSLayoutConstraint!
     @IBOutlet weak var closeButtonEqualWidthConstraintToSaveRemoveButton:NSLayoutConstraint!
@@ -38,15 +37,33 @@ class JewishCallPopOver: UIView, UITextViewDelegate
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.setupUI()
         if self.date != nil
         {
             self.setLayout()
         }
         
-        self.messageTextView.layer.borderWidth = 1.0
-        self.messageTextView.layer.borderColor = UIColor(HexColor: "791F23").cgColor
+       // self.messageTextView.layer.borderWidth = 1.0
+       // self.messageTextView.layer.borderColor = UIColor(HexColor: "791F23").cgColor
+    }
+    
+    func setupUI(){
+                
+        let statusOptoins = [(identifier:"learned",imageName:"Strip_L")
+        ,(identifier:"notLearned",imageName:"Strip_Red_L")
+        ,(identifier:"hafhLearned",imageName:"Strip_RG_L")
+        ,(identifier:"none",imageName:"Strip_yellow")]
         
-        self.closeButton.setTitle("st_close".localize(), for: .normal)
+        for button in self.statusButtonsCollection {
+            if let buttonIndex = self.statusButtonsCollection.index(of: button) {
+                let statusOption = statusOptoins[buttonIndex]
+                button.identifier = statusOption.identifier
+                button.setImage(UIImage(named: statusOption.imageName), for: .normal)
+                button.addTarget(self, action: #selector(statusButtonClicked(_:)), for: .touchUpInside)
+            }
+        }
+        
+        self.bottomBarView.backgroundColor = UIColor(HexColor:"791F23")
     }
     
     func reloadWithDate(_ date:Date)
@@ -56,148 +73,81 @@ class JewishCallPopOver: UIView, UITextViewDelegate
         self.setLayout()
     }
     
-    @IBAction func saveRemoveButtonClicked(_ sender:AnyObject)
+    @objc @IBAction func statusButtonClicked(_ sender:UIButton)
     {
-        if self.date.isMarkedAsLearned()
-        {
-            self.date.unMarAsLearned()
+        for button in self.statusButtonsCollection{
+            button.backgroundColor = button == sender ? UIColor(HexColor: "DCDCDC") : UIColor(HexColor:"F7F0D3")
+            
         }
-        else{
-            self.date.markAsLearned()
-        }
-        
-        self.setLayout()
-        
-        self.delegate?.JewishCallPopOver(self, didChangeStatusForDate: self.date)
+        self.seletedStatus = sender.identifier ?? "none"
+
+        self.saveChanges()
     }
     
-    @IBAction func saveDeleteMessageButtonClicked(_ sender:AnyObject)
+    func saveChanges()
     {
-        //Save message
-        if saveMessageButton.tag == 0
+     
+        if let masechet = HadafHayomiManager.sharedManager.maschetForDate(self.date)
+            , let page = HadafHayomiManager.sharedManager.pageForDate(self.date, addOnePage:true)
         {
-            self.saveMessage()
-        }
-        //Delete Message
-        else if saveMessageButton.tag == -1
-        {
-            self.deleteMessage()
+            
+            let status = self.seletedStatus
+            var pageNote = ""
+            if self.messageTextView.text != self.placeHolderText {
+                pageNote = self.messageTextView.text ?? ""
+            }
+            
+            let progressInfo = MSUpdatePageProgressProcess.DataModel(date: date, masechetName: masechet.name, pageSymbol: page.symbol, status:status, note: pageNote)
+            MSUpdatePageProgressProcess().executeWithObject(progressInfo, onStart: {},onComplete: { (object) in
+                
+                //Page status was updated
+                if let savedProgressInfo = object as? [String:[String:Any]] {
+                    HadafHayomiManager.sharedManager.savedPagesStatus.merge(savedProgressInfo) { (_, new) in new }
+                    masechet.refreshPagesStatus()
+                }
+                else { // Page staus was removed
+                    let remvoedProgressId = object as! String
+                    HadafHayomiManager.sharedManager.savedPagesStatus.removeValue(forKey: remvoedProgressId)
+                }
+                
+                self.setLayout()
+                self.delegate?.JewishCallPopOver(self, didChangeStatusForDate: self.date)
+               
+            },onFaile: { (object, error) in
+                
+            })
         }
     }
+    
     
     @IBAction func displayPageButtonClicked(_ sender:AnyObject)
     {
         self.delegate?.JewishCallPopOver(self, didSelectDisplayPageForDate: self.date)
     }
-    
-   func saveMessage()
-    {
-        self.messageTextView.resignFirstResponder()
-        
-        if self.messageTextView.text == self.placeHolderText || self.messageTextView.text == ""
-        {
-            return
-        }
-        self.date.svaeMessage(self.messageTextView.text)
-        
-        self.delegate?.JewishCallPopOver(self, didChangeStatusForDate: self.date)
-        
-        self.saveMessageButton.setTitle("st_delete".localize(), for: .normal)
-        self.saveMessageButton.tag = -1
-    }
-    
-    func deleteMessage()
-    {
-        let alertTitle = "st_delete_comment_alert_title".localize()
-         let alertMessage = "st_delete_comment_alert_message".localize()
-         let cancelButtonTitle = "st_cancel".localize()
-         let deleteButtonTitle = "st_delete".localize()
-        
-        BTAlertView.show(title: alertTitle, message: alertMessage, buttonKeys: [deleteButtonTitle,cancelButtonTitle], onComplete:{ (dismissButtonKey) in
             
-            if dismissButtonKey == deleteButtonTitle
-            {
-                self.date.removeMessage()
-                self.messageTextView.resignFirstResponder()
-                self.delegate?.JewishCallPopOver(self, didChangeStatusForDate: self.date)
-                self.delegate?.JewishCallPopOver(self, dismissButtonClicked: self.closeButton)
-            }
-        })
-    }
-    
     @IBAction func closeButtonButtonClicked(_ sender:AnyObject)
     {
-        if isEditingMessage
-        {
-            self.messageTextView.resignFirstResponder()
-        }
-        else{
-            self.delegate?.JewishCallPopOver(self, dismissButtonClicked: sender as! UIButton)
-        }
+        self.messageTextView.resignFirstResponder()
+        self.close()
+    }
+    
+    func close(){
+        self.delegate?.JewishCallPopOver(self, dismissButtonClicked:self.closeButton)
     }
     
     
     func setLayout()
     {
-        if self.saveRemoveButton != nil
-        {
-            if self.date.isMarkedAsLearned()
-            {
-                self.saveRemoveButton.setTitle("st_remove_mark".localize(), for: .normal)
-            }
-            else{
-                self.saveRemoveButton.setTitle("st_add_mark".localize(), for: .normal)
-            }
-        }
-        
         if let message = self.date.savedMessage()
         {
             self.messageTextView.text = message
-            
-            self.saveMessageButton.setTitle("st_delete".localize(), for: .normal)
-            saveMessageButton.tag = -1
-            self.showSaveMessageButton(animated: false)
-            
         }
         else{
             self.messageTextView.text = placeHolderText
-            self.hideSaveMessageButton(animated:false)
         }
-    }
-    
-    
-    func showSaveMessageButton(animated:Bool)
-    {
-        if self.saveMessageButton.isHidden == true
-        {
-            self.saveMessageButton.isHidden = false
-
-            self.closeButtonConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 500)
-            self.closeButtonEqualWidthConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 500)
-            
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-                {
-                    self.layoutIfNeeded()
-                    
-            }, completion: {_ in
-            })
-        }
-    }
-    func hideSaveMessageButton(animated:Bool)
-    {
-        if self.saveMessageButton.isHidden == false
-        {
-            self.closeButtonConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 900)
-            self.closeButtonEqualWidthConstraintToSaveRemoveButton.priority = UILayoutPriority(rawValue: 900)
-            
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-                {
-                    self.layoutIfNeeded()
-                    
-            }, completion: {_ in
-                
-                self.saveMessageButton.isHidden = true
-            })
+        
+        for button in self.statusButtonsCollection {
+            button.backgroundColor = button.identifier == self.date.status() ? UIColor(HexColor: "DCDCDC") : UIColor(HexColor:"F7F0D3")
         }
     }
     
@@ -213,9 +163,7 @@ class JewishCallPopOver: UIView, UITextViewDelegate
     
     //MARK Textview Delegate methods
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
-    {
-        self.isEditingMessage = true
-        
+    {        
         if self.messageTextView.text == placeHolderText
         {
             self.messageTextView.text = ""
@@ -235,13 +183,6 @@ class JewishCallPopOver: UIView, UITextViewDelegate
     
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool
     {
-        if self.messageTextView.text == ""
-        {
-            self.messageTextView.text = self.placeHolderText
-        }
-        
-        self.isEditingMessage = false
-        
         if self.centerPoint != nil
         {
              self.animateToCenterPoint(self.centerPoint!)
@@ -249,17 +190,12 @@ class JewishCallPopOver: UIView, UITextViewDelegate
         return true
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        
-       self.saveMessageButton.setTitle("st_save".localize(), for: .normal)
-        saveMessageButton.tag = 0
-        
-        if textView.text != ""
+    func textViewDidEndEditing(_ textView: UITextView) {
+           // Your code here to handle the end of editing
+        if self.messageTextView.text != self.placeHolderText
+        && self.messageTextView.text != self.date.savedMessage()
         {
-            self.showSaveMessageButton(animated:true)
-        }
-        else{
-            self.hideSaveMessageButton(animated:true)
+            self.saveChanges()
         }
     }
 }

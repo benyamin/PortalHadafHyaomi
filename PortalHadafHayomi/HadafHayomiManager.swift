@@ -22,6 +22,8 @@ open class  HadafHayomiManager
 {
     static public let sharedManager =  HadafHayomiManager()
     
+    var savedPagesStatus = [String:[String:Any]]()
+
     var userSettings:[SetableItem]?
     
     var appSettings:[SetableItem]?
@@ -944,5 +946,44 @@ open class  HadafHayomiManager
         case .Steinsaltz:
             return "SteinsaltzENTextSize"
         }
+    }
+    
+    func masechetForDate(_ date:Date) -> Masechet?
+    {
+        let pageNumber = self.pageNumberForDate(date)
+        
+        var pageSum = 0
+        
+        for maschet in self.masechtot
+        {
+            pageSum = pageSum + maschet.numberOfPages
+            
+            if pageSum > pageNumber
+            {
+                return maschet
+            }
+        }
+        return nil
+    }
+   
+    
+    func dateFor(masechet:Masechet, page:Page) -> Date? {
+        
+        if let todayMasecht = HadafHayomiManager.sharedManager.todaysMaschet
+            ,let todaysPage = HadafHayomiManager.sharedManager.todaysPage {
+            
+            let todaysPageIndex = todayMasecht.firstPageNumber + todaysPage.index
+            
+            let selectedPageIndex = masechet.firstPageNumber + page.index
+            
+            var numberOfDaysToSelectedPage = selectedPageIndex - todaysPageIndex
+            if numberOfDaysToSelectedPage < 0 {
+                //  numberOfDaysToSelectedPage = HadafHayomiManager.sharedManager.numberOfDaysToCycleComplition() + selectedPageIndex
+            }
+            let date = Date().addingTimeInterval(TimeInterval(24*60*60*numberOfDaysToSelectedPage))
+            
+            return date
+        }
+        return nil
     }
 }

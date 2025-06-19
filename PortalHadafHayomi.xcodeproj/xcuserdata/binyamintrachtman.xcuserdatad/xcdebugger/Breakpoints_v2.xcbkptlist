@@ -167,32 +167,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "56857B84-BB6C-4C37-8604-F4FBBC020678"
+            uuid = "4562E44A-B812-45FE-94B2-162D6CA2BA6C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/HadafHayomiManager.swift"
+            filePath = "PortalHadafHayomi/Processes/MSUpdatePageProgressProcess.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
-            landmarkName = "todaysMaschet"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "53D3A166-1E49-4FEF-9990-5146D438BBF8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PortalHadafHayomi/HadafHayomiManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
-            landmarkName = "getTodaysMasechetName()"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "updatePageStatusForDate(_:info:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

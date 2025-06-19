@@ -20,38 +20,22 @@ public extension UIColor
     }
     
     convenience init(HexColor:String) {
-        let hexString:String = HexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) as String
-        let scanner            = Scanner(string: HexColor)
         
-        if (hexString.hasPrefix("#")) {
-            scanner.scanLocation = 1
-        }
-                
-        var color:UInt32 = 0
-        scanner.scanHexInt32(&color)
-        
-        var alpha = CGFloat(1.0)
-        if hexString.count == 8 //The hex string includes alpha
-        {
-            let index = hexString.index(hexString.startIndex, offsetBy: 2)
-            let a = Float(hexString.substring(to: index))!
-            
-            if a == 10{
-                alpha = 1.0
-            }
-            else{
-                alpha = CGFloat(a/10.0)
-            }
-        }
-        
-        let mask = 0x000000FF
-        let r = Int(color >> 16) & mask
-        let g = Int(color >> 8) & mask
-        let b = Int(color) & mask
-        
-        let red   = CGFloat(r) / 255.0
-        let green = CGFloat(g) / 255.0
-        let blue  = CGFloat(b) / 255.0
+        var cleanString = HexColor.replacingOccurrences(of: "#", with: "")
+               if cleanString.count == 3 {
+                   cleanString = "\(cleanString[cleanString.index(cleanString.startIndex, offsetBy: 0)])\(cleanString[cleanString.index(cleanString.startIndex, offsetBy: 0)])\(cleanString[cleanString.index(cleanString.startIndex, offsetBy: 1)])\(cleanString[cleanString.index(cleanString.startIndex, offsetBy: 1)])\(cleanString[cleanString.index(cleanString.startIndex, offsetBy: 2)])\(cleanString[cleanString.index(cleanString.startIndex, offsetBy: 2)])"
+               }
+               if cleanString.count == 6 {
+                   cleanString += "ff"
+               }
+               
+               var baseValue: UInt64 = 0
+               Scanner(string: cleanString).scanHexInt64(&baseValue)
+               
+               let red = CGFloat((baseValue >> 24) & 0xFF) / 255.0
+               let green = CGFloat((baseValue >> 16) & 0xFF) / 255.0
+               let blue = CGFloat((baseValue >> 8) & 0xFF) / 255.0
+               let alpha = CGFloat((baseValue >> 0) & 0xFF) / 255.0
         
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }

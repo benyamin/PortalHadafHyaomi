@@ -13,6 +13,10 @@ class JewishCallCollectionHeaderView: UICollectionReusableView {
     @IBOutlet weak var monthNameLabel:UILabel!
     @IBOutlet weak var daysContentView:UIView!
     
+    private var month:CallendarMonth?
+    
+    var onTap : ((CallendarMonth?) -> ())?
+    
     override func awakeFromNib() {
         
         super.awakeFromNib()
@@ -20,11 +24,21 @@ class JewishCallCollectionHeaderView: UICollectionReusableView {
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
         
-         self.setLocalizatoin()
+        self.setSemanticContentAtributeRecursive(.forceRightToLeft)
+
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
+        
+        self.setLocalizatoin()
+    }
+    
+    func reloadWithMasechet(_ masechet:Masechet){
+        self.monthNameLabel.text = masechet.name
     }
     
     func reloadWithMonth(_ month:CallendarMonth)
     {
+        self.month = month
+        
         if month is HebrewMonth
         {
             self.monthNameLabel.attributedText = self.titleTextForHebrewMonth(month as! HebrewMonth)
@@ -109,5 +123,9 @@ class JewishCallCollectionHeaderView: UICollectionReusableView {
         let attributedText = text.addAttribute(["name":NSAttributedString.Key.font.rawValue,"value": UIFont.boldSystemFont(ofSize: 11)], ToSubString: hebrewDateDispalyText, ignoreCase:true)
         
         return attributedText
+    }
+    
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+        self.onTap?(month)
     }
 }

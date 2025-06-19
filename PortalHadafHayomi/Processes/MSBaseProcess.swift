@@ -47,10 +47,30 @@ open class MSBaseProcess: NSObject
     {
         
     }
-    open func cancel()
-    {
+    
+    private func reset() {
+        
         self.onStart = nil
         self.onComplete = nil
+        self.onProgress = nil
         self.onFaile = nil
+    }
+    
+    open func cancel()
+    {
+        self.reset()
+    }
+    
+    public func onCompleteWithObj(_ obj:Any?) {
+        
+        self.onComplete?(obj ?? "")
+        self.reset()
+    }
+    
+    
+    public func onFailWithObj(_ obj:Any?, error:NSError?) {
+        
+        self.onFaile?(obj,(error ?? NSError()))
+        self.reset()
     }
 }
