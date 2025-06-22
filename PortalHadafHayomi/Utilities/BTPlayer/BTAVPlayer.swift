@@ -192,55 +192,27 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         let commandCenter = MPRemoteCommandCenter.shared()
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
+        
+        commandCenter.skipForwardCommand.isEnabled = true
+        commandCenter.skipForwardCommand.preferredIntervals = [30]
+        commandCenter.skipForwardCommand.addTarget(handler: self.handleSkipForward)
+        
         commandCenter.nextTrackCommand.isEnabled = true
+        commandCenter.nextTrackCommand.addTarget(handler: self.handleSkipForward)
+
+        commandCenter.skipBackwardCommand.isEnabled = true
+        commandCenter.skipBackwardCommand.preferredIntervals = [30]
+        commandCenter.skipBackwardCommand.addTarget(handler: self.handleSkipBackward)
+
         commandCenter.previousTrackCommand.isEnabled = true
-        commandCenter.seekForwardCommand.isEnabled = true
-        commandCenter.seekBackwardCommand.isEnabled = true
+        commandCenter.previousTrackCommand.addTarget(handler: self.handleSkipBackward)
+
         
         commandCenter.playCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
             self?.play()
             self?.delegate.playerDidPlay(player: self!)
             return .success
         }
-        commandCenter.nextTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-            
-            if self != nil {
-                
-                if let duration  = self?.player.currentItem?.duration {
-                    let playerCurrentTime = CMTimeGetSeconds(self!.player.currentTime())
-                    let newTime = playerCurrentTime + 30
-                    if newTime < CMTimeGetSeconds(duration)
-                    {
-                        let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
-                        self?.player.seek(to: selectedTime)
-                    }
-                    self?.pause()
-                    self?.play()
-                }
-            }
-            
-            return .success
-        }
-        
-        commandCenter.previousTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-                 
-                 if self != nil {
-                     
-                     if let duration  = self?.player.currentItem?.duration {
-                         let playerCurrentTime = CMTimeGetSeconds(self!.player.currentTime())
-                         let newTime = playerCurrentTime - 30
-                         if newTime < CMTimeGetSeconds(duration)
-                         {
-                             let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
-                             self?.player.seek(to: selectedTime)
-                         }
-                         self?.pause()
-                         self?.play()
-                     }
-                 }
-                 
-                 return .success
-             }
         
         commandCenter.pauseCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
             self?.pause()
@@ -249,6 +221,34 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
             return .success
         }
         
+    }
+    
+    func handleSkipForward(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+        guard let duration = player.currentItem?.duration.seconds,
+              duration.isFinite else {
+            return .commandFailed
+        }
+
+        let currentTime = player.currentTime().seconds
+        let newTime = min(currentTime + 30, duration)
+        let selectedTime = CMTime(seconds: newTime, preferredTimescale: 1000)
+
+        player.seek(to: selectedTime)
+        return .success
+    }
+
+    func handleSkipBackward(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+        guard let duration = player.currentItem?.duration.seconds,
+              duration.isFinite else {
+            return .commandFailed
+        }
+
+        let currentTime = player.currentTime().seconds
+        let newTime = max(currentTime - 30, 0)
+        let selectedTime = CMTime(seconds: newTime, preferredTimescale: 1000)
+
+        player.seek(to: selectedTime)
+        return .success
     }
     
     

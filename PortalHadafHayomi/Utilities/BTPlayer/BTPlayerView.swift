@@ -471,12 +471,12 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     func updateDurationLayout(duration:Int)
     {
+        self.updateNowPlayingProgress(currentTime: TimeInterval(duration))
         self.progressSlider.value = Float(duration)
         self.timePassedLabel.text = self.timeDisplayForSeconds(seconds: duration)
         
         let timeLeft = Int( self.progressSlider.maximumValue) - duration
         self.timeLeftLabel.text = self.timeDisplayForSeconds(seconds: timeLeft)
-        
     }
     
     @IBAction func sliderDidFinishSliding(_ sender:AnyObject)
@@ -583,6 +583,8 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         self.progressSlider.minimumValue = 0.0
         self.progressSlider.maximumValue = Float(seconds)
         
+        self.updateNowPlayingProgress(currentTime: TimeInterval(timeNow))
+
         self.delegate?.playerView(self, didChangeDuration: Int(timeNow))
     }
     
@@ -753,10 +755,6 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     func setBackgourndPlayer()
     {
-      
-       
-  //  MPMediaItemPropertyArtwork: artwork,
-
         var playingInfo = [MPMediaItemPropertyArtist: self.titleLabel?.text ?? "",
             MPMediaItemPropertyTitle: self.subTitleLabel?.text ?? "",
             MPMediaItemPropertyPlaybackDuration: NSNumber(value: CMTimeGetSeconds(self.playingItem.asset.duration)),
@@ -770,7 +768,14 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         }
         
         MPNowPlayingInfoCenter.default().nowPlayingInfo = playingInfo
-        
+    }
+    
+    func updateNowPlayingProgress(currentTime: TimeInterval) {
+        guard var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo else { return }
+
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
+
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
     func playerFailed(player:IPlayerProtocol)
