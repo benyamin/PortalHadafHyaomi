@@ -38,6 +38,16 @@ class Masechet:DataObject
         }
     }
     
+    lazy var startDate:Date! = {
+        if let firstPage = self.pages.first
+            ,let date = HadafHayomiManager.sharedManager.dateFor(masechet: self, page: firstPage) {
+            return date
+        }
+        else{
+            return Date()
+        }
+    }()
+    
     var savedLessons:[Lesson]?
     
     var savedPages:[Page]{

@@ -29,15 +29,25 @@ class JewishCallCollectionCell: UICollectionViewCell
         self.setLocalizatoin()
     }
     
-    func reloadWithObject(_ object: Any)
+    func reloadWithObject(_ object: Any?)
     {
-        self.date = object as? Date
-        self.reloadData()
+        if let date = object as? Date {
+            self.date = date
+            self.reloadData()
+        }
+        else{
+            self.date = nil
+            self.backgroundColor = .white
+            self.contentView.isHidden = true
+        }
     }
     
    func reloadData() {
        
        guard let date = self.date else {return;}
+       
+       self.backgroundColor = UIColor(HexColor: "DCDCDC")
+       self.contentView.isHidden = false
        
        self.mainDateLabel.textColor = UIColor(HexColor: "6A2423")
        self.secondaryDateLabel.textColor = UIColor(HexColor: "6A2423")

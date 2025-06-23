@@ -466,7 +466,16 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         if self.displayByMasechtot{
-            return self.displayedPagesForMasechet(masechet: self.masechtot[section]).count
+            
+            let masechet = self.masechtot[section]
+            let displayedPages = self.displayedPagesForMasechet(masechet: self.masechtot[section])
+            if displayedPages == masechet.pages {
+                let numberOfItems = masechet.pages.count + masechet.startDate.weekday()-1
+                return numberOfItems
+            }
+            else{
+                return displayedPages.count
+            }
         }
         var month = CallendarMonth()
         if self.displayedCalendar == Calendar.hebrew
@@ -494,7 +503,26 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
         if self.displayByMasechtot{
             
             let masechet = self.masechtot[indexPath.section]
-            let page = self.displayedPagesForMasechet(masechet: masechet)[indexPath.row]
+
+            let displayedPages = self.displayedPagesForMasechet(masechet: self.masechtot[indexPath.section])
+            
+            var page:Page!
+            if displayedPages == masechet.pages {
+                let index = indexPath.row - (masechet.startDate.weekday()-1)
+                if index >= displayedPages.count {
+                    print ("index:\(index)")
+                }
+                if index < 0 {
+                    cell.reloadWithObject(nil)
+                    return cell
+                }
+                else {
+                    page = displayedPages[index]
+                }
+            }
+            else{
+                page = self.displayedPagesForMasechet(masechet: masechet)[indexPath.row]
+            }
            
            // let pageNumber = masechet.firstPageIndex + page.index-1
             date = HadafHayomiManager.sharedManager.dateFor(masechet: masechet, page: page) ?? Date()
@@ -556,9 +584,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
             cell.mainDateLabel.text = Calendar.gregorian.dayDisaplyName(from: date, forLocal: "en_US")
             cell.secondaryDateLabel.text = Calendar.hebrew.dayDisaplyName(from: date, forLocal: "he_IL")
         }
-        
-       
-        
         return cell
     }
     
