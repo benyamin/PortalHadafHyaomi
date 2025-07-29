@@ -351,17 +351,49 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
         self.share(sender: self.view)
     }
     
-    func share(sender:UIView){
-        let text = self.pageTitle ?? ""
-        if let image = UIImage(named: "Icon-App-60x60@2x.png")
-            ,let link = self.url {
-            
-            let shareAll = [text , image , link] as [Any]
-            let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
+    func share(sender: UIView) {
+        guard let title = self.pageTitle,
+              let image = UIImage(named: "logo-portal.png"),
+              let url = self.url else {
+            return
         }
+        
+        if url.pathExtension.lowercased() != "pdf" {
+            self.shareURl(title: title, image: image, link: url)
+        }
+
+        // Step 1: Download PDF data first
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                self.shareURl(title: title, image: image, link: url)
+                return
+            }
+
+            DispatchQueue.main.async {
+                // Step 2: Now create activity items with the actual PDF data
+                let shareItems: [Any] = [title, image, data] // <- pass PDF data, not URL
+                let activityVC = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+
+                activityVC.popoverPresentationController?.sourceView = sender
+
+                activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
+                    if completed {
+                        print("✅ User selected activity: \(activityType?.rawValue ?? "unknown")")
+                    } else {
+                        print("❌ User cancelled")
+                    }
+                }
+
+                self.present(activityVC, animated: true)
+            }
+        }.resume()
     }
-           
+    
+    func shareURl(title:String, image:UIImage, link:URL) {
+        let shareAll = [title , image , link] as [Any]
+        let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }
 
