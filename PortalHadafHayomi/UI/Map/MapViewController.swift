@@ -18,6 +18,10 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     @IBOutlet weak var venuesTableView:UITableView!
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var sortSegmentedSecondaryTopConstraint:NSLayoutConstraint!
+    @IBOutlet weak var venuesTableViewBottomConstraint:NSLayoutConstraint!
+    @IBOutlet weak var citiesTextField: ChecklistTextField!
+    
+    var lessonCities:[String] = [String]()
     
     var userLocation:CLLocation?{
         didSet{
@@ -39,6 +43,11 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             else if self.sortSegmentedControlr.selectedSegmentIndex == 1 {//Sort by Distance
                 _lessonVenues = value.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
             }
+            
+            self.lessonCities = Array(Set(lessonVenues.compactMap(\.city)))
+                .sorted { $0.localizedCompare($1) == .orderedAscending }
+            
+            citiesTextField.checklistItems = self.lessonCities
         }
     }
     var lessonsAnnotations = [LessonVenueAnnotation]()
@@ -60,13 +69,32 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         
         self.mapView.showsUserLocation = true
         
+        self.citiesTextField.onSelectionChanged = { selected in
+           // self.updateDisplayedVenues()
+        }
+        
         self.sortSegmentedSecondaryTopConstraint.priority = UILayoutPriority(rawValue: 900)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(keyboardWillChangeFrame),
+                  name: UIResponder.keyboardWillChangeFrameNotification,
+                  object: nil
+              )
+        
         self.getLessonVenues()
         self.getUserLocatoin()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+        
     
     func getLessonVenues()
     {
@@ -262,8 +290,14 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         searchBar.autocorrectionType = UITextAutocorrectionType.no
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
-    {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.updateDisplayedVenues()
+    }
+    
+    func updateDisplayedVenues(){
+        
+        let searchText = self.searchBar.text ?? ""
+        
         var filterdVenues = [LessonVenue]()
         for lessonVenue in HadafHayomiManager.sharedManager.lessonVenues
         {
@@ -271,7 +305,14 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
                 || (lessonVenue.address?.hasPrefix(searchText))!
                 || lessonVenue.maggid.hasPrefix(searchText)
             {
-                filterdVenues.append(lessonVenue)
+                if self.citiesTextField.selectedItems.count > 0 {
+                    if self.citiesTextField.selectedItems.contains(lessonVenue.city) {
+                        filterdVenues.append(lessonVenue)
+                    }
+                }
+                else{
+                    filterdVenues.append(lessonVenue)
+                }
             }
         }
         
@@ -351,4 +392,27 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             self.present(webViewController , animated: true, completion: nil)
         }
     }
+    
+    @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+           guard
+               let userInfo = notification.userInfo,
+               let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+               let curveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+           else { return }
+
+           // Convert to your view’s coordinate system
+           let keyboardFrameInView = view.convert(frame, from: nil)
+
+           let overlap = max(0, view.bounds.height - keyboardFrameInView.origin.y)
+        self.venuesTableViewBottomConstraint.constant = overlap
+
+           UIView.animate(
+               withDuration: duration,
+               delay: 0,
+               options: UIView.AnimationOptions(rawValue: curveRaw << 16),
+               animations: { self.view.layoutIfNeeded() },
+               completion: nil
+           )
+       }
 }

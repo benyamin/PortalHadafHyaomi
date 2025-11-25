@@ -261,9 +261,14 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
         self.displayNonLearnedPagesButton.isSelected = false
         self.displayAllPagesButton.isSelected = false
         
+        self.displayLearnedPagesButton.alpha = 0.4
+        self.displayNonLearnedPagesButton.alpha = 0.4
+        self.displayAllPagesButton.alpha = 0.4
+        
         self.setDefaultlayoutforFilterButons()
         
         sender.isSelected = true
+        sender.alpha = 1.0
         sender.layer.borderColor = UIColor(HexColor: "781F24").cgColor
         
         self.jewishCallCollectionView.reloadData()

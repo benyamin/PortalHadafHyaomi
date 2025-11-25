@@ -340,7 +340,7 @@ open class  HadafHayomiManager
         let lessonVenues = [LessonVenue]()
         return lessonVenues
     }()
-  
+        
     func todaysPageDisplay() -> String
     {
        

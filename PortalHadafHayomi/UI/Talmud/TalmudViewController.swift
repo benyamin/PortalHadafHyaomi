@@ -36,19 +36,9 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var selectPageButton:UIButton?
     @IBOutlet weak var selectTodaysPageButton:UIButton?
     @IBOutlet weak var selectDisplayTypeButton:UIButton?
-    
-    @IBOutlet weak var saveOrDeletePageButton:UIButton?
-    
-    @IBOutlet weak var addNoteButton:UIButton?
-    
+            
     @IBOutlet weak var nikodButton:UIButton?
-    
-    @IBOutlet weak var saveMultiplePageButton:UIButton?
-    
-    @IBOutlet weak var shareButton:UIButton?
-    
-    @IBOutlet weak var bookmarkButton:UIButton!
-    
+                
     @IBOutlet weak var increaseTextSizeButton:UIButton!
     @IBOutlet weak var dicreaseTextSizeButton:UIButton!
     
@@ -57,6 +47,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var nextPageButton:UIButton?
     @IBOutlet weak var prePageButton:UIButton?
+    
+    @IBOutlet weak var menuButton:UIButton!
     
     var displyedPicker:UIView?{
         didSet{
@@ -101,14 +93,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 && self.audioPlayer?.isPlaying == false
             {
                 self.setAudioUrl()
-            }
-            
-            if let pageIndex = currentPageIndex
-               ,HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: self.selectedDisplayType) != nil {
-                self.saveOrDeletePageButton?.isSelected = true
-            }
-            else{
-                self.saveOrDeletePageButton?.isSelected = false
             }
         }
     }
@@ -229,10 +213,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
         self.creaditView.isHidden = true
         self.pagesCollectionBottomConstraint?.constant = 0
-    
-        self.saveMultiplePageButton?.setImageTintColor(UIColor(HexColor: "781F24"))
-        
-        self.shareButton?.setImageTintColor(UIColor(HexColor: "781F24"))
         
         if let currentLanguage = Locale.current.languageCode
             ,currentLanguage.hasSuffix("he")
@@ -289,8 +269,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-         self.setAddNoteImageDisplay()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -364,17 +342,18 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         })
     }
     
-    @IBAction func bookmarkButtonButtonClicked(_ sender:UIButton){
-        self.bookmarkButton.isSelected = !self.bookmarkButton.isSelected
+    private func toggleBookMarkDisplay(){
         
+        var isDisplayingBookMark =  UserDefaults.standard.bool(forKey: "displayDafBookMark")
+        isDisplayingBookMark = !isDisplayingBookMark
         for cell in self.pagesCollectionView.visibleCells {
-            (cell as? TalmudPageCell)?.bookmarkView?.isHidden = !(self.bookmarkButton.isSelected)
-            UserDefaults.standard.setValue(self.bookmarkButton.isSelected, forKey:"displayDafBookMark")
+            (cell as? TalmudPageCell)?.bookmarkView?.isHidden = !isDisplayingBookMark
+            UserDefaults.standard.setValue(isDisplayingBookMark, forKey:"displayDafBookMark")
             UserDefaults.standard.synchronize()
         }
     }
     
-    @IBAction func saveMultiplePageButtonClicked(_ sender:UIButton) {
+    private func saveMultiplePages() {
         
         //let timePickerview = UIView.viewWithNib("BTTimePickerview") as? BTTimePickerview
         
@@ -387,7 +366,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             let popUpView = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: pageRangePickerView.frame.size.height + arrowHight))
             popUpView.addSubview(arrow)
             popUpView.layer.cornerRadius = 3.0
-            arrow.center = CGPoint(x: sender.frame.origin.x, y:  arrow.center.y)
+            arrow.center = CGPoint(x: menuButton.frame.origin.x, y:  arrow.center.y)
             pageRangePickerView.layer.borderColor = UIColor(HexColor:"791F23").cgColor
             
             pageRangePickerView.layer.borderWidth = 2.0
@@ -403,7 +382,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             let popover = Popover(options: options, showHandler: nil, dismissHandler: {
                 
             })
-            popover.show(popUpView, fromView: sender, inView: self.view)
+            popover.show(popUpView, fromView: menuButton, inView: self.view)
             
             pageRangePickerView.reloadWithObject(self.currentPageIndex)
         }
@@ -413,10 +392,9 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     {
        self.togglePagePickerViewDisplay()
     }
-    
-    @IBAction func saveOrDeletePageButtonClicked(_ sender:UIButton) {
+   
+    private func saveOrRemoveCurrentPage() {
         
-        self.saveOrDeletePageButton?.isUserInteractionEnabled = false
         if let pageIndex = self.currentPageIndex
         {
             if HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex:pageIndex, type: self.selectedDisplayType) == nil
@@ -427,8 +405,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 }, onProgress: { (object) -> Void in
                     
                 }, onComplete: { (object) -> Void in
-                    self.saveOrDeletePageButton?.isSelected = true
-                    self.saveOrDeletePageButton?.isUserInteractionEnabled = true
+                    //self.saveOrDeletePageButton?.isUserInteractionEnabled = true
                     
                 },onFaile: { (object, error) -> Void in
                 })
@@ -437,8 +414,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 RemovePageProcess().executeWithObject(pageIndex, onStart: { () -> Void in
                     
                 }, onComplete: { (object) -> Void in
-                    self.saveOrDeletePageButton?.isSelected = false
-                    self.saveOrDeletePageButton?.isUserInteractionEnabled = true
+                   // self.saveOrDeletePageButton?.isSelected = false
+                    //self.saveOrDeletePageButton?.isUserInteractionEnabled = true
                     
                 },onFaile: { (object, error) -> Void in
                     
@@ -489,7 +466,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         })
     }
     
-    @IBAction func addNoteButtonClicked(_ sender:UIButton)
+    private func addNote()
     {
            let noteViewController =  UIViewController.withName("NoteViewController", storyBoardIdentifier: "TalmudStoryboard") as! MSBaseViewController
               
@@ -550,6 +527,94 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                   self.pagesCollectionView.scrollToItem(at: preIndexPath, at: .centeredHorizontally, animated: true)
               }
     }
+    
+    @IBAction func menuButtonClicked(_ sender:UIButton){
+        
+        var actions = [ActionItem]()
+        actions.append(
+            ActionItem(
+                key: "save",
+                title: "Save/Remove Page",
+                image: UIImage(named: "saveIcon"),
+                onTap:{
+                    self.saveOrRemoveCurrentPage()
+                })
+        )
+        
+        actions.append(
+            ActionItem(
+                key: "addNote",
+                title: "Add note",
+                image: self.addNoteImageIconImage(),
+                onTap:{
+                    self.addNote()
+                })
+        )
+        
+        if self.canShareCurrentPage() {
+            actions.append(
+                ActionItem(
+                    key: "share",
+                    title:  "Share Page",
+                    image: UIImage(named: "shareIcon"),
+                    onTap:{
+                        self.shareCurrentPage()
+                    })
+            )
+        }
+        
+        actions.append(
+            ActionItem(
+                key: "addBookmark",
+                title:  "Add Bookmark",
+                image: UIImage(named: "addBookmark"),
+                onTap:{
+                    self.toggleBookMarkDisplay()
+                })
+        )
+        
+        actions.append(
+            ActionItem(
+                key: "DownloadPages",
+                title:  "Download Pages",
+                image: UIImage(named: "MultiplePageDownload"),
+                onTap:{
+                    self.saveMultiplePages()
+                })
+        )
+             
+          /*
+            ActionItem(key: "options", title: "Options", image: UIImage(named: "MultiplePageDownload.png"), subActions: [
+                    ActionItem(key: "a1", title: "Sub Action 1") { print("Sub 1") },
+                    ActionItem(key: "a2", title: "Sub Action 2") { print("Sub 2") }
+                ]),
+                   ActionItem(key: "delete", title: "Delete", image: UIImage(named: "saveIcon.png")) { print("Delete") }
+               ]*/
+               
+               let dropdown = ActionDropdownView(actions: actions)
+               dropdown.show(relativeTo: sender)
+    }
+    
+    private func canShareCurrentPage() -> Bool {
+        if let pageIndex = self.currentPageIndex
+            ,let pageLink = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageIndex, displayType: self.selectedDisplayType){
+            return true
+        }
+        else{
+           return false
+        }
+    }
+    /*
+    private func currentPageSave(){
+        if let pageIndex = currentPageIndex
+           ,HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: self.selectedDisplayType) != nil {
+          //  self.saveOrDeletePageButton?.isSelected = true
+        }
+        else{
+           // self.saveOrDeletePageButton?.isSelected = false
+        }
+    }*/
+    
     
     @objc func blockViewTap(_ sender: UITapGestureRecognizer) {
         
@@ -633,14 +698,14 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 self.nikodButton?.isSelected = true
             }
         }
-        
+        /*
         if self.selectedDisplayType == .Vagshal
             || self.selectedDisplayType == .Chavruta {
             saveOrDeletePageButton?.isHidden = false
         }
         else{
             saveOrDeletePageButton?.isHidden = true
-        }
+        }*/
         
         self.talmudPagePickerView.displayType = self.selectedDisplayType;
         
@@ -661,14 +726,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func onDidSelectPage()
     {
-        if let pageIndex = self.currentPageIndex
-            ,let pageLink = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageIndex, displayType: self.selectedDisplayType){
-            self.shareButton?.isHidden = false
-        }
-        else{
-            self.shareButton?.isHidden = true
-        }
-        
         if self.selectedDisplayType == .EN
         {
             self.topBarTitleLabel?.text = HadafHayomiManager.dispalyEnglishTitleForMaschet(self.displyedMasceht!, page: self.displyedPage, pageSide:  self.displyedPageSide)
@@ -676,35 +733,27 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         else{
             self.topBarTitleLabel?.text = HadafHayomiManager.dispalyTitleForMaschet(self.displyedMasceht!, page: self.displyedPage, pageSide:  self.displyedPageSide)
         }
-        
-        self.setAddNoteImageDisplay()
     }
     
-    func setAddNoteImageDisplay()
+    func addNoteImageIconImage() -> UIImage?
     {
         if self.displyedMasceht == nil || self.displyedPage == nil || self.displyedPageSide == nil
         {
-            let addNoteImgae = UIImage(named: "Icons_notes_off.png")
-            self.addNoteButton?.setImage(addNoteImgae, for: .normal)
-            
-            return
+            return UIImage(named: "Icons_notes_off.png")
         }
         
         if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor( self.displyedMasceht!, page: self.displyedPage!, pageSide :self.displyedPageSide)
         {
             if HadafHayomiManager.sharedManager.hasNoteOnPage(pageId:"\(pageIndex)")
             {
-                let addNoteImgae = UIImage(named: "Icons_notes_on.png")
-                self.addNoteButton?.setImage(addNoteImgae, for: .normal)
+                return UIImage(named: "Icons_notes_on.png")
             }
             else{
-                let addNoteImgae = UIImage(named: "Icons_notes_off.png")
-                self.addNoteButton?.setImage(addNoteImgae, for: .normal)
+                return UIImage(named: "Icons_notes_off.png")
             }
         }
         else{
-            let addNoteImgae = UIImage(named: "Icons_notes_off.png")
-            self.addNoteButton?.setImage(addNoteImgae, for: .normal)
+            return UIImage(named: "Icons_notes_off.png")
         }
     }
     
@@ -1080,10 +1129,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         })
     }
     
-    @IBAction func shareButtonClicked() {
-        self.share(sender: self.view)
-    }
-    
     @IBAction func dicreaseTextSizeButtonClicked(_ sender:UIButton) {
           
         let textSizeKey = HadafHayomiManager.sharedManager.textSizeKeyForDisplayType(selectedDisplayType)
@@ -1108,7 +1153,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    func share(sender:UIView){
+    func shareCurrentPage(){
         
         let text = self.topBarTitleLabel?.text ?? ""
         if let image = UIImage(named: "Icon-App-60x60@2x.png")

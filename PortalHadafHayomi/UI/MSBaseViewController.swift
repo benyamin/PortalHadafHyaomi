@@ -85,14 +85,7 @@ class MSBaseViewController: UIViewController {
         
         if self.topBarView != nil
         {
-            //If is iPhoneX
-            if let topSafeAreaInsets = UIApplication.shared.keyWindow?.safeAreaInsets.top, topSafeAreaInsets > CGFloat(0.0)
-            {
-                self.topBarHeightConstraint?.constant = 80
-            }
-            else{
-                self.topBarHeightConstraint?.constant = 60
-            }
+            self.topBarHeightConstraint?.constant = 90
             
             self.view.bringSubviewToFront(self.topBarView!)
             

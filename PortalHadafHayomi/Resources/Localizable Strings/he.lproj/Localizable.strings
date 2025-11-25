@@ -287,6 +287,8 @@
 "st_lesson_location" = "מיקום השיעור";
 "st_lesson_time" = "שעת השיעור";
 "st_additional_info" = "פרטים נוספים";
+"st_class_size" = "מספר משתתפים";
+"st_class_size_unknown" = "לא ידוע";
 "st_email_info_label" = "נא להקליד כתובת דוא״ל מדוייקת כדי שההודעה תאושר לפרסום.\nכתובת דוא״ל זו לא תפורסם באתר.";
 "st_added_lesson_success_alert_title" = "השיעור נוסף בהצלחה";
 "st_added_lesson_success_alert_message" = "השיעור יפורסם לאחר שיאושר על ידי הנהלת האתר";

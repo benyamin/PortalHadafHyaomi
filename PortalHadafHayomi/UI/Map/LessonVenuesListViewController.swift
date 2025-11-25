@@ -24,6 +24,8 @@ class LessonVenuesListViewController: MSBaseViewController, UITableViewDelegate,
     
     @IBOutlet weak var venuesTableView:UITableView!
     @IBOutlet weak var sortSegmentedControlr:UISegmentedControl!
+    @IBOutlet weak var venuesTableViewBottomConstraint:NSLayoutConstraint!
+
     
     weak var delegate:LessonVenuesListViewControllerDelegate?
     
@@ -52,6 +54,25 @@ class LessonVenuesListViewController: MSBaseViewController, UITableViewDelegate,
             
         self.getLessonVenues()
         self.getUserLocatoin()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(keyboardWillChangeFrame),
+                  name: UIResponder.keyboardWillChangeFrameNotification,
+                  object: nil
+              )
+        
+        self.getLessonVenues()
+        self.getUserLocatoin()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
     }
 
     func getUserLocatoin(){
@@ -236,4 +257,27 @@ class LessonVenuesListViewController: MSBaseViewController, UITableViewDelegate,
         
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
+    
+    @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+           guard
+               let userInfo = notification.userInfo,
+               let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+               let curveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+           else { return }
+
+           // Convert to your view’s coordinate system
+           let keyboardFrameInView = view.convert(frame, from: nil)
+
+           let overlap = max(0, view.bounds.height - keyboardFrameInView.origin.y)
+        self.venuesTableViewBottomConstraint.constant = overlap
+
+           UIView.animate(
+               withDuration: duration,
+               delay: 0,
+               options: UIView.AnimationOptions(rawValue: curveRaw << 16),
+               animations: { self.view.layoutIfNeeded() },
+               completion: nil
+           )
+       }
 }

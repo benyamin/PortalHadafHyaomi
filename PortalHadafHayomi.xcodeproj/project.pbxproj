@@ -10,6 +10,8 @@
 		220C99C824FAF1130013D377 /* RegistrationProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C99C724FAF1130013D377 /* RegistrationProcess.swift */; };
 		220C99CA24FAF7890013D377 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C99C924FAF7890013D377 /* User.swift */; };
 		220F5CA52904A650002CEC7C /* GetTalmudQAInfoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */; };
+		221482AE2EB6D04E00EC9BC6 /* hamburgerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221482AD2EB6D04E00EC9BC6 /* hamburgerIcon.png */; };
+		221482B02EB6D14E00EC9BC6 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221482AF2EB6D14E00EC9BC6 /* menuIcon.png */; };
 		221A2DB0254B49B50040475E /* ForgotPasswordProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */; };
 		221A2DB2254B8FA00040475E /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221A2DB1254B8FA00040475E /* shareIcon.png */; };
 		2224495D2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224495C2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift */; };
@@ -33,6 +35,7 @@
 		225BD7282E0210FC003C1883 /* MSUpdatePageProgressProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225BD7272E0210FC003C1883 /* MSUpdatePageProgressProcess.swift */; };
 		2260061C28D9122100FF8386 /* StudyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */; };
 		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
+		2266A09F2ED278A20088D3D5 /* ChecklistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2266A09E2ED278A20088D3D5 /* ChecklistTextField.swift */; };
 		2273A8C72471CBA7000E0390 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C52471CBA7000E0390 /* playIcon.png */; };
 		2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C62471CBA7000E0390 /* stopIcon.png */; };
 		227B64C829EB34FF004B74B9 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B64C729EB34FF004B74B9 /* BookmarkView.swift */; };
@@ -53,6 +56,7 @@
 		229E2ECF2A01BABD00453D3B /* removeBookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 229E2ECE2A01BABD00453D3B /* removeBookmark.png */; };
 		22A6BCA429F1D91E007B3EB1 /* lockRotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A6BCA229F1D91E007B3EB1 /* lockRotation.png */; };
 		22A6BCA529F1D91E007B3EB1 /* unlockRotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A6BCA329F1D91E007B3EB1 /* unlockRotation.png */; };
+		22A795FD2EBB2EC4003BF04D /* ActionDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A795FC2EBB2EC4003BF04D /* ActionDropdownView.swift */; };
 		22B2F7D329E88CEB00B7C972 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B2F7D229E88CEB00B7C972 /* bookmark.png */; };
 		22BF402429905F540053161D /* SubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF402329905F540053161D /* SubtitleView.swift */; };
 		22BF402629905F610053161D /* SubtitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF402529905F610053161D /* SubtitleView.xib */; };
@@ -649,6 +653,8 @@
 		220C99C724FAF1130013D377 /* RegistrationProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProcess.swift; sourceTree = "<group>"; };
 		220C99C924FAF7890013D377 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAInfoProcess.swift; sourceTree = "<group>"; };
+		221482AD2EB6D04E00EC9BC6 /* hamburgerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburgerIcon.png; sourceTree = "<group>"; };
+		221482AF2EB6D14E00EC9BC6 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
 		221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordProcess.swift; sourceTree = "<group>"; };
 		221A2DB1254B8FA00040475E /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
 		2224495C2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGetPagesStatusProcess.swift; sourceTree = "<group>"; };
@@ -676,6 +682,7 @@
 		225BD7272E0210FC003C1883 /* MSUpdatePageProgressProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSUpdatePageProgressProcess.swift; sourceTree = "<group>"; };
 		2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyStoryboard.storyboard; sourceTree = "<group>"; };
 		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
+		2266A09E2ED278A20088D3D5 /* ChecklistTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistTextField.swift; sourceTree = "<group>"; };
 		2273A8C52471CBA7000E0390 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
 		2273A8C62471CBA7000E0390 /* stopIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopIcon.png; sourceTree = "<group>"; };
 		227B64C729EB34FF004B74B9 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
@@ -696,6 +703,7 @@
 		229E2ECE2A01BABD00453D3B /* removeBookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = removeBookmark.png; sourceTree = "<group>"; };
 		22A6BCA229F1D91E007B3EB1 /* lockRotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockRotation.png; sourceTree = "<group>"; };
 		22A6BCA329F1D91E007B3EB1 /* unlockRotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlockRotation.png; sourceTree = "<group>"; };
+		22A795FC2EBB2EC4003BF04D /* ActionDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDropdownView.swift; sourceTree = "<group>"; };
 		22B2F7D229E88CEB00B7C972 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		22BF402329905F540053161D /* SubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleView.swift; sourceTree = "<group>"; };
 		22BF402529905F610053161D /* SubtitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubtitleView.xib; sourceTree = "<group>"; };
@@ -1357,6 +1365,14 @@
 				229390D22E035F1B009A12C4 /* wirte.png */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		22A795FB2EBB2E85003BF04D /* ActionDropdown */ = {
+			isa = PBXGroup;
+			children = (
+				22A795FC2EBB2EC4003BF04D /* ActionDropdownView.swift */,
+			);
+			path = ActionDropdown;
 			sourceTree = "<group>";
 		};
 		22CF5711250E378600273D07 /* Login */ = {
@@ -2057,6 +2073,8 @@
 		4ABFB4E3235290FF0079D68B /* btns */ = {
 			isa = PBXGroup;
 			children = (
+				221482AF2EB6D14E00EC9BC6 /* menuIcon.png */,
+				221482AD2EB6D04E00EC9BC6 /* hamburgerIcon.png */,
 				4ABFB4E4235290FF0079D68B /* play@2x.png */,
 				4ABFB4E5235290FF0079D68B /* save_highlighted.png */,
 				4ABFB4E6235290FF0079D68B /* delete_highlighted.png */,
@@ -2458,6 +2476,8 @@
 				4AD149741FDDC6880038EBDF /* BTWebView */,
 				4A933AF31FD35AC300D175E1 /* BTAlertView */,
 				4A933AE41FD3501800D175E1 /* BTPlayer */,
+				22A795FB2EBB2E85003BF04D /* ActionDropdown */,
+				2266A09E2ED278A20088D3D5 /* ChecklistTextField.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2780,6 +2800,7 @@
 				4ABFB6CB235290FF0079D68B /* sipurim_icon_and_text.png in Resources */,
 				4ABFB705235291000079D68B /* move_right@3x.png in Resources */,
 				4ABFB748235291000079D68B /* about_icon.png in Resources */,
+				221482AE2EB6D04E00EC9BC6 /* hamburgerIcon.png in Resources */,
 				4A2C76A51FD48D380074A0CC /* player-background.png in Resources */,
 				4ABFB6D7235291000079D68B /* Home icon_ios.png in Resources */,
 				4ABFB784235291000079D68B /* Books_icon_ios.png in Resources */,
@@ -2905,6 +2926,7 @@
 				4ABFB75C235291000079D68B /* calender_icon_and_text.png in Resources */,
 				4ABFB74D235291000079D68B /* questions_icon_ios.zip in Resources */,
 				4ABFB745235291000079D68B /* shiurim_icon_and_text_iphone.png in Resources */,
+				221482B02EB6D14E00EC9BC6 /* menuIcon.png in Resources */,
 				4ABFB732235291000079D68B /* share_icon.png in Resources */,
 				4A733B2320B215C300976D55 /* PageSummaryStoryboard.storyboard in Resources */,
 				4ABFB8AD235291000079D68B /* Laazy_rashi.plist in Resources */,
@@ -3137,6 +3159,7 @@
 				4A2150F82216172D00BFEEF7 /* PageSelectingCell.swift in Sources */,
 				4A90C88520B61CD400D46BC2 /* SiyumTopic.swift in Sources */,
 				220F5CA52904A650002CEC7C /* GetTalmudQAInfoProcess.swift in Sources */,
+				2266A09F2ED278A20088D3D5 /* ChecklistTextField.swift in Sources */,
 				4A2150BD220B643700BFEEF7 /* GetSteinsaltzPageProcess.swift in Sources */,
 				4AC4830D1FE5CFBA000F1528 /* GetArticalesProcess.swift in Sources */,
 				4A933ADA1FCF4AB400D175E1 /* TalmudViewController.swift in Sources */,
@@ -3348,6 +3371,7 @@
 				4A23501D2334D592006256B9 /* SettingsManager.swift in Sources */,
 				4AFE3EFB205463C20040BD24 /* LessonVenuesListViewController.swift in Sources */,
 				4A5A420F21E3EBA700DAC7C6 /* GetPageTextProcess.swift in Sources */,
+				22A795FD2EBB2EC4003BF04D /* ActionDropdownView.swift in Sources */,
 				4A7E0E2A1FF7FCED00D84E0E /* String+Extras.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3595,7 +3619,7 @@
 				CODE_SIGN_ENTITLEMENTS = PortalHadafHayomi/PortalHadafHayomi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 6RMGV6CC47;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3606,7 +3630,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 12.4;
+				MARKETING_VERSION = 12.5;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3627,7 +3651,7 @@
 				CODE_SIGN_ENTITLEMENTS = PortalHadafHayomi/PortalHadafHayomi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 6RMGV6CC47;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3637,7 +3661,7 @@
 				INFOPLIST_FILE = PortalHadafHayomi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 12.4;
+				MARKETING_VERSION = 12.5;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

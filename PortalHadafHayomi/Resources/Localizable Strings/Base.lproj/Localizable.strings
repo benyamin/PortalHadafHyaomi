@@ -398,6 +398,8 @@
 "st_maggid_shiour" = "Magid Shiour";
 "st_email" = "Email";
 "st_additional_information" = "Additional Information";
+"st_class_size" = "Participants";
+"st_class_size_unknown" = "Unknown";
 "st_from_time" = "Strat Time";
 "st_to_time" = "End time";
 "st_select_country" = "Select Country";

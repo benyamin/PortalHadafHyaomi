@@ -290,6 +290,8 @@
 "st_lesson_address" = "Lesson Address";
 "st_lesson_time" = "Lesson time";
 "st_additional_info" = "Additional Info";
+"st_class_size" = "Participants";
+"st_class_size_unknown" = "Unknown";
 "st_email_info_label" = "Please type a valid Email addres for the message to be published (The Email will not be published within the website).";
 "st_added_lesson_success_alert_title" = "Lesson added successfully";
 "st_added_lesson_success_alert_message" = "The lesson will be published after being approved by the site's management";

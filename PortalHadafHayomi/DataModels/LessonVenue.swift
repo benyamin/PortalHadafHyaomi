@@ -17,6 +17,7 @@ class  LessonVenue:Venue
     var house_number:Int?
     var location:String?
     var distanceFromUser:Double = 0.0
+    var class_size:String?
     
     lazy var dispalyedInformation:String = {
         
@@ -35,6 +36,10 @@ class  LessonVenue:Venue
         
         dispalyedInformation += "st_lesson_time".localize() + ": "
         dispalyedInformation += self.hour! + "\n"
+        
+        dispalyedInformation += "st_class_size".localize() + ": "
+        dispalyedInformation += self.class_size ?? "st_class_size_unknown".localize()
+        dispalyedInformation += "\n"
         
         dispalyedInformation += "st_additional_info".localize() + ": "
         dispalyedInformation += self.pratim!.htmlToString
@@ -60,6 +65,7 @@ class  LessonVenue:Venue
          self.pratim = dictionary["pratim"] as? String ?? ""
          self.sregionname = dictionary["sregionname"] as? String ?? ""
          self.house_number = dictionary["house_number"] as? Int
+        self.class_size = dictionary["class_size"] as? String
     }
     
     func getFullAddressFromDictoianry(_ dictionary:[String:Any]) -> String

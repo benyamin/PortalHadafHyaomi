@@ -12,7 +12,7 @@ import UIKit
 open class MSBaseProcess: NSObject
 {
     deinit {
-        print ("deinit Process: \(self.classForCoder)")
+        // print ("deinit Process: \(self.classForCoder)")
     }
     
     open var onStart:(() -> Void)?
