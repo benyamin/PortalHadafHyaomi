@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        AnalyticsManager.shared.startTracking()
+        AnalyticsManager.shared.logEvent("app_launch", info: nil)
+        
         if  launchOptions != nil
         {
             if let sourceApplication = launchOptions?[.sourceApplication] as? String

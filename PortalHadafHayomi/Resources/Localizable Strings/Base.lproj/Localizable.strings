@@ -405,6 +405,8 @@
 "st_select_country" = "Select Country";
 "st_select_city" = "Select City";
 "st_connect_venue_publisher" = "Connect Publisher";
+"st_select_from_time" = "from time";
+"st_select_to_time" = "to time";
 
 //Siyum
 "Endings for Talmud" = "";

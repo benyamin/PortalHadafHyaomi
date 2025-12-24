@@ -55,7 +55,7 @@ class Map_IPadViewController: MSBaseViewController, MKMapViewDelegate, LessonVen
             
         } else {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            annotationView.image = UIImage(named: "map_marker_off")
+            annotationView.image = UIImage(named: "portalMapIcon")
             annotationView.canShowCallout = true
             
             

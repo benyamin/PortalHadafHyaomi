@@ -19,8 +19,12 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var sortSegmentedSecondaryTopConstraint:NSLayoutConstraint!
     @IBOutlet weak var venuesTableViewBottomConstraint:NSLayoutConstraint!
+    @IBOutlet weak var countriesTextField: ChecklistTextField!
     @IBOutlet weak var citiesTextField: ChecklistTextField!
+    @IBOutlet weak var fromTimeTextField: TimeTextField!
+    @IBOutlet weak var toTimeTextField: TimeTextField!
     
+    var lessonCountries:[String] = [String]()
     var lessonCities:[String] = [String]()
     
     var userLocation:CLLocation?{
@@ -44,10 +48,13 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
                 _lessonVenues = value.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
             }
             
-            self.lessonCities = Array(Set(lessonVenues.compactMap(\.city)))
+            self.lessonCountries = Array(Set(lessonVenues.compactMap(\.sregionname)))
                 .sorted { $0.localizedCompare($1) == .orderedAscending }
             
-            citiesTextField.checklistItems = self.lessonCities
+            var countriesChecklistItems = [String]()
+           // countriesChecklistItems.append("st_all".localize())
+            countriesChecklistItems.append(contentsOf: self.lessonCountries)
+            countriesTextField.checklistItems = countriesChecklistItems
         }
     }
     var lessonsAnnotations = [LessonVenueAnnotation]()
@@ -68,7 +75,29 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         self.getUserLocatoin()
         
         self.mapView.showsUserLocation = true
+      
+        self.fromTimeTextField.placeholder = "st_select_from_time".localize()
+        self.toTimeTextField.placeholder = "st_select_to_time".localize()
         
+        self.countriesTextField.maxSelectedItems = 1
+        self.countriesTextField.placeholder = "st_select_country".localize()
+        self.countriesTextField.onSelectionChanged = {[weak self] selected in
+            
+            guard let self else { return }
+
+            let selected = Set(self.countriesTextField.selectedItems)
+
+            self.lessonCities = lessonVenues
+                .filter { selected.contains($0.sregionname) }
+                .compactMap { $0.city }
+                .reduce(into: Set<String>()) { $0.insert($1) } // unique
+                .sorted { $0.localizedCompare($1) == .orderedAscending }
+            
+            self.citiesTextField.checklistItems = self.lessonCities
+        }
+        
+        citiesTextField.maxSelectedItems = 1
+        citiesTextField.placeholder = "st_select_city".localize()
         self.citiesTextField.onSelectionChanged = { selected in
            // self.updateDisplayedVenues()
         }
@@ -220,7 +249,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             
         } else {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            annotationView.image = UIImage(named: "map_marker_off")
+            annotationView.image = UIImage(named: "portalMapIcon")
             annotationView.canShowCallout = true
             
             let btn = UIButton(type: .custom)

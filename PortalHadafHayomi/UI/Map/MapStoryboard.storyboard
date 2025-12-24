@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -101,24 +101,55 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvA-dW-gdv">
-                                <rect key="frame" x="0.0" y="171" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="171" width="375" height="112"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P7i-wU-I1N" customClass="ChecklistTextField" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="13" width="327" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJR-I1-gAh" customClass="ChecklistTextField" customModule="PortalHadafHayomi" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="16" width="120" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="zCc-4n-8XE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="from time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SbE-aY-awu" customClass="TimeTextField" customModule="PortalHadafHayomi" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="62" width="120" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="yaT-N3-Fdc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P7i-wU-I1N" customClass="ChecklistTextField" customModule="PortalHadafHayomi" customModuleProvider="target">
+                                        <rect key="frame" x="152" y="16" width="199" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="to time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UPm-3U-KrH" customClass="TimeTextField" customModule="PortalHadafHayomi" customModuleProvider="target">
+                                        <rect key="frame" x="152" y="62" width="120" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="pV9-2W-5oW"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="P7i-wU-I1N" firstAttribute="leading" secondItem="TvA-dW-gdv" secondAttribute="leading" constant="24" id="2xf-Of-KkH"/>
-                                    <constraint firstItem="P7i-wU-I1N" firstAttribute="centerY" secondItem="TvA-dW-gdv" secondAttribute="centerY" id="QqY-M0-Qih"/>
+                                    <constraint firstItem="P7i-wU-I1N" firstAttribute="leading" secondItem="iJR-I1-gAh" secondAttribute="trailing" constant="16" id="9gK-tZ-gxX"/>
+                                    <constraint firstItem="SbE-aY-awu" firstAttribute="top" secondItem="iJR-I1-gAh" secondAttribute="bottom" constant="12" id="Ch5-Xl-XZd"/>
+                                    <constraint firstItem="UPm-3U-KrH" firstAttribute="leading" secondItem="SbE-aY-awu" secondAttribute="trailing" constant="16" id="Q3l-A8-Mde"/>
+                                    <constraint firstItem="iJR-I1-gAh" firstAttribute="leading" secondItem="TvA-dW-gdv" secondAttribute="leading" constant="16" id="QEi-Vp-NoP"/>
+                                    <constraint firstItem="UPm-3U-KrH" firstAttribute="top" secondItem="P7i-wU-I1N" secondAttribute="bottom" constant="12" id="SNx-qQ-W1c"/>
+                                    <constraint firstItem="iJR-I1-gAh" firstAttribute="top" secondItem="TvA-dW-gdv" secondAttribute="top" constant="16" id="WYY-E4-pxO"/>
+                                    <constraint firstAttribute="bottom" secondItem="UPm-3U-KrH" secondAttribute="bottom" constant="16" id="Wvh-rb-fjq"/>
                                     <constraint firstAttribute="trailing" secondItem="P7i-wU-I1N" secondAttribute="trailing" constant="24" id="cmi-EA-Rnq"/>
-                                    <constraint firstAttribute="height" constant="60" id="rEr-bD-tdm"/>
+                                    <constraint firstAttribute="bottom" secondItem="SbE-aY-awu" secondAttribute="bottom" constant="16" id="hxe-OY-c1b"/>
+                                    <constraint firstItem="SbE-aY-awu" firstAttribute="leading" secondItem="TvA-dW-gdv" secondAttribute="leading" constant="16" id="tbA-c8-f5F"/>
+                                    <constraint firstItem="P7i-wU-I1N" firstAttribute="top" secondItem="TvA-dW-gdv" secondAttribute="top" constant="16" id="u6y-rE-nwR"/>
                                 </constraints>
                             </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hM3-GD-T9h">
-                                <rect key="frame" x="0.0" y="231" width="375" height="436"/>
+                                <rect key="frame" x="0.0" y="283" width="375" height="384"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.49803921569999998" green="0.1687376797" blue="0.18647488949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -290,12 +321,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="citiesTextField" destination="P7i-wU-I1N" id="wDE-GH-3pN"/>
+                        <outlet property="citiesTextField" destination="P7i-wU-I1N" id="At6-ap-Pqp"/>
+                        <outlet property="countriesTextField" destination="iJR-I1-gAh" id="ehW-Qf-bjq"/>
                         <outlet property="displaySegmentedControlr" destination="Cq3-Np-vob" id="bak-oX-WSo"/>
+                        <outlet property="fromTimeTextField" destination="SbE-aY-awu" id="XDu-EO-hYb"/>
                         <outlet property="mapView" destination="rlB-92-osI" id="aXT-MA-X0A"/>
                         <outlet property="searchBar" destination="fXU-ck-ggI" id="dzr-Dk-6xt"/>
                         <outlet property="sortSegmentedControlr" destination="iWL-KR-Er2" id="Imb-mF-InD"/>
                         <outlet property="sortSegmentedSecondaryTopConstraint" destination="hJk-Nn-tFt" id="Oyh-b1-pd7"/>
+                        <outlet property="toTimeTextField" destination="UPm-3U-KrH" id="1lT-Jy-fO5"/>
                         <outlet property="topBarTitleLabel" destination="tpM-fA-BAu" id="bNz-qD-gCj"/>
                         <outlet property="topBarView" destination="FRD-n3-SBb" id="kgO-9z-OO7"/>
                         <outlet property="venuesTableView" destination="hM3-GD-T9h" id="8Ae-Vn-7hD"/>
@@ -321,7 +355,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="650" height="70"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מפת שיעורים" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="ofd-uV-SSE">
-                                        <rect key="frame" x="372" y="32" width="270" height="28"/>
+                                        <rect key="frame" x="372" y="34" width="270" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="270" id="her-Vd-8zb"/>
                                         </constraints>
@@ -972,7 +1006,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.53333333333333333" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

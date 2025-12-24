@@ -197,7 +197,12 @@ final class ChecklistTextField: UITextField {
     }
 
     private func updateTextFieldDisplay() {
-        let selectedText = selectedItems.isEmpty ? "" : selectedItems.joined(separator: ", ") + ", "
+        
+        var selectedText:String = selectedItems.joined(separator: ", ")
+        
+        if selectedItems.count > 0 && selectedItems.count < self.maxSelectedItems ?? 999 {
+            selectedText  += ", "
+        }
         
         self.text = selectedText + filterText
 
@@ -215,13 +220,20 @@ final class ChecklistTextField: UITextField {
     }
 
     // MARK: - Selection helper
-
+    
     private func addSelection(_ item: String) {
+      
         if let max = maxSelectedItems, selectedItems.count >= max {
-            // silently ignore (could also show UI feedback)
+            selectedItems.removeLast()
+        }
+        
+        selectedItems.append(item)
+        
+        if let max = maxSelectedItems, selectedItems.count >= max {
+            hideDropdown()
+            resignFirstResponder()
             return
         }
-        selectedItems.append(item)
         // after selection, reset filter so user can type anew
         filterText = ""
         filteredItems = checklistItems

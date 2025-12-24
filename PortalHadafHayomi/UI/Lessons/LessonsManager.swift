@@ -12,7 +12,17 @@ class LessonsManager
 {
     static let sharedManager =  LessonsManager()
     
-    var playingLesson:Lesson?
+    var playingLesson:Lesson? {
+        didSet {
+            guard let playingLesson = playingLesson else { return}
+            
+            AnalyticsManager.shared.logEvent("Audio_Selection",info: [
+                "masechet":playingLesson.masechet?.name ?? "---",
+                "page":playingLesson.page?.symbol ?? "---",
+                "maggidShiur":playingLesson.maggidShiur?.name ?? "---"
+            ])
+        }
+    }
     var isPlaying:Bool = false
     
     var lessons = [Lesson](){
