@@ -528,14 +528,19 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
               }
     }
     
+    private func isCurrentPageSaved() -> Bool {
+        guard let pageIndex = self.currentPageIndex else {return false}
+        return HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex:pageIndex, type: self.selectedDisplayType) == nil
+    }
+    
     @IBAction func menuButtonClicked(_ sender:UIButton){
-        
+      
         var actions = [ActionItem]()
         actions.append(
             ActionItem(
-                key: "save",
-                title: "Save/Remove Page",
-                image: UIImage(named: "saveIcon"),
+                key: "save/remove",
+                title: self.isCurrentPageSaved() ? "st_save".localize() : "st_delete".localize(),
+                image: self.isCurrentPageSaved() ? UIImage(named: "saveIcon") : UIImage(named: "trachIcon"),
                 onTap:{
                     self.saveOrRemoveCurrentPage()
                 })
@@ -544,18 +549,18 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         actions.append(
             ActionItem(
                 key: "addNote",
-                title: "Add note",
+                title: "st_add_note".localize(),
                 image: self.addNoteImageIconImage(),
                 onTap:{
                     self.addNote()
                 })
         )
-        
+       
         if self.canShareCurrentPage() {
             actions.append(
                 ActionItem(
                     key: "share",
-                    title:  "Share Page",
+                    title: "st_share_page".localize(),
                     image: UIImage(named: "shareIcon"),
                     onTap:{
                         self.shareCurrentPage()
@@ -566,8 +571,12 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         actions.append(
             ActionItem(
                 key: "addBookmark",
-                title:  "Add Bookmark",
-                image: UIImage(named: "addBookmark"),
+                title: UserDefaults.standard.bool(forKey: "displayDafBookMark")
+                    ? "st_remove_bookmark".localize()
+                    : "st_add_bookmark".localize() ,
+                image: UserDefaults.standard.bool(forKey: "displayDafBookMark")
+                    ? UIImage(named:"removeBookmark")
+                    : UIImage(named:"addBookmark"),
                 onTap:{
                     self.toggleBookMarkDisplay()
                 })
@@ -576,12 +585,13 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         actions.append(
             ActionItem(
                 key: "DownloadPages",
-                title:  "Download Pages",
+                title: "st_download_pages".localize(),
                 image: UIImage(named: "MultiplePageDownload"),
                 onTap:{
                     self.saveMultiplePages()
                 })
         )
+      
              
           /*
             ActionItem(key: "options", title: "Options", image: UIImage(named: "MultiplePageDownload.png"), subActions: [

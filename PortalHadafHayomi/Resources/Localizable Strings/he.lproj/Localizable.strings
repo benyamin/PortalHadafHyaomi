@@ -225,6 +225,12 @@
 "st_keppLocked_button" = "השאר נעול";
 
 //Talmud page
+"st_save_remove-page" = "שמור/הסר";
+"st_add_note" = "הוסף הערה";
+"st_share_page" = "שתף";
+"st_add_bookmark" = "הוסף סימניה";
+"st_remove_bookmark" = "הסר סימניה";
+"st_download_pages" = "הורד דפים";
 "st_display_palyer" = "הצג נגן";
 "st_hide_palyer" = "הסתר נגן";
 "st_todays_page" = "הדף היומי";

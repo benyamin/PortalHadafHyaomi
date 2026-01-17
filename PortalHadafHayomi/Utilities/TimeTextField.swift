@@ -9,7 +9,7 @@
 import UIKit
 
 final class TimeTextField: UITextField {
-//let selectedLanguage =  UserDefaults.standard.object(forKey: "selectedLanguage") as? String ?? "language_he_IL"
+
     // MARK: - Public configuration
 
     var timeFormat: String = "h:mm a" {
@@ -25,6 +25,19 @@ final class TimeTextField: UITextField {
     }
 
     var defaultPickerDate: Date = Date()
+
+    /// No limit by default
+    var minDate: Date? {
+        didSet { updatePickerLimits() }
+    }
+
+    /// No limit by default
+    var maxDate: Date? {
+        didSet { updatePickerLimits() }
+    }
+
+    /// Callback
+    var onSelectionChanged: (([Date]) -> Void)?
 
     // MARK: - Private properties
 
@@ -62,6 +75,7 @@ final class TimeTextField: UITextField {
         setupPicker()
         setupToolbar()
         setupClearButton()
+        updatePickerLimits()
         updateText()
     }
 
@@ -118,31 +132,39 @@ final class TimeTextField: UITextField {
 
     @objc private func timeChanged() {
         selectedDate = timePicker.date
+        onSelectionChanged?([timePicker.date])
     }
 
     @objc private func clearTapped() {
         selectedDate = nil
+        onSelectionChanged?([])
         resignFirstResponder()
     }
 
     @objc private func doneTapped() {
         if selectedDate == nil {
             selectedDate = timePicker.date
+            onSelectionChanged?([timePicker.date])
         }
         resignFirstResponder()
     }
 
     // MARK: - Helpers
 
+    private func updatePickerLimits() {
+        timePicker.minimumDate = minDate
+        timePicker.maximumDate = maxDate
+    }
+
     private func updateText() {
         formatter.dateFormat = timeFormat
 
         if let date = selectedDate {
             formatter.timeStyle = .short
-                  formatter.dateStyle = .none
-                  text = formatter.string(from: date)
+            formatter.dateStyle = .none
+            text = formatter.string(from: date)
         } else {
-            text = nil // placeholder visible
+            text = nil
         }
     }
 
@@ -150,4 +172,3 @@ final class TimeTextField: UITextField {
         clearButton.isHidden = (selectedDate == nil)
     }
 }
-

@@ -19,11 +19,15 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var sortSegmentedSecondaryTopConstraint:NSLayoutConstraint!
     @IBOutlet weak var venuesTableViewBottomConstraint:NSLayoutConstraint!
+    @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var countriesTextField: ChecklistTextField!
     @IBOutlet weak var citiesTextField: ChecklistTextField!
     @IBOutlet weak var fromTimeTextField: TimeTextField!
     @IBOutlet weak var toTimeTextField: TimeTextField!
     
+    @IBOutlet weak var mapViewTopConstraint:NSLayoutConstraint!
+    @IBOutlet weak var venuesTableViewTopConstraint:NSLayoutConstraint!
+
     var lessonCountries:[String] = [String]()
     var lessonCities:[String] = [String]()
     
@@ -62,8 +66,10 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.searchBar.layer.borderWidth = 1.0
-        self.searchBar.layer.borderColor = UIColor(HexColor:"791F23").cgColor
+       // self.searchBar.layer.borderWidth = 1.0
+       // self.searchBar.layer.borderColor = UIColor(HexColor:"791F23").cgColor
+        
+        self.filterView.addBottomShadow()
         
         self.displaySegmentedControlr.setTitle("st_map".localize(), forSegmentAt: 0)
         self.displaySegmentedControlr.setTitle("st_list".localize(), forSegmentAt: 1)
@@ -94,15 +100,45 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
                 .sorted { $0.localizedCompare($1) == .orderedAscending }
             
             self.citiesTextField.checklistItems = self.lessonCities
+            
+            self.updateDisplayedVenues()
         }
         
         citiesTextField.maxSelectedItems = 1
         citiesTextField.placeholder = "st_select_city".localize()
         self.citiesTextField.onSelectionChanged = { selected in
-           // self.updateDisplayedVenues()
+            self.updateDisplayedVenues()
         }
         
         self.sortSegmentedSecondaryTopConstraint.priority = UILayoutPriority(rawValue: 900)
+        
+        fromTimeTextField.onSelectionChanged = { [weak self] dates in
+            
+            guard let self else {return}
+            
+            guard let fromDate = dates.first else {
+                // If "from" cleared → remove min constraint
+                self.toTimeTextField.minDate = nil
+                return
+            }
+
+            toTimeTextField?.minDate = fromDate
+
+            // Optional: auto-clear invalid "to" time
+            if let toDate =  self.toTimeTextField.selectedDate,
+               toDate < fromDate {
+                self.toTimeTextField.selectedDate = nil
+            }
+            
+            self.updateDisplayedVenues()
+        }
+        
+        toTimeTextField.onSelectionChanged = { [weak self] selectedTime in
+            self?.updateDisplayedVenues()
+        }
+        
+        mapViewTopConstraint.constant = 0
+        venuesTableViewTopConstraint.constant = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -210,7 +246,22 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         }
         self.venuesTableView.reloadData()
     }
+      
+    @IBAction func filterButtonClicked(_ sender:AnyObject) {
+       
+        mapViewTopConstraint.constant = mapViewTopConstraint.constant == 0
+        ? self.filterView.frame.size.height
+        : 0
         
+        venuesTableViewTopConstraint.constant = venuesTableViewTopConstraint.constant == 0
+        ? self.filterView.frame.size.height
+        : 0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     @IBAction func addLessonButtonClicked(_ sender:AnyObject)
     {        
         let addVenueViewController =  UIViewController.withName("AddVenueViewController", storyBoardIdentifier: "MapStoryboard") as! AddVenueViewController

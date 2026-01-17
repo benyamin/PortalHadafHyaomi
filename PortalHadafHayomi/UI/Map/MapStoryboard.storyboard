@@ -59,27 +59,24 @@
                                     <constraint firstAttribute="bottom" secondItem="tpM-fA-BAu" secondAttribute="bottom" constant="13" id="yK5-51-ST9"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rlB-92-osI">
-                                <rect key="frame" x="0.0" y="171" width="375" height="496"/>
-                                <connections>
-                                    <outlet property="delegate" destination="FeB-N9-afI" id="Znl-Ut-CdB"/>
-                                </connections>
-                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzB-FA-Gc6">
-                                <rect key="frame" x="0.0" y="127" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="127" width="375" height="52"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUb-9r-J7k">
-                                        <rect key="frame" x="335" y="4" width="36" height="36"/>
+                                        <rect key="frame" x="335" y="4" width="36" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="VDV-Ih-dFS"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="line.3.horizontal.decrease" catalog="system"/>
+                                        <connections>
+                                            <action selector="filterButtonClicked:" destination="FeB-N9-afI" eventType="touchUpInside" id="vyc-RI-r1z"/>
+                                        </connections>
                                     </button>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fXU-ck-ggI">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="44"/>
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="fXU-ck-ggI">
+                                        <rect key="frame" x="0.0" y="8" width="331" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="FsP-bm-fZe"/>
+                                            <constraint firstAttribute="height" constant="36" id="FsP-bm-fZe"/>
                                         </constraints>
                                         <color key="tintColor" red="0.49803921569999998" green="0.16862745100000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="barTintColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -94,14 +91,14 @@
                                     <constraint firstAttribute="bottom" secondItem="cUb-9r-J7k" secondAttribute="bottom" constant="4" id="38g-16-0xs"/>
                                     <constraint firstAttribute="trailing" secondItem="cUb-9r-J7k" secondAttribute="trailing" constant="4" id="5kP-e7-i27"/>
                                     <constraint firstItem="cUb-9r-J7k" firstAttribute="leading" secondItem="fXU-ck-ggI" secondAttribute="trailing" constant="4" id="7l4-kg-1ND"/>
-                                    <constraint firstItem="fXU-ck-ggI" firstAttribute="top" secondItem="wzB-FA-Gc6" secondAttribute="top" id="aoO-O0-Xin"/>
-                                    <constraint firstAttribute="bottom" secondItem="fXU-ck-ggI" secondAttribute="bottom" id="gpo-Tu-xNr"/>
+                                    <constraint firstItem="fXU-ck-ggI" firstAttribute="top" secondItem="wzB-FA-Gc6" secondAttribute="top" constant="8" id="aoO-O0-Xin"/>
+                                    <constraint firstAttribute="bottom" secondItem="fXU-ck-ggI" secondAttribute="bottom" constant="8" id="gpo-Tu-xNr"/>
                                     <constraint firstItem="cUb-9r-J7k" firstAttribute="top" secondItem="wzB-FA-Gc6" secondAttribute="top" constant="4" id="scc-wt-UW1"/>
                                     <constraint firstItem="fXU-ck-ggI" firstAttribute="leading" secondItem="wzB-FA-Gc6" secondAttribute="leading" id="ymF-OZ-clN"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvA-dW-gdv">
-                                <rect key="frame" x="0.0" y="171" width="375" height="112"/>
+                                <rect key="frame" x="0.0" y="179" width="375" height="112"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJR-I1-gAh" customClass="ChecklistTextField" customModule="PortalHadafHayomi" customModuleProvider="target">
                                         <rect key="frame" x="16" y="16" width="120" height="34"/>
@@ -133,7 +130,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.95294117647058818" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="P7i-wU-I1N" firstAttribute="leading" secondItem="iJR-I1-gAh" secondAttribute="trailing" constant="16" id="9gK-tZ-gxX"/>
                                     <constraint firstItem="SbE-aY-awu" firstAttribute="top" secondItem="iJR-I1-gAh" secondAttribute="bottom" constant="12" id="Ch5-Xl-XZd"/>
@@ -148,8 +145,14 @@
                                     <constraint firstItem="P7i-wU-I1N" firstAttribute="top" secondItem="TvA-dW-gdv" secondAttribute="top" constant="16" id="u6y-rE-nwR"/>
                                 </constraints>
                             </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rlB-92-osI">
+                                <rect key="frame" x="0.0" y="299" width="375" height="368"/>
+                                <connections>
+                                    <outlet property="delegate" destination="FeB-N9-afI" id="Znl-Ut-CdB"/>
+                                </connections>
+                            </mapView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hM3-GD-T9h">
-                                <rect key="frame" x="0.0" y="283" width="375" height="384"/>
+                                <rect key="frame" x="0.0" y="299" width="375" height="368"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.49803921569999998" green="0.1687376797" blue="0.18647488949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -314,18 +317,20 @@
                             <constraint firstItem="wzB-FA-Gc6" firstAttribute="leading" secondItem="j93-Ud-t9t" secondAttribute="leading" id="gQ3-09-CXq"/>
                             <constraint firstItem="rlB-92-osI" firstAttribute="bottom" secondItem="j93-Ud-t9t" secondAttribute="bottom" id="hBv-9E-lEa"/>
                             <constraint firstItem="iWL-KR-Er2" firstAttribute="top" secondItem="FRD-n3-SBb" secondAttribute="bottom" priority="500" id="hJk-Nn-tFt"/>
-                            <constraint firstItem="hM3-GD-T9h" firstAttribute="top" secondItem="TvA-dW-gdv" secondAttribute="bottom" id="iGJ-b9-KEF"/>
-                            <constraint firstItem="rlB-92-osI" firstAttribute="top" secondItem="wzB-FA-Gc6" secondAttribute="bottom" id="kk1-1S-W0P"/>
+                            <constraint firstItem="rlB-92-osI" firstAttribute="top" secondItem="wzB-FA-Gc6" secondAttribute="bottom" constant="120" id="kk1-1S-W0P"/>
                             <constraint firstItem="TvA-dW-gdv" firstAttribute="leading" secondItem="j93-Ud-t9t" secondAttribute="leading" id="m99-2x-EEk"/>
                             <constraint firstItem="wzB-FA-Gc6" firstAttribute="top" secondItem="iWL-KR-Er2" secondAttribute="bottom" id="nCE-hl-gpW"/>
+                            <constraint firstItem="hM3-GD-T9h" firstAttribute="top" secondItem="wzB-FA-Gc6" secondAttribute="bottom" constant="120" id="ySb-W7-uO3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="citiesTextField" destination="P7i-wU-I1N" id="At6-ap-Pqp"/>
                         <outlet property="countriesTextField" destination="iJR-I1-gAh" id="ehW-Qf-bjq"/>
                         <outlet property="displaySegmentedControlr" destination="Cq3-Np-vob" id="bak-oX-WSo"/>
+                        <outlet property="filterView" destination="TvA-dW-gdv" id="ZOm-i3-dN9"/>
                         <outlet property="fromTimeTextField" destination="SbE-aY-awu" id="XDu-EO-hYb"/>
                         <outlet property="mapView" destination="rlB-92-osI" id="aXT-MA-X0A"/>
+                        <outlet property="mapViewTopConstraint" destination="kk1-1S-W0P" id="YCw-oO-os3"/>
                         <outlet property="searchBar" destination="fXU-ck-ggI" id="dzr-Dk-6xt"/>
                         <outlet property="sortSegmentedControlr" destination="iWL-KR-Er2" id="Imb-mF-InD"/>
                         <outlet property="sortSegmentedSecondaryTopConstraint" destination="hJk-Nn-tFt" id="Oyh-b1-pd7"/>
@@ -334,6 +339,7 @@
                         <outlet property="topBarView" destination="FRD-n3-SBb" id="kgO-9z-OO7"/>
                         <outlet property="venuesTableView" destination="hM3-GD-T9h" id="8Ae-Vn-7hD"/>
                         <outlet property="venuesTableViewBottomConstraint" destination="4R5-L9-pfB" id="Hlo-Vz-ml5"/>
+                        <outlet property="venuesTableViewTopConstraint" destination="ySb-W7-uO3" id="wtF-KB-qtP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FN5-1E-6Hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -649,13 +655,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* אזור" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCV-f2-Hgl">
-                                                <rect key="frame" x="12" y="16" width="36" height="19"/>
+                                                <rect key="frame" x="12" y="16" width="35.5" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8bC-XA-b5i">
-                                                <rect key="frame" x="12" y="37" width="351" height="34"/>
+                                                <rect key="frame" x="12" y="36.5" width="351" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -663,13 +669,13 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* יישוב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGc-NQ-Z7Q">
-                                                <rect key="frame" x="12" y="87" width="39.5" height="19"/>
+                                                <rect key="frame" x="12" y="86.5" width="39.5" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5qx-gQ-dZL">
-                                                <rect key="frame" x="12" y="108" width="351" height="34"/>
+                                                <rect key="frame" x="12" y="107" width="351" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -677,7 +683,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="96t-l2-V9z">
-                                                <rect key="frame" x="12" y="249.5" width="283" height="34"/>
+                                                <rect key="frame" x="12" y="248" width="283" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -685,13 +691,13 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*משעה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHM-37-zcY">
-                                                <rect key="frame" x="12" y="299.5" width="39" height="19"/>
+                                                <rect key="frame" x="12" y="298" width="38.5" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yTI-qd-JQm">
-                                                <rect key="frame" x="12" y="320.5" width="169.5" height="34"/>
+                                                <rect key="frame" x="12" y="318.5" width="169.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                 <connections>
@@ -699,7 +705,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IOg-E7-HuM">
-                                                <rect key="frame" x="189.5" y="320.5" width="169.5" height="34"/>
+                                                <rect key="frame" x="189.5" y="318.5" width="169.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                 <connections>
@@ -707,13 +713,13 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מגיד שיעור" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9P-Zj-JI9">
-                                                <rect key="frame" x="12" y="370.5" width="351" height="18.5"/>
+                                                <rect key="frame" x="12" y="368.5" width="351" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtd-Ox-2eT">
-                                                <rect key="frame" x="12" y="391" width="351" height="34"/>
+                                                <rect key="frame" x="12" y="389" width="351" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -721,7 +727,7 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מידע נוסף" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TL2-ae-Mwd">
-                                                <rect key="frame" x="12" y="530.5" width="56.5" height="18.5"/>
+                                                <rect key="frame" x="12" y="528" width="56.5" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -749,13 +755,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* מייל" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUa-X1-1d0">
-                                                <rect key="frame" x="12" y="441" width="33.5" height="19"/>
+                                                <rect key="frame" x="12" y="439" width="33.5" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rcv-wU-LCE">
-                                                <rect key="frame" x="12" y="462" width="351" height="34"/>
+                                                <rect key="frame" x="12" y="459.5" width="351" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                 <connections>
@@ -763,7 +769,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="onU-gQ-ohX">
-                                                <rect key="frame" x="303" y="249.5" width="60" height="34"/>
+                                                <rect key="frame" x="303" y="248" width="60" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="Zq7-ZQ-2PG"/>
                                                 </constraints>
@@ -774,19 +780,19 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מס בית" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozm-SB-0pc">
-                                                <rect key="frame" x="303" y="229" width="39.5" height="18.5"/>
+                                                <rect key="frame" x="303" y="227.5" width="39.5" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* מיקום" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgE-0f-YMU">
-                                                <rect key="frame" x="12" y="158" width="43" height="19"/>
+                                                <rect key="frame" x="12" y="157" width="43" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-IV-9cN">
-                                                <rect key="frame" x="12" y="179" width="351" height="34"/>
+                                                <rect key="frame" x="12" y="177.5" width="351" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -794,19 +800,19 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="נא להקליד כתובת דוא״ל מדוייקת כדי שההודעה תאושר לפירסום." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPo-qs-hA0">
-                                                <rect key="frame" x="12" y="500" width="351" height="14.5"/>
+                                                <rect key="frame" x="12" y="497.5" width="351" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="כתובת" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zm5-Kw-SGr">
-                                                <rect key="frame" x="12" y="229" width="35" height="18.5"/>
+                                                <rect key="frame" x="12" y="227.5" width="35" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*עד שעה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5i-We-FcE">
-                                                <rect key="frame" x="189.5" y="299.5" width="50" height="19"/>
+                                                <rect key="frame" x="189.5" y="298" width="50" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -894,7 +900,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time picker Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5f-gL-cAS">
-                                                <rect key="frame" x="16" y="11.5" width="141.5" height="21.5"/>
+                                                <rect key="frame" x="16" y="11.5" width="142" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="20"/>
                                                 <color key="textColor" red="0.47058823529999999" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1006,7 +1012,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.53333333333333333" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

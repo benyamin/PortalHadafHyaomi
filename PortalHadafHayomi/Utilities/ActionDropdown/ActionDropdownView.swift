@@ -62,20 +62,60 @@ final class ActionDropdownView: UIView, UITableViewDataSource, UITableViewDelega
     func show(relativeTo anchorView: UIView) {
         guard let window = anchorView.window else { return }
         parentView = window
-        
+
+        let minMargin: CGFloat = 8
+        let spacing: CGFloat = 4
+        let preferredWidth: CGFloat = 220
+
         backgroundView.frame = window.bounds
         window.addSubview(backgroundView)
-        
+
         let anchorFrame = anchorView.convert(anchorView.bounds, to: window)
-        let width: CGFloat = 220
-        let height: CGFloat = CGFloat(totalVisibleActions()) * cellHeight
-        let originX = anchorFrame.midX - width / 2
-        let originY = anchorFrame.maxY + 4
-        
+
+        // Calculate desired size
+        let contentHeight = CGFloat(totalVisibleActions()) * cellHeight
+
+        // Clamp width so it never violates left/right margins
+        let maxWidth = window.bounds.width - minMargin * 2
+        let width = min(preferredWidth, maxWidth)
+
+        // Horizontal positioning (centered on anchor, clamped to margins)
+        var originX = anchorFrame.midX - width / 2
+        originX = max(minMargin, min(originX, window.bounds.width - width - minMargin))
+
+        // Try showing below anchor first
+        let spaceBelow = window.bounds.height - anchorFrame.maxY - minMargin
+        let spaceAbove = anchorFrame.minY - minMargin
+
+        var height = contentHeight
+        var originY: CGFloat
+
+        if spaceBelow >= contentHeight + spacing {
+            // Show below
+            originY = anchorFrame.maxY + spacing
+        } else if spaceAbove >= contentHeight + spacing {
+            // Show above
+            originY = anchorFrame.minY - contentHeight - spacing
+        } else {
+            // Not enough space — fit to the larger side
+            if spaceBelow >= spaceAbove {
+                height = spaceBelow - spacing
+                originY = anchorFrame.maxY + spacing
+            } else {
+                height = spaceAbove - spacing
+                originY = anchorFrame.minY - height - spacing
+            }
+        }
+
+        // Final vertical clamp
+        originY = max(minMargin, min(originY, window.bounds.height - height - minMargin))
+
         frame = CGRect(x: originX, y: originY, width: width, height: height)
         tableView.frame = bounds
+        tableView.isScrollEnabled = height < contentHeight
+
         window.addSubview(self)
-        
+
         alpha = 0
         transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         UIView.animate(withDuration: 0.25) {
@@ -83,6 +123,7 @@ final class ActionDropdownView: UIView, UITableViewDataSource, UITableViewDelega
             self.transform = .identity
         }
     }
+
     
     private func totalVisibleActions() -> Int {
         var count = actions.count

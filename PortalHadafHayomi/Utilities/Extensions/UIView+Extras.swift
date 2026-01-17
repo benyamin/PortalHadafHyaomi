@@ -259,4 +259,17 @@ extension UIView
         self.semanticContentAttribute = semanticContentAttribute
         subviews.forEach { $0.setSemanticContentAtributeRecursive(semanticContentAttribute) }
     }
+    
+    @objc func topConstraint() -> NSLayoutConstraint? {
+        return superview?.constraints.first {$0.firstAttribute == .top}
+    }
+    
+    @objc func heightConstraint() -> NSLayoutConstraint? {
+       return self.constraints.filter({ $0.firstAttribute == .height }).first
+    }
+    
+    @objc func widthConstraint() -> NSLayoutConstraint? {
+       return self.constraints.filter({ $0.firstAttribute == .width }).first
+    }
+    
 }

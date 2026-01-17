@@ -228,6 +228,12 @@
 "st_keppLocked_button" = "Keep Locked";
 
 //Talmud page
+"st_save_remove-page" = "Save/Remove";
+"st_add_note" = "Add Note";
+"st_share_page" = "Share";
+"st_add_bookmark" = "Add Bookmark";
+"st_remove_bookmark" = "Remove Bookmark";
+"st_download_pages" = "Download Pages";
 "st_display_palyer" = "Show player";
 "st_hide_palyer" = "Hide player";
 "st_todays_page" = "Today's page";
