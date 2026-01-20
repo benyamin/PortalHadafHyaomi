@@ -31,6 +31,9 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     var lessonCountries:[String] = [String]()
     var lessonCities:[String] = [String]()
     
+    var selectedCountry:String?
+    var selectedCity:String?
+    
     var userLocation:CLLocation?{
         didSet{
             if userLocation != nil {
@@ -87,14 +90,14 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         
         self.countriesTextField.maxSelectedItems = 1
         self.countriesTextField.placeholder = "st_select_country".localize()
-        self.countriesTextField.onSelectionChanged = {[weak self] selected in
+        self.countriesTextField.onSelectionChanged = {[weak self] countries in
             
             guard let self else { return }
 
-            let selected = Set(self.countriesTextField.selectedItems)
+            self.selectedCountry = countries.first
 
             self.lessonCities = lessonVenues
-                .filter { selected.contains($0.sregionname) }
+                .filter { $0.sregionname == self.selectedCountry }
                 .compactMap { $0.city }
                 .reduce(into: Set<String>()) { $0.insert($1) } // unique
                 .sorted { $0.localizedCompare($1) == .orderedAscending }
@@ -106,7 +109,8 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         
         citiesTextField.maxSelectedItems = 1
         citiesTextField.placeholder = "st_select_city".localize()
-        self.citiesTextField.onSelectionChanged = { selected in
+        self.citiesTextField.onSelectionChanged = { cities in
+            self.selectedCity = cities.first
             self.updateDisplayedVenues()
         }
         
@@ -375,29 +379,45 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     }
     
     func updateDisplayedVenues(){
-        
-        let searchText = self.searchBar.text ?? ""
-        
-        var filterdVenues = [LessonVenue]()
-        for lessonVenue in HadafHayomiManager.sharedManager.lessonVenues
-        {
-            if lessonVenue.city.hasPrefix(searchText)
-                || (lessonVenue.address?.hasPrefix(searchText))!
-                || lessonVenue.maggid.hasPrefix(searchText)
-            {
-                if self.citiesTextField.selectedItems.count > 0 {
-                    if self.citiesTextField.selectedItems.contains(lessonVenue.city) {
-                        filterdVenues.append(lessonVenue)
-                    }
-                }
-                else{
-                    filterdVenues.append(lessonVenue)
-                }
-            }
-        }
-        
-        self.lessonVenues = filterdVenues
+   
+        self.lessonVenues = self.updateFilteredVenues()
         self.reloadData()
+    }
+    
+    func updateFilteredVenues() -> [LessonVenue] {
+        
+        let allVenues = HadafHayomiManager.sharedManager.lessonVenues
+        let searchText = searchBar.text ?? ""
+
+        return allVenues.filter { venue in
+
+            // Country / City filtering
+            if let selectedCountry = selectedCountry,
+               venue.sregionname != selectedCountry {
+                return false
+            }
+
+            if let selectedCity = selectedCity,
+               venue.city != selectedCity {
+                return false
+            }
+
+            // Search filtering
+            let matchesSearch =
+                searchText.isEmpty ||
+                venue.city.hasPrefix(searchText) ||
+                venue.maggid.hasPrefix(searchText) ||
+                (venue.address?.hasPrefix(searchText) ?? false)
+
+            guard matchesSearch else { return false }
+
+            // Cities picker filtering
+            if citiesTextField.selectedItems.isEmpty {
+                return true
+            }
+
+            return citiesTextField.selectedItems.contains(venue.city)
+        }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar)
