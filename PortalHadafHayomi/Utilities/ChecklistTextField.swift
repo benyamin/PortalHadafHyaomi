@@ -18,7 +18,11 @@ final class ChecklistTextField: UITextField {
 
     /// All available items (cities)
     var checklistItems: [String] = [] {
-        didSet { filteredItems = checklistItems }
+        didSet {
+            filteredItems = checklistItems
+            selectedItems = []
+            
+        }
     }
 
     /// Optional limit for number of selections (nil = unlimited)

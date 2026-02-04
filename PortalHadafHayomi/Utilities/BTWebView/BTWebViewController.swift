@@ -113,7 +113,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
     // Load url to webview
     open func loadUrl(_ urlString : String, title:String?)
     {
-        var urlPath = urlString.lowercased()
+        var urlPath = urlString//.lowercased()
         urlPath = urlPath.replacingOccurrences(of: "questionary", with: "mobile/questionary")
         urlPath = urlPath.replacingOccurrences(of: "mobile/mobile/questionary", with: "mobile/questionary")
         

@@ -16,7 +16,6 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     @IBOutlet weak var sortSegmentedControlr:UISegmentedControl!
     @IBOutlet weak var mapView:MKMapView!
     @IBOutlet weak var venuesTableView:UITableView!
-    @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var sortSegmentedSecondaryTopConstraint:NSLayoutConstraint!
     @IBOutlet weak var venuesTableViewBottomConstraint:NSLayoutConstraint!
     @IBOutlet weak var filterView: UIView!
@@ -25,10 +24,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     @IBOutlet weak var fromTimeTextField: TimeTextField!
     @IBOutlet weak var toTimeTextField: TimeTextField!
     
-    @IBOutlet weak var mapViewTopConstraint:NSLayoutConstraint!
-    @IBOutlet weak var venuesTableViewTopConstraint:NSLayoutConstraint!
 
-    var lessonCountries:[String] = [String]()
     var lessonCities:[String] = [String]()
     
     var selectedCountry:String?
@@ -42,35 +38,24 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         }
     }
     
-    private var _lessonVenues:[LessonVenue]?
-    var lessonVenues:[LessonVenue]!{
+    private var _displayedVenues:[LessonVenue]?
+    var displayedVenues:[LessonVenue]!{
         get{
-            return _lessonVenues ?? HadafHayomiManager.sharedManager.lessonVenues 
+            return _displayedVenues ?? HadafHayomiManager.sharedManager.lessonVenues 
         }
         set (value){
             if self.sortSegmentedControlr.selectedSegmentIndex == 0 {//Sort by City
-                _lessonVenues = value.sorted(by:{ $0.city < $1.city })
+                _displayedVenues = value.sorted(by:{ $0.city < $1.city })
             }
             else if self.sortSegmentedControlr.selectedSegmentIndex == 1 {//Sort by Distance
-                _lessonVenues = value.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
+                _displayedVenues = value.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
             }
-            
-            self.lessonCountries = Array(Set(lessonVenues.compactMap(\.sregionname)))
-                .sorted { $0.localizedCompare($1) == .orderedAscending }
-            
-            var countriesChecklistItems = [String]()
-           // countriesChecklistItems.append("st_all".localize())
-            countriesChecklistItems.append(contentsOf: self.lessonCountries)
-            countriesTextField.checklistItems = countriesChecklistItems
         }
     }
     var lessonsAnnotations = [LessonVenueAnnotation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       // self.searchBar.layer.borderWidth = 1.0
-       // self.searchBar.layer.borderColor = UIColor(HexColor:"791F23").cgColor
         
         self.filterView.addBottomShadow()
         
@@ -80,7 +65,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         self.sortSegmentedControlr.setTitle("st_sort_by_city".localize(), forSegmentAt: 0)
         self.sortSegmentedControlr.setTitle("st_sort_by_distance".localize(), forSegmentAt: 1)
         
-        self.getLessonVenues()
+        self.getLesonVenues()
         self.getUserLocatoin()
         
         self.mapView.showsUserLocation = true
@@ -95,8 +80,9 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             guard let self else { return }
 
             self.selectedCountry = countries.first
+            self.selectedCity = nil
 
-            self.lessonCities = lessonVenues
+            self.lessonCities = displayedVenues
                 .filter { $0.sregionname == self.selectedCountry }
                 .compactMap { $0.city }
                 .reduce(into: Set<String>()) { $0.insert($1) } // unique
@@ -140,9 +126,6 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         toTimeTextField.onSelectionChanged = { [weak self] selectedTime in
             self?.updateDisplayedVenues()
         }
-        
-        mapViewTopConstraint.constant = 0
-        venuesTableViewTopConstraint.constant = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -154,7 +137,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
                   object: nil
               )
         
-        self.getLessonVenues()
+        self.getLesonVenues()
         self.getUserLocatoin()
     }
     
@@ -165,15 +148,25 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     }
         
     
-    func getLessonVenues()
+    func getLesonVenues()
     {
         GetLessonVenuesProcess().executeWithObject(nil, onStart: { () -> Void in
             
-        }, onComplete: { (object) -> Void in
+        }, onComplete: {[weak self] (object) -> Void in
+            
+            guard let self else {return}
             
             HadafHayomiManager.sharedManager.lessonVenues = object as! [LessonVenue]
             
-            self.lessonVenues =  HadafHayomiManager.sharedManager.lessonVenues
+            self.displayedVenues =  HadafHayomiManager.sharedManager.lessonVenues
+            
+            let lessonCountries = Array(Set(displayedVenues.compactMap(\.sregionname)))
+                .sorted { $0.localizedCompare($1) == .orderedAscending }
+            
+            var countriesChecklistItems = [String]()
+           // countriesChecklistItems.append("st_all".localize())
+            countriesChecklistItems.append(contentsOf: lessonCountries)
+            self.countriesTextField.checklistItems = countriesChecklistItems
             
             self.reloadData()
             
@@ -190,8 +183,8 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
             
             self.userLocation = object as? CLLocation
             
-            if self.lessonVenues.count > 0 {
-                self.updateVenues(self.lessonVenues, withUserLocatoin: self.userLocation!)
+            if self.displayedVenues.count > 0 {
+                self.updateVenues(self.displayedVenues, withUserLocatoin: self.userLocation!)
             }
             
         },onFaile: { (object, error) -> Void in
@@ -208,12 +201,12 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     
     override func reloadData()
     {
-        self.lessonVenues  = self.lessonVenues.sorted(by: { $0.city < $1.city })
+        self.displayedVenues  = self.displayedVenues.sorted(by: { $0.city < $1.city })
         
         self.mapView.removeAnnotations(self.lessonsAnnotations)
         
         self.lessonsAnnotations = [LessonVenueAnnotation]()
-        for lessonVenue in self.lessonVenues
+        for lessonVenue in self.displayedVenues
         {
             let lessonAnnotation = LessonVenueAnnotation()
             lessonAnnotation.lessonVenue = lessonVenue
@@ -243,24 +236,15 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     @IBAction func sortSegmentedControlrValueChanged(_ sedner:AnyObject)
     {
         if self.sortSegmentedControlr.selectedSegmentIndex == 0 {//Sort by City
-            self.lessonVenues = self.lessonVenues.sorted(by:{ $0.city < $1.city })
+            self.displayedVenues = self.displayedVenues.sorted(by:{ $0.city < $1.city })
         }
         else if self.sortSegmentedControlr.selectedSegmentIndex == 1 {//Sort by Distance
-            self.lessonVenues = self.lessonVenues.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
+            self.displayedVenues = self.displayedVenues.sorted(by:{ $0.distanceFromUser < $1.distanceFromUser })
         }
         self.venuesTableView.reloadData()
     }
       
-    @IBAction func filterButtonClicked(_ sender:AnyObject) {
-       
-        mapViewTopConstraint.constant = mapViewTopConstraint.constant == 0
-        ? self.filterView.frame.size.height
-        : 0
-        
-        venuesTableViewTopConstraint.constant = venuesTableViewTopConstraint.constant == 0
-        ? self.filterView.frame.size.height
-        : 0
-        
+    @IBAction func searchButtonClicked(_ sender:AnyObject) {
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
@@ -340,7 +324,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
     // MARK: - TableView Methods:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.lessonVenues.count
+        return self.displayedVenues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -350,7 +334,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.delegate = self
         
-        cell.reloadWithObject(self.lessonVenues[indexPath.row])
+        cell.reloadWithObject(self.displayedVenues[indexPath.row])
         
         return cell
     }
@@ -367,72 +351,51 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         return UITableView.automaticDimension
     }
     
-    //Mark: - UISearchBarDelegate
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar)
-    {
-        searchBar.showsCancelButton = true
-        searchBar.autocorrectionType = UITextAutocorrectionType.no
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.updateDisplayedVenues()
-    }
-    
     func updateDisplayedVenues(){
    
-        self.lessonVenues = self.updateFilteredVenues()
+        self.displayedVenues = self.updateFilteredVenues()
+        
+        if let center = self.centerCoordinate(for: displayedVenues) {
+            
+            let region = MKCoordinateRegion(
+                   center: center,
+                   latitudinalMeters: selectedCity != nil ? 10_000 : 500_000,
+                   longitudinalMeters: selectedCity != nil ? 10_000 : 500_000
+               )
+
+               mapView.setRegion(region, animated: true)
+        }
+        
         self.reloadData()
     }
     
     func updateFilteredVenues() -> [LessonVenue] {
-        
-        let allVenues = HadafHayomiManager.sharedManager.lessonVenues
-        let searchText = searchBar.text ?? ""
+        let venues = HadafHayomiManager.sharedManager.lessonVenues
 
-        return allVenues.filter { venue in
-
-            // Country / City filtering
-            if let selectedCountry = selectedCountry,
-               venue.sregionname != selectedCountry {
-                return false
-            }
-
-            if let selectedCity = selectedCity,
-               venue.city != selectedCity {
-                return false
-            }
-
-            // Search filtering
-            let matchesSearch =
-                searchText.isEmpty ||
-                venue.city.hasPrefix(searchText) ||
-                venue.maggid.hasPrefix(searchText) ||
-                (venue.address?.hasPrefix(searchText) ?? false)
-
-            guard matchesSearch else { return false }
-
-            // Cities picker filtering
-            if citiesTextField.selectedItems.isEmpty {
-                return true
-            }
-
-            return citiesTextField.selectedItems.contains(venue.city)
+        let filteredVenues = venues.filter { venue in
+            (selectedCountry == nil || venue.sregionname == selectedCountry)
+            && (selectedCity == nil || venue.city == selectedCity)
+            && venue.isWithinTimeRange(from: self.fromTimeTextField.selectedDate,
+                                       to: self.toTimeTextField.selectedDate)
+            && (citiesTextField.selectedItems.isEmpty
+                || citiesTextField.selectedItems.contains(venue.city))
         }
+        
+        return filteredVenues
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar)
-    {
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-    {
-        searchBar.resignFirstResponder()
-        
-        searchBar.text = ""
-        
-        self.lessonVenues = HadafHayomiManager.sharedManager.lessonVenues
-        self.reloadData()
+    func centerCoordinate(for venues: [LessonVenue]) -> CLLocationCoordinate2D? {
+        guard !venues.isEmpty else { return nil }
+
+        let (latSum, lonSum) = venues.reduce(into: (0.0, 0.0)) {
+            $0.0 += $1.latitude
+            $0.1 += $1.longitude
+        }
+
+        return CLLocationCoordinate2D(
+            latitude: latSum / Double(venues.count),
+            longitude: lonSum / Double(venues.count)
+        )
     }
     
     //Mark: - LessonVenueTableCell delegate methods
@@ -505,7 +468,6 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
            let keyboardFrameInView = view.convert(frame, from: nil)
 
            let overlap = max(0, view.bounds.height - keyboardFrameInView.origin.y)
-        self.venuesTableViewBottomConstraint.constant = overlap
 
            UIView.animate(
                withDuration: duration,

@@ -132,9 +132,10 @@ final class TimeTextField: UITextField {
 
     @objc private func timeChanged() {
         selectedDate = timePicker.date
+        
         onSelectionChanged?([timePicker.date])
     }
-
+    
     @objc private func clearTapped() {
         selectedDate = nil
         onSelectionChanged?([])

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class  Venue:DataObject
+class Venue:DataObject
 {
     var id:Int!
     
