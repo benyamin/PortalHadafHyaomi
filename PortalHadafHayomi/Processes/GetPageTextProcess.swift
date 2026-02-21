@@ -18,18 +18,21 @@ open class GetPageTextProcess: MSBaseProcess
         
         let pageIndex = pageInfo["index"] as! Int
         let scoring = pageInfo["scoring"] as! Bool
+        let withCommentators = pageInfo["withCommentators"] as? Bool ?? false
         
-        self.getPageByIndex(pageIndex, withScoring:scoring)
+        self.getPageByIndex(pageIndex, withScoring:scoring, withCommentators:withCommentators)
     }
     
-    func getPageByIndex(_ pageIndex:Int, withScoring scoring:Bool)
+    func getPageByIndex(_ pageIndex:Int, withScoring scoring:Bool, withCommentators:Bool)
     {
             dataTask?.cancel()
         
         let baseUrl = "https://app.daf-yomi.com/DafYomi_Page.aspx"
 
             if var urlComponents = URLComponents(string: baseUrl) {
-                urlComponents.query = "vt=\(scoring ? 3 : 2)&context=1&id=\(pageIndex)&mobile=1"
+                var vt = withCommentators ? 2 : (scoring ? 3 : 4)
+                
+                urlComponents.query = "vt=\(vt)&context=1&id=\(pageIndex)&mobile=1"
                 
                 guard let url = urlComponents.url else {
                     self.didFaile(error: nil)

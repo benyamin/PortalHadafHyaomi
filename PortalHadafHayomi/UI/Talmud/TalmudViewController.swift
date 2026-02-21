@@ -124,7 +124,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 self.increaseTextSizeButton.isHidden = true
                 self.dicreaseTextSizeButton.isHidden = true
                 break
-            case .Steinsaltz, .EN, .Text, .TextWithScore:
+            case .Steinsaltz, .EN, .Text, .TextWithScore, .TextWithCommentators:
                 self.increaseTextSizeButton.isHidden = false
                 self.dicreaseTextSizeButton.isHidden = false
                 break 
@@ -1311,6 +1311,10 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 
             case .TextWithScore:
                 pikerLabel.text = "טקסט הדף (מנוקד)"
+                break
+                
+            case .TextWithCommentators:
+                pikerLabel.text = "טקסט הדף ומפרשים"
                 break
                 
             case .Meorot:

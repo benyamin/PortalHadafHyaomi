@@ -133,7 +133,8 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                 }
             }
             else if displayType == .Text
-                 || displayType == .TextWithScore
+                        || displayType == .TextWithScore
+                        || displayType == .TextWithCommentators
             {
                 self.pagPDFView?.isHidden = true
                 self.pageWebView.isHidden = false
@@ -294,8 +295,9 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         else{
              pageInfo["scoring"] = false
         }
-       
         
+        pageInfo["withCommentators"] = (displayType == .TextWithCommentators)
+       
         self.runProcess(process: GetPageTextProcess(), withInfo:pageInfo)
     }
     

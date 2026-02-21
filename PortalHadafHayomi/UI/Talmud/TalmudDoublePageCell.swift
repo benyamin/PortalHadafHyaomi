@@ -94,7 +94,8 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
             self.addBookmark()
         }
         else if displayType == .Text
-            || displayType == .TextWithScore
+                    || displayType == .TextWithScore
+                    || displayType == .TextWithCommentators
         {
             self.setPlaneTextDisplay()
         }

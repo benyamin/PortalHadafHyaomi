@@ -147,6 +147,9 @@ class SettableItemCell: MSBaseTableViewCell, BTTablePopUpViewDelegate
                 
             case .TextWithScore: talmudDisplayTypes.append("טקסט הדף (מנוקד)")
                 break
+             
+            case .TextWithCommentators: talmudDisplayTypes.append("טקסט הדף ופרשנים")
+                break
                 
             case .EN: talmudDisplayTypes.append("Steinsaltz")
                 break
