@@ -13,6 +13,7 @@
 		220C99C824FAF1130013D377 /* RegistrationProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C99C724FAF1130013D377 /* RegistrationProcess.swift */; };
 		220C99CA24FAF7890013D377 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C99C924FAF7890013D377 /* User.swift */; };
 		220F5CA52904A650002CEC7C /* GetTalmudQAInfoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */; };
+		22132BEA2F4A87A900653C71 /* CarPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22132BE92F4A87A900653C71 /* CarPlay.framework */; };
 		221482AE2EB6D04E00EC9BC6 /* hamburgerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221482AD2EB6D04E00EC9BC6 /* hamburgerIcon.png */; };
 		221482B02EB6D14E00EC9BC6 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221482AF2EB6D14E00EC9BC6 /* menuIcon.png */; };
 		221A2DB0254B49B50040475E /* ForgotPasswordProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */; };
@@ -40,6 +41,13 @@
 		2260061C28D9122100FF8386 /* StudyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */; };
 		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
 		2266A09F2ED278A20088D3D5 /* ChecklistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2266A09E2ED278A20088D3D5 /* ChecklistTextField.swift */; };
+		226A87DE2F578C7D00BB1A86 /* BTPlayerView+CarPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A87DD2F578C7D00BB1A86 /* BTPlayerView+CarPlay.swift */; };
+		226A87E02F578CCF00BB1A86 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A87DF2F578CCF00BB1A86 /* CarPlaySceneDelegate.swift */; };
+		226A87E22F578CE200BB1A86 /* CarPlay-Fixed-Summary.md in Resources */ = {isa = PBXBuildFile; fileRef = 226A87E12F578CE200BB1A86 /* CarPlay-Fixed-Summary.md */; };
+		226A87E42F578FC500BB1A86 /* Info-CarPlay-Example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 226A87E32F578FC500BB1A86 /* Info-CarPlay-Example.plist */; };
+		226A87E62F578FD100BB1A86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A87E52F578FD100BB1A86 /* SceneDelegate.swift */; };
+		226A87E82F578FD800BB1A86 /* AppDelegate+CarPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A87E72F578FD800BB1A86 /* AppDelegate+CarPlay.swift */; };
+		226A87EA2F578FE700BB1A86 /* CarPlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A87E92F578FE700BB1A86 /* CarPlayManager.swift */; };
 		2273A8C72471CBA7000E0390 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C52471CBA7000E0390 /* playIcon.png */; };
 		2273A8C82471CBA7000E0390 /* stopIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2273A8C62471CBA7000E0390 /* stopIcon.png */; };
 		227B64C829EB34FF004B74B9 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B64C729EB34FF004B74B9 /* BookmarkView.swift */; };
@@ -667,6 +675,7 @@
 		220C99C724FAF1130013D377 /* RegistrationProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProcess.swift; sourceTree = "<group>"; };
 		220C99C924FAF7890013D377 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		220F5CA42904A650002CEC7C /* GetTalmudQAInfoProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAInfoProcess.swift; sourceTree = "<group>"; };
+		22132BE92F4A87A900653C71 /* CarPlay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarPlay.framework; path = System/Library/Frameworks/CarPlay.framework; sourceTree = SDKROOT; };
 		221482AD2EB6D04E00EC9BC6 /* hamburgerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburgerIcon.png; sourceTree = "<group>"; };
 		221482AF2EB6D14E00EC9BC6 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
 		221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordProcess.swift; sourceTree = "<group>"; };
@@ -698,6 +707,13 @@
 		2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyStoryboard.storyboard; sourceTree = "<group>"; };
 		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
 		2266A09E2ED278A20088D3D5 /* ChecklistTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistTextField.swift; sourceTree = "<group>"; };
+		226A87DD2F578C7D00BB1A86 /* BTPlayerView+CarPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BTPlayerView+CarPlay.swift"; sourceTree = "<group>"; };
+		226A87DF2F578CCF00BB1A86 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
+		226A87E12F578CE200BB1A86 /* CarPlay-Fixed-Summary.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "CarPlay-Fixed-Summary.md"; sourceTree = "<group>"; };
+		226A87E32F578FC500BB1A86 /* Info-CarPlay-Example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-CarPlay-Example.plist"; sourceTree = "<group>"; };
+		226A87E52F578FD100BB1A86 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		226A87E72F578FD800BB1A86 /* AppDelegate+CarPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CarPlay.swift"; sourceTree = "<group>"; };
+		226A87E92F578FE700BB1A86 /* CarPlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayManager.swift; sourceTree = "<group>"; };
 		2273A8C52471CBA7000E0390 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
 		2273A8C62471CBA7000E0390 /* stopIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopIcon.png; sourceTree = "<group>"; };
 		227B64C729EB34FF004B74B9 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
@@ -1340,6 +1356,7 @@
 				4A65E17C1FE80588008BA62B /* CoreLocation.framework in Frameworks */,
 				4A65E17A1FE80581008BA62B /* MapKit.framework in Frameworks */,
 				4A933AEE1FD351C800D175E1 /* CoreMedia.framework in Frameworks */,
+				22132BEA2F4A87A900653C71 /* CarPlay.framework in Frameworks */,
 				4A7E0E111FF2EEC900D84E0E /* Batch.framework in Frameworks */,
 				4AFC249D1FCB5FF10056E726 /* libsqlite3.tbd in Frameworks */,
 				22E653932EF751840010712F /* FirebaseAnalyticsIdentitySupport in Frameworks */,
@@ -1722,6 +1739,7 @@
 				4AEC801F217270F3003459AF /* BTPlayerRateSpeedView.swift */,
 				4AEC802121727122003459AF /* BTPlayerRateSpeedView.xib */,
 				4A2C76921FD48D380074A0CC /* Images */,
+				226A87E32F578FC500BB1A86 /* Info-CarPlay-Example.plist */,
 			);
 			path = BTPlayer;
 			sourceTree = "<group>";
@@ -2471,6 +2489,9 @@
 				4AF5552F1FCA360E00A830EE /* LaunchScreen.storyboard */,
 				4AF555321FCA360E00A830EE /* Info.plist */,
 				22E64DEA2EF74E240010712F /* GoogleService-Info.plist */,
+				226A87E52F578FD100BB1A86 /* SceneDelegate.swift */,
+				226A87E72F578FD800BB1A86 /* AppDelegate+CarPlay.swift */,
+				226A87E92F578FE700BB1A86 /* CarPlayManager.swift */,
 			);
 			path = PortalHadafHayomi;
 			sourceTree = "<group>";
@@ -2664,6 +2685,9 @@
 				22FD993A2953673D00F73BDD /* MaggidiShiourTableView.xib */,
 				22FD99342953262700F73BDD /* TableSelectionCell.swift */,
 				22FD99352953262700F73BDD /* TableSelectionCell.xib */,
+				226A87DD2F578C7D00BB1A86 /* BTPlayerView+CarPlay.swift */,
+				226A87DF2F578CCF00BB1A86 /* CarPlaySceneDelegate.swift */,
+				226A87E12F578CE200BB1A86 /* CarPlay-Fixed-Summary.md */,
 			);
 			path = Lessons;
 			sourceTree = "<group>";
@@ -2671,6 +2695,7 @@
 		4AFC249B1FCB5FE40056E726 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22132BE92F4A87A900653C71 /* CarPlay.framework */,
 				4AC35B6422A46298005084DC /* WebKit.framework */,
 				4AB1662F2116757800481B04 /* PDFKit.framework */,
 				4A90C92620C08C0000D46BC2 /* libxml2.2.tbd */,
@@ -2854,6 +2879,7 @@
 				4ABFB6AA235290FF0079D68B /* DineiSiyum.png in Resources */,
 				4ABFB6B5235290FF0079D68B /* btn_bg_A_click.png in Resources */,
 				4A469E73200E39D200AA9A23 /* LessonPickerMaggidShiourCell.xib in Resources */,
+				226A87E42F578FC500BB1A86 /* Info-CarPlay-Example.plist in Resources */,
 				4ABFB70C235291000079D68B /* arrowLeft.png in Resources */,
 				4ABFB770235291000079D68B /* Icon-App-83.5x83.5@2x.png in Resources */,
 				4ABFB752235291000079D68B /* hipusShas_icon.png in Resources */,
@@ -2867,6 +2893,7 @@
 				4ABFB69D235290FF0079D68B /* Opening_Screen_ios_Lines.png in Resources */,
 				4ABFB75D235291000079D68B /* seker_icon.png in Resources */,
 				4A999D6627F4F2C7004C9675 /* A-_icon.png in Resources */,
+				226A87E22F578CE200BB1A86 /* CarPlay-Fixed-Summary.md in Resources */,
 				4ABFB718235291000079D68B /* delete.png in Resources */,
 				4ABFB706235291000079D68B /* move_left@2x.png in Resources */,
 				4ABFB77D235291000079D68B /* Icon-App-76x76@1x.png in Resources */,
@@ -3190,6 +3217,7 @@
 				4A933ADF1FCF4ECC00D175E1 /* Date+Extras.swift in Sources */,
 				4A2C76B61FD48EC00074A0CC /* RemoveLessonProcess.swift in Sources */,
 				4A733B0C20ACCD4300976D55 /* HadafHayomiProjectTopic.swift in Sources */,
+				226A87DE2F578C7D00BB1A86 /* BTPlayerView+CarPlay.swift in Sources */,
 				4A17CBD021C5AC110063F834 /* Publisher.swift in Sources */,
 				4AD1496C1FDC8B480038EBDF /* AccessoryTableCell.swift in Sources */,
 				4A733B3420B2350B00976D55 /* GetSurveysProcess.swift in Sources */,
@@ -3204,7 +3232,9 @@
 				220F5CA52904A650002CEC7C /* GetTalmudQAInfoProcess.swift in Sources */,
 				2266A09F2ED278A20088D3D5 /* ChecklistTextField.swift in Sources */,
 				4A2150BD220B643700BFEEF7 /* GetSteinsaltzPageProcess.swift in Sources */,
+				226A87E82F578FD800BB1A86 /* AppDelegate+CarPlay.swift in Sources */,
 				4AC4830D1FE5CFBA000F1528 /* GetArticalesProcess.swift in Sources */,
+				226A87E02F578CCF00BB1A86 /* CarPlaySceneDelegate.swift in Sources */,
 				4A933ADA1FCF4AB400D175E1 /* TalmudViewController.swift in Sources */,
 				4A2151272225E72700BFEEF7 /* BTTimePickerview.swift in Sources */,
 				4A6349A9200CA146000428AA /* LessonsPickerView.swift in Sources */,
@@ -3353,6 +3383,7 @@
 				4A74B4CD270F8C1300DD20E6 /* TalmudPageRangePickerView.swift in Sources */,
 				4AD149621FD9CAE70038EBDF /* MSBaseTableViewCell.swift in Sources */,
 				2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */,
+				226A87EA2F578FE700BB1A86 /* CarPlayManager.swift in Sources */,
 				4AD4099F201F9C1000A76EF0 /* JewishCallCollectionHeaderView.swift in Sources */,
 				22FD99362953262700F73BDD /* TableSelectionCell.swift in Sources */,
 				4ABFB21E235250050079D68B /* DownloadSiriInstructions.swift in Sources */,
@@ -3365,6 +3396,7 @@
 				4A2E202A22024A02006E1EF4 /* SettingsViewController.swift in Sources */,
 				22EC340B29BFD20D00D81A71 /* WKWebView+Extras.swift in Sources */,
 				4ABAAD5C200549200023200D /* Util.swift in Sources */,
+				226A87E62F578FD100BB1A86 /* SceneDelegate.swift in Sources */,
 				4A7537231FD6B86E0013BCD9 /* MSRequest.swift in Sources */,
 				4AB1662E2116607000481B04 /* ChavrusaInfoTableCell.swift in Sources */,
 				4AEACF2E20963F8500385129 /* MeasurementCalculatorViewController.swift in Sources */,

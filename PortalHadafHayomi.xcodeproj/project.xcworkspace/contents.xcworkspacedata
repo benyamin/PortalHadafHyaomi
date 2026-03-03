@@ -4,4 +4,22 @@
    <FileRef
       location = "self:">
    </FileRef>
+   <FileRef
+      location = "group:CarPlaySceneDelegate.swift">
+   </FileRef>
+   <FileRef
+      location = "group:CarPlayAudioManager.swift">
+   </FileRef>
+   <FileRef
+      location = "group:BTPlayerView+CarPlay.swift">
+   </FileRef>
+   <FileRef
+      location = "group:CarPlay-Setup-Guide.md">
+   </FileRef>
+   <FileRef
+      location = "group:CarPlayController.swift">
+   </FileRef>
+   <FileRef
+      location = "group:CarPlay-Implementation-Summary.md">
+   </FileRef>
 </Workspace>

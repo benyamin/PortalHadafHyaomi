@@ -192,6 +192,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             self.lessonsPickerView.pickerView.frame = self.lessonsPickerView.bounds
             self.lessonsPickerView.pickerView.reloadAllComponents()
             
+            // Setup CarPlay integration
+            self.setupCarPlayIntegration()
+            
             let saveLastLesson = UserDefaults.standard.object(forKey: "setableItem_SaveLastLesson") as? Bool ?? true
             
             if let playingLesson = LessonsManager.sharedManager.playingLesson
@@ -905,6 +908,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         LessonsManager.sharedManager.isPlaying = false
         self.playPauseButton.isSelected = false
         
+        // Update CarPlay now playing info
+        self.updateCarPlayForCurrentLesson()
+        
         if let tableView  = self.lastPlayedLessonsTableView
            ,let visibleCellsIndexes = tableView.indexPathsForVisibleRows {
             tableView.reloadRows(at: visibleCellsIndexes, with: .none)
@@ -915,6 +921,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.playPauseButton.isSelected = true
         
         LessonsManager.sharedManager.isPlaying = true
+        
+        // Update CarPlay now playing info
+        self.updateCarPlayForCurrentLesson()
         
         if let tableView  = self.lastPlayedLessonsTableView
            ,let visibleCellsIndexes = tableView.indexPathsForVisibleRows {
@@ -1181,5 +1190,65 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         }
                 
         return cell
+    }
+}
+
+// MARK: - CarPlay Integration
+
+extension LessonsViewController {
+    
+    func setupCarPlayIntegration() {
+        // Setup CarPlay remote commands for the audio player
+        self.audioPlayer?.setupCarPlayRemoteCommands()
+        
+        // Setup skip functionality with simple implementations
+        self.audioPlayer?.onSkipForward = { [weak self] seconds in
+            // Simple skip forward - move to next lesson if skip is more than 30 seconds
+            if seconds > 30 {
+                if let nextLesson = self?.getNextLesson() {
+                    self?.lessonsPickerView.select(maschet: nextLesson.masechet, page: nextLesson.page!, maggidShior: nextLesson.maggidShiur)
+                    self?.playSelectedLesson()
+                }
+            } else {
+                // Skip within current lesson
+                self?.skipWithinCurrentLesson(seconds: seconds)
+            }
+        }
+        
+        self.audioPlayer?.onSkipBackward = { [weak self] seconds in
+            // Simple skip backward - move to previous lesson if skip is more than 30 seconds  
+            if seconds > 30 {
+                if let prevLesson = self?.getPreLesson() {
+                    self?.lessonsPickerView.select(maschet: prevLesson.masechet, page: prevLesson.page!, maggidShior: prevLesson.maggidShiur)
+                    self?.playSelectedLesson()
+                }
+            } else {
+                // Skip within current lesson
+                self?.skipWithinCurrentLesson(seconds: -seconds)
+            }
+        }
+        
+        // Update CarPlay when lesson changes
+        if let currentLesson = self.selectedLesson {
+            self.audioPlayer?.updateCarPlayNowPlayingInfo(for: currentLesson)
+        }
+    }
+    
+    private func skipWithinCurrentLesson(seconds: TimeInterval) {
+        // Use the existing player's seek functionality
+        if let player = self.audioPlayer?.player, 
+           player.isActive(),
+           let duration = player.duration() {
+            
+            let currentTime = TimeInterval(self.audioPlayer?.timeNow() ?? 0)
+            let newTime = max(0, min(currentTime + seconds, CMTimeGetSeconds(duration)))
+            self.audioPlayer?.seekToTime(newTime)
+        }
+    }
+    
+    func updateCarPlayForCurrentLesson() {
+        if let currentLesson = self.selectedLesson {
+            self.audioPlayer?.updateCarPlayNowPlayingInfo(for: currentLesson)
+        }
     }
 }
