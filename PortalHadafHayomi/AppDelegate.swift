@@ -8,6 +8,7 @@
 
 import UIKit
 import Batch
+import CarPlay
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,21 +50,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.getUserSettings()
         
-        if(UIDevice.current.userInterfaceIdiom == .pad)//IPad
-        {
-           let storyboard = UIStoryboard(name: "Main_IPadStoryboard", bundle: nil)
-            self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        // Window setup is now handled in SceneDelegate for iOS 13+
+        // Keep localization and opening screen logic for older iOS versions or when scenes aren't used
+        if #available(iOS 13.0, *) {
+            // Scene-based app lifecycle - window setup handled in SceneDelegate
+        } else {
+            // Legacy app lifecycle - set up window here
+            if(UIDevice.current.userInterfaceIdiom == .pad) { // iPad
+               let storyboard = UIStoryboard(name: "Main_IPadStoryboard", bundle: nil)
+                self.window?.rootViewController = storyboard.instantiateInitialViewController()
+                
+                self.window?.makeKeyAndVisible()
+            } else { // iPhone
+                self.setIphoneRootView()
+            }
             
-            self.window?.makeKeyAndVisible()
+            self.handleLocalization()
+            self.showOpeningScreenIfRequired()
         }
-        else//IPhone
-        {
-            self.setIphoneRootView()
-        }
-        
-        self.handleLocalization()
-
-        self.showOpeningScreenIfRequired()
         
         return true
     }
@@ -101,7 +105,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         {
                             self.setHebrewLanguage()
                             
-                            self.setIphoneRootView()
+                            // Refresh the interface to apply language changes
+                            if #available(iOS 13.0, *) {
+                                // For scene-based apps, we might need to update the interface differently
+                                // The root view is already set up in SceneDelegate
+                            } else {
+                                self.setIphoneRootView()
+                            }
                         }
                     })
                 }
@@ -267,6 +277,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
        
          NotificationCenter.default.post(name: NSNotification.Name(rawValue: "applicationWillTerminate"), object: nil)
+    }
+    
+    // MARK: - Scene Support for CarPlay
+    
+    func application(
+        _ application: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
+
+        if connectingSceneSession.role == .carTemplateApplication {
+            // CarPlay Scene
+            let carPlaySceneConfig = UISceneConfiguration(name: "CarPlay", sessionRole: connectingSceneSession.role)
+            carPlaySceneConfig.delegateClass = CarPlaySceneDelegate.self
+            return carPlaySceneConfig
+        } else {
+            // Default iPhone Scene
+            let config = UISceneConfiguration(
+                name: "Default Configuration",
+                sessionRole: connectingSceneSession.role
+            )
+            config.delegateClass = SceneDelegate.self
+            return config
+        }
     }
 }
 

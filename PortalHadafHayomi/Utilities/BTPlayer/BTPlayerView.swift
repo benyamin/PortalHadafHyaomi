@@ -75,6 +75,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             self.player.setTitle(self.title)
             
             self.titleLabel?.text = self.title
+            
+            // Notify CarPlay of title change
+            self.notifyCarPlayOfTitleChange(title: self.title)
         }
     }
     
@@ -83,6 +86,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             self.player.setSubTitle(self.subTitle)
             
             self.subTitleLabel?.text = self.subTitle
+            
+            // Notify CarPlay of subtitle change
+            self.notifyCarPlayOfSubTitleChange(subTitle: self.subTitle)
         }
     }
     
@@ -146,6 +152,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         self.playerUrl = selectedUrl
         
         self.loadSelectedURL()
+        
+        // Notify CarPlay of URL change
+        self.notifyCarPlayOfURLChange(url: url)
     }
     
     func loadSelectedURL() {
@@ -263,6 +272,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
             self.rateSpeedButton?.setTitle( String(format: "%.1f", playerRateSpeed), for: .normal)
         }
+        
+        // Setup CarPlay synchronization
+        self.setupCarPlaySync()
     }
     
     override func remoteControlReceived(with event: UIEvent?) {
@@ -467,6 +479,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         }
         
         self.delegate?.playerView(self, didChangeDuration: duration)
+        
+        // Notify CarPlay of duration change
+        self.notifyCarPlayOfDurationChange(duration: duration)
     }
     
     func updateDurationLayout(duration:Int)
@@ -532,6 +547,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         self.setIsPlayingLayout()
         
         self.delegate?.didPlay(player:self)
+        
+        // Notify CarPlay of state change
+        self.notifyCarPlayOfStateChange()
     }
     
     func updatePlayer()
@@ -623,6 +641,9 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     {
         self.player.pause()
         self.playerDidStop()
+        
+        // Notify CarPlay of state change
+        self.notifyCarPlayOfStateChange()
     }
     
     func playerDidStop()
@@ -890,6 +911,155 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
 
     func updateInfoCenter() {
         self.setBackgourndPlayer()
+    }
+    
+    // MARK: - CarPlay Synchronization
+    
+    private func setupCarPlaySync() {
+        // Listen for CarPlay player updates
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(carPlayPlayerDidUpdate(_:)),
+            name: NSNotification.Name("CarPlayPlayerDidUpdateState"),
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(carPlayPlayerDidChangeDuration(_:)),
+            name: NSNotification.Name("CarPlayPlayerDidChangeDuration"),
+            object: nil
+        )
+    }
+    
+    @objc private func carPlayPlayerDidUpdate(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let source = userInfo["source"] as? String,
+              source == "CarPlay" else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            if let isPlaying = userInfo["isPlaying"] as? Bool {
+                if isPlaying && !self.isPlaying {
+                    // CarPlay started playing, update phone UI
+                    self.setIsPlayingLayout()
+                } else if !isPlaying && self.isPlaying {
+                    // CarPlay paused, update phone UI
+                    self.setNotPlayingLayout()
+                }
+            }
+        }
+    }
+    
+    @objc private func carPlayPlayerDidChangeDuration(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let source = userInfo["source"] as? String,
+              source == "CarPlay",
+              let duration = userInfo["duration"] as? Int else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Update UI without triggering another CarPlay notification
+            self.updateDurationLayout(duration: duration)
+        }
+    }
+    
+    private func notifyCarPlayOfStateChange() {
+        DispatchQueue.main.async {
+            let userInfo: [String: Any] = [
+                "isPlaying": self.isPlaying,
+                "title": self.title,
+                "subTitle": self.subTitle,
+                "source": "Phone"
+            ]
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name("BTPlayerViewDidUpdateState"),
+                object: self,
+                userInfo: userInfo
+            )
+            
+            // Also update CarPlay directly through manager
+            CarPlayManager.shared.updateCarPlayWithPhonePlayerState(
+                title: self.title,
+                subTitle: self.subTitle,
+                isPlaying: self.isPlaying
+            )
+        }
+    }
+    
+    private func notifyCarPlayOfDurationChange(duration: Int) {
+        DispatchQueue.main.async {
+            let userInfo: [String: Any] = [
+                "duration": duration,
+                "source": "Phone"
+            ]
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name("BTPlayerViewDidUpdateState"),
+                object: self,
+                userInfo: userInfo
+            )
+            
+            // Also update CarPlay directly through manager
+            CarPlayManager.shared.updateCarPlayWithPhonePlayerState(duration: duration)
+        }
+    }
+    
+    private func notifyCarPlayOfURLChange(url: URL?) {
+        DispatchQueue.main.async {
+            var userInfo: [String: Any] = ["source": "Phone"]
+            if let url = url {
+                userInfo["url"] = url
+            }
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name("BTPlayerViewDidUpdateState"),
+                object: self,
+                userInfo: userInfo
+            )
+            
+            // Also update CarPlay directly through manager
+            CarPlayManager.shared.updateCarPlayWithPhonePlayerState(url: url)
+        }
+    }
+    
+    private func notifyCarPlayOfTitleChange(title: String) {
+        DispatchQueue.main.async {
+            let userInfo: [String: Any] = [
+                "title": title,
+                "source": "Phone"
+            ]
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name("BTPlayerViewDidUpdateState"),
+                object: self,
+                userInfo: userInfo
+            )
+            
+            // Also update CarPlay directly through manager
+            CarPlayManager.shared.updateCarPlayWithPhonePlayerState(title: title)
+        }
+    }
+    
+    private func notifyCarPlayOfSubTitleChange(subTitle: String) {
+        DispatchQueue.main.async {
+            let userInfo: [String: Any] = [
+                "subTitle": subTitle,
+                "source": "Phone"
+            ]
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name("BTPlayerViewDidUpdateState"),
+                object: self,
+                userInfo: userInfo
+            )
+            
+            // Also update CarPlay directly through manager
+            CarPlayManager.shared.updateCarPlayWithPhonePlayerState(subTitle: subTitle)
+        }
     }
 }
 

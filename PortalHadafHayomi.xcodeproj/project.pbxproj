@@ -37,6 +37,13 @@
 		2256E4A02959DAC0006B0495 /* ExamAnswerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E49F2959DAC0006B0495 /* ExamAnswerTableCell.swift */; };
 		2256E4A22959E140006B0495 /* ExamAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256E4A12959E140006B0495 /* ExamAnswer.swift */; };
 		225BD7282E0210FC003C1883 /* MSUpdatePageProgressProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225BD7272E0210FC003C1883 /* MSUpdatePageProgressProcess.swift */; };
+		225D32F52F579AD500BF1B50 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D32F42F579AD500BF1B50 /* CarPlaySceneDelegate.swift */; };
+		225D32F72F579B0A00BF1B50 /* CarPlayPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D32F62F579B0A00BF1B50 /* CarPlayPlayerView.swift */; };
+		225D32F92F579B6D00BF1B50 /* CarPlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D32F82F579B6D00BF1B50 /* CarPlayManager.swift */; };
+		225D32FB2F579B8500BF1B50 /* CarPlayInfoPlistConfiguration.txt in Resources */ = {isa = PBXBuildFile; fileRef = 225D32FA2F579B8500BF1B50 /* CarPlayInfoPlistConfiguration.txt */; };
+		225D32FD2F579BAB00BF1B50 /* CarPlayImplementationGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = 225D32FC2F579BAB00BF1B50 /* CarPlayImplementationGuide.md */; };
+		225D32FF2F579BCF00BF1B50 /* CarPlayIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D32FE2F579BCF00BF1B50 /* CarPlayIntegrationTests.swift */; };
+		225D33012F57A23000BF1B50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D33002F57A23000BF1B50 /* SceneDelegate.swift */; };
 		2260061C28D9122100FF8386 /* StudyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */; };
 		2260062028D913FE00FF8386 /* GetTalmudQAProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */; };
 		2266A09F2ED278A20088D3D5 /* ChecklistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2266A09E2ED278A20088D3D5 /* ChecklistTextField.swift */; };
@@ -695,6 +702,13 @@
 		2256E49F2959DAC0006B0495 /* ExamAnswerTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamAnswerTableCell.swift; sourceTree = "<group>"; };
 		2256E4A12959E140006B0495 /* ExamAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamAnswer.swift; sourceTree = "<group>"; };
 		225BD7272E0210FC003C1883 /* MSUpdatePageProgressProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSUpdatePageProgressProcess.swift; sourceTree = "<group>"; };
+		225D32F42F579AD500BF1B50 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
+		225D32F62F579B0A00BF1B50 /* CarPlayPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayPlayerView.swift; sourceTree = "<group>"; };
+		225D32F82F579B6D00BF1B50 /* CarPlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayManager.swift; sourceTree = "<group>"; };
+		225D32FA2F579B8500BF1B50 /* CarPlayInfoPlistConfiguration.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CarPlayInfoPlistConfiguration.txt; sourceTree = "<group>"; };
+		225D32FC2F579BAB00BF1B50 /* CarPlayImplementationGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CarPlayImplementationGuide.md; sourceTree = "<group>"; };
+		225D32FE2F579BCF00BF1B50 /* CarPlayIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayIntegrationTests.swift; sourceTree = "<group>"; };
+		225D33002F57A23000BF1B50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2260061B28D9122100FF8386 /* StudyStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyStoryboard.storyboard; sourceTree = "<group>"; };
 		2260061F28D913FE00FF8386 /* GetTalmudQAProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTalmudQAProcess.swift; sourceTree = "<group>"; };
 		2266A09E2ED278A20088D3D5 /* ChecklistTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistTextField.swift; sourceTree = "<group>"; };
@@ -1722,6 +1736,12 @@
 				4AEC801F217270F3003459AF /* BTPlayerRateSpeedView.swift */,
 				4AEC802121727122003459AF /* BTPlayerRateSpeedView.xib */,
 				4A2C76921FD48D380074A0CC /* Images */,
+				225D32F42F579AD500BF1B50 /* CarPlaySceneDelegate.swift */,
+				225D32F62F579B0A00BF1B50 /* CarPlayPlayerView.swift */,
+				225D32F82F579B6D00BF1B50 /* CarPlayManager.swift */,
+				225D32FA2F579B8500BF1B50 /* CarPlayInfoPlistConfiguration.txt */,
+				225D32FC2F579BAB00BF1B50 /* CarPlayImplementationGuide.md */,
+				225D32FE2F579BCF00BF1B50 /* CarPlayIntegrationTests.swift */,
 			);
 			path = BTPlayer;
 			sourceTree = "<group>";
@@ -2471,6 +2491,7 @@
 				4AF5552F1FCA360E00A830EE /* LaunchScreen.storyboard */,
 				4AF555321FCA360E00A830EE /* Info.plist */,
 				22E64DEA2EF74E240010712F /* GoogleService-Info.plist */,
+				225D33002F57A23000BF1B50 /* SceneDelegate.swift */,
 			);
 			path = PortalHadafHayomi;
 			sourceTree = "<group>";
@@ -2969,6 +2990,7 @@
 				4ABFB732235291000079D68B /* share_icon.png in Resources */,
 				4A733B2320B215C300976D55 /* PageSummaryStoryboard.storyboard in Resources */,
 				4ABFB8AD235291000079D68B /* Laazy_rashi.plist in Resources */,
+				225D32FB2F579B8500BF1B50 /* CarPlayInfoPlistConfiguration.txt in Resources */,
 				4ABFB78D235291000079D68B /* locations.xml in Resources */,
 				4ABFB78A235291000079D68B /* Laaz_rashi.sqlite in Resources */,
 				4A65E2A61FE8FCED008BA62B /* AboutStoryboard.storyboard in Resources */,
@@ -3023,6 +3045,7 @@
 				4A733B3020B22BF800976D55 /* SurveysStoryboard.storyboard in Resources */,
 				4ABFB6D8235291000079D68B /* Calculator_icon_ios.png in Resources */,
 				4ABFB6AF235290FF0079D68B /* btn_bg_A.png in Resources */,
+				225D32FD2F579BAB00BF1B50 /* CarPlayImplementationGuide.md in Resources */,
 				4ABFB6AD235290FF0079D68B /* Star.png in Resources */,
 				4ABFB6DE235291000079D68B /* rashei_tevot_icon+text_ios.png in Resources */,
 				4ABFB6D6235291000079D68B /* toldot_icon.png in Resources */,
@@ -3202,6 +3225,7 @@
 				4A2150F82216172D00BFEEF7 /* PageSelectingCell.swift in Sources */,
 				4A90C88520B61CD400D46BC2 /* SiyumTopic.swift in Sources */,
 				220F5CA52904A650002CEC7C /* GetTalmudQAInfoProcess.swift in Sources */,
+				225D32F72F579B0A00BF1B50 /* CarPlayPlayerView.swift in Sources */,
 				2266A09F2ED278A20088D3D5 /* ChecklistTextField.swift in Sources */,
 				4A2150BD220B643700BFEEF7 /* GetSteinsaltzPageProcess.swift in Sources */,
 				4AC4830D1FE5CFBA000F1528 /* GetArticalesProcess.swift in Sources */,
@@ -3216,6 +3240,7 @@
 				22CDDD8A294F171700945E6F /* CGPoint+Extras.swift in Sources */,
 				4AFC249A1FCB5FB30056E726 /* SQLmanager.swift in Sources */,
 				4AE755582321ABFE001B0E24 /* SpeachManager.swift in Sources */,
+				225D32F92F579B6D00BF1B50 /* CarPlayManager.swift in Sources */,
 				4AB1665C214860B900481B04 /* FourmDiscussionTableCell.swift in Sources */,
 				4AD40997201D139200A76EF0 /* Calendar+Extras.swift in Sources */,
 				4A2151222225DF5B00BFEEF7 /* UILabel+Extras.swift in Sources */,
@@ -3273,9 +3298,11 @@
 				4AEC8020217270F3003459AF /* BTPlayerRateSpeedView.swift in Sources */,
 				4A5884822082AFA2003EC9E5 /* GetCitiesProcess.swift in Sources */,
 				4A933AE91FD3501800D175E1 /* BTAVPlayer.swift in Sources */,
+				225D32F52F579AD500BF1B50 /* CarPlaySceneDelegate.swift in Sources */,
 				4A2C76B51FD48EC00074A0CC /* SaveLessonProcess.swift in Sources */,
 				2256E4A02959DAC0006B0495 /* ExamAnswerTableCell.swift in Sources */,
 				4A933AF91FD35B8100D175E1 /* BTPopUpView.swift in Sources */,
+				225D32FF2F579BCF00BF1B50 /* CarPlayIntegrationTests.swift in Sources */,
 				4A6B0BDF1FCDAABB008C1205 /* Masechet.swift in Sources */,
 				4AC483D71FE718EA000F1528 /* ArticlesViewController.swift in Sources */,
 				4AC1F2522360E4CC00133263 /* BTLoadingViewWithMessage.swift in Sources */,
@@ -3406,6 +3433,7 @@
 				4AB347232231C607002ED44C /* MyPagesViewController.swift in Sources */,
 				4AEC80262173C05C003459AF /* BTPlayerManager.swift in Sources */,
 				224518E4250BC2A600C82C9E /* ForumAddMessageProcess.swift in Sources */,
+				225D33012F57A23000BF1B50 /* SceneDelegate.swift in Sources */,
 				4A79B04420F1876100C3C456 /* Window+Extras.swift in Sources */,
 				223A7BEA247C721D00FC6E37 /* GetLessonsInfoProcess.swift in Sources */,
 				4A933ADD1FCF4EA300D175E1 /* UICollectionView+Extras.swift in Sources */,

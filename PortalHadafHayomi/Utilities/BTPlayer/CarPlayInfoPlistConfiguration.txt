@@ -1,0 +1,59 @@
+//
+//  CarPlayInfoPlistConfiguration.txt
+//  PortalHdafHyomi
+//
+//  Required Info.plist configurations for CarPlay support
+//
+
+/*
+Add the following to your Info.plist file:
+
+<key>UIApplicationSceneManifest</key>
+<dict>
+    <key>UIApplicationSupportsMultipleScenes</key>
+    <true/>
+    <key>UISceneConfigurations</key>
+    <dict>
+        <key>CPTemplateApplicationSceneSessionRoleApplication</key>
+        <array>
+            <dict>
+                <key>UISceneConfigurationName</key>
+                <string>CarPlay</string>
+                <key>UISceneDelegateClassName</key>
+                <string>$(PRODUCT_MODULE_NAME).CarPlaySceneDelegate</string>
+            </dict>
+        </array>
+        <key>UIWindowSceneSessionRoleApplication</key>
+        <array>
+            <dict>
+                <key>UISceneConfigurationName</key>
+                <string>Default Configuration</string>
+                <key>UISceneStoryboardFile</key>
+                <string>Main</string>
+            </dict>
+        </array>
+    </dict>
+</dict>
+
+<key>MKDirectionsApplicationSupportedModes</key>
+<array>
+    <string>MKDirectionsModeCar</string>
+</array>
+
+<key>UIBackgroundModes</key>
+<array>
+    <string>audio</string>
+</array>
+
+<key>AVAudioSessionCategory</key>
+<string>AVAudioSessionCategoryPlayback</string>
+
+<key>LSApplicationCategoryType</key>
+<string>public.app-category.music</string>
+
+Notes:
+1. Replace $(PRODUCT_MODULE_NAME) with your actual module name if using Objective-C
+2. The audio background mode is crucial for CarPlay audio functionality
+3. The AVAudioSessionCategory should be set to playback for media apps
+4. Make sure your app has the necessary entitlements for CarPlay in your provisioning profile
+*/
