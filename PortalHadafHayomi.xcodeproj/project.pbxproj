@@ -19,6 +19,7 @@
 		221A2DB2254B8FA00040475E /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221A2DB1254B8FA00040475E /* shareIcon.png */; };
 		2224495D2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224495C2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift */; };
 		223508BD2581684C0049D467 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223508BC2581684C0049D467 /* LessonTableViewCell.swift */; };
+		2236B5522F997726006940DF /* AI_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2236B5512F997726006940DF /* AI_Icon.png */; };
 		223A7BEA247C721D00FC6E37 /* GetLessonsInfoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */; };
 		223AEF9E2EFC8E8200248436 /* TimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223AEF9D2EFC8E8200248436 /* TimeTextField.swift */; };
 		223DEF1729C6926B009977A4 /* VagshalEncoding.json in Resources */ = {isa = PBXBuildFile; fileRef = 223DEF1629C6926A009977A4 /* VagshalEncoding.json */; };
@@ -680,6 +681,7 @@
 		221A2DB1254B8FA00040475E /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
 		2224495C2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGetPagesStatusProcess.swift; sourceTree = "<group>"; };
 		223508BC2581684C0049D467 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
+		2236B5512F997726006940DF /* AI_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AI_Icon.png; sourceTree = "<group>"; };
 		223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLessonsInfoProcess.swift; sourceTree = "<group>"; };
 		223AEF9D2EFC8E8200248436 /* TimeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTextField.swift; sourceTree = "<group>"; };
 		223DEF1629C6926A009977A4 /* VagshalEncoding.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VagshalEncoding.json; sourceTree = "<group>"; };
@@ -2181,6 +2183,7 @@
 				4ABFB513235290FF0079D68B /* mifal_hdaf_icon.png */,
 				4ABFB514235290FF0079D68B /* forum_icon.png */,
 				4ABFB515235290FF0079D68B /* calender_icon.png */,
+				2236B5512F997726006940DF /* AI_Icon.png */,
 				4ABFB516235290FF0079D68B /* havruta_icon.png */,
 				4ABFB517235290FF0079D68B /* milon_icon.png */,
 				4ABFB518235290FF0079D68B /* map_icon.png */,
@@ -2869,6 +2872,7 @@
 				4ABFB72D235291000079D68B /* btnFrame.png in Resources */,
 				4ABFB6B6235290FF0079D68B /* star_icon.png in Resources */,
 				4ABFB8A4235291000079D68B /* Musagim.plist in Resources */,
+				2236B5522F997726006940DF /* AI_Icon.png in Resources */,
 				4AEACF2C20963F5300385129 /* Measurements.storyboard in Resources */,
 				4ABFB758235291000079D68B /* tchanim_icon.png in Resources */,
 				4ABFB70F235291000079D68B /* Icons_notes_off.png in Resources */,

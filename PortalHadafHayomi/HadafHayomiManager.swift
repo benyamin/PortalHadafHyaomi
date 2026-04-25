@@ -755,6 +755,14 @@ open class  HadafHayomiManager
         
         let menuItem_Forums = MenuItem(dictionary:["name":"Forums","title":"Forums","imageName":"forum_icon.png"])
         
+        let menuItem_AI = MenuItem(dictionary:["name":"AI","title":"AI","imageName":"AI_Icon.png"])
+        
+        let menuItem_Calculator = MenuItem(dictionary:["name":"Calculator","title":"Calculator","imageName":"forum_icon.png"])
+        
+        let menuItem_DafQuestions = MenuItem(dictionary:["name":"DafQuestions","title":"DafQuestions","imageName":"forum_icon.png"])
+        
+        let menuItem_Donations = MenuItem(dictionary:["name":"Donations","title":"Donations","imageName":"forum_icon.png"])
+        
         
         let menuItems = [menuItem_Talmud,
                          menuItem_AudioLessons,
@@ -771,7 +779,11 @@ open class  HadafHayomiManager
                          menuItem_Surveys,
                          menuItem_QandA,
                          menuItem_TheDafYomiProject,
-                         menuItem_About,
+                         //menuItem_About,
+                         menuItem_AI
+                       //  menuItem_Calculator,
+                       //  menuItem_DafQuestions,
+                      //   menuItem_Donations
                          ]
         return menuItems
     }()

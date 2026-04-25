@@ -98,7 +98,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
         return lessonVenuesListViewController
     }()
     
-    lazy var contactUsWebView:BTWebViewController! = {
+    lazy var webViewController:BTWebViewController! = {
         
         let viewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
         
@@ -386,6 +386,37 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
         }
     }
     
+    func showWebPageWithLink(_ link:String, title:String){
+        
+        self.present(self.webViewController, animated: false, completion: nil)
+        
+        self.webViewController.backButton.isHidden = true
+        
+        self.webViewController.loadUrl(link, title:title.localize())
+    }
+    
+    func showExamsView() {
+        let examsViewController = UIViewController.withName("ExamsViewController", storyBoardIdentifier: "StudyStoryboard") as! ExamsViewController
+
+        self.present(examsViewController, animated: false, completion: nil)
+
+        if let masechet = HadafHayomiManager.sharedManager.maschetForDate(Date())
+            , let page = HadafHayomiManager.sharedManager.pageForDate(Date(), addOnePage:true) {
+            examsViewController.reloadWithObject((masechet:masechet,page:page))
+        }
+    }
+    
+    func showCalculatorView() {
+        let examsViewController = UIViewController.withName("ExamsViewController", storyBoardIdentifier: "StudyStoryboard") as! ExamsViewController
+
+        self.present(examsViewController, animated: false, completion: nil)
+
+        if let masechet = HadafHayomiManager.sharedManager.maschetForDate(Date())
+            , let page = HadafHayomiManager.sharedManager.pageForDate(Date(), addOnePage:true) {
+            examsViewController.reloadWithObject((masechet:masechet,page:page))
+        }
+    }
+    
     @IBAction func menuButtonClicked(_ sender:AnyObject)
     {
         // If sideMenuView is visible
@@ -413,12 +444,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     
     @IBAction func contactUsButtonClicked(_ sender: Any)
     {
-        self.present(self.contactUsWebView, animated: false, completion: nil)
-        
-        self.contactUsWebView.backButton.isHidden = true
-        
-        let contactUsLink = "https://app.daf-yomi.com/ContactUs.aspx"
-        self.contactUsWebView.loadUrl(contactUsLink, title:"ContactUs".localize())
+        self.showWebPageWithLink("https://app.daf-yomi.com/ContactUs.aspx", title: "ContactUs".localize())
     }
     
     @IBAction func settingsButtonClicked(_ sender: Any)
@@ -595,21 +621,34 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             break
             
         case "Search":
-            
            self.present(self.SearchTalmudNavigationController, animated: false, completion: nil)
             
             break
             
         case "Chavrusa":
-            
             self.present(self.FindChavrusaNavigationController, animated: false, completion: nil)
             
             break
             
         case "Forums":
-            
             self.present(self.ForumsNavigationController, animated: false, completion: nil)
             
+            break
+            
+        case "AI":
+            self.showWebPageWithLink("https://kedai.co.il/he/embed/dji4sjyzcZnSyDfhJ5pD?full_page=false&bg_preset=soft&bg_intensity=45", title: "AI".localize())
+            break
+            
+        case "Calculator":
+            self.present(self.ForumsNavigationController, animated: false, completion: nil)
+            break
+            
+        case "DafQuestions":
+            self.showExamsView()
+            break
+            
+        case "Donations":
+            self.showWebPageWithLink("st_donation_page_link".localize(), title: "st_Donation".localize())
             break
             
         default:

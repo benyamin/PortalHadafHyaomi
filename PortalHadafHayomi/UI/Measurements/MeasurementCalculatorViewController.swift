@@ -258,7 +258,7 @@ class MeasurementCalculatorViewController: MSBaseViewController, UITextFieldDele
         {
             if fromMesurmentKey != nil && toMesurmentKey != nil
             {
-                if let result = MesurementsManager.sharedManager.convertFrom(mesurment_a_name: fromMesurmentKey!, amountA: amount, to: toMesurmentKey!, measurementType:self.selectedMeasurementType)
+                if let result = MesurementsManager.sharedManager.convertFrom(mesurment_a_name: fromMesurmentKey!, amount: amount, to: toMesurmentKey!, measurementType:self.selectedMeasurementType)
                 {
                    
                     if self.selectedMeasurementType == .length
@@ -267,13 +267,15 @@ class MeasurementCalculatorViewController: MSBaseViewController, UITextFieldDele
                         
                         self.convertedAmountTextField?.text = self.appendString(value: rebChimNoehValue)
                         
-                        //Check at least one mesurment key is old mesurments
-                        if MesurementsManager.modern_lengthMeasurementsKeys.contains(fromMesurmentKey!)
-                            ||  MesurementsManager.modern_lengthMeasurementsKeys.contains(toMesurmentKey!)
-                        {
-                            self.rebChimNoeh_valueTextField?.text = self.appendString(value: rebChimNoehValue)
-                            self.chazonIsh_valueTextField?.text = self.appendString(value: rebChimNoehValue*1.2)
-                            self.rambam_valueTextField?.text = self.appendString(value: rebChimNoehValue*0.95)
+                        if let fromMesurmentKey, let toMesurmentKey {
+                            self.updateMesurementsValuesDisplay(
+                                fromMesurmentKey: fromMesurmentKey,
+                                toMesurmentKey: toMesurmentKey,
+                                amount: amount,
+                                isFromModernValue: MesurementsManager.modern_lengthMeasurementsKeys.contains(fromMesurmentKey),
+                                isToModernValue: MesurementsManager.modern_lengthMeasurementsKeys.contains(toMesurmentKey),
+                                chazonIshRatio: 1.2,
+                                rambamRatio: 0.95)
                         }
                     }
                     else if self.selectedMeasurementType == .volume
@@ -282,12 +284,15 @@ class MeasurementCalculatorViewController: MSBaseViewController, UITextFieldDele
                         
                         self.convertedAmountTextField?.text = self.appendString(value: rebChimNoehValue)
                         
-                        if MesurementsManager.modern_volumeMeasurementsKeys.contains(fromMesurmentKey!)
-                            ||  MesurementsManager.modern_volumeMeasurementsKeys.contains(toMesurmentKey!)
-                        {
-                            self.rebChimNoeh_valueTextField?.text = self.appendString(value: rebChimNoehValue)
-                            self.chazonIsh_valueTextField?.text = self.appendString(value: rebChimNoehValue*(17/10))
-                            self.rambam_valueTextField?.text = self.appendString(value: result * 0.85)
+                        if let fromMesurmentKey, let toMesurmentKey {
+                            self.updateMesurementsValuesDisplay(
+                                fromMesurmentKey: fromMesurmentKey,
+                                toMesurmentKey: toMesurmentKey,
+                                amount: amount,
+                                isFromModernValue: MesurementsManager.modern_volumeMeasurementsKeys.contains(fromMesurmentKey),
+                                isToModernValue: MesurementsManager.modern_volumeMeasurementsKeys.contains(toMesurmentKey),
+                                chazonIshRatio: 1.7,
+                                rambamRatio: 0.85)
                         }
                     }
                     else if self.selectedMeasurementType == .surface
@@ -296,21 +301,38 @@ class MeasurementCalculatorViewController: MSBaseViewController, UITextFieldDele
                         
                         self.convertedAmountTextField?.text = self.appendString(value: rebChimNoehValue)
                         
-                        if MesurementsManager.modern_surfaceMeasurementsKeys.contains(fromMesurmentKey!)
-                            ||  MesurementsManager.modern_surfaceMeasurementsKeys.contains(toMesurmentKey!)
-                        {
-                            self.rebChimNoeh_valueTextField?.text = self.appendString(value: rebChimNoehValue)
-                            self.chazonIsh_valueTextField?.text = self.appendString(value: rebChimNoehValue*1.44)
-                            self.rambam_valueTextField?.text = self.appendString(value: rebChimNoehValue*0.9020833333)
+                        if let fromMesurmentKey, let toMesurmentKey {
+                            self.updateMesurementsValuesDisplay(
+                                fromMesurmentKey: fromMesurmentKey,
+                                toMesurmentKey: toMesurmentKey,
+                                amount: amount,
+                                isFromModernValue: MesurementsManager.modern_surfaceMeasurementsKeys.contains(fromMesurmentKey),
+                                isToModernValue: MesurementsManager.modern_surfaceMeasurementsKeys.contains(toMesurmentKey),
+                                chazonIshRatio: 1.44,
+                                rambamRatio: 0.9020833333)
                         }
                     }
                     else{
-                        
                         self.convertedAmountTextField?.text = self.appendString(value: result)
                     }
                 }
             }
             
+        }
+    }
+    
+    func updateMesurementsValuesDisplay(fromMesurmentKey:String, toMesurmentKey:String, amount:Double, isFromModernValue:Bool, isToModernValue:Bool,  chazonIshRatio:Double, rambamRatio:Double) {
+        
+        if (isFromModernValue && !isToModernValue)
+            || (!isFromModernValue && isToModernValue) {
+            
+            guard let rebChimNoehValue = MesurementsManager.sharedManager.convertFrom(mesurment_a_name: fromMesurmentKey, amount: amount, to: toMesurmentKey, measurementType:self.selectedMeasurementType) else {return}
+            
+            self.rebChimNoeh_valueTextField?.text = self.appendString(value: rebChimNoehValue)
+            
+            self.chazonIsh_valueTextField?.text = self.appendString(value:rebChimNoehValue * Double(isFromModernValue ? 1.0/chazonIshRatio: chazonIshRatio))
+            
+            self.rambam_valueTextField?.text = self.appendString(value:rebChimNoehValue * Double(isFromModernValue ? 1.0/rambamRatio: rambamRatio))
         }
     }
     

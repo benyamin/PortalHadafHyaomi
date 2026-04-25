@@ -74,7 +74,7 @@ open class  MesurementsManager
     static let inch:Double = 2.54 * centimeter
     static let foot:Double = 0.3048 * meter
     
-    static let liter:Double = kav*1.4
+    static let liter:Double = kav*0.72338
     static let cubicCentimeter:Double = liter*0.001
     static let gallon:Double = 3.78541 * liter
     
@@ -328,7 +328,7 @@ open class  MesurementsManager
         return weightMeasurements
     }()
     
-    func convertFrom(mesurment_a_name:String, amountA:Double, to mesurment_b_name:String, measurementType:MeasurementType) -> Double?
+    func convertFrom(mesurment_a_name:String, amount:Double, to mesurment_b_name:String, measurementType:MeasurementType) -> Double?
     {
         var measurementsDictoinary:[String:Double]
         
@@ -351,12 +351,10 @@ open class  MesurementsManager
             break
             
         }
-        if let mesurmentA = measurementsDictoinary[mesurment_a_name]
-          ,let mesurmentB = measurementsDictoinary[mesurment_b_name]
+        if let fromUnit = measurementsDictoinary[mesurment_a_name]
+          ,let toUnit = measurementsDictoinary[mesurment_b_name]
         {
-                let conversionValue = (mesurmentA/mesurmentB) * amountA //(mesurmentA * amountA)/mesurmentB
-                
-                return conversionValue
+                    return (amount * fromUnit) / toUnit
         }
         
         return nil
