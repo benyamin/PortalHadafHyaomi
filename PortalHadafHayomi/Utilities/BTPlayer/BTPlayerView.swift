@@ -930,6 +930,21 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             name: NSNotification.Name("CarPlayPlayerDidChangeDuration"),
             object: nil
         )
+        
+        // Listen for CarPlay about to load a new URL so we can remove our time observer
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(carPlayWillLoadNewURL),
+            name: NSNotification.Name("CarPlayWillLoadNewURL"),
+            object: nil
+        )
+    }
+    
+    @objc private func carPlayWillLoadNewURL() {
+        if timeObserver != nil {
+            self.player.removeTimeObserver(observer: timeObserver)
+            self.timeObserver = nil
+        }
     }
     
     @objc private func carPlayPlayerDidUpdate(_ notification: Notification) {
@@ -941,8 +956,29 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
             guard let self = self else { return }
             
             if let isPlaying = userInfo["isPlaying"] as? Bool {
-                if isPlaying && !self.isPlaying {
-                    // CarPlay started playing, update phone UI
+                if isPlaying {
+                    // CarPlay started playing - fully set up phone UI
+                    // since CarPlay may have loaded the lesson into the shared player
+                    if let duration = self.player.duration() {
+                        let seconds = CMTimeGetSeconds(duration)
+                        if seconds > 0 {
+                            self.loadingActivityIndicator.isHidden = true
+                            self.loadingActivityIndicator.stopAnimating()
+                            self.errorLabel.isHidden = true
+                            self.jumpForwardButton?.isHidden = false
+                            self.jumpBackButton?.isHidden = false
+                            
+                            self.progressSlider.minimumValue = 0.0
+                            self.progressSlider.maximumValue = Float(seconds)
+                            
+                            // Re-add time observer if needed
+                            if self.timeObserver == nil {
+                                self.addPeriodicTimeObserver()
+                            }
+                            
+                            self.setBackgourndPlayer()
+                        }
+                    }
                     self.setIsPlayingLayout()
                 } else if !isPlaying && self.isPlaying {
                     // CarPlay paused, update phone UI

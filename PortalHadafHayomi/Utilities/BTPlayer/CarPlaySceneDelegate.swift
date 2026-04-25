@@ -59,6 +59,9 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
         
         // Setup periodic updates for better scroll bar responsiveness
         setupPeriodicUpdates()
+        
+        // Display or auto-play a lesson on connect
+        displayLessonOnConnect()
     }
     
     private func setupNowPlayingButtons() {
@@ -197,6 +200,94 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
             }
             return .success
         }
+    }
+    
+    // MARK: - Auto-Play / Display Lesson on Connect
+    
+    private func displayLessonOnConnect() {
+        // Don't interfere if already playing
+        if LessonsManager.sharedManager.isPlaying { return }
+        guard let carPlayPlayerView = carPlayPlayerView else { return }
+        
+        let saveLastLesson = UserDefaults.standard.object(forKey: "setableItem_SaveLastLesson") as? Bool ?? true
+        
+        // If there's a last played lesson, auto-play it
+        if saveLastLesson,
+           let lastPlayedLesson = LessonsManager.sharedManager.lastPlayedLasson(),
+           let lastPlayedLessonInfo = UserDefaults.standard.object(forKey: "lastPlayedLasson") as? [String: Any],
+           let duration = lastPlayedLessonInfo["duration"] as? Int,
+           lastPlayedLesson.masechet != nil,
+           lastPlayedLesson.maggidShiur != nil,
+           lastPlayedLesson.page != nil,
+           let lessonUrl = lastPlayedLesson.getUrl() {
+            
+            let title = "מסכת \(lastPlayedLesson.masechet.name!) דף \(lastPlayedLesson.page!.symbol!)"
+            let subTitle = lastPlayedLesson.maggidShiur.name ?? ""
+            
+            LessonsManager.sharedManager.playingLesson = lastPlayedLesson
+            
+            // Auto-play the last lesson from saved position
+            carPlayPlayerView.setTitle(title)
+            carPlayPlayerView.setSubTitle(subTitle)
+            carPlayPlayerView.startAutomatically = true
+            carPlayPlayerView.setPlayerUrl(lessonUrl, duration: duration)
+            return
+        }
+        
+        // Otherwise, display today's daf (without auto-play)
+        if LessonsManager.sharedManager.lessons.isEmpty {
+            GetLessonsProcess().executeWithObject(nil, onStart: {
+            }, onProgress: { [weak self] (object) in
+                if let lessons = object as? [Lesson] {
+                    LessonsManager.sharedManager.lessons = lessons
+                    self?.displayTodaysDaf()
+                }
+            }, onComplete: { [weak self] (object) in
+                if let lessons = object as? [Lesson] {
+                    LessonsManager.sharedManager.lessons = lessons
+                }
+                self?.displayTodaysDaf()
+            }, onFaile: { (object, error) in })
+        } else {
+            displayTodaysDaf()
+        }
+    }
+    
+    private func displayTodaysDaf() {
+        guard let carPlayPlayerView = carPlayPlayerView else { return }
+        guard let todaysMasechet = HadafHayomiManager.sharedManager.todaysMaschet,
+              let todaysPage = HadafHayomiManager.sharedManager.todaysPage else { return }
+        
+        // Find the maggid shiur: default setting -> דוד קלופר -> first available
+        var selectedMaggidShiur: MaggidShiur?
+        
+        if let defaultMaggidShiurName = UserDefaults.standard.object(forKey: "DefaultMagidShiour") as? String {
+            selectedMaggidShiur = todaysMasechet.maggidShiurs.first(where: { $0.name == defaultMaggidShiurName })
+        }
+        
+        if selectedMaggidShiur == nil {
+            selectedMaggidShiur = todaysMasechet.maggidShiurs.first(where: { $0.name == "דוד קלופר" })
+        }
+        
+        if selectedMaggidShiur == nil {
+            selectedMaggidShiur = todaysMasechet.maggidShiurs.first
+        }
+        
+        guard let maggidShiur = selectedMaggidShiur else { return }
+        
+        // Create a lesson for today's daf
+        guard let lesson = LessonsManager.sharedManager.getLessonForMasechet(todaysMasechet, andMaggidShiour: maggidShiur) else { return }
+        lesson.page = todaysPage
+        
+        guard let lessonUrl = lesson.getUrl() else { return }
+        
+        let title = "מסכת \(todaysMasechet.name!) דף \(todaysPage.symbol!)"
+        let subTitle = maggidShiur.name ?? ""
+        
+        LessonsManager.sharedManager.playingLesson = lesson
+        
+        // Display only (don't auto-play today's daf)
+        carPlayPlayerView.setPendingLesson(title: title, subTitle: subTitle, url: lessonUrl, duration: 0)
     }
     
     // MARK: - Helper Methods

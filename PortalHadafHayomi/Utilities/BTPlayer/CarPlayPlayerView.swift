@@ -24,7 +24,7 @@ class CarPlayPlayerView: NSObject, IPlayerProtocolDelegate {
     
     // Player properties
     private var isPaused = false
-    private var startAutomatically = false
+    var startAutomatically = false
     private var desiredStartDuration: Float = 0.0
     private var timeObserver: Any?
     private var playingItem: AVPlayerItem?
@@ -111,7 +111,39 @@ class CarPlayPlayerView: NSObject, IPlayerProtocolDelegate {
         loadSelectedURL()
     }
     
+    // Pending lesson (displayed but not yet loaded into player)
+    private var pendingLessonUrl: URL?
+    private var pendingLessonDuration: Int = 0
+    
+    func setPendingLesson(title: String, subTitle: String, url: URL, duration: Int) {
+        currentTitle = title
+        currentSubTitle = subTitle
+        pendingLessonUrl = url
+        pendingLessonDuration = duration
+        
+        var playingInfo: [String: Any] = [
+            MPMediaItemPropertyArtist: title,
+            MPMediaItemPropertyTitle: subTitle,
+            MPNowPlayingInfoPropertyPlaybackRate: NSNumber(value: 0.0),
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: NSNumber(value: duration)
+        ]
+        if let image = UIImage(named: "Icon-App-60x60@3x.png") {
+            let artwork = MPMediaItemArtwork(boundsSize: CGSize(width: 300, height: 300)) { _ in image }
+            playingInfo[MPMediaItemPropertyArtwork] = artwork
+        }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = playingInfo
+    }
+    
     func play() {
+        // If there's a pending lesson (displayed but not loaded), load it now
+        if let pendingUrl = pendingLessonUrl {
+            pendingLessonUrl = nil
+            startAutomatically = true
+            setPlayerUrl(pendingUrl, duration: pendingLessonDuration)
+            pendingLessonDuration = 0
+            return
+        }
+        
         guard playerUrl != nil else { return }
         
         if playingItem == nil && playerUrl != nil {
@@ -197,6 +229,12 @@ class CarPlayPlayerView: NSObject, IPlayerProtocolDelegate {
     // MARK: - Private Methods
     
     private func loadSelectedURL() {
+        // Notify BTPlayerView to remove its time observer before we touch the shared player
+        NotificationCenter.default.post(
+            name: NSNotification.Name("CarPlayWillLoadNewURL"),
+            object: nil
+        )
+        
         if player != nil {
             if let timeObserver = timeObserver {
                 player.removeTimeObserver(observer: timeObserver)
@@ -340,27 +378,36 @@ class CarPlayPlayerView: NSObject, IPlayerProtocolDelegate {
         // Sync with phone player changes
         if let isPlaying = userInfo["isPlaying"] as? Bool {
             if isPlaying && !self.isPlaying {
-                play()
+                // Phone started playing - update our state without calling play()
+                // since the shared player is already playing
+                updateNowPlayingInfo()
             } else if !isPlaying && self.isPlaying {
-                pause()
+                updateNowPlayingInfo()
             }
         }
         
-        if let duration = userInfo["duration"] as? Int {
-            setDuration(duration)
-        }
-        
         if let title = userInfo["title"] as? String {
-            setTitle(title)
+            currentTitle = title
         }
         
         if let subTitle = userInfo["subTitle"] as? String {
-            setSubTitle(subTitle)
+            currentSubTitle = subTitle
         }
         
         if let url = userInfo["url"] as? URL {
-            setPlayerUrl(url)
+            // Don't reload the URL - the phone's BTPlayerView already loaded it
+            // into the shared player. Just track the URL and update display.
+            playerUrl = url
+            pendingLessonUrl = nil
+            pendingLessonDuration = 0
+            
+            // Re-add our time observer since the phone created a new AVPlayer
+            self.timeObserver = nil
+            addPeriodicTimeObserver()
         }
+        
+        // Update CarPlay now playing display
+        updateNowPlayingInfo()
     }
     
     // MARK: - Notification Handlers

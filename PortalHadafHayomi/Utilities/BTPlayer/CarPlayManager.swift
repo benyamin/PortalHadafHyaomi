@@ -179,31 +179,9 @@ class CarPlayManager: NSObject {
         isPlaying: Bool? = nil,
         duration: Int? = nil
     ) {
-        guard let carPlayPlayerView = carPlayPlayerView, isCarPlayConnected else { return }
-        
-        if let title = title {
-            carPlayPlayerView.setTitle(title)
-        }
-        
-        if let subTitle = subTitle {
-            carPlayPlayerView.setSubTitle(subTitle)
-        }
-        
-        if let url = url {
-            carPlayPlayerView.setPlayerUrl(url)
-        }
-        
-        if let isPlaying = isPlaying {
-            if isPlaying && !carPlayPlayerView.isPlaying {
-                carPlayPlayerView.play()
-            } else if !isPlaying && carPlayPlayerView.isPlaying {
-                carPlayPlayerView.pause()
-            }
-        }
-        
-        if let duration = duration {
-            carPlayPlayerView.setDuration(duration)
-        }
+        // Phone player state is synced via notifications handled by
+        // CarPlaySceneDelegate's CarPlayPlayerView. This method is kept
+        // as a no-op to avoid double-loading URLs into the shared player.
     }
     
     func getCarPlayPlayerView() -> CarPlayPlayerView? {
