@@ -35,6 +35,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     @IBOutlet weak var sideMenuTableView:UIView!
     
     @IBOutlet weak var rateUsButtonLabel:UILabel?
+    @IBOutlet weak var aboutButtonLabel:UILabel?
     @IBOutlet weak var contactUsButtonLabel:UILabel?
     
     @IBOutlet weak var whatsAppButton:UIButton?
@@ -244,6 +245,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
         
         self.rateUsButtonLabel?.text = "Rate_Us".localize()
         self.contactUsButtonLabel?.text = "Contact".localize()
+        self.aboutButtonLabel?.text = "About".localize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -440,6 +442,10 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
         } else {
             UIApplication.shared.openURL(url)
         }
+    }
+    
+    @IBAction func aboutButtonClicked(_ sender: Any) {
+        self.present(self.aboutNavigationController, animated: false, completion: nil)
     }
     
     @IBAction func contactUsButtonClicked(_ sender: Any)
