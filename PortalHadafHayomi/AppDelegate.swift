@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Batch
+import OneSignalFramework
 import CarPlay
 
 @UIApplicationMain
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Sleep for showing launcScreen for 1 more second
         sleep(UInt32(0.5))
         
-        self.setAPN()
+        self.setAPN(launchOptions: launchOptions)
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "st_cancel".localize()
 
@@ -245,15 +245,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func setAPN()
+    func setAPN(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     {
-        #if DEBUG
-            Batch.start(withAPIKey: "DEV58220E5F9D97514AB54FA715BA1")
-        #else
-            Batch.start(withAPIKey: "58220E5F9D709B5E9B07937FA5A7AD")
-        #endif
+        // Enable verbose logging to debug notification issues
+        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
         
-        BatchPush.registerForRemoteNotifications()
+        OneSignal.initialize("f97a170e-e77e-408a-b6a0-3ac6adcf4ad3", withLaunchOptions: launchOptions)
+        
+        // Request push notification permission
+        OneSignal.Notifications.requestPermission({ accepted in
+            print("OneSignal notification permission accepted: \(accepted)")
+        }, fallbackToSettings: true)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

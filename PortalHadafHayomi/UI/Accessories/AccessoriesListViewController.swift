@@ -38,6 +38,8 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
         
         accessoriesList.append(Accessory(id: "RT", title: "acronyms", iconImage: "RasheiTevot_icon_ios.png", dataType:"Text"))
         
+        accessoriesList.append(Accessory(id: "RT", title: "acronyms", iconImage: "RasheiTevot_icon_ios.png", dataType:"Text"))
+        
   
         
      //    accessoriesList.append(Accessory(id: "MAP", title: "מפות", iconImage: "map_icon_ios.png.png", dataType:"Text"))
