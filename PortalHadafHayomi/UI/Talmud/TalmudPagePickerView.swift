@@ -31,9 +31,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
                 self.pagesPickerView.isHidden = false
                 self.noPagesLabel?.isHidden = true
                 
-                if displayType == .Vagshal || displayType == .Chavruta {
-                    self.saveOrRemovePageButton?.isHidden = false
-                }
+                self.saveOrRemovePageButton?.isHidden = false
             }
         }
     }
@@ -42,12 +40,8 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     
     var displayType:TalmudDisplayType = .Vagshal {
         didSet {
-            if displayType == .Vagshal || displayType == .Chavruta {
-                self.saveOrRemovePageButton?.isHidden = false
-            }
-            else{
-                self.saveOrRemovePageButton?.isHidden = true
-            }
+            self.titleLabel?.text = "st_display_Type_\(displayType.rawValue)".localize()
+            self.updatePagePickerLayout()
         }
     }
     
@@ -58,6 +52,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     @IBOutlet weak var pagePickerContentView:UIView?
     var pagesPickerView:UIPickerView!//TablePickerView!
     
+    @IBOutlet weak var titleLabel:UILabel?
     @IBOutlet weak var toggleButton:UIButton?
     @IBOutlet weak var toggleButtonTopConstraint:NSLayoutConstraint?
     
@@ -97,13 +92,13 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             
            if self.showSavedPagesButton?.isSelected ?? false
             {
-                self.displayedPages = selectedMasechet?.savedPages
+                self.displayedPages = selectedMasechet?.savedPages(forDisplayType: self.displayType)
                 
                 self.pagesPickerView.reloadComponent(1)//pages
 
                 if let selectedPage = self.selectedPage
                 {
-                    self.displayedPageSides = selectedMasechet?.getSavedPageSidesForPage(selectedPage)
+                    self.displayedPageSides = selectedMasechet?.getSavedPageSidesForPage(selectedPage, displayType: self.displayType)
                 }
             }
             else 
@@ -150,6 +145,11 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.setupUI()
+    }
+    
+    func setupUI(){
+        
         self.addPicker()
         
         self.noPagesLabel?.text = "st_no_saved_pages_message_label".localize()
@@ -157,6 +157,11 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
         self.showAllPagesButton?.setTitle("st_show_all_pages".localize(), for: .normal)
           self.showSavedPagesButton?.setTitle("st_show_saved_pages".localize(), for: .normal)
         
+        self.titleLabel?.font = UIFont(name:"BroshMF", size: 20)!
+        self.titleLabel?.textColor = UIColor(HexColor: "781F24")
+        
+        self.titleLabel?.text = "st_display_Type_\(displayType.rawValue)".localize()
+
     }
     
     func reloadData() {
@@ -244,7 +249,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
         self.showSavedPagesButton?.isSelected = true
         self.showSavedPagesButton?.alpha = 1.0
         
-        self.dispalyedMasechtot = HadafHayomiManager.sharedManager.getMessechtotWithSavedPages()
+        self.dispalyedMasechtot = HadafHayomiManager.sharedManager.getMessechtotWithSavedPages(forDisplayType: self.displayType)
         self.pagesPickerView.reloadComponent(2)//Masechtot
         
         if let indexOfSelectedMasechet = dispalyedMasechtot?.index(of: self.selectedMasechet!)
@@ -252,16 +257,22 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             self.pagesPickerView.selectRow(indexOfSelectedMasechet, inComponent: 2, animated: false)
         }
        
-        if self.dispalyedMasechtot != nil && self.dispalyedMasechtot!.count > 0
+        if let masechtot = self.dispalyedMasechtot, !masechtot.isEmpty
         {
-            self.selectedMasechet = self.dispalyedMasechtot?[self.pagesPickerView.selectedRow(inComponent: 2)]
+            let selectedRow = self.pagesPickerView.selectedRow(inComponent: 2)
+            if selectedRow < masechtot.count {
+                self.selectedMasechet = masechtot[selectedRow]
+            } else {
+                self.selectedMasechet = masechtot[0]
+                self.pagesPickerView.selectRow(0, inComponent: 2, animated: false)
+            }
         }
         
         self.pagesPickerView.reloadComponent(1)//pages
         
         if let selectedPage = self.selectedPage
         {
-            self.displayedPageSides = selectedMasechet?.getSavedPageSidesForPage(selectedPage)
+            self.displayedPageSides = selectedMasechet?.getSavedPageSidesForPage(selectedPage, displayType: self.displayType)
         }
         self.pagesPickerView.reloadComponent(0)//pageSide
         
@@ -435,11 +446,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
                                                                               page: page,
                                                                               pageSide: row)
             {
-                
-                let path = LessonsManager.sharedManager.pathForPage(pageIndex: pageIndex)
-                
-                if self.shouldHighlightSavedPages
-                && FileManager.default.fileExists(atPath: path)
+                if let _ = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: self.displayType)
                 {
                     textLabel.textColor = UIColor.blue
                 }
@@ -454,7 +461,18 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             if let page = self.displayedPages?[row]
             {
                 textLabel.text = page.symbol
-                textLabel.textColor = (self.shouldHighlightSavedPages && page.hasSavedPages) ?  UIColor.blue : UIColor(HexColor: "781F24")
+                
+                var pageSaved = false
+                if self.shouldHighlightSavedPages, let masechet = self.selectedMasechet {
+                    for side in 0...1 {
+                        if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: side),
+                           let _ = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: self.displayType) {
+                            pageSaved = true
+                            break
+                        }
+                    }
+                }
+                textLabel.textColor = pageSaved ? UIColor.blue : UIColor(HexColor: "781F24")
             }
             
         case 2: //Masechetֿ
@@ -463,7 +481,21 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             if let maschet = self.dispalyedMasechtot?[row]
             {
                 textLabel.text = maschet.name
-                textLabel.textColor = (self.shouldHighlightSavedPages && maschet.hasSavedPages) ?  UIColor.blue : UIColor(HexColor: "781F24")
+                
+                var masechetSaved = false
+                if self.shouldHighlightSavedPages {
+                    for page in maschet.pages {
+                        for side in 0...1 {
+                            if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(maschet, page: page, pageSide: side),
+                               let _ = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: self.displayType) {
+                                masechetSaved = true
+                                break
+                            }
+                        }
+                        if masechetSaved { break }
+                    }
+                }
+                textLabel.textColor = masechetSaved ? UIColor.blue : UIColor(HexColor: "781F24")
             }
             
             break
@@ -483,7 +515,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             if self.showSavedPagesButton?.isSelected ?? false
             ,let selectedPage = self.selectedPage
             {
-                self.displayedPageSides = selectedMasechet?.getSavedPageSidesForPage(selectedPage)
+                self.displayedPageSides = selectedMasechet?.getSavedPageSidesForPage(selectedPage, displayType: self.displayType)
             }
             self.pagesPickerView.reloadComponent(0)//page side
             
@@ -532,26 +564,20 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             }
             else{
                 
-                if displayType == .Vagshal || displayType == .Chavruta {
-                    self.saveOrRemovePageButton?.isHidden = false
-                    self.progressCircleView?.isHidden = true
-                }
-                else{
-                    self.saveOrRemovePageButton?.isHidden = true
-                    self.progressCircleView?.isHidden = true
-                }
+                // Show save/delete button only for display types that support offline saving
+                self.saveOrRemovePageButton?.isHidden = !displayType.supportsOfflineSave
+                self.progressCircleView?.isHidden = true
                 
-                //Check if page is saved in documnets
-                var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-                path += "/\(pageIndex).pdf"
-                
-                if FileManager.default.fileExists(atPath: path)
-                {
-                    setDeleteButton()
-                }
-                else //page is not saved
-                {
-                    self.setSaveButton()
+                if displayType.supportsOfflineSave {
+                    //Check if page is saved in documents for current display type
+                    if let _ = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: displayType)
+                    {
+                        setDeleteButton()
+                    }
+                    else //page is not saved
+                    {
+                        self.setSaveButton()
+                    }
                 }
             }
         }
@@ -559,8 +585,8 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     
     func setSaveButton()
     {
-        self.saveOrRemovePageButton?.setImage(UIImage(named: "save"), for: .normal)
-        self.saveOrRemovePageButton?.setImage(UIImage(named: "save_highlighted"), for: .highlighted)
+        self.saveOrRemovePageButton?.setImage(UIImage(named: "downloadIcon"), for: .normal)
+        self.saveOrRemovePageButton?.setImage(UIImage(named: "downloadIcon"), for: .highlighted)
         
         self.saveOrRemovePageButton?.removeTarget(nil, action: nil, for: .allEvents)
         self.saveOrRemovePageButton?.addTarget(self, action:  #selector(saveButtonClicked(_:)), for: .touchUpInside)
@@ -666,7 +692,8 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
                 return
             }
             
-            RemovePageProcess().executeWithObject(pageIndex!, onStart: { () -> Void in
+            let removePageInfo = (pageIndex:pageIndex!, type:self.displayType)
+            RemovePageProcess().executeWithObject(removePageInfo, onStart: { () -> Void in
                 
             }, onComplete: { (object) -> Void in
                 
@@ -681,6 +708,8 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
                 {
                     self.showSavedPages()
                 }
+                
+                self.updatePagePickerLayout()
                 
             },onFaile: { (object, error) -> Void in
                 

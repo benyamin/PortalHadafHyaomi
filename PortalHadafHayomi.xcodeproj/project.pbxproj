@@ -18,6 +18,7 @@
 		221A2DB0254B49B50040475E /* ForgotPasswordProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */; };
 		221A2DB2254B8FA00040475E /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 221A2DB1254B8FA00040475E /* shareIcon.png */; };
 		2224495D2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224495C2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift */; };
+		22302FBA300C25EF00A00D90 /* downloadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 22302FB9300C25EF00A00D90 /* downloadIcon.png */; };
 		223508BD2581684C0049D467 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223508BC2581684C0049D467 /* LessonTableViewCell.swift */; };
 		2236B5522F997726006940DF /* AI_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2236B5512F997726006940DF /* AI_Icon.png */; };
 		223A7BEA247C721D00FC6E37 /* GetLessonsInfoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */; };
@@ -707,6 +708,7 @@
 		221A2DAF254B49B50040475E /* ForgotPasswordProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordProcess.swift; sourceTree = "<group>"; };
 		221A2DB1254B8FA00040475E /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
 		2224495C2E04AC7900D865C1 /* MSGetPagesStatusProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGetPagesStatusProcess.swift; sourceTree = "<group>"; };
+		22302FB9300C25EF00A00D90 /* downloadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloadIcon.png; sourceTree = "<group>"; };
 		223508BC2581684C0049D467 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		2236B5512F997726006940DF /* AI_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AI_Icon.png; sourceTree = "<group>"; };
 		223A7BE9247C721D00FC6E37 /* GetLessonsInfoProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLessonsInfoProcess.swift; sourceTree = "<group>"; };
@@ -798,7 +800,7 @@
 		22FD99352953262700F73BDD /* TableSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSelectionCell.xib; sourceTree = "<group>"; };
 		22FD9938295364CC00F73BDD /* favoriteUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favoriteUser.png; sourceTree = "<group>"; };
 		22FD993A2953673D00F73BDD /* MaggidiShiourTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaggidiShiourTableView.xib; sourceTree = "<group>"; };
-		3E632705BC7B58C18704364F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = OneSignalNotificationServiceExtension.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		3E632705BC7B58C18704364F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		4A0BCF791FE7B799009F7261 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4A0F791821ADC085000F8393 /* RemovePageProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePageProcess.swift; sourceTree = "<group>"; };
 		4A17CBC921C593370063F834 /* ArticlesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesManager.swift; sourceTree = "<group>"; };
@@ -1367,9 +1369,9 @@
 		4AFE3EFA205463C20040BD24 /* LessonVenuesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonVenuesListViewController.swift; sourceTree = "<group>"; };
 		4AFE3EFC20548A5A0040BD24 /* AddLessonVenueProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLessonVenueProcess.swift; sourceTree = "<group>"; };
 		6017FB69F28EE21852A84313 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7D79FD228D91DBC70085A71A /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = OneSignalNotificationServiceExtension.appex; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7FE7A8EC6498CF377119121 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
-		F4CA3344C99BC41463D8E1F2 /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NotificationService.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		7D79FD228D91DBC70085A71A /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7FE7A8EC6498CF377119121 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4CA3344C99BC41463D8E1F2 /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2175,6 +2177,7 @@
 				4ABFB4E8235290FF0079D68B /* exitButton.png */,
 				4ABFB4E9235290FF0079D68B /* delete.png */,
 				4ABFB4EA235290FF0079D68B /* play.png */,
+				22302FB9300C25EF00A00D90 /* downloadIcon.png */,
 				4ABFB4EB235290FF0079D68B /* save.png */,
 			);
 			path = btns;
@@ -2768,7 +2771,6 @@
 				A7FE7A8EC6498CF377119121 /* Info.plist */,
 				3E632705BC7B58C18704364F /* OneSignalNotificationServiceExtension.entitlements */,
 			);
-			name = OneSignalNotificationServiceExtension;
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
@@ -3193,6 +3195,7 @@
 				4ABFB759235291000079D68B /* talmud_icon_and_text.png in Resources */,
 				22B2F7D329E88CEB00B7C972 /* bookmark.png in Resources */,
 				4A74B4CB270F83EC00DD20E6 /* MultiplePageDownload.png in Resources */,
+				22302FBA300C25EF00A00D90 /* downloadIcon.png in Resources */,
 				4ABFB788235291000079D68B /* Toldot.sqlite in Resources */,
 				4ABFB76C235291000079D68B /* Icon-App-40x40@1x.png in Resources */,
 				4AF5552E1FCA360E00A830EE /* Assets.xcassets in Resources */,

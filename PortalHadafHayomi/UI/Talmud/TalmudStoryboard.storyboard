@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -355,8 +355,25 @@
                             <view contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" translatesAutoresizingMaskIntoConstraints="NO" id="d41-67-OzN" customClass="TalmudPagePickerView" customModule="PortalHadafHayomi" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="-250" width="375" height="340"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGv-pP-cGt">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRH-Hu-LYH">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFf-hb-mE3">
+                                                <rect key="frame" x="171" y="7" width="33" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="FFf-hb-mE3" firstAttribute="centerX" secondItem="oRH-Hu-LYH" secondAttribute="centerX" id="LIA-sf-QgC"/>
+                                            <constraint firstAttribute="height" constant="35" id="MmQ-8C-ZEe"/>
+                                            <constraint firstItem="FFf-hb-mE3" firstAttribute="centerY" secondItem="oRH-Hu-LYH" secondAttribute="centerY" id="edC-eI-bgF"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGv-pP-cGt">
+                                        <rect key="frame" x="0.0" y="36" width="375" height="35"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZt-YN-evZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="35"/>
@@ -421,10 +438,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.95294117649999999" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="bGv-pP-cGt" firstAttribute="top" secondItem="d41-67-OzN" secondAttribute="top" id="5IW-M2-cRg"/>
+                                    <constraint firstItem="bGv-pP-cGt" firstAttribute="top" secondItem="d41-67-OzN" secondAttribute="top" constant="36" id="5IW-M2-cRg"/>
+                                    <constraint firstItem="oRH-Hu-LYH" firstAttribute="top" secondItem="d41-67-OzN" secondAttribute="top" id="SJb-L9-Uhd"/>
+                                    <constraint firstItem="oRH-Hu-LYH" firstAttribute="leading" secondItem="d41-67-OzN" secondAttribute="leading" id="ZbG-j1-afX"/>
                                     <constraint firstAttribute="height" constant="340" id="bk5-71-LZk"/>
                                     <constraint firstItem="YMx-fR-eGv" firstAttribute="centerY" secondItem="d41-67-OzN" secondAttribute="centerY" id="dQN-dq-pcK"/>
                                     <constraint firstItem="bGv-pP-cGt" firstAttribute="leading" secondItem="d41-67-OzN" secondAttribute="leading" id="g3c-qn-ABY"/>
+                                    <constraint firstAttribute="trailing" secondItem="oRH-Hu-LYH" secondAttribute="trailing" id="kli-3U-0YC"/>
                                     <constraint firstAttribute="trailing" secondItem="bGv-pP-cGt" secondAttribute="trailing" id="m7r-IF-cdf"/>
                                     <constraint firstItem="YMx-fR-eGv" firstAttribute="leading" secondItem="d41-67-OzN" secondAttribute="leading" constant="16" id="nsR-VY-ZkZ"/>
                                     <constraint firstItem="7U8-c5-LCe" firstAttribute="centerY" secondItem="d41-67-OzN" secondAttribute="centerY" id="peQ-j8-0sk"/>
@@ -435,6 +455,7 @@
                                     <outlet property="saveOrRemovePageButton" destination="YMx-fR-eGv" id="A8S-XY-E9a"/>
                                     <outlet property="showAllPagesButton" destination="WZt-YN-evZ" id="eQu-yl-giX"/>
                                     <outlet property="showSavedPagesButton" destination="Onf-HT-j8h" id="Wkj-Fz-jFl"/>
+                                    <outlet property="titleLabel" destination="FFf-hb-mE3" id="ycF-KY-5H2"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Omk-88-gA9">
@@ -1231,7 +1252,7 @@
         <image name="trachIcon.png" width="100" height="110"/>
         <image name="vasgal-icon.png" width="140" height="152"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

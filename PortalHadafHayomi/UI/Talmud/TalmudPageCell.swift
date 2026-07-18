@@ -147,6 +147,21 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                 self.pagPDFView?.isHidden = true
                 self.pageWebView.isHidden = false
                 
+                // Check for saved Meorot HTML file
+                let fileNamed = "\(self.pageIndex!)_\(TalmudDisplayType.Meorot.rawValue)"
+                let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+                
+                if FileManager.default.fileExists(atPath: filePath.path),
+                   let savedText = try? String(contentsOf: filePath, encoding: .utf8) {
+                    self.pageWebView.loadHTMLString(savedText, baseURL: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.setTextSize()
+                        self.loadingView.isHidden = true
+                        self.loadingIndicatorView.stopAnimating()
+                    }
+                    return
+                }
+                
                 if let masechet = HadafHayomiManager.sharedManager.getMasechetForPageIndex(self.pageIndex)
                 {
                     let maschentNumber = 282 + Int(masechet.id!)!
@@ -274,16 +289,61 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
     
     func setEnglishDispaly()
     {
+        // Check for saved EN HTML file
+        let fileNamed = "\(self.pageIndex!)_\(TalmudDisplayType.EN.rawValue)"
+        let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+        
+        if FileManager.default.fileExists(atPath: filePath.path),
+           let savedText = try? String(contentsOf: filePath, encoding: .utf8) {
+            self.pageWebView.loadHTMLString(savedText, baseURL: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.setTextSize()
+                self.loadingView.isHidden = true
+                self.loadingIndicatorView.stopAnimating()
+            }
+            return
+        }
+        
         self.runProcess(process: GetENPageProcess() ,withInfo:nil)
     }
     
     func setSteinsaltzDisplay()
     {
-         self.runProcess(process: GetSteinsaltzPageProcess() ,withInfo:nil)
+        // Check for saved Steinsaltz HTML file
+        let fileNamed = "\(self.pageIndex!)_\(TalmudDisplayType.Steinsaltz.rawValue)"
+        let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+        
+        if FileManager.default.fileExists(atPath: filePath.path),
+           let savedText = try? String(contentsOf: filePath, encoding: .utf8) {
+            self.pageWebView.loadHTMLString("<font size=\"25\">\(savedText)</font>", baseURL: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.setTextSize()
+                self.loadingView.isHidden = true
+                self.loadingIndicatorView.stopAnimating()
+            }
+            return
+        }
+        
+        self.runProcess(process: GetSteinsaltzPageProcess() ,withInfo:nil)
     }
     
     func setPlaneTextDisplay()
     {
+        // Check for saved HTML file for this text display type
+        let fileNamed = "\(self.pageIndex!)_\(displayType.rawValue)"
+        let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+        
+        if FileManager.default.fileExists(atPath: filePath.path),
+           let savedText = try? String(contentsOf: filePath, encoding: .utf8) {
+            self.pageWebView.loadHTMLString(savedText, baseURL: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.setTextSize()
+                self.loadingView.isHidden = true
+                self.loadingIndicatorView.stopAnimating()
+            }
+            return
+        }
+        
         var pageInfo = [String:Any]()
         
         pageInfo["index"] = self.pageIndex

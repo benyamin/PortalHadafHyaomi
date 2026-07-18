@@ -24,10 +24,26 @@ open class SavePageProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDow
     
     func savePage(_ pageInfo:(pageIndex:Int, type:TalmudDisplayType))
     {
-        var pageUrlPath = ("https://app.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageInfo.pageIndex).pdf")
+        switch pageInfo.type {
+        case .Steinsaltz:
+            self.saveSteinsaltzPage(pageInfo)
+            return
+        case .EN:
+            self.saveENPage(pageInfo)
+            return
+        case .Text, .TextWithScore, .TextWithCommentators:
+            self.saveTextPage(pageInfo)
+            return
+        case .Meorot:
+            self.saveMeorotPage(pageInfo)
+            return
+        case .Vagshal, .Chavruta:
+            break
+        }
         
-        if pageInfo.type == .Chavruta {
-            pageUrlPath = "http://files.daf-yomi.com/files/app/chavruta/\(pageInfo.pageIndex).pdf"
+        guard let pageUrlPath = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageInfo.pageIndex, displayType: pageInfo.type) else {
+            self.onFailWithError(nil)
+            return
         }
         
         if let pageUrl = URL(string: pageUrlPath)
@@ -41,6 +57,147 @@ open class SavePageProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDow
         else{
             self.onFailWithError(nil)
         }
+    }
+    
+    func saveSteinsaltzPage(_ pageInfo:(pageIndex:Int, type:TalmudDisplayType))
+    {
+        GetSteinsaltzPageProcess().executeWithObject(pageInfo.pageIndex, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            if let fullText = object as? String {
+                
+                let fileNamed = "\(pageInfo.pageIndex)_\(pageInfo.type.rawValue)"
+                let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+                
+                do {
+                    try fullText.write(to: filePath, atomically: true, encoding: .utf8)
+                    self.onDidSavePage(pageInfo)
+                } catch {
+                    self.onFailWithError(error)
+                }
+            }
+            else {
+                self.onFailWithError(nil)
+            }
+            
+        }, onFaile: { (object, error) -> Void in
+            self.onFailWithError(error)
+        })
+    }
+    
+    func saveENPage(_ pageInfo:(pageIndex:Int, type:TalmudDisplayType))
+    {
+        GetENPageProcess().executeWithObject(pageInfo.pageIndex, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            if let fullText = object as? String {
+                
+                let fileNamed = "\(pageInfo.pageIndex)_\(pageInfo.type.rawValue)"
+                let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+                
+                do {
+                    try fullText.write(to: filePath, atomically: true, encoding: .utf8)
+                    self.onDidSavePage(pageInfo)
+                } catch {
+                    self.onFailWithError(error)
+                }
+            }
+            else {
+                self.onFailWithError(nil)
+            }
+            
+        }, onFaile: { (object, error) -> Void in
+            self.onFailWithError(error)
+        })
+    }
+    
+    func saveTextPage(_ pageInfo:(pageIndex:Int, type:TalmudDisplayType))
+    {
+        var processInfo = [String:Any]()
+        processInfo["index"] = pageInfo.pageIndex
+        processInfo["scoring"] = (pageInfo.type == .TextWithScore)
+        processInfo["withCommentators"] = (pageInfo.type == .TextWithCommentators)
+        
+        GetPageTextProcess().executeWithObject(processInfo, onStart: { () -> Void in
+            
+        }, onComplete: { (object) -> Void in
+            
+            if let fullText = object as? String {
+                
+                let fileNamed = "\(pageInfo.pageIndex)_\(pageInfo.type.rawValue)"
+                let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+                
+                do {
+                    try fullText.write(to: filePath, atomically: true, encoding: .utf8)
+                    self.onDidSavePage(pageInfo)
+                } catch {
+                    self.onFailWithError(error)
+                }
+            }
+            else if let pageURL = object as? URL {
+                // Fallback: download the URL content
+                let task = URLSession.shared.dataTask(with: pageURL) { data, response, error in
+                    if let error = error {
+                        self.onFailWithError(error)
+                        return
+                    }
+                    if let data = data, let htmlString = String(data: data, encoding: .utf8) {
+                        let fileNamed = "\(pageInfo.pageIndex)_\(pageInfo.type.rawValue)"
+                        let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+                        do {
+                            try htmlString.write(to: filePath, atomically: true, encoding: .utf8)
+                            DispatchQueue.main.async {
+                                self.onDidSavePage(pageInfo)
+                            }
+                        } catch {
+                            self.onFailWithError(error)
+                        }
+                    } else {
+                        self.onFailWithError(nil)
+                    }
+                }
+                task.resume()
+            }
+            else {
+                self.onFailWithError(nil)
+            }
+            
+        }, onFaile: { (object, error) -> Void in
+            self.onFailWithError(error)
+        })
+    }
+    
+    func saveMeorotPage(_ pageInfo:(pageIndex:Int, type:TalmudDisplayType))
+    {
+        guard let pageUrlPath = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageInfo.pageIndex, displayType: pageInfo.type),
+              let pageUrl = URL(string: pageUrlPath) else {
+            self.onFailWithError(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: pageUrl) { data, response, error in
+            if let error = error {
+                self.onFailWithError(error)
+                return
+            }
+            if let data = data, let htmlString = String(data: data, encoding: .utf8) {
+                let fileNamed = "\(pageInfo.pageIndex)_\(pageInfo.type.rawValue)"
+                let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+                do {
+                    try htmlString.write(to: filePath, atomically: true, encoding: .utf8)
+                    DispatchQueue.main.async {
+                        self.onDidSavePage(pageInfo)
+                    }
+                } catch {
+                    self.onFailWithError(error)
+                }
+            } else {
+                self.onFailWithError(nil)
+            }
+        }
+        task.resume()
     }
         
     //MARK: - session delegate methods

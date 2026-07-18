@@ -253,6 +253,42 @@ class Masechet:DataObject
         return savedPageSides
     }
     
+    func savedPages(forDisplayType displayType: TalmudDisplayType) -> [Page]
+    {
+        var result = [Page]()
+        
+        for page in self.pages
+        {
+            for side in 0...1
+            {
+                if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(self, page: page, pageSide: side),
+                   let _ = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: displayType)
+                {
+                    result.append(page)
+                    break
+                }
+            }
+        }
+        
+        return result
+    }
+    
+    func getSavedPageSidesForPage(_ page:Page, displayType: TalmudDisplayType) -> [Int]
+    {
+        var savedPageSides = [Int]()
+        
+        for side in 0...1
+        {
+            if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(self, page: page, pageSide: side),
+               let _ = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: displayType)
+            {
+                savedPageSides.append(side)
+            }
+        }
+        
+        return savedPageSides
+    }
+    
     func copy() -> Masechet
     {
         let masechet = Masechet()

@@ -229,6 +229,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     func setDefaultTalmudDisplay()
     {
         selectedDisplayType =  TalmudDisplayType(rawValue:(UserDefaults.standard.object(forKey: "TalmudSelectedDisplayType") as? String ?? "Vagshal")) ?? .Vagshal
+        self.talmudPagePickerView.displayType = self.selectedDisplayType
         /*
         if let selectedTalmudDisplayType = UserDefaults.standard.object(forKey: "TalmudDisplayType") as? String
         {
@@ -948,6 +949,10 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         else//Show picker
         {
             self.displayTypePickerViewTopConstraint.constant = 0
+            
+            if let selectedIndex = self.avalibleDisplayTypes.firstIndex(of: self.selectedDisplayType) {
+                self.displayTypePickerView.selectRow(selectedIndex, inComponent: 0, animated: false)
+            }
             
             self.displyedPicker = self.displayTypePickerView
         }

@@ -251,7 +251,14 @@
 "st_to_page" = "לדף";
 "st_Max_Pages_Per_Downlaod" = "מקסימום דפים לכל הורדה";
 "st_should_move_to_selected_lesson_page" = "האם לעבור לדף עבור השיעור הנבחר";
-
+"st_display_Type_Vagshal" = "צורת הדף";
+"st_display_Type_Text" = "טקסט הדף";
+"st_display_Type_TextWithScore" = "טקסט הדף (מנוקד)";
+"st_display_Type_TextWithCommentators" = "טקסט הדף ומפרשים";
+"st_display_Type_Meorot" = "טקסט הדף";
+"st_display_Type_EN" = "Steinsaltz";
+"st_display_Type_Chavruta" = "חברותא";
+"st_display_Type_Steinsaltz" = "שטיינזלץ";
 
 //Lessons Page
 "st_lessons" = "שיעורים";

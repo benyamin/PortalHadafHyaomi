@@ -17,6 +17,14 @@ enum TalmudDisplayType: String {
     case EN = "EN"
     case Chavruta = "Chavruta"
     case Steinsaltz = "Steinsaltz"
+    
+    func localizedString() -> String {
+        return "st_display_Type_\(self.rawValue)".localize()
+    }
+    
+    var supportsOfflineSave: Bool {
+        return true
+    }
 }
 
 open class  HadafHayomiManager
@@ -219,6 +227,34 @@ open class  HadafHayomiManager
                         }
                     }
                 }
+            }
+        }
+        
+        return messechtotWithSavedPages
+    }
+    
+    func getMessechtotWithSavedPages(forDisplayType displayType: TalmudDisplayType) -> [Masechet]
+    {
+        var messechtotWithSavedPages = [Masechet]()
+        
+        for masechet in self.masechtot
+        {
+            var found = false
+            for page in masechet.pages
+            {
+                for side in 0...1
+                {
+                    if let pageIndex = self.pageIndexFor(masechet, page: page, pageSide: side),
+                       let _ = self.savedPageFilePath(pageIndex: pageIndex, type: displayType)
+                    {
+                        found = true
+                        break
+                    }
+                }
+                if found { break }
+            }
+            if found {
+                messechtotWithSavedPages.append(masechet)
             }
         }
         
@@ -899,11 +935,19 @@ open class  HadafHayomiManager
         //Check if page is saved in documnets
         var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
 
+        let fileExtension: String
+        switch type! {
+        case .Vagshal, .Chavruta:
+            fileExtension = "pdf"
+        default:
+            fileExtension = "html"
+        }
+        
         if type == TalmudDisplayType.Vagshal {
-            path += "/\(pageIndex).pdf"
+            path += "/\(pageIndex).\(fileExtension)"
         }
         else{
-            path += "/\(pageIndex)_\(type.rawValue).pdf"
+            path += "/\(pageIndex)_\(type.rawValue).\(fileExtension)"
         }
         
         if FileManager.default.fileExists(atPath: path){
