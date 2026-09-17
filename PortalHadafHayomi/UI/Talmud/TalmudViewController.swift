@@ -1021,6 +1021,13 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     @objc func rotated()
     {
+        let orientation = UIDevice.current.orientation
+        
+        // Ignore faceUp, faceDown, and unknown orientations
+        guard orientation == .landscapeLeft || orientation == .landscapeRight || orientation == .portrait || orientation == .portraitUpsideDown else {
+            return
+        }
+        
         if self.lockRotationButton.isSelected
         {
             self.lockRotationArrowImageView.rotateAnimation(duration: 0.6, repeatCount:2.0)
@@ -1031,7 +1038,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.pagesCollectionView.translatesAutoresizingMaskIntoConstraints = true
         self.lockRotationContentView.translatesAutoresizingMaskIntoConstraints = true
         
-        if UIDevice.current.orientation.isLandscape {
+        if orientation.isLandscape {
             
             self.setLandscapeLayout()
         }
@@ -1048,7 +1055,16 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func setLandscapeLayout()
     {
-        var rotationAngle:Double!
+        let rotationAngle: Double
+        
+        if UIDevice.current.orientation == .landscapeLeft
+        {
+            rotationAngle = Double.pi/2
+        }
+        else
+        {
+            rotationAngle = -Double.pi/2
+        }
         
         var currentIndex = IndexPath(row: 0, section: 0)
         if self.pagesCollectionView.indexPathsForVisibleItems.count > 0
@@ -1060,15 +1076,6 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         let colletoinCenterOnRootView = self.view.convert(self.pagesCollectionView.center, to:rootViewController.view)
         rootViewController.view.addSubview(self.pagesCollectionView)
         self.pagesCollectionView.center = colletoinCenterOnRootView
-        
-        if UIDevice.current.orientation == .landscapeLeft
-        {
-            rotationAngle = Double.pi/2
-        }
-        else if UIDevice.current.orientation == .landscapeRight
-        {
-            rotationAngle = -Double.pi/2
-        }
    
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
