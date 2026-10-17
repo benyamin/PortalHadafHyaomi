@@ -276,6 +276,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return .landscape // same as Info.plist for iPad
+        }
+        // iPhone: portrait everywhere, landscape only on the Talmud page screen
+        return TalmudViewController.shared?.allowedOrientations ?? .portrait
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
        
          NotificationCenter.default.post(name: NSNotification.Name(rawValue: "applicationWillTerminate"), object: nil)

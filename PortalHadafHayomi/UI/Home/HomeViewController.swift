@@ -603,7 +603,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             break
             
         case "Surveys":
-            self.present(self.surveysNavigationController, animated: false, completion: nil)
+            self.showWebPageWithLink("https://daf-yomi.com/RatingPreview.aspx", title: "Rating")
             break
             
         case "TheDafYomiProject":
@@ -725,6 +725,9 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             {
                 self.view.bringSubviewToFront(self.bottomBarCollectionView!)
             }
+            
+            // Only the Talmud screen may rotate to landscape
+            TalmudViewController.updateSupportedOrientations()
         }
     }
     

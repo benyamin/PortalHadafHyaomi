@@ -764,7 +764,7 @@ open class  HadafHayomiManager
         
         let menuItem_ContactUs = MenuItem(dictionary:["name":"ContactUs","title":"ContactUs","imageName":"ContactUs_icon.png"])
         
-        let menuItem_Surveys = MenuItem(dictionary:["name":"Surveys","title":"Surveys","imageName":"seker_icon.png"])
+        let menuItem_Surveys = MenuItem(dictionary:["name":"Surveys","title":"Rating","imageName":"seker_icon.png"])
         
         let menuItem_Siyum = MenuItem(dictionary:["name":"Maschet_Complition","title":"Maschet Complition","imageName":"sium_icon.png"])
         

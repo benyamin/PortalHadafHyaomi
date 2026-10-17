@@ -28,6 +28,8 @@ class HadafHayomiProjectViewController: MSBaseViewController, UITableViewDelegat
         
         topicstList.append(HadafHayomiProjectTopic(id: "5", title: "משנה יומית לדף היומי", iconImage: "star_icon.png", link:"https://app.daf-yomi.com/mobile/content.aspx?id=247"))
         
+        topicstList.append(HadafHayomiProjectTopic(id: "surveys", title: "סקרים", iconImage: "star_icon.png", link:nil))
+        
        
         return topicstList
     }()
@@ -82,6 +84,15 @@ class HadafHayomiProjectViewController: MSBaseViewController, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
       let selectedTopic = self.topicstList[indexPath.row]
+
+        // Surveys - open the surveys screen
+        if selectedTopic.id == "surveys"
+        {
+            if let homeViewController = self.homeViewController {
+                homeViewController.present(homeViewController.surveysNavigationController, animated: false, completion: nil)
+            }
+            return
+        }
 
         if let topicLink = selectedTopic.link
         {

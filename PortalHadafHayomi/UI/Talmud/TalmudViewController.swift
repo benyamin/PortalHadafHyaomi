@@ -278,6 +278,9 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
+        TalmudViewController.shared = self
+        TalmudViewController.updateSupportedOrientations()
+        
         if self.firstAppearance == true
         {
             self.firstAppearance = false
@@ -429,6 +432,14 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     @IBAction func lockRotationButtonClicked(_ sender:UIButton)
     {
         self.lockRotationButton.isSelected = !self.lockRotationButton.isSelected
+        
+        // Lock to the orientation the screen is in right now
+        switch self.view.window?.windowScene?.interfaceOrientation {
+        case .landscapeLeft?: self.lockedOrientationMask = .landscapeLeft
+        case .landscapeRight?: self.lockedOrientationMask = .landscapeRight
+        default: self.lockedOrientationMask = .portrait
+        }
+        TalmudViewController.updateSupportedOrientations()
         
         //If should rotate
         if self.lockRotationButton.isSelected == false
@@ -1019,6 +1030,41 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.saveSelectedPage()
     }
     
+    // MARK: - Rotation
+    // Landscape uses a real iOS interface rotation (not a CGAffineTransform),
+    // because PDFKit only renders the visible area sharply when the view is not transformed.
+    
+    /// The instance AppDelegate asks for the allowed orientations.
+    static weak var shared: TalmudViewController?
+    
+    private var isInLandscapeLayout = false
+    private var lockedOrientationMask: UIInterfaceOrientationMask = .portrait
+    private var originalLockRotationFrame: CGRect?
+    
+    /// Orientations the app may use while this screen is visible.
+    var allowedOrientations: UIInterfaceOrientationMask {
+        guard isViewLoaded, view.window != nil else { return .portrait }
+        if lockRotationButton?.isSelected == true { return lockedOrientationMask }
+        return .allButUpsideDown
+    }
+    
+    /// Tell iOS to re-read the allowed orientations.
+    static func updateSupportedOrientations() {
+        let rootViewController = UIApplication.shared.connectedScenes
+            .compactMap { ($0 as? UIWindowScene)?.windows.first(where: { $0.isKeyWindow }) }
+            .first?.rootViewController
+        if #available(iOS 16.0, *) {
+            rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
+        } else {
+            UIViewController.attemptRotationToDeviceOrientation()
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.updateLayoutForInterfaceOrientation()
+    }
+    
     @objc func rotated()
     {
         let orientation = UIDevice.current.orientation
@@ -1031,124 +1077,97 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         if self.lockRotationButton.isSelected
         {
             self.lockRotationArrowImageView.rotateAnimation(duration: 0.6, repeatCount:2.0)
-
             return
         }
         
-        self.pagesCollectionView.translatesAutoresizingMaskIntoConstraints = true
-        self.lockRotationContentView.translatesAutoresizingMaskIntoConstraints = true
+        // iOS rotates the screen itself. The layout is updated in viewDidLayoutSubviews.
+        self.updateLayoutForInterfaceOrientation()
+    }
+    
+    private func updateLayoutForInterfaceOrientation()
+    {
+        guard let window = self.view.window else { return }
+        let isLandscape = window.bounds.width > window.bounds.height
+        if isLandscape == self.isInLandscapeLayout { return }
+        self.isInLandscapeLayout = isLandscape
         
-        if orientation.isLandscape {
-            
+        if isLandscape {
             self.setLandscapeLayout()
-        }
-        else {
-            
-            //Is alredy in protert mode
-            if self.pagesCollectionView.superview == self.view
-            {
-                return
-            }
+        } else {
             self.setProtraitLayout()
+        }
+    }
+    
+    private func currentPageIndexPath() -> IndexPath
+    {
+        if let first = self.pagesCollectionView.indexPathsForVisibleItems.sorted().first {
+            return first
+        }
+        return IndexPath(row: 0, section: 0)
+    }
+    
+    private func scrollBackTo(_ indexPath: IndexPath)
+    {
+        self.pagesCollectionView.collectionViewLayout.invalidateLayout()
+        self.pagesCollectionView.layoutIfNeeded()
+        if indexPath.row < self.pagesCollectionView.numberOfItems(inSection: 0) {
+            self.pagesCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
         }
     }
     
     func setLandscapeLayout()
     {
-        let rotationAngle: Double
+        guard let rootView = self.view.window?.rootViewController?.view else { return }
+        let currentIndex = self.currentPageIndexPath()
         
-        if UIDevice.current.orientation == .landscapeLeft
-        {
-            rotationAngle = Double.pi/2
-        }
-        else
-        {
-            rotationAngle = -Double.pi/2
-        }
+        self.pagesCollectionView.translatesAutoresizingMaskIntoConstraints = true
+        self.lockRotationContentView.translatesAutoresizingMaskIntoConstraints = true
         
-        var currentIndex = IndexPath(row: 0, section: 0)
-        if self.pagesCollectionView.indexPathsForVisibleItems.count > 0
-        {
-            currentIndex = self.pagesCollectionView.indexPathsForVisibleItems.first!
+        if self.originalLockRotationFrame == nil {
+            self.originalLockRotationFrame = self.lockRotationContentView.frame
         }
         
-        let rootViewController = UIApplication.shared.keyWindow!.rootViewController!
-        let colletoinCenterOnRootView = self.view.convert(self.pagesCollectionView.center, to:rootViewController.view)
-        rootViewController.view.addSubview(self.pagesCollectionView)
-        self.pagesCollectionView.center = colletoinCenterOnRootView
-   
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-            {
-                self.pagesCollectionView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
-                
-                let collectionFrameSize = CGSize(width: rootViewController.view.bounds.size.width, height: rootViewController.view.bounds.size.height)
-                let collectionCenter = CGPoint(x: collectionFrameSize.width/2, y: collectionFrameSize.height/2)
-                
-                self.pagesCollectionView.frame.size = collectionFrameSize
-                self.pagesCollectionView.center = collectionCenter
-                
-                if let flowLayout = self.pagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-                {
-                    flowLayout.invalidateLayout()
-                }
-                
-                self.pagesCollectionView.selectItem(at: currentIndex, animated: false, scrollPosition: .centeredHorizontally)
-                
-        }, completion: {_ in
-            
-            let lockRotationCenter = self.view.convert(self.lockRotationContentView.center, to:rootViewController.view)
-            rootViewController.view.addSubview(self.lockRotationContentView)
-            self.lockRotationContentView.center = lockRotationCenter
-            
-            self.lockRotationContentView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
-        })
+        // Full screen page, no transform
+        self.pagesCollectionView.transform = .identity
+        rootView.addSubview(self.pagesCollectionView)
+        self.pagesCollectionView.frame = rootView.bounds
+        self.pagesCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // Lock button in the top-right corner
+        self.lockRotationContentView.transform = .identity
+        rootView.addSubview(self.lockRotationContentView)
+        let lockSize = self.lockRotationContentView.bounds.size
+        self.lockRotationContentView.frame = CGRect(x: rootView.bounds.width - lockSize.width - 60,
+                                                    y: 16,
+                                                    width: lockSize.width,
+                                                    height: lockSize.height)
+        self.lockRotationContentView.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
+        
+        self.scrollBackTo(currentIndex)
     }
     
     func setProtraitLayout()
     {
-        var currentIndex = IndexPath(row: 0, section: 0)
-        if self.pagesCollectionView.indexPathsForVisibleItems.count > 0
-        {
-            currentIndex = self.pagesCollectionView.indexPathsForVisibleItems.first!
-        }
-        
-        let rotationAngle = 0
+        let currentIndex = self.currentPageIndexPath()
         
         let collectionHeight = self.view.bounds.size.height - (self.topBarView!.frame.origin.y + self.topBarView!.frame.size.height)
-        
-        let collectionFrameSize = CGSize(width: self.view.bounds.size.width, height:collectionHeight)
-        
         let topButtonsHeight:CGFloat = 35.0
-        let collectionCenterY = (self.topBarView!.frame.origin.y + self.topBarView!.frame.size.height + topButtonsHeight) + (collectionHeight/2)
-        let collectionCenter = CGPoint(x:  collectionFrameSize.width/2, y: collectionCenterY)
+        let collectionY = self.topBarView!.frame.origin.y + self.topBarView!.frame.size.height + topButtonsHeight
         
-        let rootViewController = UIApplication.shared.keyWindow!.rootViewController!
-        let lockRotationCenter = rootViewController.view.convert(self.lockRotationContentView.center, to:self.topBarView!)
+        self.pagesCollectionView.transform = .identity
+        self.view.addSubview(self.pagesCollectionView)
+        self.pagesCollectionView.autoresizingMask = []
+        self.pagesCollectionView.frame = CGRect(x: 0, y: collectionY, width: self.view.bounds.size.width, height: collectionHeight)
+        self.view.sendSubviewToBack(self.pagesCollectionView)
+        
+        self.lockRotationContentView.transform = .identity
         self.topBarView!.addSubview(self.lockRotationContentView)
-        self.lockRotationContentView.center = lockRotationCenter
+        self.lockRotationContentView.autoresizingMask = []
+        if let originalFrame = self.originalLockRotationFrame {
+            self.lockRotationContentView.frame = originalFrame
+        }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-            {
-                self.pagesCollectionView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
-                self.lockRotationContentView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
-
-                self.pagesCollectionView.frame.size = collectionFrameSize
-                self.pagesCollectionView.center = collectionCenter
-                
-                if let flowLayout = self.pagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-                {
-                    flowLayout.invalidateLayout()
-                }
-                
-                self.pagesCollectionView.selectItem(at: currentIndex, animated: false, scrollPosition: .centeredHorizontally)
-                
-        }, completion: {_ in
-            
-                let colletoinCenter = rootViewController.view.convert(self.pagesCollectionView.center, to:self.view)
-                self.view.addSubview(self.pagesCollectionView)
-                self.pagesCollectionView.center = colletoinCenter
-            self.view.sendSubviewToBack(self.pagesCollectionView)
-        })
+        self.scrollBackTo(currentIndex)
     }
     
     @IBAction func dicreaseTextSizeButtonClicked(_ sender:UIButton) {
