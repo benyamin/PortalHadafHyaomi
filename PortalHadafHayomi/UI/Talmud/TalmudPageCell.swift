@@ -252,7 +252,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         
         self.heightLightedAnnotatoins.removeAll()
         
-        let highlightText = HadafHayomiManager.sharedManager.convertTextToVagshalEncoding(text: self.searchText)
+        let highlightText = self.searchText
         let selections = pagPDFView?.document?.findString(highlightText, withOptions: .caseInsensitive)
 
         // Loop through the selections and add a highlight annotation for each one

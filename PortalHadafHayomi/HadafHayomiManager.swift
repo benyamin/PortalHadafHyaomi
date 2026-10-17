@@ -67,25 +67,6 @@ open class  HadafHayomiManager
         return [String:Any]()
     }()
     
-    func convertTextToVagshalEncoding(text:String) -> String {
-        
-        var encoding = ""
-        let gemara = self.vagshalEncoding["gemara"] as! [String:String]
-        
-        let letters = text.map { String($0) }
-        for letter in letters{
-            
-            if let letterIncuding = gemara.first(where: { $0.value == letter })?.key{
-                encoding += letterIncuding
-            }
-            else{
-                encoding += letter
-            }
-        }
-       
-        return String(encoding.reversed())
-    }
-    
     
     lazy var savedNotes:[Note] = {
         
