@@ -1,0 +1,151 @@
+﻿/* stylelint-disable keyframes-name-pattern */
+
+/**
+ * DafYomiModal Styles
+ * Custom modal system matching Highslide/Fancybox appearance
+ * Last updated: December 2025
+ */
+
+/* Backdrop - light white overlay */
+.daf-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgb(255 255 255 / 80%);
+    z-index: 10000;
+}
+
+/* Modal wrapper */
+.daf-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    pointer-events: none; /* Allow backdrop clicks through wrapper */
+}
+
+/* Modal container - actual modal box */
+.daf-modal-container {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #b6a258;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+    pointer-events: auto; /* Block clicks on modal itself */
+}
+
+/* Title bar - matches SelectionTranslator */
+.daf-modal-titlebar {
+    height: 40px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space items evenly */
+    position: relative;
+    direction: rtl;
+    cursor: move;
+    padding: 0 8px;
+}
+
+.daf-modal-title {
+    color: #761c21;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
+    flex: 1;
+    margin-right: 10px; /* Space from right edge */
+    margin-left: auto; /* Push to the right */
+}
+
+/* Checkbox container (injected dynamically) */
+.daf-modal-checkbox-container {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    user-select: none;
+    white-space: nowrap;
+    margin-left: 15px; /* Space from close button */
+    margin-right: 15px; /* Space from title */
+}
+
+.daf-modal-checkbox {
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.daf-modal-checkbox-label {
+    cursor: pointer;
+}
+
+/* Close button - matches SelectionTranslator */
+.daf-modal-close {
+    flex-shrink: 0; /* Don't shrink */
+    width: 24px;
+    height: 24px;
+    border: solid 1px #b6a258;
+    color: #b6a258;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    font-weight: bold;
+    margin-left: 0; /* No left margin since it's at the left edge */
+}
+
+    .daf-modal-close:hover {
+        background: #761c21;
+        color: #fff;
+        border: solid 1px #761c21;
+    }
+
+    .daf-modal-close:active {
+        background: #761c21;
+        color: #fff;
+        border: solid 1px #761c21;
+    }
+
+    .daf-modal-close:focus {
+        background: #761c21;
+        color: #fff;
+        border: solid 1px #761c21;
+    }
+
+/* Content area */
+.daf-modal-content {
+    height: calc(100% - 40px); /* Subtract title bar height */
+    overflow: hidden;
+}
+
+/* Iframe */
+.daf-modal-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fdfbf4;
+    display: block;
+}
+
+/* Fade in animation */
+@keyframes dafModalFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+/*@media (width <= 768px) {
+    .daf-modal-container {
+        width: 90% !important;
+        max-width: 90% !important;
+        left: 5% !important;
+    }*/
+}

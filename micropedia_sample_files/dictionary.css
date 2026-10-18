@@ -1,0 +1,580 @@
+﻿/* ============================================
+   DICTIONARY PAGES - COMMON STYLES
+   Consolidated from all dictionary ASPX pages
+   ============================================ */
+
+/* ============================================
+   BASIC RESET & COMMON
+   ============================================ */
+a {
+    outline-width: 0;
+}
+
+/* ============================================
+   LAYOUT - DICTIONARY CONTAINER
+   ============================================ */
+.container_dictionary {
+    width: 800px;
+    border: solid 1px #b6a258;
+    min-height: 439px;
+    margin-right: 15px;
+    margin-top: 50px;
+    position: relative;
+}
+
+.container_tab {
+}
+
+/* ============================================
+   NAVIGATION - TABS
+   ============================================ */
+.tab {
+    width: 104px;
+}
+
+    .tab div {
+        width: 104px;
+        text-align: center;
+    }
+
+.tab1 {
+    position: absolute;
+    right: -1px;
+    top: -30px;
+    width: 104px;
+}
+
+.tab2 {
+    position: absolute;
+    right: 110px;
+    top: -30px;
+    width: 104px;
+}
+
+.tab3 {
+    position: absolute;
+    right: 220px;
+    top: -30px;
+    width: 104px;
+}
+
+.tab4 {
+    position: absolute;
+    right: 330px;
+    top: -30px;
+    width: 104px;
+}
+
+.tab_selected {
+    background-image: url('../images/AramicDictionary/BG_tab_selected.jpg');
+    height: 30px;
+}
+
+.tab_unselected {
+    background-image: url('../images/AramicDictionary/BG_tab_unselected.jpg');
+    height: 29px;
+}
+
+.tab_selected div a {
+    display: block;
+    width: 104px;
+    padding-top: 8px;
+    padding-bottom: 5px;
+    text-decoration: none;
+    color: Black;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tab_unselected div a {
+    display: block;
+    width: 104px;
+    padding-top: 8px;
+    padding-bottom: 5px;
+    text-decoration: none;
+    color: #7e7d7a;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tab-content {
+    padding: 15px;
+}
+
+/* ============================================
+   NAVIGATION - BREADCRUMBS
+   ============================================ */
+.breadcrumb {
+    margin-right: 15px;
+    font-size: 12px;
+}
+
+    .breadcrumb a {
+        color: Black;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .breadcrumb .separator {
+        font-size: 9px;
+    }
+
+/* ============================================
+   NAVIGATION - ARROWS & PAGINATION
+   ============================================ */
+.navigation-container {
+    width: 177px;
+    height: 16px;
+    margin: 0 auto;
+}
+
+.nav-arrow {
+    color: #761c21;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.pagination-link,
+.pagination-current,
+.pagination-disabled {
+    margin: 0 2px;
+    padding: 2px 4px;
+}
+
+.pagination-current {
+    font-weight: normal;
+}
+
+.pagination-disabled {
+    color: #ccc;
+}
+
+.pagination-arrow,
+.pagination-arrow-disabled {
+    margin: 0 4px;
+    font-weight: bold;
+}
+
+.pagination-arrow-disabled {
+    color: #ccc;
+}
+
+/* ============================================
+   ALPHABET NAVIGATION
+   ============================================ */
+.alphabet {
+    background-color: #f3ebcf;
+    table-layout: fixed;
+}
+
+    .alphabet tr td {
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+        .alphabet tr td a {
+            color: Black;
+            text-decoration: none;
+        }
+
+        .alphabet tr td.selected,
+        .alphabet tr td.active {
+            background-color: #e0d3a8;
+            border: 2px solid #967c1b;
+        }
+
+/* ============================================
+   FORMS - INPUT FIELDS
+   ============================================ */
+.search-input {
+    width: 200px;
+}
+
+.link-input {
+    width: 590px;
+    direction: ltr;
+    border: solid 1px black;
+}
+
+/* ============================================
+   PANELS & CONTAINERS
+   ============================================ */
+.link-container {
+    float: left;
+    margin-top: 1px;
+    width: 100px;
+    height: 0px;
+}
+
+.link-panel {
+    position: relative;
+    top: 10px;
+    left: 500px;
+    width: 600px;
+    background-color: White;
+    display: none;
+}
+
+.logo-container {
+    margin-right: 15px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+.content-area {
+    padding: 15px;
+    min-height: 120px;
+}
+
+.browse-content-area {
+    min-height: 116px;
+    padding: 15px 0;
+}
+
+/* ============================================
+   TYPOGRAPHY & TEXT
+   ============================================ */
+.boldtext {
+    color: #761c21;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.adjacent-words-section {
+    font-size: 15px;
+    color: #967c1b;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.label-bold {
+    font-weight: bold;
+}
+
+/* ============================================
+   CREDITS & INFO
+   ============================================ */
+.credit {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* ============================================
+   SEARCH RESULTS - TABLES
+   ============================================ */
+.clsIndexTable {
+    table-layout: fixed;
+}
+
+    .clsIndexTable td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .clsIndexTable .extract {
+    }
+
+    .clsIndexTable .title-cell {
+    }
+
+    .clsIndexTable .ordinal-cell {
+        text-align: center;
+    }
+
+    .clsIndexTable tbody tr:nth-child(even) {
+        background-color: #fbf8ed; /* Light grey background for even rows */
+    }
+
+/* ============================================
+   SEARCH - EXTENDED OPTIONS
+   ============================================ */
+.extended-search-container {
+    margin-right: 10px;
+    float: right;
+}
+
+.extended-search-label {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.extended-search-checkbox {
+    margin-left: 5px;
+}
+
+/* ============================================
+   SEARCH RESULTS - FUZZY/PARTIAL MATCHES
+   ============================================ */
+.fuzzy div {
+    float: right;
+    width: 145px;
+}
+
+.fuzzy li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    list-style-position: inside;
+    white-space: nowrap;
+}
+
+/* ============================================
+   WIKI CONTENT (DictionaryV2 specific)
+   ============================================ */
+.wiki-content {
+    margin-top: 10px;
+}
+
+    .wiki-content p {
+        margin: 0 0 3px 0;
+    }
+
+    .wiki-content h1,
+    .wiki-content h2,
+    .wiki-content h3,
+    .wiki-content h4,
+    .wiki-content h5 {
+        margin: 5px 0 5px 0;
+    }
+
+    .wiki-content h4,
+    .wiki-content h5 {
+        font-family: Arial;
+    }
+
+    .wiki-content td {
+        vertical-align: top;
+        border: 1px solid;
+        padding: 3px;
+    }
+
+/* ============================================
+   ARAMAIC DICTIONARY V2 - SPECIFIC STYLES
+   ============================================ */
+
+/* Translation Results */
+.translation-result {
+    background-color: #f3ebcf;
+    padding: 5px;
+    padding-left: 127px;
+}
+
+/* Segment Translation */
+.segment-source-textarea {
+    overflow: auto;
+    overflow-x: hidden;
+    width: 362px;
+    height: 336px;
+    border: solid 1px #b6a258;
+    padding: 5px;
+    padding-top: 10px;
+    line-height: 19px;
+}
+
+.segment-result-container {
+    float: right;
+    margin-right: 20px;
+}
+
+.segment-result-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #761c21;
+    margin-bottom: 6px;
+}
+
+.segment-translation-box {
+    width: 362px;
+    height: 336px;
+    border: solid 1px #b6a258;
+    background-color: White;
+    padding: 5px;
+    padding-top: 10px;
+    position: relative;
+    overflow: auto;
+    line-height: 19px;
+}
+
+    .segment-translation-box a {
+        background-color: #ffecb2;
+        color: Black;
+        outline: none;
+        text-decoration: none;
+    }
+
+/* Translation Text Styles */
+.found {
+    text-decoration: none;
+    text-decoration-color: lightgreen;
+    text-decoration-thickness: 3px;
+}
+
+.notfound {
+    text-decoration: none;
+    text-decoration-color: lightpink;
+    text-decoration-thickness: 3px;
+}
+
+.found-template {
+    text-decoration: underline;
+    text-decoration-color: lightgreen;
+    text-decoration-thickness: 3px;
+}
+
+.notfound-template {
+    text-decoration: underline;
+    text-decoration-color: lightpink;
+    text-decoration-thickness: 3px;
+}
+
+.translation-link {
+    color: #00c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+    .translation-link:hover {
+        color: #00f;
+    }
+
+/* More Translations Dropdown */
+#moreTranslations_content {
+    position: absolute;
+    z-index: 10000;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+    #moreTranslations_content ul {
+        padding: 10px;
+        margin: 0;
+        list-style: none;
+    }
+
+        #moreTranslations_content ul li {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+            #moreTranslations_content ul li:hover,
+            #moreTranslations_content ul li.ui-state-hover {
+                background-color: #f0f0f0;
+            }
+
+            #moreTranslations_content ul li a {
+                text-decoration: none;
+                color: #000;
+                display: block;
+            }
+
+                #moreTranslations_content ul li a:hover {
+                    background-color: #ffffcc;
+                }
+
+/* Adjacent Words Display */
+.adjacent-words-grid {
+    float: right;
+    width: 140px;
+    overflow: hidden;
+    margin-left: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+a.adjacent-word-link {
+    color: Black;
+    text-decoration: none;
+    line-height: 20px;
+    font-size: 12px;
+}
+
+.adjacent-word-current {
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 12px;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.valign-middle {
+    vertical-align: middle;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.clear-both {
+    clear: both;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-top-1 {
+    margin-top: 1px;
+}
+
+.margin-top-2 {
+    margin-top: 2px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
+}
+
+/* ============================================
+   LEGACY/DEPRECATED - Keep for backward compatibility
+   These may be removed in future versions
+   ============================================ */
+.segmentTranslationWordContainer {
+    float: right;
+    margin-right: 5px;
+    white-space: nowrap;
+}
+
+    .segmentTranslationWordContainer a {
+        background-color: #FDB458;
+        outline: none;
+        text-decoration: none;
+    }
+
+#segmentTranslation a {
+    background-color: #FDB458;
+    outline: none;
+    text-decoration: none;
+}
+
+.segmentTranslationWordContainer_noSpace {
+    float: right;
+    white-space: nowrap;
+}

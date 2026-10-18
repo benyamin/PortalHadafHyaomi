@@ -1,0 +1,191 @@
+﻿/* ========================================
+   Chat Panel - Slide-out Vertical Bar Design
+   Based on test-iframe/index.html
+   ======================================== */
+
+/* Chat Panel Container */
+.chat-panel {
+    direction: rtl; /* Align content to the right */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    height: 100vh;
+    border-left: 1px solid #d4cfc4;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+    transition: width 0.3s ease;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.chat-panel.collapsed {
+    width: 48px;
+    cursor: pointer;
+}
+
+.chat-panel.collapsed:hover {
+    width: 56px;
+    background: linear-gradient(135deg, #faf8f4 0%, #f0ece4 100%);
+}
+
+.chat-panel.collapsed .chat-header,
+.chat-panel.collapsed .chat-iframe {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Collapsed Strip - Vertical Bar with Icon and Text */
+.collapsed-strip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 16px;
+    gap: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.chat-panel.collapsed .collapsed-strip {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.collapsed-strip svg {
+    width: 24px;
+    height: 24px;
+    stroke: #c9a962;
+}
+
+.collapsed-strip span {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: #8b6914;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Chat Header */
+.chat-header {
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #faf8f4 0%, #f0ece4 100%);
+    border-bottom: 1px solid #d4cfc4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: opacity 0.3s ease;
+    flex-shrink: 0;
+}
+
+.chat-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-title {
+    color: #8b6914;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.chat-title svg {
+    width: 20px;
+    height: 20px;
+    stroke: #c9a962;
+}
+
+/* Header Buttons */
+.header-btn {
+    background: none;
+    border: none;
+    color: #8b7355;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.header-btn:hover {
+    background: rgba(201, 169, 98, 0.15);
+    color: #8b6914;
+}
+
+.header-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Chat Iframe */
+.chat-iframe {
+    flex: 1;
+    border: none;
+    width: 100%;
+    background: #ffffff;
+    transition: opacity 0.3s ease;
+}
+
+/* ========================================
+   Main Content Centering
+   ======================================== */
+
+/* 
+   Strategy: Shift the viewport by adding padding to body,
+   then let existing margin: auto centering work naturally.
+   Match panel transition timing for synchronized animation.
+*/
+
+/* Reserve space for expanded panel (420px) */
+body.chat-panel-expanded {
+    padding-right: 420px;
+    box-sizing: border-box;
+    transition: padding 0.3s ease;
+}
+
+/* Reserve space for collapsed panel (48px) */
+body.chat-panel-collapsed {
+    padding-right: 48px;
+    box-sizing: border-box;
+    transition: padding 0.3s ease;
+}
+
+/* Smooth transition for content repositioning */
+.clsPageAlign,
+.clsFooter {
+    transition: margin 0.3s ease;
+}
+
+/* 
+   How this works:
+   1. body gets padding-right (reduces available width)
+   2. .clsPageAlign (width: 1000px, margin: auto) centers in reduced space
+   3. When viewport < (1000px + 420px), content extends and panel overlays
+
+   Example:
+   - Viewport: 1920px, Panel: 420px
+   - Available: 1920px - 420px = 1500px
+   - Content: 1000px
+   - Left margin: (1500px - 1000px) / 2 = 250px ✓ Centered!
+
+   All transitions synchronized at 0.3s ease to match panel width animation.
+*/
+
+/* When no panel exists (ShowChat = false), no adjustments needed */

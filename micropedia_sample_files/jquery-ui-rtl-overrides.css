@@ -1,0 +1,28 @@
+/*! jQuery UI RTL Overrides for Hebrew
+ * daf-yomi.com Custom RTL Support
+ * Version: 2.0.0 (Enhanced for generic jQuery UI CSS)
+ * Date: December 12, 2025
+ * 
+ * IMPORTANT: Load this file AFTER jQuery UI theme CSS
+ * 
+ * These overrides work with generic jquery-ui.min.css
+ * for proper RTL (Hebrew/Arabic) support
+ */
+
+/* ============================================
+   RTL Menu Direction & Layout
+   ============================================ */
+
+.ui-menu {
+    text-align: right !important;
+    direction: rtl !important;
+}
+
+.ui-autocomplete {
+    height: 200px !important;
+    overflow: hidden scroll !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 13px !important;
+    background: #fff !important;
+    background-image: none !important;
+}

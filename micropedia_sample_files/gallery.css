@@ -1,0 +1,293 @@
+/* ================================================================
+   gallery.css  –  Daf HaYomi media gallery
+   Used by: public page renderer, GalleryManager, GalleryBrowser
+   ================================================================ */
+
+/* ---- Gallery container ----------------------------------------- */
+
+.dfy-gallery {
+    display: grid;
+    gap: 8px;
+    margin: 12px 0;
+    direction: rtl;
+}
+.dfy-gallery-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.dfy-gallery-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.dfy-gallery-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.dfy-gallery-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.dfy-gallery-cols-5 { grid-template-columns: repeat(5, 1fr); }
+/* Compact preview: auto-fill cells of exactly 170px, single row via overflow */
+.dfy-gallery-compact {
+    grid-template-columns: repeat(auto-fill, 170px) !important;
+    max-width: 100% !important;
+    overflow-x: auto;
+}
+
+/* ---- Gallery item ---------------------------------------------- */
+.dfy-gallery-item {
+    display: flex;
+    flex-direction: column;
+    background: inherit;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid #e0d8c0;
+}
+.dfy-gallery-item a { display: block; }
+.dfy-gallery-item img,
+.dfy-gallery-item .dfy-video-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    transition: opacity 0.2s;
+}
+.dfy-gallery-item:hover img,
+.dfy-gallery-item:hover .dfy-video-thumb { opacity: 0.85; }
+
+/* ---- Video placeholder (no server-side thumb) ------------------ */
+.dfy-video-thumb {
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4/3;
+}
+/* When FFmpeg produced a real thumbnail — image fills the box, play overlays it */
+.dfy-video-thumb.dfy-video-has-thumb {
+    position: relative;
+    display: block;
+}
+.dfy-video-thumb.dfy-video-has-thumb img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+.dfy-video-thumb.dfy-video-has-thumb .dfy-video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.dfy-video-play {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+.dfy-video-play::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 14px 0 14px 24px;
+    border-color: transparent transparent transparent #333;
+    margin-right: -4px;
+}
+
+/* ---- Caption below image --------------------------------------- */
+.dfy-gallery-caption {
+    padding: 5px 8px 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    direction: rtl;
+    color: #333;
+    background: inherit;          /* match item/page background — no white stripe */
+    border-top: 1px solid #e0d8c0;
+    text-align: right;
+    flex: 1;                      /* fill remaining height so equal-height rows look even */
+}
+.dfy-gallery-caption strong { display: block; font-size: 13px; color: #333; }
+
+/* ================================================================
+   Admin – GalleryManager.aspx
+   ================================================================ */
+
+.gm-wrap { padding: 10px 20px; font-family: Arial, sans-serif; font-size: 13px; direction: rtl; }
+.gm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.gm-header h2 { margin: 0; font-size: 16pt; color: #737357; }
+
+/* ---- List filter + pager ---- */
+.gm-list-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.gm-filter-input { padding: 5px 8px; border: 1px solid #bbb; border-radius: 3px; font-size: 13px; min-width: 220px; }
+.gm-filter-input:focus { border-color: #737357; outline: none; }
+.gm-list-info { font-size: 11px; color: #888; }
+.gm-pager { display: flex; align-items: center; gap: 3px; margin-top: 8px; flex-wrap: wrap; }
+.gm-pg-btn  { padding: 3px 9px; border: 1px solid #bbb; border-radius: 3px; background: #e8e2c8; cursor: pointer; font-size: 12px; }
+.gm-pg-btn:hover:not([disabled]) { background: #d4cda8; }
+.gm-pg-btn[disabled] { opacity: .4; cursor: default; }
+.gm-pg-cur  { background: #737357 !important; color: #fff; border-color: #555; }
+.gm-pg-ellipsis { padding: 0 4px; color: #888; }
+
+.gm-table { width: 100%; border-collapse: collapse; background: #F9F3DD; }
+.gm-table th, .gm-table td { border: 1px solid #ccc; padding: 6px 10px; text-align: right; }
+.gm-table th { background: #e8e2c8; font-weight: bold; }
+.gm-table tr:nth-child(even) td { background: #f3eed8; }
+
+.gm-btn { display: inline-block; padding: 4px 10px; border: 1px solid #888; border-radius: 3px; background: #e8e2c8; cursor: pointer; font-size: 12px; text-decoration: none; color: #333; }
+.gm-btn:hover { background: #d4cda8; }
+.gm-btn-danger { border-color: #c00; color: #c00; }
+.gm-btn-danger:hover { background: #fee; }
+.gm-btn-primary { background: #737357; color: #fff; border-color: #555; }
+.gm-btn-primary:hover { background: #5c5c45; }
+
+.gm-msg { padding: 8px 12px; border-radius: 3px; margin-bottom: 10px; }
+.gm-msg-ok  { background: #dff0d8; color: #3c763d; border: 1px solid #b2dba1; }
+.gm-msg-err { background: #f2dede; color: #a94442; border: 1px solid #ebccd1; }
+
+/* ================================================================
+   Admin – GalleryEditor (items editor panel inside GalleryManager)
+   ================================================================ */
+
+.ge-wrap { padding: 10px; direction: rtl; }
+
+/* ---- Inline gallery name editor -------------------------------- */
+.ge-name-row { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 14px; font-weight: bold; direction: ltr; }
+.ge-name-prefix { color: #555; white-space: nowrap; }
+.ge-name-sep    { color: #888; }
+.ge-name-save   { font-size: 12px; padding: 2px 8px; }
+.ge-name-err    { font-size: 11px; color: #c00; font-weight: normal; }
+/* ---------------------------------------------------------------- */
+
+.ge-toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.ge-radio-lbl { font-weight: normal; cursor: pointer; }
+.ge-width-ctrl { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+.ge-grid { display: grid; gap: 10px; }
+.ge-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.ge-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.ge-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.ge-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.ge-cols-5 { grid-template-columns: repeat(5, 1fr); }
+/* Demo=off: compact single-row, 170px cells */
+.ge-grid.ge-compact { grid-template-columns: repeat(auto-fill, 170px) !important; overflow-x: auto; }
+
+.ge-item {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background: #fafafa;
+    padding: 6px;
+    position: relative;
+    cursor: grab;
+}
+.ge-item.dragging { opacity: 0.4; border-color: #737357; }
+.ge-item.drag-over { border-color: #c00; }
+
+.ge-item-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    background: #222;
+}
+.ge-item-video-ph {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 11px;
+}
+/* When FFmpeg produced a real thumbnail in the admin editor */
+.ge-item-video-ph.ge-item-video-has-thumb {
+    position: relative;
+    display: block;
+}
+.ge-item-video-ph.ge-item-video-has-thumb .ge-item-thumb {
+    display: block;
+}
+.ge-item-video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.80);
+    pointer-events: none;
+}
+.ge-item-video-play::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 9px 0 9px 16px;
+    border-color: transparent transparent transparent #333;
+}
+
+.ge-item-toprow { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+.ge-item-preview { color: #555; cursor: pointer; font-size: 16px; line-height: 1; border: none; background: none; padding: 0; }
+.ge-item-preview:hover { color: #737357; }
+.ge-item-del { color: #c00; cursor: pointer; font-size: 18px; line-height: 1; border: none; background: none; padding: 0; }
+.ge-item-title { width: 100%; margin-top: 4px; font-size: 12px; padding: 2px 4px; box-sizing: border-box; }
+.ge-item-text  { width: 100%; margin-top: 3px; font-size: 11px; padding: 2px 4px; box-sizing: border-box; min-height: 48px; resize: vertical; direction: rtl; font-family: Arial, sans-serif; }
+
+/* ---- Mini HTML editor inside each gallery item card ------------ */
+.ge-mini-editor { margin-top: 4px; border: 1px solid #ccc; border-radius: 3px; background: #fff; }
+.ge-mini-toolbar {
+    display: flex;
+    gap: 2px;
+    padding: 3px 4px;
+    background: #f0ead0;
+    border-bottom: 1px solid #ccc;
+    border-radius: 3px 3px 0 0;
+}
+.ge-mini-btn {
+    min-width: 24px;
+    height: 22px;
+    padding: 0 4px;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    color: #333;
+}
+.ge-mini-btn:hover { background: #e8e2c8; }
+.ge-mini-body {
+    min-height: 44px;
+    max-height: 120px;
+    overflow-y: auto;
+    padding: 4px 6px;
+    font-size: 11px;
+    direction: rtl;
+    font-family: Arial, sans-serif;
+    outline: none;
+    word-break: break-word;
+}
+.ge-mini-body:empty::before {
+    content: attr(data-placeholder);
+    color: #aaa;
+    pointer-events: none;
+}
+
+.ge-drop-zone {
+    border: 2px dashed #aaa;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.ge-drop-zone.drag-active { background: #f0ead0; border-color: #737357; color: #555; }
+
+.ge-progress { height: 4px; background: #ddd; border-radius: 2px; margin-bottom: 8px; overflow: hidden; display: none; }
+.ge-progress-bar { height: 100%; background: #737357; width: 0; transition: width 0.2s; }

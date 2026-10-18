@@ -27,6 +27,8 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
         accessoriesList.append(Accessory(id: "MT", title: "talmudic_terms", iconImage: "Munachim_icon_ios.png", dataType:"HTML"))
         
         accessoriesList.append(Accessory(id: "MS", title:  "measurements", iconImage: "Midot_icon_ios.png", dataType:"Text"))
+        
+        accessoriesList.append(Accessory(id: "MP", title: "micropedia", iconImage: "Musagim_icon_ios.png", dataType:"Text"))
      
         accessoriesList.append(Accessory(id: "Exams", title: "st_Exams", iconImage: "Q&A_icon_ios.png", dataType:"Text"))
         
@@ -327,6 +329,10 @@ class AccessoriesListViewController: MSBaseViewController, UITableViewDelegate, 
           
         case "Exams":// שאלות ותשובות
             self.showExams()
+            break
+            
+        case "MP":// מיקרופדיה תלמודית
+            self.navigationController?.pushViewController(MicropediaViewController(), animated: true)
             break
             
         default: break

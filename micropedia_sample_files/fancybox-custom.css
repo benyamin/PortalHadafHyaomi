@@ -1,0 +1,32 @@
+/* Fancybox Custom Overrides - Do not modify core fancybox.css */
+
+/* Backdrop/Overlay background color */
+.fancybox__backdrop {
+    background-color: rgba(0, 0, 0, 0.85); /* Dark backdrop - adjust opacity as needed */
+}
+
+/* Content area background and padding */
+.fancybox__content {
+    background-color: #fefbf4; /* Content background */
+    padding: 0px; /* Add padding around content */
+}
+
+    /* For iframe content specifically */
+    .fancybox__content > iframe {
+        background-color: #fefbf4;
+    }
+
+/* Toolbar/controls area styling */
+.fancybox__toolbar {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px;
+}
+
+/* Example: Custom styling for specific content types */
+.fancybox__slide--image .fancybox__content {
+    padding: 0; /* Remove padding for images */
+}
+
+.fancybox__slide--iframe .fancybox__content {
+    padding: 0; /* Adjust padding for iframes */
+}
