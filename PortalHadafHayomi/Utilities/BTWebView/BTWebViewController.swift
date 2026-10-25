@@ -172,6 +172,14 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
     
     @objc func rotated()
     {
+        // iPad layout (iPad / iPhone Duo open): iOS rotates the screen for real and the web page
+        // stays inside the side menu. The manual turning below is only for the iPhone layout;
+        // on iPad it moved the web page over the whole screen and hid the Talmud page.
+        if AppLayout.isWide
+        {
+            return
+        }
+        
         if self.lockRotationButton.isSelected
         {
             self.lockRotationArrowImageView.rotateAnimation(duration: 0.6, repeatCount:2.0)

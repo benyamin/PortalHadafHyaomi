@@ -68,6 +68,12 @@ class SearchResultsPagerViewController: MSBaseViewController, UICollectionViewDe
     
     @objc func rotated()
     {
+        // iPad layout: iOS rotates the screen for real; the manual turning is only for iPhone
+        if AppLayout.isWide
+        {
+            return
+        }
+        
         if self.lockRotationButton.isSelected
         {
             self.lockRotationArrowImageView.rotateAnimation(duration: 0.6, repeatCount:2.0)
