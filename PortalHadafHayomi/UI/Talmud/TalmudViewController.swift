@@ -163,6 +163,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
        
         self.setDefaultTalmudDisplay()
         
+        self.setupSearchRowConstraints()
+        
         self.talmudPagePickerView.shouldHighlightSavedPages = true
 
         self.pagesCollectionView.isHidden = true
@@ -646,11 +648,96 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    /// "בחר דף" while the page picker is closed, "סגור" while it is open
+    func updateSelectPageButtonTitle(isPickerOpen:Bool)
+    {
+        let key = isPickerOpen ? "st_close" : "st_select_page"
+        self.selectPageButton?.setTitle(key.localize(), for: .normal)
+    }
+    
+    // MARK: - Search row stays at the top while the page picker is open
+    
+    private var searchRowTopConstraints:[NSLayoutConstraint] = []
+    private let searchRowTopWhenClosed:CGFloat = 39
+    
+    /// The page picker opens right under the buttons row ("לדף היומי" / "סגור"), over the search row
+    var pagePickerOpenTopOffset:CGFloat {
+        return self.selectPageButton?.frame.size.height ?? 35
+    }
+    
+    /// The picker stretches from under the search row down to the bottom bar (credit / player button)
+    func updatePagePickerHeightForOpen()
+    {
+        guard let picker = self.talmudPagePickerView, let container = picker.superview, let topBar = self.topBarView else { return }
+        container.layoutIfNeeded()
+        
+        // Full size: down to the bottom of the screen area (above the app's tab bar)
+        let bottomY = container.bounds.height - container.safeAreaInsets.bottom
+        let topY = topBar.frame.maxY + self.pagePickerOpenTopOffset
+        let height = max(200, bottomY - topY)
+        
+        if let heightConstraint = picker.constraints.first(where: { $0.firstItem === picker && $0.firstAttribute == .height && $0.secondItem == nil }) {
+            heightConstraint.constant = height
+        }
+        container.layoutIfNeeded()
+    }
+    
+    var isPagePickerOpen:Bool {
+        return self.talmudPagePickerViewTopConstraint.constant >= 0
+    }
+    
+    func setupSearchRowConstraints()
+    {
+        guard let topBar = self.topBarView, let searchBar = self.searchBar, let container = searchBar.superview else { return }
+        
+        // The search bar was attached under the "today's page" button, so it moved down with the page picker.
+        // Attach it to the top bar instead, like the arrows row.
+        for c in container.constraints where c.firstItem === searchBar && c.firstAttribute == .top {
+            c.isActive = false
+        }
+        let searchTop = searchBar.topAnchor.constraint(equalTo: topBar.bottomAnchor, constant: self.searchRowTopWhenClosed)
+        searchTop.isActive = true
+        self.searchRowTopConstraints = [searchTop]
+        
+        // The arrows row and the nikod button are already attached to the top bar (+39)
+        for c in container.constraints where c.isActive && c !== searchTop
+            && c.firstAttribute == .top && c.secondItem === topBar && c.secondAttribute == .bottom
+            && c.constant == self.searchRowTopWhenClosed {
+            self.searchRowTopConstraints.append(c)
+        }
+    }
+    
+    func setSearchRowForPagePicker(open:Bool)
+    {
+        // The picker covers the search row and the bottom bar;
+        // "לדף היומי", "בחר דף / סגור" and the top bar stay above it
+        if open, let picker = self.talmudPagePickerView {
+            picker.superview?.bringSubviewToFront(picker)
+        }
+        if !open {
+            for c in self.searchRowTopConstraints {
+                if let v = c.firstItem as? UIView { v.superview?.bringSubviewToFront(v) }
+            }
+        }
+        // "בחר תצוגה" and "בחר שיעור" are disabled while the page picker is open
+        for b in [self.selectDisplayTypeButton, self.selectLessonButton] {
+            b?.isEnabled = !open
+            b?.alpha = open ? 0.3 : 1.0
+        }
+        
+        for v in [self.selectTodaysPageButton as UIView?, self.selectPageButton as UIView?] {
+            if let v = v { v.superview?.bringSubviewToFront(v) }
+        }
+        if let topBar = self.topBarView { topBar.superview?.bringSubviewToFront(topBar) }
+    }
+    
     func closPicker(_ picker:UIView, animated:Bool)
     {
         //If is open hide talmudPagePicker
-        if picker == talmudPagePickerView && self.talmudPagePickerViewTopConstraint.constant == 0 {
+        if picker == talmudPagePickerView && self.isPagePickerOpen {
             self.talmudPagePickerViewTopConstraint.constant = -1 * self.talmudPagePickerView.frame.size.height
+            self.setSearchRowForPagePicker(open: false)
+            self.updateSelectPageButtonTitle(isPickerOpen: false)
         }
         
         //If is open hide displayTypePickerView
@@ -786,7 +873,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         
         var pickerIsDisplayed = false
         //If is open hide talmudPagePicker
-        if self.talmudPagePickerViewTopConstraint.constant == 0
+        if self.isPagePickerOpen
         {
             if let selectedMasehchet = talmudPagePickerView.selectedMasechet
             , let selectedPage = talmudPagePickerView.selectedPage
@@ -795,6 +882,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 self.scrollToMaschet(selectedMasehchet, page: selectedPage, pageSide:selectedPageSide, animated: false)
                 
                 self.talmudPagePickerViewTopConstraint.constant = -1 * self.talmudPagePickerView.frame.size.height
+                self.setSearchRowForPagePicker(open: false)
             }
         }
         else//Show picker
@@ -809,9 +897,13 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             
             self.talmudPagePickerView.scrollToMasechet(self.displyedMasceht!, page: self.displyedPage, pageSide:self.displyedPageSide, animated: false)
             
-            self.talmudPagePickerViewTopConstraint.constant = 0
+            self.updatePagePickerHeightForOpen()
+            self.talmudPagePickerViewTopConstraint.constant = self.pagePickerOpenTopOffset
+            self.setSearchRowForPagePicker(open: true)
             
         }
+        
+        self.updateSelectPageButtonTitle(isPickerOpen: pickerIsDisplayed)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
@@ -1280,6 +1372,13 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     func talmudPagePickerView(_ talmudPagePickerView:TalmudPagePickerView, didHide:Bool){
     }
     
+    /// A page was tapped in the page list: go to it and close the picker
+    func talmudPagePickerViewDidSelectPage(_ talmudPagePickerView: TalmudPagePickerView) {
+        if self.isPagePickerOpen {
+            self.togglePagePickerViewDisplay()
+        }
+    }
+    
     //MARK PickerViewDelegate
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
@@ -1394,11 +1493,32 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchBarTrailingConstraintToView?.priority = UILayoutPriority(900)
         self.searchBar.searchBarStyle = .default
+        
+        // The open search bar goes over the next / previous page arrows
+        self.searchBar.superview?.bringSubviewToFront(self.searchBar)
+        
+        // A "סגור" button above the keyboard to dismiss it
+        if self.searchBar.searchTextField.inputAccessoryView == nil {
+            let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
+            let closeButton = UIBarButtonItem(title: "st_close".localize(), style: .done, target: self, action: #selector(dismissSearchKeyboard))
+            toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), closeButton]
+            toolbar.sizeToFit()
+            self.searchBar.searchTextField.inputAccessoryView = toolbar
+            self.searchBar.searchTextField.reloadInputViews()
+        }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.searchBarTrailingConstraintToView?.priority = UILayoutPriority(500)
         self.searchBar.searchBarStyle = .minimal
+        
+        // Arrows back on top when the search bar is small again
+        if let prePageButton = self.prePageButton { prePageButton.superview?.bringSubviewToFront(prePageButton) }
+        if let nextPageButton = self.nextPageButton { nextPageButton.superview?.bringSubviewToFront(nextPageButton) }
+    }
+    
+    @objc func dismissSearchKeyboard() {
+        self.searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -1409,10 +1529,12 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
 }

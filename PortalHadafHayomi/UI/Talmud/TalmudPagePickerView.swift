@@ -13,6 +13,9 @@ import UIKit
     func talmudPagePickerView(_ talmudPagePickerView:TalmudPagePickerView, didChangeComponent component:Int)
     
     func talmudPagePickerView(_ talmudPagePickerView:TalmudPagePickerView, didHide:Bool)
+    
+    /// The user tapped a page in the list (the selection is already set)
+    @objc optional func talmudPagePickerViewDidSelectPage(_ talmudPagePickerView:TalmudPagePickerView)
 }
 
 
@@ -21,18 +24,20 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     var dispalyedMasechtot:[Masechet]?
     {
         didSet{
+            // The picker wheel stays hidden: the page list is shown instead (it still holds the selection)
+            self.pagesPickerView.isHidden = true
+            // The floating save button is replaced by the icon on the side of each amud
+            self.saveOrRemovePageButton?.isHidden = true
             if dispalyedMasechtot?.count == 0
             {
-                self.pagesPickerView.isHidden = true
+                self.pageListView.isHidden = true
                 self.noPagesLabel?.isHidden = false
-                self.saveOrRemovePageButton?.isHidden = true
             }
             else{
-                self.pagesPickerView.isHidden = false
+                self.pageListView.isHidden = false
                 self.noPagesLabel?.isHidden = true
-                
-                self.saveOrRemovePageButton?.isHidden = false
             }
+            self.pageListView.masechtot = dispalyedMasechtot ?? []
         }
     }
     var displayedPages:[Page]?
@@ -42,6 +47,7 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
         didSet {
             self.titleLabel?.text = "st_display_Type_\(displayType.rawValue)".localize()
             self.updatePagePickerLayout()
+            self.pageListView.reload()
         }
     }
     
@@ -68,8 +74,57 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     var highlightSavedPages = false{
         didSet{
             self.pagesPickerView.reloadAllComponents()
+            self.pageListView.reload()
         }
     }
+    
+    /// The new page list (masechtot -> daf cards). Replaces the picker wheel on screen.
+    lazy var pageListView: TalmudPageListView = {
+        let listView = TalmudPageListView()
+        
+        listView.dafimProvider = { [weak self] masechet in
+            guard let self = self else { return [] }
+            if self.showSavedPagesButton?.isSelected ?? false {
+                return masechet.savedPages(forDisplayType: self.displayType).map {
+                    TalmudListDaf(page: $0, sides: masechet.getSavedPageSidesForPage($0, displayType: self.displayType))
+                }
+            }
+            return masechet.pages.map { page in
+                TalmudListDaf(page: page, sides: [0, 1].filter {
+                    HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: $0) != nil
+                })
+            }
+        }
+        
+        listView.saveState = { [weak self] masechet, page, side in
+            guard let self = self, self.displayType.supportsOfflineSave,
+                  let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: side) else { return .unavailable }
+            if self.isDownloadingPage(pageIndex: pageIndex) { return .downloading }
+            if HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: self.displayType) != nil { return .saved }
+            return .notSaved
+        }
+        
+        listView.onDownload = { [weak self] masechet, page, side in
+            if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: side) {
+                self?.savePage(pageIndex: pageIndex)
+            }
+        }
+        
+        listView.onDelete = { [weak self] masechet, page, side in
+            if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: side) {
+                self?.deletePage(pageIndex: pageIndex)
+            }
+        }
+        
+        listView.onSelect = { [weak self] masechet, page, side in
+            guard let self = self else { return }
+            self.selectInPicker(masechet, page: page, side: side)
+            // Screens that react to every change (e.g. the iPad screen) get the usual callback
+            self.delegate?.talmudPagePickerView(self, didChangeComponent: 0)
+            self.delegate?.talmudPagePickerViewDidSelectPage?(self)
+        }
+        return listView
+    }()
         
     lazy var progressCircleView:BTProgressCircleView? = {
         
@@ -183,6 +238,19 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
         
         pagesPickerView.addSidedConstraints()
         self.sendSubviewToBack(pagesPickerView)
+        
+        // The new page list, in the same place as the picker
+        self.pageListView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(self.pageListView)
+        NSLayoutConstraint.activate([
+            self.pageListView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            self.pageListView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            self.pageListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            self.pageListView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+        if let saveButton = self.saveOrRemovePageButton {
+            saveButton.superview?.bringSubviewToFront(saveButton)
+        }
         
         self.showAllPages()
         
@@ -326,6 +394,37 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             row = 0
         }
         self.pagesPickerView.selectRow(row, inComponent: 0, animated: animated)
+        
+        // Open the masechet in the list and show the current page
+        self.pageListView.showCurrent(masechet: masechet, page: page, side: row)
+    }
+    
+    /// Puts the picker (which holds selectedMasechet / selectedPage / selectedPageSide) on the tapped page.
+    func selectInPicker(_ masechet:Masechet, page:Page, side:Int)
+    {
+        if let masechetIndex = dispalyedMasechtot?.firstIndex(where: { $0 === masechet })
+        {
+            self.selectedMasechet = masechet
+            self.pagesPickerView.selectRow(masechetIndex, inComponent: 2, animated: false)
+        }
+        
+        if let pageRow = self.displayedPages?.firstIndex(where: { $0.index == page.index })
+        {
+            self.pagesPickerView.selectRow(pageRow, inComponent: 1, animated: false)
+        }
+        
+        if self.showSavedPagesButton?.isSelected ?? false
+        {
+            self.displayedPageSides = masechet.getSavedPageSidesForPage(page, displayType: self.displayType)
+        }
+        else
+        {
+            self.displayedPageSides = [0,1]
+        }
+        self.pagesPickerView.reloadComponent(0)
+        self.pagesPickerView.selectRow(self.displayedPageSides?.firstIndex(of: side) ?? 0, inComponent: 0, animated: false)
+        
+        self.updatePagePickerLayout()
     }
     
     //MARK: UIPickerViewDelegate Methods
@@ -585,6 +684,9 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     
     func setSaveButton()
     {
+        // The floating button is no longer shown (see the icons in the page list)
+        self.saveOrRemovePageButton?.isHidden = true
+        self.progressCircleView?.isHidden = true
         self.saveOrRemovePageButton?.setImage(UIImage(named: "downloadIcon"), for: .normal)
         self.saveOrRemovePageButton?.setImage(UIImage(named: "downloadIcon"), for: .highlighted)
         
@@ -594,6 +696,8 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
     
     func setDeleteButton()
     {
+        self.saveOrRemovePageButton?.isHidden = true
+        self.progressCircleView?.isHidden = true
         self.saveOrRemovePageButton?.setImage(UIImage(named: "delete"), for: .normal)
         self.saveOrRemovePageButton?.setImage(UIImage(named: "delete_highlighted"), for: .highlighted)
         
@@ -606,74 +710,61 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
         if let selectedMasechet = self.selectedMasechet
             , let selectedPage = self.selectedPage
             , let selectedPageSide = self.selectedPageSide
+            , let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(selectedMasechet, page: selectedPage, pageSide: selectedPageSide)
         {
-            
-            let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(selectedMasechet,
-                                                                          page: selectedPage,
-                                                                          pageSide: selectedPageSide)
-            
-            if pageIndex == nil{
-                return
-            }
-            
-            let pageInfo = (pageIndex:pageIndex, type:self.displayType)
-            SavePageProcess().executeWithObject(pageInfo, onStart: { () -> Void in
-                
-                self.saveOrRemovePageButton?.isHidden = true
-                
-                if let progressCircleView = self.progressCircleView
-                {
-                    self.saveOrRemovePageButton?.superview?.addSubview(progressCircleView)
-                    self.progressCircleView?.isHidden = false
-                }
-                
-                self.savePagesInProgress[pageIndex!] = 0.0
-                self.updatePagePickerLayout()
-                
-            }, onProgress: { (object) -> Void in
-                
-                let savePageProcess = object as! SavePageProcess
-                self.savePagesInProgress[savePageProcess.pageInfo.pageIndex] = savePageProcess.downloadProgress
-                
-                self.updatePagePickerLayout()
-                
-            }, onComplete: { (object) -> Void in
-                
-                let pageIndex = object as! Int
-                self.savePagesInProgress.removeValue(forKey: pageIndex)
-                
-                let pageInfo = HadafHayomiManager.pageInfoForIndexInTalmud(pageIndex)
-                
-                if let masechet = pageInfo["maschet"] as? Masechet
-                    , let page = pageInfo["page"] as? Page
-                {
-                    masechet.hasSavedPages = true
-                    
-                    for masechetPage in masechet.pages
-                    {
-                        if masechetPage.index == page.index
-                        {
-                            masechetPage.hasSavedPages = true
-                            break
-                        }
-                    }
-                    
-                    self.pagesPickerView.reloadComponent(2)//Masechtot
-                    self.pagesPickerView.reloadComponent(1)//pages
-                    self.pagesPickerView.reloadComponent(0)//pageSide
-                    
-                    self.updatePagePickerLayout()
-                }
-                
-            },onFaile: { (object, error) -> Void in
-                
-                print ("saveButtonClicked failed")
-                let savePageProcess = object as! SavePageProcess
-                self.savePagesInProgress.removeValue(forKey: savePageProcess.pageInfo.pageIndex)
-                
-                self.updatePagePickerLayout()
-            })
+            self.savePage(pageIndex: pageIndex)
         }
+    }
+    
+    /// Downloads one amud for the current display type (the icon on its side shows the progress)
+    func savePage(pageIndex:Int)
+    {
+        if self.isDownloadingPage(pageIndex: pageIndex) { return }
+        
+        let pageInfo = (pageIndex:pageIndex, type:self.displayType)
+        SavePageProcess().executeWithObject(pageInfo, onStart: { () -> Void in
+            
+            self.savePagesInProgress[pageIndex] = 0.0
+            self.pageListView.reloadVisibleRows()
+            
+        }, onProgress: { (object) -> Void in
+            
+            let savePageProcess = object as! SavePageProcess
+            self.savePagesInProgress[savePageProcess.pageInfo.pageIndex] = savePageProcess.downloadProgress
+            
+        }, onComplete: { (object) -> Void in
+            
+            let savedPageIndex = object as! Int
+            self.savePagesInProgress.removeValue(forKey: savedPageIndex)
+            
+            let pageInfo = HadafHayomiManager.pageInfoForIndexInTalmud(savedPageIndex)
+            
+            if let masechet = pageInfo["maschet"] as? Masechet
+                , let page = pageInfo["page"] as? Page
+            {
+                masechet.hasSavedPages = true
+                
+                for masechetPage in masechet.pages
+                {
+                    if masechetPage.index == page.index
+                    {
+                        masechetPage.hasSavedPages = true
+                        break
+                    }
+                }
+                
+                self.pagesPickerView.reloadAllComponents()
+            }
+            self.pageListView.reloadVisibleRows()
+            self.updatePagePickerLayout()
+            
+        },onFaile: { (object, error) -> Void in
+            
+            print ("savePage failed")
+            self.savePagesInProgress.removeValue(forKey: pageIndex)
+            self.pageListView.reloadVisibleRows()
+            self.updatePagePickerLayout()
+        })
     }
     
     @IBAction func deleteButtonClicked(_ sender:UIButton)
@@ -681,41 +772,39 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
         if let selectedMasechet = self.selectedMasechet
             , let selectedPage = self.selectedPage
             , let selectedPageSide = self.selectedPageSide
+            , let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(selectedMasechet, page: selectedPage, pageSide: selectedPageSide)
         {
+            self.deletePage(pageIndex: pageIndex)
+        }
+    }
+    
+    /// Deletes one saved amud of the current display type
+    func deletePage(pageIndex:Int)
+    {
+        let removePageInfo = (pageIndex:pageIndex, type:self.displayType)
+        RemovePageProcess().executeWithObject(removePageInfo, onStart: { () -> Void in
             
-            let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(selectedMasechet,
-                                                                          page: selectedPage,
-                                                                          pageSide: selectedPageSide)
+        }, onComplete: { (object) -> Void in
             
-            if pageIndex == nil
+            let removedPageIndex = object as! Int
+            self.savePagesInProgress.removeValue(forKey: removedPageIndex)
+            
+            if self.showSavedPagesButton?.isSelected ?? false
             {
-                return
+                // In "saved pages" the amud disappears from the list
+                self.showSavedPages()
+            }
+            else
+            {
+                self.pageListView.reloadVisibleRows()
             }
             
-            let removePageInfo = (pageIndex:pageIndex!, type:self.displayType)
-            RemovePageProcess().executeWithObject(removePageInfo, onStart: { () -> Void in
-                
-            }, onComplete: { (object) -> Void in
-                
-                let pageIndex = object as! Int
-                self.savePagesInProgress.removeValue(forKey: pageIndex)
-                
-                if self.showAllPagesButton?.isSelected ?? false
-                {
-                    self.showAllPages()
-                }
-                else if self.showSavedPagesButton?.isSelected ?? false
-                {
-                    self.showSavedPages()
-                }
-                
-                self.updatePagePickerLayout()
-                
-            },onFaile: { (object, error) -> Void in
-                
-                print(error)
-            })
-        }
+            self.updatePagePickerLayout()
+            
+        },onFaile: { (object, error) -> Void in
+            
+            print(error)
+        })
     }
     
     func onDidRemovePage(pageIndex:Int)

@@ -671,6 +671,7 @@
 		B0C3925363EDE6C5B24F5C12 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4A381300C2B847D28E2B1FD8 /* OneSignalExtension */; };
 		BB3E460CCE9F3451922B6198 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6017FB69F28EE21852A84313 /* Foundation.framework */; };
 		FDC00397C3BA51E0429AE003 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CA3344C99BC41463D8E1F2 /* NotificationService.swift */; };
+		3045150E9109794F857B699A /* TalmudPageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1374,6 +1375,7 @@
 		A7FE7A8EC6498CF377119121 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11D1E54F1712CA462637413 /* MicropediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicropediaViewController.swift; sourceTree = "<group>"; };
 		F4CA3344C99BC41463D8E1F2 /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalmudPageListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1730,6 +1732,7 @@
 				4A933AD71FCF4AB400D175E1 /* TalmudViewController.swift */,
 				4A47E6041FF9098500785929 /* Talmud_IPadViewController.swift */,
 				4A933AD51FCF4AB400D175E1 /* TalmudPageCell.swift */,
+				6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */,
 				4A5A428E21F3EE7D00DAC7C6 /* TalmudDoublePageCell.swift */,
 				4A7E0DEC1FEB224800D84E0E /* TalmudPagePickerView.swift */,
 				4A7E0E131FF436FD00D84E0E /* TalmudPagePickerView.xib */,
@@ -3410,6 +3413,7 @@
 				4A17CBCA21C593370063F834 /* ArticlesManager.swift in Sources */,
 				4AB1663E2131EAD000481B04 /* SurveyViewController.swift in Sources */,
 				4A933AD81FCF4AB400D175E1 /* TalmudPageCell.swift in Sources */,
+				3045150E9109794F857B699A /* TalmudPageListView.swift in Sources */,
 				4AC482FD1FE58CD0000F1528 /* UIViewController+Extras.swift in Sources */,
 				4A7537261FD6D5F50013BCD9 /* AEXML.swift in Sources */,
 				4A90C8AB20BC984E00D46BC2 /* QandADetailsViewController.swift in Sources */,

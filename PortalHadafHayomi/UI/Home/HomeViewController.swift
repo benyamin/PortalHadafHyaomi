@@ -603,7 +603,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             break
             
         case "Surveys":
-            self.showWebPageWithLink("https://daf-yomi.com/RatingPreview.aspx", title: "Rating")
+            self.showWebPageWithLink("https://daf-yomi.com/Rating.aspx", title: "Rating")
             break
             
         case "TheDafYomiProject":
