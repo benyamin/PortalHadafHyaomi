@@ -112,6 +112,7 @@
 		22FD9939295364CC00F73BDD /* favoriteUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FD9938295364CC00F73BDD /* favoriteUser.png */; };
 		22FD993B2953673D00F73BDD /* MaggidiShiourTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22FD993A2953673D00F73BDD /* MaggidiShiourTableView.xib */; };
 		2D4086306B10EF29964D1239 /* MicropediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11D1E54F1712CA462637413 /* MicropediaViewController.swift */; };
+		3045150E9109794F857B699A /* TalmudPageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */; };
 		4A0BCF7A1FE7B799009F7261 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BCF791FE7B799009F7261 /* MapViewController.swift */; };
 		4A0F791921ADC085000F8393 /* RemovePageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0F791821ADC085000F8393 /* RemovePageProcess.swift */; };
 		4A17CBCA21C593370063F834 /* ArticlesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A17CBC921C593370063F834 /* ArticlesManager.swift */; };
@@ -671,7 +672,6 @@
 		B0C3925363EDE6C5B24F5C12 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4A381300C2B847D28E2B1FD8 /* OneSignalExtension */; };
 		BB3E460CCE9F3451922B6198 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6017FB69F28EE21852A84313 /* Foundation.framework */; };
 		FDC00397C3BA51E0429AE003 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CA3344C99BC41463D8E1F2 /* NotificationService.swift */; };
-		3045150E9109794F857B699A /* TalmudPageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1371,11 +1371,11 @@
 		4AFE3EFA205463C20040BD24 /* LessonVenuesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonVenuesListViewController.swift; sourceTree = "<group>"; };
 		4AFE3EFC20548A5A0040BD24 /* AddLessonVenueProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLessonVenueProcess.swift; sourceTree = "<group>"; };
 		6017FB69F28EE21852A84313 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalmudPageListView.swift; sourceTree = "<group>"; };
 		7D79FD228D91DBC70085A71A /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FE7A8EC6498CF377119121 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11D1E54F1712CA462637413 /* MicropediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicropediaViewController.swift; sourceTree = "<group>"; };
 		F4CA3344C99BC41463D8E1F2 /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalmudPageListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3841,7 +3841,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13.3;
+				MARKETING_VERSION = 13.4;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3872,7 +3872,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13.3;
+				MARKETING_VERSION = 13.4;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
