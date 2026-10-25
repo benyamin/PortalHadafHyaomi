@@ -278,8 +278,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if AppLayout.isWide {
-            // iPad: landscape as in Info.plist. iPhone Fold (open): any orientation
-            return UIDevice.current.userInterfaceIdiom == .pad ? .landscape : .all
+            // iPad / iPhone Duo (open): real rotation, the lock button can limit it
+            return Main_IPadViewController.allowedOrientations
         }
         // iPhone: portrait everywhere, landscape only on the Talmud page screen
         return TalmudViewController.shared?.allowedOrientations ?? .portrait

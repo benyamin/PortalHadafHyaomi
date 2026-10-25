@@ -111,44 +111,117 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
 
     }
     
+    // MARK: - Rotation
+    // The iPad now uses a real iOS rotation (like the iPhone Talmud screen) instead of turning
+    // the page with a transform. Landscape: side menu + page (or full screen page).
+    // Portrait: the page fills the whole screen. A real rotation also keeps the PDF sharp.
+    
+    /// The orientations AppDelegate allows for the iPad layout (changed by the lock button)
+    static var allowedOrientations:UIInterfaceOrientationMask = .all
+    
+    private var appliedLayout:String?
+    
     @IBAction func lockRotationButtonClicked(_ sender:UIButton)
     {
         self.lockRotationButton.isSelected = !self.lockRotationButton.isSelected
         
-        //If should rotate
-        if self.lockRotationButton.isSelected == false
+        if self.lockRotationButton.isSelected
         {
-            self.rotated()
+            // Lock to the current orientation
+            let orientation = self.view.window?.windowScene?.interfaceOrientation ?? .landscapeLeft
+            switch orientation {
+            case .portrait: Main_IPadViewController.allowedOrientations = .portrait
+            case .portraitUpsideDown: Main_IPadViewController.allowedOrientations = .portraitUpsideDown
+            case .landscapeRight: Main_IPadViewController.allowedOrientations = .landscapeRight
+            default: Main_IPadViewController.allowedOrientations = .landscapeLeft
+            }
         }
+        else
+        {
+            Main_IPadViewController.allowedOrientations = .all
+        }
+        self.updateSupportedOrientations()
+    }
+    
+    func updateSupportedOrientations()
+    {
+        if #available(iOS 16.0, *) {
+            self.setNeedsUpdateOfSupportedInterfaceOrientations()
+        } else {
+            UIViewController.attemptRotationToDeviceOrientation()
+        }
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return Main_IPadViewController.allowedOrientations
     }
     
     @IBAction func fullScreenButtonClicked(_ sender:UIButton)
     {
         self.fullScreenButton.isSelected =  !self.fullScreenButton.isSelected
+        self.applyLayoutForCurrentSize(force: true, animated: true)
+    }
+    
+    /// Device turned while the screen is locked: show the lock button is holding it
+    @objc func rotated()
+    {
+        let deviceOrientation = UIDevice.current.orientation
+        if !deviceOrientation.isPortrait && !deviceOrientation.isLandscape { return }
         
         if self.lockRotationButton.isSelected
         {
-            return
+            let isPortraitScreen = self.view.bounds.height > self.view.bounds.width
+            if deviceOrientation.isPortrait != isPortraitScreen
+            {
+                self.lockRotationButton.rotateAnimation(duration: 0.6, repeatCount:2.0)
+            }
         }
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        self.applyLayoutForCurrentSize(force: false, animated: false)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator)
+    {
+        let currentIndex = self.currentPageIndexPath()
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+            self.applyLayoutForCurrentSize(force: true, animated: false, keepIndex: currentIndex)
+        }, completion: { _ in
+            self.scrollTalmudBack(to: currentIndex)
+        })
+    }
+    
+    func applyLayoutForCurrentSize(force:Bool, animated:Bool, keepIndex:IndexPath? = nil)
+    {
+        let size = self.view.bounds.size
+        let layout:String
+        if size.height > size.width {
+            layout = "portrait"
+        } else if self.fullScreenButton.isSelected {
+            layout = "fullLandscape"
+        } else {
+            layout = "landscape"
+        }
+        if !force && layout == self.appliedLayout { return }
+        self.appliedLayout = layout
         
-        if UIDevice.current.orientation.isPortrait
-        {
-            return
-        }
-        else if self.fullScreenButton.isSelected
-        {
-            self.setFullLandscapeDisplay()
-        }
-        else{
-            self.setLandscapeDisplay()
-        }
+        let currentIndex = keepIndex ?? self.currentPageIndexPath()
         
+        switch layout {
+        case "portrait":      self.setPortraitDisplay(currentIndex, animated: animated)
+        case "fullLandscape": self.setFullLandscapeDisplay(currentIndex, animated: animated)
+        default:              self.setLandscapeDisplay(currentIndex, animated: animated)
+        }
     }
     
     /// The page in the middle of the screen (the first visible cell can be the neighbour page)
     func currentPageIndexPath() -> IndexPath
     {
-        let collectionView = self.talmudViewController.pagesCollectionView!
+        guard let collectionView = self.talmudViewController.pagesCollectionView else { return IndexPath(row: 0, section: 0) }
         let row = collectionView.centerRowIndex()
         if row >= 0 && row < collectionView.numberOfItems(inSection: 0) {
             return IndexPath(row: row, section: 0)
@@ -156,143 +229,63 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         return collectionView.indexPathsForVisibleItems.first ?? IndexPath(row: 0, section: 0)
     }
     
-    @objc func rotated()
+    private func scrollTalmudBack(to indexPath:IndexPath)
     {
-        // iPhone Duo (open): iOS rotates the screen itself, no manual turning of the page
-        if UIDevice.current.userInterfaceIdiom != .pad
-        {
-            return
+        guard let collectionView = self.talmudViewController.pagesCollectionView else { return }
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.layoutIfNeeded()
+        if indexPath.row < collectionView.numberOfItems(inSection: 0) {
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
         }
-        
-        // Ignore face up / face down / unknown, so lying the iPad flat does not turn the page
-        let deviceOrientation = UIDevice.current.orientation
-        if !deviceOrientation.isPortrait && !deviceOrientation.isLandscape
-        {
-            return
-        }
-        
-        if self.lockRotationButton.isSelected
-        {
-            self.lockRotationButton.rotateAnimation(duration: 0.6, repeatCount:2.0)
-            
-            return
-        }
-        
+    }
+    
+    private func setMainContainerFrame(_ frame:CGRect, onTop:Bool, currentIndex:IndexPath, animated:Bool)
+    {
         self.mainContainerView.translatesAutoresizingMaskIntoConstraints = true
-        
-        if UIDevice.current.orientation.isPortrait {
-            
-            self.setPortraitDisplay()
-        }
-        else {
-            if self.fullScreenButton.isSelected
-            {
-                self.setFullLandscapeDisplay()
-            }
-            else{
-                self.setLandscapeDisplay()
-            }
-            
-        }
-    }
-    
-    func setPortraitDisplay()
-    {
-        let currentIndex = self.currentPageIndexPath()
-        
-        let rootViewController = UIApplication.shared.keyWindow!.rootViewController!
-        let colletoinCenterOnRootView = self.view.convert(self.mainContainerView.center, to:rootViewController.view)
-        rootViewController.view.addSubview(self.mainContainerView)
-        self.mainContainerView.center = colletoinCenterOnRootView
-        
-        // The iPad screens stay in landscape, so in portrait the page is turned 90°.
-        // Which way depends on which landscape side the screen is in;
-        // using one fixed angle showed the page upside down on the other side.
-        let interfaceOrientation = self.view.window?.windowScene?.interfaceOrientation ?? .landscapeLeft
-        var rotationAngle = (interfaceOrientation == .landscapeRight) ? -Double.pi/2 : Double.pi/2
-        if UIDevice.current.orientation == .portraitUpsideDown {
-            rotationAngle = -rotationAngle
-        }
-        
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-            {
-                self.mainContainerView.transform = CGAffineTransform(rotationAngle: CGFloat(rotationAngle))
-                
-                if let flowLayout = self.talmudViewController.pagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-                {
-                    flowLayout.invalidateLayout()
-                }
-                
-                // With a rotation, "frame" can't be set (iOS keeps the old landscape size, so the page
-                // did not fill the screen). Set the size and center instead: the turned page is
-                // as wide as the screen is tall, and as tall as the screen is wide.
-                let rootBounds = rootViewController.view.bounds
-                self.mainContainerView.bounds = CGRect(x: 0, y: 0, width: rootBounds.height, height: rootBounds.width)
-                self.mainContainerView.center = CGPoint(x: rootBounds.midX, y: rootBounds.midY)
-                self.mainContainerView.layoutIfNeeded()
-                
-                self.talmudViewController.pagesCollectionView.selectItem(at: currentIndex, animated: false, scrollPosition: .centeredHorizontally)
-                
-                
-        }, completion: {_ in
-            
-        })
-    }
-    
-    func setFullLandscapeDisplay()
-    {
-        let currentIndex = self.currentPageIndexPath()
-        
-        let rootViewController = UIApplication.shared.keyWindow!.rootViewController!
-        let colletoinCenterOnRootView = self.view.convert(self.mainContainerView.center, to:rootViewController.view)
-        rootViewController.view.addSubview(self.mainContainerView)
-        self.mainContainerView.center = colletoinCenterOnRootView
-        
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-            {
-                self.mainContainerView.transform = .identity
-
-                if let flowLayout = self.talmudViewController.pagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-                {
-                    flowLayout.invalidateLayout()
-                }
-                
-                self.mainContainerView.frame = rootViewController.view.bounds
-                self.mainContainerView.layoutIfNeeded()
-                
-                self.talmudViewController.pagesCollectionView.selectItem(at: currentIndex, animated: false, scrollPosition: .centeredHorizontally)
-                
-                
-        }, completion: {_ in
-            
-        })
-    }
-    
-    func setLandscapeDisplay()
-    {
-        let currentIndex = self.currentPageIndexPath()
-        
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-            {
-                self.mainContainerView.transform = .identity
-                
-                if let flowLayout = self.talmudViewController.pagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-                {
-                    flowLayout.invalidateLayout()
-                }
-                
-                self.mainContainerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - self.sideContainerViewWidthConstraint.constant, height: self.view.frame.height)
-                
-                self.mainContainerView.layoutIfNeeded()
-                
-                self.talmudViewController.pagesCollectionView.selectItem(at: currentIndex, animated: false, scrollPosition: .centeredHorizontally)
-                
-                
-        }, completion: {_ in
-            
+        self.mainContainerView.transform = .identity
+        if self.mainContainerView.superview !== self.view {
             self.view.addSubview(self.mainContainerView)
+        }
+        if onTop {
+            self.view.bringSubviewToFront(self.mainContainerView)
+        } else {
             self.view.sendSubviewToBack(self.mainContainerView)
-        })
+        }
+        
+        let changes = {
+            self.mainContainerView.frame = frame
+            self.mainContainerView.layoutIfNeeded()
+            self.scrollTalmudBack(to: currentIndex)
+        }
+        if animated {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: .allowUserInteraction, animations: changes, completion: { _ in
+                self.scrollTalmudBack(to: currentIndex)
+            })
+        } else {
+            changes()
+            DispatchQueue.main.async { self.scrollTalmudBack(to: currentIndex) }
+        }
+    }
+    
+    /// Portrait: the page fills the whole screen
+    func setPortraitDisplay(_ currentIndex:IndexPath, animated:Bool)
+    {
+        self.setMainContainerFrame(self.view.bounds, onTop: true, currentIndex: currentIndex, animated: animated)
+    }
+    
+    /// Landscape, full screen button on: the page fills the whole screen
+    func setFullLandscapeDisplay(_ currentIndex:IndexPath, animated:Bool)
+    {
+        self.setMainContainerFrame(self.view.bounds, onTop: true, currentIndex: currentIndex, animated: animated)
+    }
+    
+    /// Landscape: page next to the side menu
+    func setLandscapeDisplay(_ currentIndex:IndexPath, animated:Bool)
+    {
+        let frame = CGRect(x: 0, y: 0,
+                           width: self.view.bounds.width - self.sideContainerViewWidthConstraint.constant,
+                           height: self.view.bounds.height)
+        self.setMainContainerFrame(frame, onTop: false, currentIndex: currentIndex, animated: animated)
     }
     
     //MARK: HomeViewController Delegate Methods
