@@ -259,7 +259,7 @@ class ExpressionsViewController: MSBaseViewController, UITableViewDelegate, UITa
     //MARK ExpressionsWebTableCell Delegate methods
     func expressionsTableCell(_ expressionsTableCell:ExpressionsTableCell, shouldStartLoadURL url:URL)
     {
-        if(UIDevice.current.userInterfaceIdiom == .pad)
+        if(AppLayout.isWide)
         {
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 ,rootViewController is Main_IPadViewController

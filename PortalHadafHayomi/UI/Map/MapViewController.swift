@@ -421,7 +421,7 @@ class MapViewController: MSBaseViewController, MKMapViewDelegate, UITableViewDel
         
         let actionSheet = NavigationActoinSheet.createWith(address: lessonVenueFullAddress, latitude: lessonVenue.latitude, longitude: lessonVenue.longitude)
         
-        if(UIDevice.current.userInterfaceIdiom == .pad){
+        if(AppLayout.isWide){
             if let ppc = actionSheet.popoverPresentationController {
                 ppc.sourceView = lessonVenueTableCell
                 ppc.sourceRect = lessonVenueTableCell.bounds

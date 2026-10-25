@@ -66,7 +66,7 @@ class ArticlesViewController: MSBaseViewController, UITableViewDelegate, UITable
         
         if let article = self.articaleCategory?.articles[indexPath.row]
         {
-            if(UIDevice.current.userInterfaceIdiom == .pad)
+            if(AppLayout.isWide)
             {
                 if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                     ,rootViewController is Main_IPadViewController

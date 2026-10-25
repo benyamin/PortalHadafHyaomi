@@ -537,7 +537,7 @@ class SearchTalmudViewController: MSBaseViewController, UITableViewDelegate, UIT
             
             webViewController.loadUrl(mobileLink, title: (self.selectedSearchResult?.page ?? ""))
             
-            if(UIDevice.current.userInterfaceIdiom == .pad)
+            if(AppLayout.isWide)
             {
                 if let mainViewController = UIApplication.shared.keyWindow?.mainViewController()
                 {

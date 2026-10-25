@@ -167,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func showOpeningScreen()
     {
-        if(UIDevice.current.userInterfaceIdiom == .pad)//IPad
+        if(AppLayout.isWide)//IPad layout
         {
             return
         }
@@ -277,8 +277,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return .landscape // same as Info.plist for iPad
+        if AppLayout.isWide {
+            // iPad: landscape as in Info.plist. iPhone Fold (open): any orientation
+            return UIDevice.current.userInterfaceIdiom == .pad ? .landscape : .all
         }
         // iPhone: portrait everywhere, landscape only on the Talmud page screen
         return TalmudViewController.shared?.allowedOrientations ?? .portrait

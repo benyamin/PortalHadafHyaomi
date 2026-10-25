@@ -23,17 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the window for this scene
         window = UIWindow(windowScene: windowScene)
         
-        // Set up the root view controller based on device type
-        if(UIDevice.current.userInterfaceIdiom == .pad) { // iPad
-            let storyboard = UIStoryboard(name: "Main_IPadStoryboard", bundle: nil)
-            window?.rootViewController = storyboard.instantiateInitialViewController()
-        } else { // iPhone
-            let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
-            let rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-            let navController = UINavigationController(rootViewController: rootViewController)
-            navController.setNavigationBarHidden(true, animated: false)
-            window?.rootViewController = navController
-        }
+        // Set up the root view controller by screen size: iPad layout on big screens (iPad, iPhone Fold open)
+        let wide = AppLayout.shouldUseWide(for: windowScene.coordinateSpace.bounds.size)
+        window?.rootViewController = self.makeRootViewController(wide: wide)
         
         window?.makeKeyAndVisible()
         
@@ -41,6 +33,54 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.handleLocalization()
             appDelegate.showOpeningScreenIfRequired()
+        }
+    }
+
+    // MARK: - iPhone layout / iPad layout
+    
+    func makeRootViewController(wide:Bool) -> UIViewController
+    {
+        if wide { // iPad layout
+            let storyboard = UIStoryboard(name: "Main_IPadStoryboard", bundle: nil)
+            return storyboard.instantiateInitialViewController()!
+        }
+        // iPhone layout
+        let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
+        let rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+        let navController = UINavigationController(rootViewController: rootViewController)
+        navController.setNavigationBarHidden(true, animated: false)
+        return navController
+    }
+    
+    /// Called when the screen size changes: fold / unfold, Split View, Stage Manager
+    func windowScene(_ windowScene: UIWindowScene, didUpdate previousCoordinateSpace: UICoordinateSpace, interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation, traitCollection previousTraitCollection: UITraitCollection)
+    {
+        let wide = AppLayout.shouldUseWide(for: windowScene.coordinateSpace.bounds.size)
+        guard let window = self.window, wide != AppLayout.isWide else { return }
+        self.switchLayout(toWide: wide, in: window)
+    }
+    
+    func switchLayout(toWide wide:Bool, in window:UIWindow)
+    {
+        // Keep the page the user is reading
+        TalmudViewController.shared?.saveSelectedPage()
+        AppLayout.restorePageAfterSwitch = true
+        
+        window.rootViewController?.dismiss(animated: false, completion: nil)
+        
+        let newRoot = self.makeRootViewController(wide: wide)
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            let animationsWereEnabled = UIView.areAnimationsEnabled
+            UIView.setAnimationsEnabled(false)
+            window.rootViewController = newRoot
+            UIView.setAnimationsEnabled(animationsWereEnabled)
+        }, completion: nil)
+        
+        // iPhone layout: open the Talmud screen again (the iPad layout always shows it)
+        if !wide, let nav = newRoot as? UINavigationController, let home = nav.viewControllers.first as? HomeViewController {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                home.displayTalmudView()
+            }
         }
     }
 

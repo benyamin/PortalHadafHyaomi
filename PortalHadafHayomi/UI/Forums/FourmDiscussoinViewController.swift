@@ -193,7 +193,7 @@ class FourmDiscussoinViewController: MSBaseViewController, UITableViewDelegate, 
     {
         let webViewController = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
 
-        if(UIDevice.current.userInterfaceIdiom == .pad)
+        if(AppLayout.isWide)
         {
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 ,rootViewController is Main_IPadViewController

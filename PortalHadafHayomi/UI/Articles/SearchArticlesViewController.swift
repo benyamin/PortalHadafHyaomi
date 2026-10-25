@@ -418,7 +418,7 @@ class SearchArticlesViewController: MSBaseViewController, UITableViewDelegate, U
     {
           let webView = BTWebViewController(nibName: "BTWebViewController", bundle: nil)
         
-        if(UIDevice.current.userInterfaceIdiom == .pad)
+        if(AppLayout.isWide)
         {
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 ,rootViewController is Main_IPadViewController
@@ -451,7 +451,7 @@ class SearchArticlesViewController: MSBaseViewController, UITableViewDelegate, U
             
             webViewController.loadUrl(mobileLink, title: (self.selectedSearchResult?.page ?? ""))
             
-            if(UIDevice.current.userInterfaceIdiom == .pad)
+            if(AppLayout.isWide)
             {
                 if let mainViewController = UIApplication.shared.keyWindow?.mainViewController()
                 {

@@ -72,7 +72,7 @@ class MidotAndShiourimViewController: MSBaseViewController, UITableViewDelegate,
             let title = "measurements".localize()
             webViewController.loadUrl(refrence.path!, title: title)
             
-            if(UIDevice.current.userInterfaceIdiom == .pad)
+            if(AppLayout.isWide)
             {
                 if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                     ,rootViewController is Main_IPadViewController

@@ -145,8 +145,32 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         
     }
     
+    /// The page in the middle of the screen (the first visible cell can be the neighbour page)
+    func currentPageIndexPath() -> IndexPath
+    {
+        let collectionView = self.talmudViewController.pagesCollectionView!
+        let row = collectionView.centerRowIndex()
+        if row >= 0 && row < collectionView.numberOfItems(inSection: 0) {
+            return IndexPath(row: row, section: 0)
+        }
+        return collectionView.indexPathsForVisibleItems.first ?? IndexPath(row: 0, section: 0)
+    }
+    
     @objc func rotated()
     {
+        // iPhone Duo (open): iOS rotates the screen itself, no manual turning of the page
+        if UIDevice.current.userInterfaceIdiom != .pad
+        {
+            return
+        }
+        
+        // Ignore face up / face down / unknown, so lying the iPad flat does not turn the page
+        let deviceOrientation = UIDevice.current.orientation
+        if !deviceOrientation.isPortrait && !deviceOrientation.isLandscape
+        {
+            return
+        }
+        
         if self.lockRotationButton.isSelected
         {
             self.lockRotationButton.rotateAnimation(duration: 0.6, repeatCount:2.0)
@@ -174,18 +198,21 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
     
     func setPortraitDisplay()
     {
-        var currentIndex = IndexPath(row: 0, section: 0)
-        if self.talmudViewController.pagesCollectionView.indexPathsForVisibleItems.count > 0
-        {
-            currentIndex = self.talmudViewController.pagesCollectionView.indexPathsForVisibleItems.first!
-        }
+        let currentIndex = self.currentPageIndexPath()
         
         let rootViewController = UIApplication.shared.keyWindow!.rootViewController!
         let colletoinCenterOnRootView = self.view.convert(self.mainContainerView.center, to:rootViewController.view)
         rootViewController.view.addSubview(self.mainContainerView)
         self.mainContainerView.center = colletoinCenterOnRootView
         
-        let rotationAngle = UIDevice.current.orientation == .portrait ?  Double.pi/2 : -Double.pi/2
+        // The iPad screens stay in landscape, so in portrait the page is turned 90°.
+        // Which way depends on which landscape side the screen is in;
+        // using one fixed angle showed the page upside down on the other side.
+        let interfaceOrientation = self.view.window?.windowScene?.interfaceOrientation ?? .landscapeLeft
+        var rotationAngle = (interfaceOrientation == .landscapeRight) ? -Double.pi/2 : Double.pi/2
+        if UIDevice.current.orientation == .portraitUpsideDown {
+            rotationAngle = -rotationAngle
+        }
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
@@ -196,7 +223,12 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
                     flowLayout.invalidateLayout()
                 }
                 
-                self.mainContainerView.frame = rootViewController.view.bounds
+                // With a rotation, "frame" can't be set (iOS keeps the old landscape size, so the page
+                // did not fill the screen). Set the size and center instead: the turned page is
+                // as wide as the screen is tall, and as tall as the screen is wide.
+                let rootBounds = rootViewController.view.bounds
+                self.mainContainerView.bounds = CGRect(x: 0, y: 0, width: rootBounds.height, height: rootBounds.width)
+                self.mainContainerView.center = CGPoint(x: rootBounds.midX, y: rootBounds.midY)
                 self.mainContainerView.layoutIfNeeded()
                 
                 self.talmudViewController.pagesCollectionView.selectItem(at: currentIndex, animated: false, scrollPosition: .centeredHorizontally)
@@ -209,11 +241,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
     
     func setFullLandscapeDisplay()
     {
-        var currentIndex = IndexPath(row: 0, section: 0)
-        if self.talmudViewController.pagesCollectionView.indexPathsForVisibleItems.count > 0
-        {
-            currentIndex = self.talmudViewController.pagesCollectionView.indexPathsForVisibleItems.first!
-        }
+        let currentIndex = self.currentPageIndexPath()
         
         let rootViewController = UIApplication.shared.keyWindow!.rootViewController!
         let colletoinCenterOnRootView = self.view.convert(self.mainContainerView.center, to:rootViewController.view)
@@ -242,11 +270,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
     
     func setLandscapeDisplay()
     {
-        var currentIndex = IndexPath(row: 0, section: 0)
-        if self.talmudViewController.pagesCollectionView.indexPathsForVisibleItems.count > 0
-        {
-            currentIndex = self.talmudViewController.pagesCollectionView.indexPathsForVisibleItems.first!
-        }
+        let currentIndex = self.currentPageIndexPath()
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {

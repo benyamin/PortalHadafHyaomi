@@ -42,9 +42,9 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
                 a_player = AVPlayer()
                 
                 do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: [
-                        .allowBluetooth
-                     ])
+                    // .allowBluetooth is only for record categories; with .playback it is not valid
+                    // (Bluetooth headphones work with .playback anyway)
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: [])
               
                     print("Playback OK")
                     try AVAudioSession.sharedInstance().setActive(true)
@@ -93,12 +93,29 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         else
         {
             // self.player.play()
+            self.activatePlaybackAudioSession()
             self.player.playImmediately(atRate: self.playerRate)
             self.player.rate = self.playerRate
             
         }
         
         self.updateNowPlayingInfo()
+    }
+    
+    /// When paused, the voice commands listener may switch the audio session to "playAndRecord".
+    /// In that mode iOS uses a different (call) volume and route, so after resuming the lesson
+    /// the volume changed. Switch back to normal playback before every play.
+    func activatePlaybackAudioSession()
+    {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            if session.category != .playback || session.mode != .default {
+                try session.setCategory(.playback, mode: .default, options: [])
+            }
+            try session.setActive(true)
+        } catch {
+            print("activatePlaybackAudioSession error: \(error)")
+        }
     }
     
     func playVideo(){

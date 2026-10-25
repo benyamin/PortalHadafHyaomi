@@ -1192,6 +1192,14 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     private func currentPageIndexPath() -> IndexPath
     {
+        // Use the page we know is displayed. The visible cells are not reliable here:
+        // while rotating, the collection view is already resized, so 2 pages are partly visible
+        // and taking the first one sometimes jumped to the neighbour page.
+        if let masechet = self.displyedMasceht, let page = self.displyedPage, let side = self.displyedPageSide,
+           let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: side),
+           pageIndex > 0 {
+            return IndexPath(row: pageIndex - 1, section: 0)
+        }
         if let first = self.pagesCollectionView.indexPathsForVisibleItems.sorted().first {
             return first
         }
@@ -1200,11 +1208,18 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     private func scrollBackTo(_ indexPath: IndexPath)
     {
-        self.pagesCollectionView.collectionViewLayout.invalidateLayout()
-        self.pagesCollectionView.layoutIfNeeded()
-        if indexPath.row < self.pagesCollectionView.numberOfItems(inSection: 0) {
-            self.pagesCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
+        let scroll = { [weak self] in
+            guard let self = self else { return }
+            self.pagesCollectionView.collectionViewLayout.invalidateLayout()
+            self.pagesCollectionView.layoutIfNeeded()
+            if indexPath.row < self.pagesCollectionView.numberOfItems(inSection: 0) {
+                self.pagesCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
+            }
         }
+        scroll()
+        // The rotation may resize the page area once more after this; scroll again when it is done
+        DispatchQueue.main.async(execute: scroll)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35, execute: scroll)
     }
     
     func setLandscapeLayout()

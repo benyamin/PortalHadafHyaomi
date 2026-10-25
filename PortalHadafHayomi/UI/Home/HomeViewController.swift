@@ -117,7 +117,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
                     , let page = HadafHayomiManager.sharedManager.pageForDate(date, addOnePage:true){
                     
                     //For IPad
-                    if(UIDevice.current.userInterfaceIdiom == .pad)
+                    if(AppLayout.isWide)
                     {
                         if let mainIpadViewController = UIApplication.shared.keyWindow?.rootViewController as? Main_IPadViewController {
                             
@@ -191,6 +191,26 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
         
         return menuItems
     }()
+    
+    // MARK: - Bottom bar down to the screen edge (iPad layout / iPhone Duo open)
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        self.extendBottomBarToScreenEdge()
+    }
+    
+    /// The bottom bar stopped above the home-indicator area and left an empty margin under it.
+    /// In the wide layout the bar is pinned to the bottom edge of the screen (same height, no gap).
+    private func extendBottomBarToScreenEdge()
+    {
+        guard AppLayout.isWide, let bar = self.bottomBarCollectionView else { return }
+        let bottomInset = self.view.safeAreaInsets.bottom
+        
+        // bar bottom = safe area bottom + inset  -> sits on the screen edge
+        for c in self.view.constraints where c.firstItem === bar && c.firstAttribute == .bottom {
+            c.constant = bottomInset
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -582,7 +602,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             
         case "LessonMap":
             //For IPad
-            if(UIDevice.current.userInterfaceIdiom == .pad)
+            if(AppLayout.isWide)
             {
                 if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                     ,rootViewController is Main_IPadViewController
@@ -666,7 +686,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     func displayTalmudView(){
         
         //For IPad
-        if(UIDevice.current.userInterfaceIdiom == .pad)
+        if(AppLayout.isWide)
         {
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 ,rootViewController is Main_IPadViewController

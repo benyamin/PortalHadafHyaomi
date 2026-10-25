@@ -74,7 +74,7 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
         self.webView?.navigationDelegate = self
         self.webView?.uiDelegate = self
         
-         if(UIDevice.current.userInterfaceIdiom == .pad)//IPad
+         if(AppLayout.isWide)//IPad
          {
             self.lockRotationContentView.isHidden = true
             self.topBarTitleLabel?.textAlignment = .right

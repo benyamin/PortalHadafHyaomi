@@ -79,7 +79,12 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         {
             self.firstAppearance = false
             
-             self.perform( #selector(self.scrollToTodaysPage), with: nil, afterDelay: 0.4)
+            if AppLayout.restorePageAfterSwitch {
+                AppLayout.restorePageAfterSwitch = false
+                self.perform( #selector(self.scrollToSavedPage), with: nil, afterDelay: 0.4)
+            } else {
+                self.perform( #selector(self.scrollToTodaysPage), with: nil, afterDelay: 0.4)
+            }
         }
         
         NotificationCenter.default.removeObserver(self)
@@ -240,6 +245,23 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         self.scrollToMaschet(todaysMaschet, page: todaysPage, pageSide:0,  animated: false)
     }
     
+    /// Opens the page that was open before the fold / unfold switch
+    @objc func scrollToSavedPage()
+    {
+        guard let info = UserDefaults.standard.object(forKey: "selectedPageInfo") as? [String:Any]
+            , let maschetId = info["maschetId"] as? String
+            , let pageIndex = info["pageIndex"] as? Int
+            , let pageSide = info["pageSide"] as? Int
+            , let masechet = HadafHayomiManager.sharedManager.getMasechetById(maschetId)
+        else {
+            self.scrollToTodaysPage()
+            return
+        }
+        let page = Page(index: pageIndex)
+        self.scrollToMaschet(masechet, page: page, pageSide: pageSide, animated: false)
+        self.talmudPagePickerViewController?.talmudPagePickerView.scrollToMasechet(masechet, page: page, pageSide: pageSide, animated: false)
+    }
+    
     func scrollToMaschet(_ maschet:Masechet, page:Page, pageSide:Int, animated:Bool)
     {
         if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(maschet, page: page, pageSide: pageSide)
@@ -351,6 +373,13 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         let pageSide =  pageInfo["pageSide"] as! Int
         
         self.topBarTitleLabel?.text = HadafHayomiManager.dispalyTitleForMaschet(maschet, page: page, pageSide: pageSide )
+        
+        // Remember the page, so folding the phone opens the same page in the iPhone layout
+        var selectedPageInfo = [String:Any]()
+        selectedPageInfo["maschetId"] = maschet.id
+        selectedPageInfo["pageIndex"] = page.index
+        selectedPageInfo["pageSide"] = pageSide
+        UserDefaults.standard.set(selectedPageInfo, forKey: "selectedPageInfo")
         
         if shouldUpdateTalmudPagePicker && self.talmudPagePickerViewController != nil
         {
