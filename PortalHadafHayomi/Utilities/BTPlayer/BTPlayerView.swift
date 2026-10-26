@@ -455,8 +455,17 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         if player == nil || self.player.isActive()
         {
-            self.moveToDesiredStartDuration(Float(duration))
-            
+            // FIX: jumping back to 0:00 did nothing (only times > 0 were seeked to),
+            // and the duration change was not reported
+            if self.player != nil, self.player.status() == "ReadyToPlay", let playerDuration = self.player.duration() {
+                let time = CMTimeMakeWithSeconds(Double(max(0, duration)), preferredTimescale: playerDuration.timescale)
+                self.player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { _ in }
+                self.desiredStartDuration = 0.0
+            } else {
+                self.moveToDesiredStartDuration(Float(duration))
+            }
+            self.delegate?.playerView(self, didChangeDuration: duration)
+            self.notifyCarPlayOfDurationChange(duration: duration)
             return
         }
         if let playerDuration = self.player.duration()
@@ -526,17 +535,8 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     func play()
     {
+        // FIX: a new AVPlayerItem was created here on every play just to check the url (unused)
         if self.playerUrl == nil
-        {
-            return
-        }
-        
-        if self.playerUrl != nil
-        {
-            self.playingItem = AVPlayerItem(url: self.playerUrl!)
-        }
-        
-        if self.playingItem == nil
         {
             return
         }
@@ -560,8 +560,6 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         if self.playerUrl != nil {
             
-            self.playingItem = AVPlayerItem(url: self.playerUrl!)
-            
             self.playButton.isHidden = true
             self.loadingActivityIndicator.isHidden = false
             self.loadingActivityIndicator.startAnimating()
@@ -580,6 +578,8 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     func updatePlayerWithDurationSeconds(seconds:Float64)
     {
+        // FIX: a not-yet-known / live duration is NaN or infinite -> Int(seconds) crashed
+        let seconds = (seconds.isFinite && seconds > 0) ? seconds : 0
         let timeNow = self.timeNow()
         
         if timeNow > 0
@@ -612,7 +612,11 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         if self.player != nil && self.player.isActive()
         {
-            timeNow = Int(Double(self.player.currentTime().value) / Double(self.player.currentTime().timescale))
+            // FIX: an invalid time has timescale 0 -> division by zero -> crash on Int(inf / NaN)
+            let seconds = CMTimeGetSeconds(self.player.currentTime())
+            if seconds.isFinite && seconds >= 0 {
+                timeNow = Int(seconds)
+            }
         }
         
         return timeNow
@@ -664,10 +668,11 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
         
         if self.player.status() == "ReadyToPlay"
         {
-            if self.desiredStartDuration > 0.0
+            // FIX: guard the duration (was force-unwrapped)
+            if self.desiredStartDuration > 0.0, let playerDuration = self.player.duration()
             {
                 
-                let timeScale = self.player.duration()!.timescale;
+                let timeScale = playerDuration.timescale;
                 let time = CMTimeMakeWithSeconds(Double(self.desiredStartDuration), preferredTimescale: timeScale);
                 
                 self.player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero){ (Bool) in
@@ -682,7 +687,15 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     @objc func itemDidFinishPlaying(notification:NSNotification)  {
         
-        let timeScale = self.player.duration()!.timescale;
+        // FIX: this notification comes for EVERY AVPlayerItem in the app (video player, other
+        // sounds). Only react when our lesson finished.
+        if let finishedItem = notification.object as? AVPlayerItem,
+           let lessonPlayer = BTPlayerManager.sharedManager.player as? BTAVPlayer,
+           finishedItem !== lessonPlayer.player.currentItem {
+            return
+        }
+        
+        let timeScale = self.player.duration()?.timescale ?? 600
         let time = CMTimeMakeWithSeconds(0.0, preferredTimescale: timeScale);
         
         self.player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero){ (Bool) in
@@ -760,26 +773,36 @@ class BTPlayerView: UIView,IPlayerProtocolDelegate, BTPlayerRateSpeedViewDelegat
     
     func addPeriodicTimeObserver()
     {
+        // FIX: never keep two observers (ready-to-play can come again, CarPlay re-adds) -
+        // the extra one was never removed and kept running
+        if self.timeObserver != nil {
+            self.player.removeTimeObserver(observer: self.timeObserver!)
+            self.timeObserver = nil
+        }
         self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
-            
-            if (self?.player.isActive())!
+            // FIX: was force-unwrapping a weak self
+            guard let self = self, self.player.isActive() else { return }
+            if let duration = self.player.duration()
             {
-                if let duration = self?.player.duration()
-                {
-                    let seconds = CMTimeGetSeconds(duration)
-                    
-                    self?.updatePlayerWithDurationSeconds(seconds:seconds)
-                }
+                self.updatePlayerWithDurationSeconds(seconds: CMTimeGetSeconds(duration))
             }
         }
     }
     
     func setBackgourndPlayer()
     {
+        // FIX: used a second AVPlayerItem (loading its remote file on the main thread, and nil
+        // after "lesson not found" -> crash). Use the playing item's duration and the real speed.
+        var durationSeconds:Double = 0
+        if let duration = self.player.duration() {
+            let seconds = CMTimeGetSeconds(duration)
+            if seconds.isFinite && seconds > 0 { durationSeconds = seconds }
+        }
         var playingInfo = [MPMediaItemPropertyArtist: self.titleLabel?.text ?? "",
             MPMediaItemPropertyTitle: self.subTitleLabel?.text ?? "",
-            MPMediaItemPropertyPlaybackDuration: NSNumber(value: CMTimeGetSeconds(self.playingItem.asset.duration)),
-                MPNowPlayingInfoPropertyPlaybackRate: NSNumber(value: 1)] as [String : Any]
+            MPMediaItemPropertyPlaybackDuration: NSNumber(value: durationSeconds),
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: NSNumber(value: self.timeNow()),
+                MPNowPlayingInfoPropertyPlaybackRate: NSNumber(value: self.isPlaying ? self.player.rate() : 0)] as [String : Any]
         
         if let image = UIImage(named: "Icon-App-60x60@3x.png") {
             let artwork = MPMediaItemArtwork(boundsSize: CGSize(width: 300, height: 300)) { _ in

@@ -34,6 +34,11 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         }
     }
     
+    private var observedItem:AVPlayerItem?
+    private var didSetupCommandCenter = false
+    /// time observer token -> the AVPlayer that created it (an observer must be removed from that same player)
+    private var timeObserverOwners = [(token:AnyObject, player:AVPlayer)]()
+    
     var a_player:AVPlayer!
     var player:AVPlayer!{
         
@@ -68,20 +73,11 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     
     func setup()
     {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.itemDidFinishPlaying(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
+        // FIX: was listening to "keyboard will change frame" by mistake, and added an extra
+        // lock-screen "play" handler that did nothing (and returned "failed" while playing).
         if let playerRateSpeed =  UserDefaults.standard.object(forKey: "lessonPlayerRateSpeed") as? Float {
             self.setRate(playerRateSpeed)
         }
-        
-        MPRemoteCommandCenter.shared().playCommand.addTarget { [unowned self] event in
-                 if self.player.rate == 0.0 { // <- is stopped?
-                     // do your stuff and say to the OS that everything worked
-                     return .success
-                 }
-                 // if the command does not run properly you must inform the OS
-                 return .commandFailed
-             }
     }
     
     func play()
@@ -180,7 +176,12 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     
     func removeTimeObserver(observer: Any)
     {
-        player.removeTimeObserver(observer)
+        // FIX: remove from the player that created it (never from another AVPlayer)
+        let token = observer as AnyObject
+        if let index = self.timeObserverOwners.firstIndex(where: { $0.token === token }) {
+            self.timeObserverOwners[index].player.removeTimeObserver(observer)
+            self.timeObserverOwners.remove(at: index)
+        }
     }
     
     func setPlayerItemPath(itemPathUrl:URL?)
@@ -189,18 +190,28 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
         {
             self.currentPlayerItemPath = itemPathUrl.absoluteString
             
-            var playerItem:AVPlayerItem!
+            let playerItem = AVPlayerItem(url: itemPathUrl)
             
-            playerItem = AVPlayerItem(url: itemPathUrl)
-            
+            // FIX: remove the observer only from the item we observed (removing from an item
+            // that has no observer crashes)
+            if let observedItem = self.observedItem {
+                observedItem.removeObserver(self, forKeyPath: "status", context: &observerContext)
+                self.observedItem = nil
+            }
             playerItem.addObserver(self, forKeyPath: "status", options: .new, context: &observerContext)
+            self.observedItem = playerItem
             
-            self.player.currentItem?.removeObserver(self, forKeyPath:"status")
-            
-            self.player = nil
+            // FIX: keep the same AVPlayer. A new AVPlayer for every lesson broke the time
+            // observers (progress stopped updating, and removing an observer of the old
+            // player crashes) and lost the playback speed.
             self.player.replaceCurrentItem(with: playerItem)
             
-            self.setupCommandCenter()
+            // FIX: register the lock-screen / CarPlay commands once. They were added again for
+            // every lesson, so "skip 30" jumped 60, 90… and play/pause ran several times.
+            if !self.didSetupCommandCenter {
+                self.didSetupCommandCenter = true
+                self.setupCommandCenter()
+            }
         }
     }
     
@@ -226,15 +237,16 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
 
         
         commandCenter.playCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.play()
-            self?.delegate.playerDidPlay(player: self!)
+            guard let self = self else { return .commandFailed }
+            self.play()
+            self.playerDelegate?.playerDidPlay(player: self)
             return .success
         }
         
         commandCenter.pauseCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.pause()
-            self?.delegate.playerDidStop(player: self!)
-            
+            guard let self = self else { return .commandFailed }
+            self.pause()
+            self.playerDelegate?.playerDidStop(player: self)
             return .success
         }
         
@@ -281,13 +293,17 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     
     func duration() -> CMTime?
     {
-        if let currentItem = self.player.currentItem
-        {
+        guard let currentItem = self.player.currentItem else { return nil }
+        // FIX: item.duration is ready once the item is ready to play; asset.duration on a remote
+        // file loads it synchronously and froze the screen
+        let itemDuration = currentItem.duration
+        if itemDuration.isNumeric && itemDuration.seconds.isFinite {
+            return itemDuration
+        }
+        if currentItem.status == .readyToPlay {
             return currentItem.asset.duration
         }
-        else{
-            return nil
-        }
+        return nil
     }
     
     func seek(to time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completionHandler: @escaping (Bool) -> Swift.Void)
@@ -297,7 +313,10 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     
     func addPeriodicTimeObserver(forInterval interval: CMTime, queue: DispatchQueue?, using block: @escaping (CMTime) -> Void) -> Any {
         
-        return self.player.addPeriodicTimeObserver(forInterval: interval, queue: queue, using:block)
+        let owner = self.player!
+        let token = owner.addPeriodicTimeObserver(forInterval: interval, queue: queue, using:block)
+        self.timeObserverOwners.append((token: token as AnyObject, player: owner))
+        return token
     }
     
     func currentTime() -> CMTime
@@ -319,18 +338,22 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
             switch (status)
             {
                 
-            case AVPlayer.Status.readyToPlay.rawValue:
+            case AVPlayerItem.Status.readyToPlay.rawValue:
                 
                 print ("PLAYER Status ReadyToPlay")
                
-                self.delegate.playerIsReadyToPlay(player: self)
+                self.playerDelegate?.playerIsReadyToPlay(player: self)
                 
                 break;
                 
+            case AVPlayerItem.Status.failed.rawValue:
+                
+                self.playerDelegate?.playerFailed(player: self)
+                
+                break
+                
             default :
-                
-                self.delegate.playerFailed(player: self)
-                
+                // FIX: "unknown" is not a failure
                 break
             }
             }
@@ -371,7 +394,13 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     func setRate(_ rate:Float)
     {
         self.playerRate = rate
-        self.player.rate = self.playerRate
+        if #available(iOS 16.0, *) {
+            self.player.defaultRate = rate
+        }
+        // FIX: setting AVPlayer.rate starts playing; only apply it now if already playing
+        if self.player.rate != 0 {
+            self.player.rate = self.playerRate
+        }
     }
     
     func rate() -> Float
@@ -416,6 +445,6 @@ class BTAVPlayer:NSObject, IPlayerProtocol, AVPlayerViewControllerDelegate
     
     func playerViewController(_ playerViewController: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         
-        self.delegate.playerDidStop(player: self)
+        self.playerDelegate?.playerDidStop(player: self)
     }
 }
