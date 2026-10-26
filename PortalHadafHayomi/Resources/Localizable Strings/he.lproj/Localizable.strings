@@ -564,3 +564,6 @@
 "st_convert_arrow_directrion_label" = "<<";
 
 "st_copied_successfully" = "הועתק בהצלחה";
+"st_biur" = "ביאור";
+"st_go_to_todays_page" = "לדף היומי";
+"st_page_display" = "תצוגת הדף";

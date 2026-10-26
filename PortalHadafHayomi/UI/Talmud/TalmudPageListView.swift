@@ -64,6 +64,99 @@ final class TalmudPageListView: UIView, UITableViewDataSource, UITableViewDelega
     
     private let tableView = UITableView(frame: .zero, style: .plain)
     
+    /// "לדף היומי" button at the top of the list (shown when set)
+    var onTodaysPage: (() -> Void)? {
+        didSet { self.updateTodaysPageHeader() }
+    }
+    
+    private func updateTodaysPageHeader() {
+        guard onTodaysPage != nil else {
+            tableView.tableHeaderView = nil
+            return
+        }
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: max(tableView.bounds.width, 320), height: 68))
+        container.backgroundColor = .clear
+        
+        let button = UIControl()
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 2
+        button.layer.borderColor = TalmudPageListView.gold.cgColor
+        button.semanticContentAttribute = .forceRightToLeft
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(todaysPageTapped), for: .touchUpInside)
+        
+        let icon = UIImageView(image: UIImage(systemName: "calendar"))
+        icon.tintColor = .white
+        icon.contentMode = .center
+        icon.backgroundColor = TalmudPageListView.gold
+        icon.layer.cornerRadius = 16
+        icon.clipsToBounds = true
+        
+        let title = UILabel()
+        title.text = "st_go_to_todays_page".localize()
+        title.font = UIFont.boldSystemFont(ofSize: 15)
+        title.textColor = TalmudPageListView.burgundy
+        
+        let subtitle = UILabel()
+        if let masechet = HadafHayomiManager.sharedManager.todaysMaschet,
+           let page = HadafHayomiManager.sharedManager.todaysPage {
+            subtitle.text = "\(masechet.name ?? "") \(page.symbol ?? "")"
+        }
+        subtitle.font = UIFont.systemFont(ofSize: 12)
+        subtitle.textColor = UIColor(HexColor: "6B5E4E")
+        
+        let texts = UIStackView(arrangedSubviews: [title, subtitle])
+        texts.axis = .vertical
+        texts.alignment = .leading
+        texts.semanticContentAttribute = .forceRightToLeft
+        
+        let arrow = UIImageView(image: UIImage(systemName: "chevron.left"))
+        arrow.tintColor = TalmudPageListView.burgundy
+        arrow.contentMode = .scaleAspectFit
+        
+        let row = UIStackView(arrangedSubviews: [icon, texts, UIView(), arrow])
+        row.axis = .horizontal
+        row.spacing = 10
+        row.alignment = .center
+        row.semanticContentAttribute = .forceRightToLeft
+        row.isUserInteractionEnabled = false
+        row.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addSubview(row)
+        container.addSubview(button)
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: container.topAnchor, constant: 10),
+            button.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -10),
+            button.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 12),
+            button.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -12),
+            row.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 10),
+            row.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -12),
+            row.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            icon.widthAnchor.constraint(equalToConstant: 32),
+            icon.heightAnchor.constraint(equalToConstant: 32),
+            arrow.widthAnchor.constraint(equalToConstant: 14)
+        ])
+        button.accessibilityLabel = "\(title.text ?? "") \(subtitle.text ?? "")"
+        button.accessibilityTraits = .button
+        button.isAccessibilityElement = true
+        
+        tableView.tableHeaderView = container
+    }
+    
+    @objc private func todaysPageTapped() {
+        onTodaysPage?()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // keep the header as wide as the list
+        if let header = tableView.tableHeaderView, header.frame.width != tableView.bounds.width, tableView.bounds.width > 0 {
+            header.frame.size.width = tableView.bounds.width
+            tableView.tableHeaderView = header
+        }
+    }
+    
     static let burgundy = UIColor(HexColor: "781F24")
     static let parchment = UIColor(HexColor: "F9F3DB")
     static let amudBackground = UIColor(HexColor: "F6EED6")

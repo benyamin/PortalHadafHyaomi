@@ -192,9 +192,9 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                             {
                                 let statusCode = httpResponse.statusCode
                                 if (statusCode == 200) {
-                                    print("file downloaded successfully.")
+                                   //print("file downloaded successfully.")
                                 } else  {
-                                    print("Failed")
+                                   // print("Failed")
                                 }
                             }
 

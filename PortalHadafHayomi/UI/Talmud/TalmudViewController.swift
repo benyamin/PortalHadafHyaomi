@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PDFKit
+import WebKit
 
 class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TalmudPagePickerViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UISearchBarDelegate
 {
@@ -142,8 +144,11 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
                 self.nikodButton?.isHidden = true
             }
             
-            UserDefaults.standard.set(selectedDisplayType.rawValue, forKey: "TalmudSelectedDisplayType")
-            UserDefaults.standard.synchronize()
+            // The ביאור is remembered separately; the normal display stays the one the user chose
+            if !self.isBiurMode {
+                UserDefaults.standard.set(selectedDisplayType.rawValue, forKey: "TalmudSelectedDisplayType")
+                UserDefaults.standard.synchronize()
+            }
         }
     }
     
@@ -164,6 +169,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.setDefaultTalmudDisplay()
         
         self.setupSearchRowConstraints()
+        self.setupPageToolbar()
         
         self.talmudPagePickerView.shouldHighlightSavedPages = true
 
@@ -206,9 +212,10 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
          self.selectTodaysPageButton?.titleLabel?.numberOfLines = 2
          self.selectDisplayTypeButton?.titleLabel?.numberOfLines = 2
       
-        self.selectTodaysPageButton?.setTitle(("st_todays_page").localize(), for: .normal)
+        // This button is now "ביאור" (today's page moved into "בחר דף")
+        self.selectTodaysPageButton?.setTitle(("st_biur").localize(), for: .normal)
         self.selectPageButton?.setTitle(("st_select_page").localize(), for: .normal)
-        self.selectDisplayTypeButton?.setTitle(("st_select_display").localize(), for: .normal)
+        self.selectDisplayTypeButton?.setTitle(("st_page_display").localize(), for: .normal)
         //self.selectDisplayTypeButton?.titleLabel?.adjustsFontSizeToFitWidth = true
         
         self.selectLessonButton?.setTitle(("st_select_lesson").localize(), for: .normal)
@@ -521,25 +528,29 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.pagesCollectionView.reloadData()
     }
     
+    /// The page in the middle of the screen. (indexPathsForVisibleItems.first is not in order:
+    /// it was sometimes the neighbour page, so "back" seemed not to work.)
+    private func centeredPageRow() -> Int
+    {
+        let row = self.pagesCollectionView.centerRowIndex()
+        if row >= 0 && row < self.pagesCollectionView.numberOfItems(inSection: 0) {
+            return row
+        }
+        return self.currentPageIndexPath().row
+    }
+    
     @IBAction func nextPageButtonClicked(_ sender:UIButton){
-        let currentIndex = self.pagesCollectionView.indexPathsForVisibleItems.first!
-
-              let nextIndexPath = IndexPath(item: currentIndex.item + 1, section: 0)
-
-              if nextIndexPath.item < self.talmudNumberOfPages {
-                  self.pagesCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
-              }
+        let nextIndexPath = IndexPath(item: self.centeredPageRow() + 1, section: 0)
+        if nextIndexPath.item < self.pagesCollectionView.numberOfItems(inSection: 0) {
+            self.pagesCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
+        }
     }
 
     @IBAction func prePageButtonClicked(_ sender:UIButton){
-        
-        let currentIndex = self.pagesCollectionView.indexPathsForVisibleItems.first!
-
-              let preIndexPath = IndexPath(item: currentIndex.item - 1, section: 0)
-
-              if preIndexPath.item >= 0 {
-                  self.pagesCollectionView.scrollToItem(at: preIndexPath, at: .centeredHorizontally, animated: true)
-              }
+        let preIndexPath = IndexPath(item: self.centeredPageRow() - 1, section: 0)
+        if preIndexPath.item >= 0 {
+            self.pagesCollectionView.scrollToItem(at: preIndexPath, at: .centeredHorizontally, animated: true)
+        }
     }
     
     private func isCurrentPageSaved() -> Bool {
@@ -655,6 +666,424 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.selectPageButton?.setTitle(key.localize(), for: .normal)
     }
     
+    // MARK: - Page toolbar (44pt under the tabs): search · display / ביאור ▾ · arrows
+    
+    let biurTypes:[TalmudDisplayType] = [.Chavruta, .Steinsaltz, .EN]
+    var isBiurMode = false
+    private var displayTypeBeforeBiur:TalmudDisplayType = .Vagshal
+    
+    let pageToolbarHeight:CGFloat = 44
+    private let tabsRowHeight:CGFloat = 35
+    
+    /// The last ביאור the user chose (default: חברותא)
+    var biurDisplayType:TalmudDisplayType {
+        get {
+            let raw = UserDefaults.standard.string(forKey: "TalmudBiurDisplayType") ?? TalmudDisplayType.Chavruta.rawValue
+            let type = TalmudDisplayType(rawValue: raw) ?? .Chavruta
+            return self.biurTypes.contains(type) ? type : .Chavruta
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: "TalmudBiurDisplayType")
+        }
+    }
+    
+    /// All page displays except the ביאור ones (those are under "ביאור")
+    var pageDisplayTypes:[TalmudDisplayType] {
+        return self.avalibleDisplayTypes.filter { !self.biurTypes.contains($0) }
+    }
+    
+    private func toolbarTitle(for type:TalmudDisplayType) -> String {
+        return type == .EN ? "Steinsaltz (English)" : type.localizedString()
+    }
+    
+    private func makeToolbarIconButton(_ systemName:String, label:String, action:Selector, bordered:Bool) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: systemName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)), for: .normal)
+        button.tintColor = UIColor(HexColor: "781F24")
+        if bordered {
+            button.backgroundColor = .white
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor(HexColor: "DCCFAE").cgColor
+            button.layer.cornerRadius = 3
+        }
+        button.accessibilityLabel = label
+        button.addTarget(self, action: action, for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }
+    
+    lazy var toolbarSearchButton:UIButton = self.makeToolbarIconButton("magnifyingglass", label: "חיפוש בדף", action: #selector(toolbarSearchTapped), bordered: false)
+    lazy var toolbarPrevButton:UIButton = self.makeToolbarIconButton("chevron.right", label: "העמוד הקודם", action: #selector(toolbarPrevTapped), bordered: true)
+    lazy var toolbarNextButton:UIButton = self.makeToolbarIconButton("chevron.left", label: "העמוד הבא", action: #selector(toolbarNextTapped), bordered: true)
+    
+    lazy var toolbarMenuButton:UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.setTitleColor(UIColor(HexColor: "781F24"), for: .normal)
+        button.tintColor = UIColor(HexColor: "781F24")
+        button.setImage(UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 12, weight: .bold)), for: .normal)
+        // chevron on the left of the text
+        button.semanticContentAttribute = .forceLeftToRight
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 4)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 12)
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(HexColor: "DCCFAE").cgColor
+        button.layer.cornerRadius = 3
+        button.addTarget(self, action: #selector(toolbarMenuTappedLegacy), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var pageToolbar:UIView = {
+        let bar = UIView()
+        bar.backgroundColor = UIColor(HexColor: "F3E9CC")
+        bar.semanticContentAttribute = .forceRightToLeft
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        
+        let line = UIView()
+        line.backgroundColor = UIColor(HexColor: "DCCFAE")
+        line.translatesAutoresizingMaskIntoConstraints = false
+        
+        for v in [self.toolbarSearchButton, self.toolbarMenuButton, self.toolbarPrevButton, self.toolbarNextButton, line] {
+            bar.addSubview(v)
+        }
+        NSLayoutConstraint.activate([
+            // search on the right
+            self.toolbarSearchButton.leadingAnchor.constraint(equalTo: bar.leadingAnchor, constant: 6),
+            self.toolbarSearchButton.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
+            self.toolbarSearchButton.widthAnchor.constraint(equalToConstant: 36),
+            self.toolbarSearchButton.heightAnchor.constraint(equalToConstant: 34),
+            // current display / ביאור in the middle
+            self.toolbarMenuButton.centerXAnchor.constraint(equalTo: bar.centerXAnchor),
+            self.toolbarMenuButton.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
+            self.toolbarMenuButton.heightAnchor.constraint(equalToConstant: 34),
+            // arrows on the left: previous (→) then next (←)
+            self.toolbarNextButton.trailingAnchor.constraint(equalTo: bar.trailingAnchor, constant: -8),
+            self.toolbarNextButton.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
+            self.toolbarNextButton.widthAnchor.constraint(equalToConstant: 36),
+            self.toolbarNextButton.heightAnchor.constraint(equalToConstant: 34),
+            self.toolbarPrevButton.trailingAnchor.constraint(equalTo: self.toolbarNextButton.leadingAnchor, constant: -4),
+            self.toolbarPrevButton.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
+            self.toolbarPrevButton.widthAnchor.constraint(equalToConstant: 36),
+            self.toolbarPrevButton.heightAnchor.constraint(equalToConstant: 34),
+            line.leadingAnchor.constraint(equalTo: bar.leadingAnchor),
+            line.trailingAnchor.constraint(equalTo: bar.trailingAnchor),
+            line.bottomAnchor.constraint(equalTo: bar.bottomAnchor),
+            line.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        return bar
+    }()
+    
+    private var pageToolbarAdded = false
+    
+    func setupPageToolbar()
+    {
+        guard !self.pageToolbarAdded, let topBar = self.topBarView else { return }
+        self.pageToolbarAdded = true
+        
+        self.view.addSubview(self.pageToolbar)
+        NSLayoutConstraint.activate([
+            self.pageToolbar.topAnchor.constraint(equalTo: topBar.bottomAnchor, constant: self.tabsRowHeight),
+            self.pageToolbar.heightAnchor.constraint(equalToConstant: self.pageToolbarHeight),
+            self.pageToolbar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.pageToolbar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        ])
+        
+        // The old search row (search bar, arrows, nikod) is replaced by the toolbar.
+        // The search bar opens over the toolbar when the search icon is tapped.
+        for c in self.searchRowTopConstraints {
+            if c.firstItem === self.searchBar {
+                c.constant = self.tabsRowHeight
+            } else {
+                (c.firstItem as? UIView)?.isHidden = true
+            }
+        }
+        self.searchBar?.isHidden = true
+        
+        self.updatePageToolbar()
+    }
+    
+    func updatePageToolbar()
+    {
+        self.setupPageToolbar()
+        
+        let current = self.isBiurMode ? self.biurDisplayType : self.selectedDisplayType
+        self.toolbarMenuButton.setTitle(self.toolbarTitle(for: current), for: .normal)
+        self.toolbarMenuButton.accessibilityLabel = (self.isBiurMode ? "st_biur" : "st_page_display").localize() + ": " + self.toolbarTitle(for: current)
+        self.rebuildToolbarMenu()
+        
+        // Displays are chosen from the toolbar now; the nikod button is not needed
+        self.nikodButton?.isHidden = true
+        
+        // No swiping between pages inside the ביאור (the arrows still work)
+        self.pagesCollectionView?.isScrollEnabled = !self.isBiurMode && !self.isInLandscapeLayout
+        
+        // The active tab looks pressed (darker), no system highlight
+        let normal = UIColor(red: 0.553, green: 0.267, blue: 0.263, alpha: 1)
+        let pressed = UIColor(HexColor: "5A1520")
+        self.selectTodaysPageButton?.backgroundColor = self.isBiurMode ? pressed : normal
+        self.selectDisplayTypeButton?.backgroundColor = self.isBiurMode ? normal : pressed
+        
+        if self.searchBar?.isHidden == false {
+            self.view.bringSubviewToFront(self.pageToolbar)
+            self.view.bringSubviewToFront(self.searchBar)
+        } else {
+            self.view.bringSubviewToFront(self.pageToolbar)
+        }
+    }
+    
+    // MARK: Drop-down list under the toolbar (display / ביאור options)
+    
+    private var isToolbarDropdownOpen = false
+    private var toolbarDropdownHeight:NSLayoutConstraint?
+    
+    private lazy var toolbarDropdownDim:UIControl = {
+        let dim = UIControl()
+        dim.backgroundColor = UIColor(white: 0.12, alpha: 0.35)
+        dim.alpha = 0
+        dim.isHidden = true
+        dim.translatesAutoresizingMaskIntoConstraints = false
+        dim.addTarget(self, action: #selector(closeToolbarDropdownTapped), for: .touchUpInside)
+        dim.accessibilityLabel = "st_close".localize()
+        return dim
+    }()
+    
+    private lazy var toolbarDropdown:UIView = {
+        let panel = UIView()
+        panel.backgroundColor = .white
+        panel.clipsToBounds = true
+        panel.isHidden = true
+        panel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.semanticContentAttribute = .forceRightToLeft
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.tag = 7001
+        panel.addSubview(stack)
+        NSLayoutConstraint.activate([
+            stack.topAnchor.constraint(equalTo: panel.topAnchor),
+            stack.leadingAnchor.constraint(equalTo: panel.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: panel.trailingAnchor)
+        ])
+        return panel
+    }()
+    
+    private var toolbarDropdownAdded = false
+    
+    private func addToolbarDropdownIfNeeded()
+    {
+        guard !self.toolbarDropdownAdded else { return }
+        self.setupPageToolbar()
+        self.toolbarDropdownAdded = true
+        self.view.addSubview(self.toolbarDropdownDim)
+        self.view.addSubview(self.toolbarDropdown)
+        let height = self.toolbarDropdown.heightAnchor.constraint(equalToConstant: 0)
+        self.toolbarDropdownHeight = height
+        NSLayoutConstraint.activate([
+            self.toolbarDropdownDim.topAnchor.constraint(equalTo: self.pageToolbar.bottomAnchor),
+            self.toolbarDropdownDim.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.toolbarDropdownDim.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.toolbarDropdownDim.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.toolbarDropdown.topAnchor.constraint(equalTo: self.pageToolbar.bottomAnchor),
+            self.toolbarDropdown.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.toolbarDropdown.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            height
+        ])
+    }
+    
+    private func rebuildToolbarMenu()
+    {
+        // The options open as a drop-down under the toolbar (not a floating menu)
+        self.updateToolbarChevron()
+    }
+    
+    private func updateToolbarChevron()
+    {
+        let name = self.isToolbarDropdownOpen ? "chevron.up" : "chevron.down"
+        self.toolbarMenuButton.setImage(UIImage(systemName: name, withConfiguration: UIImage.SymbolConfiguration(pointSize: 12, weight: .bold)), for: .normal)
+        self.toolbarMenuButton.layer.borderColor = UIColor(HexColor: self.isToolbarDropdownOpen ? "781F24" : "DCCFAE").cgColor
+        self.toolbarMenuButton.accessibilityValue = self.isToolbarDropdownOpen ? "פתוח" : nil
+    }
+    
+    private func fillToolbarDropdown() -> CGFloat
+    {
+        guard let stack = self.toolbarDropdown.viewWithTag(7001) as? UIStackView else { return 0 }
+        stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let types = self.isBiurMode ? self.biurTypes : self.pageDisplayTypes
+        let current = self.isBiurMode ? self.biurDisplayType : self.selectedDisplayType
+        let burgundy = UIColor(HexColor: "781F24")
+        let rowHeight:CGFloat = 48
+        
+        for (index, type) in types.enumerated() {
+            let selected = type == current
+            let row = UIButton(type: .custom)
+            row.tag = index
+            row.backgroundColor = selected ? UIColor(HexColor: "FFF6E0") : .white
+            row.setTitle(self.toolbarTitle(for: type), for: .normal)
+            row.setTitleColor(selected ? burgundy : UIColor(HexColor: "1F1A17"), for: .normal)
+            row.titleLabel?.font = selected ? UIFont.boldSystemFont(ofSize: 16) : UIFont.systemFont(ofSize: 16)
+            row.contentHorizontalAlignment = .right
+            row.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 44)
+            row.addTarget(self, action: #selector(toolbarDropdownRowTapped(_:)), for: .touchUpInside)
+            row.accessibilityTraits = selected ? [.button, .selected] : .button
+            row.translatesAutoresizingMaskIntoConstraints = false
+            row.heightAnchor.constraint(equalToConstant: rowHeight).isActive = true
+            
+            if selected {
+                let check = UIImageView(image: UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)))
+                check.tintColor = burgundy
+                check.translatesAutoresizingMaskIntoConstraints = false
+                row.addSubview(check)
+                NSLayoutConstraint.activate([
+                    check.rightAnchor.constraint(equalTo: row.rightAnchor, constant: -16),
+                    check.centerYAnchor.constraint(equalTo: row.centerYAnchor)
+                ])
+            }
+            
+            let line = UIView()
+            line.backgroundColor = UIColor(HexColor: "EFE6CC")
+            line.translatesAutoresizingMaskIntoConstraints = false
+            row.addSubview(line)
+            NSLayoutConstraint.activate([
+                line.leftAnchor.constraint(equalTo: row.leftAnchor),
+                line.rightAnchor.constraint(equalTo: row.rightAnchor),
+                line.bottomAnchor.constraint(equalTo: row.bottomAnchor),
+                line.heightAnchor.constraint(equalToConstant: 1)
+            ])
+            stack.addArrangedSubview(row)
+        }
+        return CGFloat(types.count) * rowHeight
+    }
+    
+    @objc func toolbarMenuTappedLegacy()
+    {
+        if self.isToolbarDropdownOpen {
+            self.closeToolbarDropdown(animated: true)
+        } else {
+            self.openToolbarDropdown()
+        }
+    }
+    
+    private func openToolbarDropdown()
+    {
+        self.addToolbarDropdownIfNeeded()
+        self.searchBar?.resignFirstResponder()
+        let height = self.fillToolbarDropdown()
+        self.isToolbarDropdownOpen = true
+        self.updateToolbarChevron()
+        
+        self.toolbarDropdownDim.isHidden = false
+        self.toolbarDropdown.isHidden = false
+        self.view.bringSubviewToFront(self.toolbarDropdownDim)
+        self.view.bringSubviewToFront(self.toolbarDropdown)
+        self.view.bringSubviewToFront(self.pageToolbar)
+        self.view.layoutIfNeeded()
+        
+        // slides down from under the toolbar
+        self.toolbarDropdownHeight?.constant = height
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: {
+            self.toolbarDropdownDim.alpha = 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func closeToolbarDropdown(animated:Bool)
+    {
+        guard self.isToolbarDropdownOpen else { return }
+        self.isToolbarDropdownOpen = false
+        self.updateToolbarChevron()
+        self.toolbarDropdownHeight?.constant = 0
+        
+        let finish = {
+            self.toolbarDropdownDim.isHidden = true
+            self.toolbarDropdown.isHidden = true
+        }
+        if animated {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.toolbarDropdownDim.alpha = 0
+                self.view.layoutIfNeeded()
+            }, completion: { _ in finish() })
+        } else {
+            self.toolbarDropdownDim.alpha = 0
+            self.view.layoutIfNeeded()
+            finish()
+        }
+    }
+    
+    @objc private func closeToolbarDropdownTapped()
+    {
+        self.closeToolbarDropdown(animated: true)
+    }
+    
+    @objc private func toolbarDropdownRowTapped(_ sender:UIButton)
+    {
+        let types = self.isBiurMode ? self.biurTypes : self.pageDisplayTypes
+        guard sender.tag < types.count else { return }
+        self.closeToolbarDropdown(animated: true)
+        self.selectToolbarOption(types[sender.tag])
+    }
+    
+    private func selectToolbarOption(_ type:TalmudDisplayType)
+    {
+        if self.isBiurMode {
+            self.biurDisplayType = type          // remembered for next time
+        }
+        self.applyDisplayType(type)
+        self.updatePageToolbar()
+    }
+    
+    @objc func toolbarSearchTapped()
+    {
+        guard let searchBar = self.searchBar else { return }
+        searchBar.isHidden = false
+        searchBar.showsCancelButton = true
+        self.view.bringSubviewToFront(searchBar)
+        searchBar.becomeFirstResponder()
+    }
+    
+    private func hideSearchBar()
+    {
+        self.searchBar?.resignFirstResponder()
+        self.searchBar?.isHidden = true
+    }
+    
+    @objc func toolbarPrevTapped() { self.prePageButtonClicked(self.toolbarPrevButton) }
+    @objc func toolbarNextTapped() { self.nextPageButtonClicked(self.toolbarNextButton) }
+    
+    /// "ביאור" tab: opens the last chosen ביאור on the current page (tapping it again keeps it open)
+    @IBAction func biurButtonClicked(_ sender:UIButton)
+    {
+        self.closeToolbarDropdown(animated: false)
+        self.closPicker(self.displayTypePickerView, animated:false)
+        self.closPicker(self.lessonsPickerView, animated:false)
+        self.closPicker(self.talmudPagePickerView, animated:false)
+        
+        if !self.isBiurMode {
+            self.enterBiurMode()
+        }
+        self.view.layoutIfNeeded()
+    }
+    
+    func enterBiurMode()
+    {
+        if !self.biurTypes.contains(self.selectedDisplayType) {
+            self.displayTypeBeforeBiur = self.selectedDisplayType
+        }
+        self.isBiurMode = true
+        self.applyDisplayType(self.biurDisplayType)
+        self.updatePageToolbar()
+    }
+    
+    func exitBiurMode()
+    {
+        self.isBiurMode = false
+        self.applyDisplayType(self.displayTypeBeforeBiur)
+        self.updatePageToolbar()
+    }
+    
     // MARK: - Search row stays at the top while the page picker is open
     
     private var searchRowTopConstraints:[NSLayoutConstraint] = []
@@ -715,14 +1144,16 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             picker.superview?.bringSubviewToFront(picker)
         }
         if !open {
-            for c in self.searchRowTopConstraints {
-                if let v = c.firstItem as? UIView { v.superview?.bringSubviewToFront(v) }
+            self.view.bringSubviewToFront(self.pageToolbar)
+            if self.searchBar?.isHidden == false {
+                self.view.bringSubviewToFront(self.searchBar)
             }
         }
-        // "בחר תצוגה" and "בחר שיעור" are disabled while the page picker is open
-        for b in [self.selectDisplayTypeButton, self.selectLessonButton] {
-            b?.isEnabled = !open
-            b?.alpha = open ? 0.3 : 1.0
+        // "תצוגת הדף", "ביאור" and "בחר שיעור" are disabled while the page picker is open
+        for b in [self.selectDisplayTypeButton, self.selectLessonButton, self.selectTodaysPageButton] {
+            let disabled = open
+            b?.isEnabled = !disabled
+            b?.alpha = disabled ? 0.3 : 1.0
         }
         
         for v in [self.selectTodaysPageButton as UIView?, self.selectPageButton as UIView?] {
@@ -768,6 +1199,11 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func setSelectedDisplayType()
     {
+        self.applyDisplayType(self.avalibleDisplayTypes[displayTypePickerView.selectedRow(inComponent: 0)])
+    }
+    
+    func applyDisplayType(_ displayType:TalmudDisplayType)
+    {
         self.pagesCollectionView.semanticContentAttribute = .forceRightToLeft
         
         self.vagshalLogoImageView.isHidden = true
@@ -776,7 +1212,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         
          self.pagesCollectionBottomConstraint?.constant = 0
         
-        self.selectedDisplayType = self.avalibleDisplayTypes[displayTypePickerView.selectedRow(inComponent: 0)]
+        self.selectedDisplayType = displayType
         
         if self.selectedDisplayType == .Vagshal
         {
@@ -868,6 +1304,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func togglePagePickerViewDisplay()
     {
+        self.closeToolbarDropdown(animated: false)
         self.closPicker(self.displayTypePickerView, animated:false)
         self.closPicker(self.lessonsPickerView, animated:false)
         
@@ -930,6 +1367,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     func toggleLessonsPickerViewDisplay()
     {
+        self.closeToolbarDropdown(animated: false)
         self.lessonsPickerView.reloadAllComponents()
         
         self.closPicker(self.displayTypePickerView, animated:false)
@@ -1036,37 +1474,20 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         })
     }
     
+    /// "תצוגת הדף" tab: back to the page from the ביאור (the display is chosen in the toolbar)
     @IBAction func toggleDisplyTypeButtonClicked(_ sender:UIButton)
     {
+        self.closeToolbarDropdown(animated: false)
         self.closPicker(self.lessonsPickerView, animated:false)
         self.closPicker(self.talmudPagePickerView, animated:false)
+        self.closPicker(self.displayTypePickerView, animated:false)
         
-        //If is open hide displayTypePickerView
-        if self.displayTypePickerViewTopConstraint.constant == 0
-        {
-            self.setSelectedDisplayType()
-            self.displayTypePickerViewTopConstraint.constant = -1 * self.displayTypePickerView.frame.size.height
-            
-            self.displyedPicker = nil
+        if self.isBiurMode {
+            self.exitBiurMode()
         }
-        else//Show picker
-        {
-            self.displayTypePickerViewTopConstraint.constant = 0
-            
-            if let selectedIndex = self.avalibleDisplayTypes.firstIndex(of: self.selectedDisplayType) {
-                self.displayTypePickerView.selectRow(selectedIndex, inComponent: 0, animated: false)
-            }
-            
-            self.displyedPicker = self.displayTypePickerView
-        }
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
-            {
-                self.view.layoutIfNeeded()
-                
-        }, completion: {_ in
-        })
+        self.view.layoutIfNeeded()
     }
+    
     
     func scrollToSelectedPage(pageInfo:[String:Any])
     {
@@ -1120,6 +1541,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         }
         
         self.saveSelectedPage()
+        DispatchQueue.main.async { self.updateLandscapeBiurPage() }
     }
     
     // MARK: - Rotation
@@ -1155,6 +1577,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.updateLayoutForInterfaceOrientation()
+        self.layoutLandscapeViews()
     }
     
     @objc func rotated()
@@ -1180,6 +1603,8 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     {
         guard let window = self.view.window else { return }
         let isLandscape = window.bounds.width > window.bounds.height
+        // The rotation lock is only useful in landscape (to stay there); hide it in portrait
+        self.lockRotationContentView?.isHidden = !isLandscape
         if isLandscape == self.isInLandscapeLayout { return }
         self.isInLandscapeLayout = isLandscape
         
@@ -1237,18 +1662,23 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         // Full screen page, no transform
         self.pagesCollectionView.transform = .identity
         rootView.addSubview(self.pagesCollectionView)
-        self.pagesCollectionView.frame = rootView.bounds
-        self.pagesCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.pagesCollectionView.autoresizingMask = []
         
-        // Lock button in the top-right corner
+        // Side bar (44pt) with the lock, ביאור and page arrows
+        self.setupLandscapeSideBar()
+        rootView.addSubview(self.landscapeBiurView)
+        rootView.addSubview(self.landscapeSideBar)
         self.lockRotationContentView.transform = .identity
-        rootView.addSubview(self.lockRotationContentView)
-        let lockSize = self.lockRotationContentView.bounds.size
-        self.lockRotationContentView.frame = CGRect(x: rootView.bounds.width - lockSize.width - 60,
-                                                    y: 16,
-                                                    width: lockSize.width,
-                                                    height: lockSize.height)
-        self.lockRotationContentView.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
+        self.lockRotationContentView.autoresizingMask = []
+        self.landscapeSideBar.addSubview(self.lockRotationContentView)
+        
+        // In landscape pages move only with the side bar arrows (no swiping)
+        self.pagesCollectionView.isScrollEnabled = false
+        
+        rootView.addSubview(self.landscapeSplitHandle)
+        self.lastLandscapeLayoutKey = nil
+        self.layoutLandscapeViews()
+        self.updateLandscapeBiurPage()
         
         self.scrollBackTo(currentIndex)
     }
@@ -1257,9 +1687,18 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     {
         let currentIndex = self.currentPageIndexPath()
         
-        let collectionHeight = self.view.bounds.size.height - (self.topBarView!.frame.origin.y + self.topBarView!.frame.size.height)
-        let topButtonsHeight:CGFloat = 35.0
+        // No side bar and no ביאור half in portrait
+        self.landscapeSideBar.removeFromSuperview()
+        self.landscapeBiurView.removeFromSuperview()
+        self.landscapeSplitHandle.removeFromSuperview()
+        self.landscapeBiurView.stop()
+        
+        // Swiping back in portrait (not inside the ביאור tab)
+        self.pagesCollectionView.isScrollEnabled = !self.isBiurMode
+        
+        let topButtonsHeight:CGFloat = 35.0 + self.pageToolbarHeight   // tabs row + page toolbar
         let collectionY = self.topBarView!.frame.origin.y + self.topBarView!.frame.size.height + topButtonsHeight
+        let collectionHeight = self.view.bounds.size.height - collectionY
         
         self.pagesCollectionView.transform = .identity
         self.view.addSubview(self.pagesCollectionView)
@@ -1275,6 +1714,289 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         }
         
         self.scrollBackTo(currentIndex)
+    }
+    
+    // MARK: - Landscape side bar + ביאור side by side (like the iPad)
+    
+    let landscapeSideBarWidth:CGFloat = 44
+    /// The ביאור shown next to the page in landscape (nil = page only)
+    var landscapeBiurType:TalmudDisplayType?
+    private var lastLandscapeLayoutKey:String?
+    
+    lazy var landscapeBiurView:TalmudBiurSideView = TalmudBiurSideView()
+    
+    lazy var landscapeBiurButton:UIButton = self.makeSideBarButton("lightbulb", label: "st_select_explanation".localize(), action: #selector(landscapeBiurTapped))
+    lazy var landscapePrevButton:UIButton = self.makeSideBarButton("chevron.right", label: "העמוד הקודם", action: #selector(toolbarPrevTapped))
+    lazy var landscapeNextButton:UIButton = self.makeSideBarButton("chevron.left", label: "העמוד הבא", action: #selector(toolbarNextTapped))
+    
+    private func makeSideBarButton(_ systemName:String, label:String, action:Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: systemName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .semibold)), for: .normal)
+        button.tintColor = UIColor(HexColor: "781F24")
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(HexColor: "DCCFAE").cgColor
+        button.layer.cornerRadius = 3
+        button.accessibilityLabel = label
+        button.addTarget(self, action: action, for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }
+    
+    lazy var landscapeSideBar:UIView = {
+        let bar = UIView()
+        bar.backgroundColor = UIColor(HexColor: "F3E9CC")
+        let line = UIView()
+        line.backgroundColor = UIColor(HexColor: "DCCFAE")
+        line.translatesAutoresizingMaskIntoConstraints = false
+        bar.addSubview(line)
+        
+        let lower = UIStackView(arrangedSubviews: [self.landscapeBiurButton, self.landscapePrevButton, self.landscapeNextButton])
+        lower.axis = .vertical
+        lower.spacing = 10
+        lower.translatesAutoresizingMaskIntoConstraints = false
+        lower.tag = 7101
+        bar.addSubview(lower)
+        
+        NSLayoutConstraint.activate([
+            line.leftAnchor.constraint(equalTo: bar.leftAnchor),
+            line.topAnchor.constraint(equalTo: bar.topAnchor),
+            line.bottomAnchor.constraint(equalTo: bar.bottomAnchor),
+            line.widthAnchor.constraint(equalToConstant: 1),
+            // at the bottom, away from the camera area (in landscape it is in the middle of the side)
+            lower.bottomAnchor.constraint(equalTo: bar.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            self.landscapeBiurButton.widthAnchor.constraint(equalToConstant: 36),
+            self.landscapeBiurButton.heightAnchor.constraint(equalToConstant: 36),
+            self.landscapePrevButton.widthAnchor.constraint(equalToConstant: 36),
+            self.landscapePrevButton.heightAnchor.constraint(equalToConstant: 36),
+            self.landscapeNextButton.widthAnchor.constraint(equalToConstant: 36),
+            self.landscapeNextButton.heightAnchor.constraint(equalToConstant: 36)
+        ])
+        return bar
+    }()
+    
+    private var landscapeStackCenterX:NSLayoutConstraint?
+    
+    private func setupLandscapeSideBar()
+    {
+        guard self.landscapeStackCenterX == nil, let stack = self.landscapeSideBar.viewWithTag(7101) else { return }
+        let centerX = stack.centerXAnchor.constraint(equalTo: self.landscapeSideBar.centerXAnchor)
+        centerX.isActive = true
+        self.landscapeStackCenterX = centerX
+    }
+    
+    /// Frames for the landscape views: [ביאור half][page][side bar]
+    func layoutLandscapeViews()
+    {
+        guard self.isInLandscapeLayout, let rootView = self.landscapeSideBar.superview else { return }
+        let bounds = rootView.bounds
+        let rightInset = rootView.safeAreaInsets.right
+        // as wide as the lock button + 16 on each side
+        let lockWidth = self.lockRotationContentView.bounds.width > 0 ? self.lockRotationContentView.bounds.width : self.landscapeSideBarWidth
+        let barWidth = lockWidth + 32
+        let contentWidth = bounds.width - barWidth
+        let split = self.landscapeBiurType != nil
+        
+        let key = "\(bounds.size)-\(rightInset)-\(split)-\(self.landscapeSplitRatio)"
+        if key == self.lastLandscapeLayoutKey { return }
+        let pageChangedWidth = self.lastLandscapeLayoutKey != nil
+        self.lastLandscapeLayoutKey = key
+        let currentIndex = self.currentPageIndexPath()
+        
+        self.landscapeSideBar.frame = CGRect(x: contentWidth, y: 0, width: barWidth, height: bounds.height)
+        
+        // lock button at the top of the side bar
+        let lockSize = self.lockRotationContentView.bounds.size
+        self.lockRotationContentView.frame = CGRect(x: 16,
+                                                    y: max(12, rootView.safeAreaInsets.top + 8),
+                                                    width: lockSize.width, height: lockSize.height)
+        self.lockRotationContentView.isHidden = false
+        
+        self.applyLandscapeSplitFrames(contentWidth: contentWidth, height: bounds.height, split: split)
+        
+        self.landscapeBiurButton.backgroundColor = split ? UIColor(HexColor: "781F24") : .white
+        self.landscapeBiurButton.tintColor = split ? .white : UIColor(HexColor: "781F24")
+        
+        if pageChangedWidth {
+            self.scrollBackTo(currentIndex)
+        }
+    }
+    
+    // MARK: Resize page / ביאור by dragging the middle
+    
+    /// Width of the ביאור part (0.3 ... 0.7 of the content width)
+    var landscapeSplitRatio:CGFloat {
+        get {
+            let value = UserDefaults.standard.object(forKey: "TalmudLandscapeSplitRatio") as? Double ?? 0.5
+            return CGFloat(min(0.7, max(0.3, value)))
+        }
+        set {
+            UserDefaults.standard.set(Double(min(0.7, max(0.3, newValue))), forKey: "TalmudLandscapeSplitRatio")
+        }
+    }
+    
+    private var landscapeContentWidth:CGFloat = 0
+    private var splitDragRow:Int = 0
+    
+    lazy var landscapeSplitHandle:UIView = {
+        let handle = UIView()
+        handle.backgroundColor = .clear
+        // Size first: the subviews below use autoresizing, which needs a real starting size
+        // (with a zero size the middle marks were pushed off screen)
+        handle.frame = CGRect(x: 0, y: 0, width: 34, height: 104)
+        
+        // A 20pt-wide rail along the divider: a light band with a line on each side
+        // of the center line, so it reads as something that can be moved
+        let rail = UIView()
+        rail.backgroundColor = UIColor(HexColor: "F3E9CC").withAlphaComponent(0.85)
+        rail.frame = CGRect(x: 7, y: 0, width: 20, height: 104)
+        rail.autoresizingMask = [.flexibleHeight]
+        handle.addSubview(rail)
+        for x in [CGFloat(7), CGFloat(26)] {
+            let side = UIView()
+            side.backgroundColor = UIColor(HexColor: "DCCFAE")
+            side.frame = CGRect(x: x, y: 0, width: 1, height: 104)
+            side.autoresizingMask = [.flexibleHeight]
+            handle.addSubview(side)
+        }
+        
+        let line = UIView()
+        line.backgroundColor = UIColor(HexColor: "B58B3A")
+        line.frame = CGRect(x: 16, y: 0, width: 2, height: 104)
+        line.autoresizingMask = [.flexibleHeight]
+        handle.addSubview(line)
+        
+        // Grip marks in the middle: a 30pt line on each side of the center line,
+        // 2pt away from it, in the same color
+        for x in [CGFloat(16 - 2 - 2), CGFloat(18 + 2)] {
+            let mark = UIView()
+            mark.backgroundColor = UIColor(HexColor: "B58B3A")
+            mark.frame = CGRect(x: x, y: (104 - 30) / 2, width: 2, height: 30)
+            mark.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin]
+            mark.tag = 7201
+            handle.addSubview(mark)
+        }
+        
+        handle.frame = CGRect(x: 0, y: 0, width: 34, height: 104)
+        handle.isAccessibilityElement = true
+        handle.accessibilityLabel = "גרור לשינוי הגודל"
+        handle.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(splitHandleDragged(_:))))
+        handle.isHidden = true
+        return handle
+    }()
+    
+    private func applyLandscapeSplitFrames(contentWidth:CGFloat, height:CGFloat, split:Bool)
+    {
+        self.landscapeContentWidth = contentWidth
+        if split {
+            // ביאור on the left, page on the right
+            let biurWidth = floor(contentWidth * self.landscapeSplitRatio)
+            self.landscapeBiurView.isHidden = false
+            self.landscapeBiurView.frame = CGRect(x: 0, y: 0, width: biurWidth, height: height)
+            self.pagesCollectionView.frame = CGRect(x: biurWidth, y: 0, width: contentWidth - biurWidth, height: height)
+            self.landscapeSplitHandle.isHidden = false
+            self.landscapeSplitHandle.frame = CGRect(x: biurWidth - 17, y: 0, width: 34, height: height)
+            // keep the grip marks in the vertical middle
+            for part in self.landscapeSplitHandle.subviews {
+                if part.tag == 7201 {
+                    part.frame.origin.y = (height - part.frame.height) / 2
+                } else {
+                    // rail and lines: full height, no gap at the bottom
+                    part.frame.origin.y = 0
+                    part.frame.size.height = height
+                }
+            }
+            self.landscapeSplitHandle.superview?.bringSubviewToFront(self.landscapeSplitHandle)
+        } else {
+            self.landscapeBiurView.isHidden = true
+            self.landscapeSplitHandle.isHidden = true
+            self.pagesCollectionView.frame = CGRect(x: 0, y: 0, width: contentWidth, height: height)
+        }
+    }
+    
+    @objc private func splitHandleDragged(_ pan:UIPanGestureRecognizer)
+    {
+        guard let rootView = self.landscapeSplitHandle.superview, self.landscapeContentWidth > 0 else { return }
+        switch pan.state {
+        case .began:
+            self.splitDragRow = self.currentPageIndexPath().row
+        case .changed:
+            let x = pan.location(in: rootView).x
+            let ratio = min(0.7, max(0.3, x / self.landscapeContentWidth))
+            self.landscapeSplitRatio = ratio
+            self.applyLandscapeSplitFrames(contentWidth: self.landscapeContentWidth, height: rootView.bounds.height, split: true)
+            // keep the same page while the page area gets wider / narrower
+            self.pagesCollectionView.collectionViewLayout.invalidateLayout()
+            self.pagesCollectionView.layoutIfNeeded()
+            if self.splitDragRow < self.pagesCollectionView.numberOfItems(inSection: 0) {
+                self.pagesCollectionView.scrollToItem(at: IndexPath(row: self.splitDragRow, section: 0), at: .centeredHorizontally, animated: false)
+            }
+        case .ended, .cancelled:
+            self.lastLandscapeLayoutKey = nil
+            self.layoutLandscapeViews()
+            self.scrollBackTo(IndexPath(row: self.splitDragRow, section: 0))
+        default:
+            break
+        }
+    }
+    
+    /// Load the ביאור of the page that is shown now
+    func updateLandscapeBiurPage()
+    {
+        guard self.isInLandscapeLayout, let type = self.landscapeBiurType else { return }
+        let row = self.currentPageIndexPath().row
+        self.landscapeBiurView.show(type: type, pageIndex: row + 1)
+    }
+    
+    // ביאור options (like the iPad: חברותא / שטיינזלץ / Steinsaltz, and "hide")
+    @objc func landscapeBiurTapped()
+    {
+        // Already showing a ביאור: tapping again hides it (page only)
+        if self.landscapeBiurType != nil {
+            self.selectLandscapeBiur("hide")
+            return
+        }
+        
+        let options = ["חברותא", "שטיינזלץ", "Steinsaltz"]
+        var titles = options
+        if self.landscapeBiurType != nil {
+            titles.append("st_hide_explanation".localize())
+        }
+        let selected:String? = {
+            switch self.landscapeBiurType {
+            case .some(.Chavruta): return "חברותא"
+            case .some(.Steinsaltz): return "שטיינזלץ"
+            case .some(.EN): return "Steinsaltz"
+            default: return nil
+            }
+        }()
+        
+        let sheet = UIAlertController(title: "st_select_explanation".localize(), message: nil, preferredStyle: .actionSheet)
+        for title in titles {
+            let isSelected = (title == selected)
+            sheet.addAction(UIAlertAction(title: (isSelected ? "✓ " : "") + title, style: .default) { [weak self] _ in
+                self?.selectLandscapeBiur(title)
+            })
+        }
+        sheet.addAction(UIAlertAction(title: "st_close".localize(), style: .cancel, handler: nil))
+        sheet.popoverPresentationController?.sourceView = self.landscapeBiurButton
+        sheet.popoverPresentationController?.sourceRect = self.landscapeBiurButton.bounds
+        self.present(sheet, animated: true, completion: nil)
+    }
+    
+    private func selectLandscapeBiur(_ option:String)
+    {
+        switch option {
+        case "חברותא": self.landscapeBiurType = .Chavruta
+        case "שטיינזלץ": self.landscapeBiurType = .Steinsaltz
+        case "Steinsaltz": self.landscapeBiurType = .EN
+        default: self.landscapeBiurType = nil
+        }
+        if self.landscapeBiurType == nil {
+            self.landscapeBiurView.stop()
+        }
+        self.layoutLandscapeViews()
+        self.updateLandscapeBiurPage()
     }
     
     @IBAction func dicreaseTextSizeButtonClicked(_ sender:UIButton) {
@@ -1367,6 +2089,21 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.onDidSelectPage()
         
         self.saveSelectedPage()
+        self.updateLandscapeBiurPage()
+    }
+    
+    /// After the arrows scroll the pages (animated), update the shown page
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        guard scrollView === self.pagesCollectionView else { return }
+        let pageIndex = self.pagesCollectionView.centerRowIndex()
+        guard pageIndex >= 0 else { return }
+        let pageInfo = HadafHayomiManager.pageInfoForIndexInTalmud(pageIndex + 1)
+        self.displyedMasceht = pageInfo["maschet"] as? Masechet
+        self.displyedPage = pageInfo["page"] as? Page
+        self.displyedPageSide = pageInfo["pageSide"] as? Int
+        self.onDidSelectPage()
+        self.saveSelectedPage()
+        self.updateLandscapeBiurPage()
     }
     
     func saveSelectedPage()
@@ -1385,6 +2122,11 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     }
     
     func talmudPagePickerView(_ talmudPagePickerView:TalmudPagePickerView, didHide:Bool){
+    }
+    
+    /// "לדף היומי" at the top of the page list
+    func talmudPagePickerViewDidSelectTodaysPage(_ talmudPagePickerView: TalmudPagePickerView) {
+        self.showTodaysPageButtonClicked(self.selectPageButton ?? UIButton())
     }
     
     /// A page was tapped in the page list: go to it and close the picker
@@ -1524,6 +2266,10 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        // Empty search: back to the toolbar
+        if (searchBar.text ?? "").isEmpty {
+            searchBar.isHidden = true
+        }
         self.searchBarTrailingConstraintToView?.priority = UILayoutPriority(500)
         self.searchBar.searchBarStyle = .minimal
         
@@ -1543,13 +2289,117 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
         searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.text = ""
-        searchBar.resignFirstResponder()
+        self.searchBar(searchBar, textDidChange: "")
+        self.hideSearchBar()
+    }
+}
+
+// MARK: - The ביאור half next to the page (iPhone landscape)
+
+final class TalmudBiurSideView: UIView
+{
+    private let pdfView = PDFView()
+    private let webView = WKWebView()
+    private let spinner = UIActivityIndicatorView(style: .medium)
+    private var process:MSBaseProcess?
+    private var dataTask:URLSessionDataTask?
+    private var shown:(type:TalmudDisplayType, pageIndex:Int)?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
+        pdfView.autoScales = true
+        pdfView.backgroundColor = .white
+        for v in [pdfView, webView] as [UIView] {
+            v.frame = bounds
+            v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            addSubview(v)
+        }
+        spinner.hidesWhenStopped = true
+        spinner.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
+        addSubview(spinner)
+        
+        let line = UIView(frame: CGRect(x: bounds.width - 1, y: 0, width: 1, height: bounds.height))
+        line.backgroundColor = UIColor(HexColor: "B58B3A")
+        line.autoresizingMask = [.flexibleLeftMargin, .flexibleHeight]
+        addSubview(line)
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        spinner.center = CGPoint(x: bounds.midX, y: bounds.midY)
+    }
+    
+    func stop() {
+        process?.cancel()
+        dataTask?.cancel()
+        shown = nil
+    }
+    
+    func show(type:TalmudDisplayType, pageIndex:Int)
+    {
+        if let shown = shown, shown.type == type, shown.pageIndex == pageIndex { return }
+        stop()
+        shown = (type, pageIndex)
+        spinner.startAnimating()
+        bringSubviewToFront(spinner)
+        
+        if type == .Chavruta {
+            pdfView.isHidden = false
+            webView.isHidden = true
+            pdfView.document = nil
+            if let saved = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: .Chavruta),
+               let document = PDFDocument(url: URL(fileURLWithPath: saved)) {
+                pdfView.document = document
+                spinner.stopAnimating()
+                return
+            }
+            guard let url = URL(string: "http://files.daf-yomi.com/files/app/chavruta/\(pageIndex).pdf") else { return }
+            dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+                DispatchQueue.main.async {
+                    guard let self = self, self.shown?.pageIndex == pageIndex, self.shown?.type == type else { return }
+                    self.spinner.stopAnimating()
+                    if let data = data { self.pdfView.document = PDFDocument(data: data) }
+                }
+            }
+            dataTask?.resume()
+            return
+        }
+        
+        // Steinsaltz (Hebrew) / English: HTML
+        pdfView.isHidden = true
+        webView.isHidden = false
+        webView.loadHTMLString("", baseURL: nil)
+        
+        let fileNamed = "\(pageIndex)_\(type.rawValue)"
+        let filePath = FileManager.filePathFor(fileNamed: fileNamed, ofType: "html")
+        if FileManager.default.fileExists(atPath: filePath.path),
+           let savedText = try? String(contentsOf: filePath, encoding: .utf8) {
+            webView.loadHTMLString(type == .Steinsaltz ? "<font size=\"25\">\(savedText)</font>" : savedText, baseURL: nil)
+            spinner.stopAnimating()
+            return
+        }
+        
+        let newProcess:MSBaseProcess = (type == .EN) ? GetENPageProcess() : GetSteinsaltzPageProcess()
+        process = newProcess
+        newProcess.executeWithObject(pageIndex, onStart: { }, onComplete: { [weak self] object in
+            guard let self = self, self.shown?.pageIndex == pageIndex, self.shown?.type == type else { return }
+            self.spinner.stopAnimating()
+            if let pageText = object as? String {
+                self.webView.loadHTMLString("<font size=\"25\">\(pageText)</font>", baseURL: nil)
+            } else if let pageURL = object as? URL {
+                self.webView.load(URLRequest(url: pageURL))
+            }
+        }, onFaile: { [weak self] _, _ in
+            self?.spinner.stopAnimating()
+        })
     }
 }

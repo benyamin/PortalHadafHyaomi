@@ -303,11 +303,11 @@
                                     <constraint firstAttribute="height" constant="35" id="AEB-0h-0qq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="16"/>
-                                <state key="normal" title="לדף היומי">
+                                <state key="normal" title="ביאור">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showTodaysPageButtonClicked:" destination="Jai-r2-lgz" eventType="touchUpInside" id="v4y-D3-9r5"/>
+                                    <action selector="biurButtonClicked:" destination="Jai-r2-lgz" eventType="touchUpInside" id="v4y-D3-9r5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVD-0l-dn5">
@@ -574,7 +574,7 @@
                             <constraint firstAttribute="trailing" secondItem="e3S-8u-bB1" secondAttribute="trailing" id="Cn6-tr-h9E"/>
                             <constraint firstItem="iXH-Fj-72o" firstAttribute="top" secondItem="e3S-8u-bB1" secondAttribute="bottom" id="DSB-Ko-I7L"/>
                             <constraint firstItem="3CU-qn-65E" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="bottom" constant="39" id="DbW-YO-lv4"/>
-                            <constraint firstItem="zVD-0l-dn5" firstAttribute="leading" secondItem="cxP-Kk-WIo" secondAttribute="trailing" constant="1" id="L7b-AS-Hfi"/>
+                            <constraint firstItem="cxP-Kk-WIo" firstAttribute="leading" secondItem="tw4-s9-hff" secondAttribute="trailing" constant="1" id="L7b-AS-Hfi"/>
                             <constraint firstItem="Gtt-Vg-Jeg" firstAttribute="top" secondItem="tTo-xy-lHx" secondAttribute="top" id="Pkl-PE-9FM"/>
                             <constraint firstAttribute="trailing" secondItem="5Sk-sJ-IN1" secondAttribute="trailing" id="QMk-LS-ihY"/>
                             <constraint firstAttribute="trailing" secondItem="khj-Z1-3kN" secondAttribute="trailing" id="QYt-fT-cT1"/>
@@ -582,13 +582,13 @@
                             <constraint firstItem="e3S-8u-bB1" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="T3R-cC-3ew"/>
                             <constraint firstItem="DKM-e9-dg2" firstAttribute="top" secondItem="cxP-Kk-WIo" secondAttribute="bottom" constant="4" id="TQb-Ka-YP6"/>
                             <constraint firstItem="Omk-88-gA9" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" constant="16" id="Vic-35-iwF"/>
-                            <constraint firstItem="e3S-8u-bB1" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="bottom" constant="35" id="W9Q-72-7TC"/>
+                            <constraint firstItem="e3S-8u-bB1" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="bottom" constant="79" id="W9Q-72-7TC"/>
                             <constraint firstAttribute="bottomMargin" secondItem="zyy-A8-skH" secondAttribute="bottom" id="c53-bn-coE"/>
-                            <constraint firstItem="cxP-Kk-WIo" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="cCy-bz-dhh"/>
+                            <constraint firstItem="zVD-0l-dn5" firstAttribute="leading" secondItem="tTo-xy-lHx" secondAttribute="leading" id="cCy-bz-dhh"/>
                             <constraint firstItem="iXH-Fj-72o" firstAttribute="top" secondItem="zsp-Gh-zwb" secondAttribute="bottom" constant="6" id="cxS-T5-j9h"/>
                             <constraint firstAttribute="trailing" secondItem="Qye-yT-nQL" secondAttribute="trailing" id="dGY-uM-kN9"/>
                             <constraint firstItem="tw4-s9-hff" firstAttribute="width" secondItem="UgW-NQ-GQb" secondAttribute="width" id="ddk-8L-7RG"/>
-                            <constraint firstItem="UgW-NQ-GQb" firstAttribute="leading" secondItem="tw4-s9-hff" secondAttribute="trailing" constant="1" id="eoa-BI-kbD"/>
+                            <constraint firstItem="UgW-NQ-GQb" firstAttribute="leading" secondItem="cxP-Kk-WIo" secondAttribute="trailing" constant="1" id="eoa-BI-kbD"/>
                             <constraint firstItem="cxP-Kk-WIo" firstAttribute="top" secondItem="Gtt-Vg-Jeg" secondAttribute="bottom" id="fcA-f3-B7x"/>
                             <constraint firstAttribute="bottom" secondItem="mta-EO-xNA" secondAttribute="bottom" constant="4" id="hBQ-Ts-taF"/>
                             <constraint firstAttribute="trailing" secondItem="kJc-UB-NKh" secondAttribute="trailing" constant="8" id="hTX-NN-k0t"/>

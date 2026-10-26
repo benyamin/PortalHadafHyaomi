@@ -552,3 +552,6 @@
 "st_convert_arrow_directrion_label" = ">>";
 
 "st_copied_successfully" = "Copied Successfully";
+"st_biur" = "Explanation";
+"st_go_to_todays_page" = "Go to today's page";
+"st_page_display" = "Page display";

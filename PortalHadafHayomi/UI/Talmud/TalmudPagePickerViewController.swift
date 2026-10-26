@@ -73,6 +73,13 @@ class TalmudPagePickerViewController: MSBaseViewController,TalmudPagePickerViewD
          self.talmudPagePickerView.scrollToMasechet(maschet, page: page, pageSide:pageSide, animated: animated)
     }
     
+    /// iPad: "לדף היומי" at the top of the list
+    func talmudPagePickerViewDidSelectTodaysPage(_ talmudPagePickerView: TalmudPagePickerView)
+    {
+        self.scrollToTodaysPage()
+        self.delegate?.talmudPagePickerViewControllerDidChange(self, component: 0)
+    }
+    
     func talmudPagePickerView(_ talmudPagePickerView:TalmudPagePickerView, didChangeComponent component:Int)
     {
         self.delegate?.talmudPagePickerViewControllerDidChange(self, component:component)

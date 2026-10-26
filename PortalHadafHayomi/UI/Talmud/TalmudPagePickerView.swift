@@ -16,6 +16,8 @@ import UIKit
     
     /// The user tapped a page in the list (the selection is already set)
     @objc optional func talmudPagePickerViewDidSelectPage(_ talmudPagePickerView:TalmudPagePickerView)
+    /// "לדף היומי" was tapped at the top of the list
+    @objc optional func talmudPagePickerViewDidSelectTodaysPage(_ talmudPagePickerView:TalmudPagePickerView)
 }
 
 
@@ -114,6 +116,11 @@ class TalmudPagePickerView:UIView, UIPickerViewDelegate,UIPickerViewDataSource
             if let pageIndex = HadafHayomiManager.sharedManager.pageIndexFor(masechet, page: page, pageSide: side) {
                 self?.deletePage(pageIndex: pageIndex)
             }
+        }
+        
+        listView.onTodaysPage = { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.talmudPagePickerViewDidSelectTodaysPage?(self)
         }
         
         listView.onSelect = { [weak self] masechet, page, side in
