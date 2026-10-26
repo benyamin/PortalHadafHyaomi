@@ -16,8 +16,9 @@ public extension Date
         if dateString.hasPrefix("today-plus-")
         {
             //remove the prefix from the string
-            let daysFromToday = Double(dateString.replacingOccurrences(of: "today-plus-", with: ""))!
-            let date = Date(timeInterval: 60*60*24 * daysFromToday, since: Date())
+            let daysFromToday = Int(Double(dateString.replacingOccurrences(of: "today-plus-", with: "")) ?? 0)
+            // FIX: calendar days, not N x 24 hours (wrong by a day across a clock change)
+            let date = Calendar.current.date(byAdding: .day, value: daysFromToday, to: Date()) ?? Date()
             
             return date
         }

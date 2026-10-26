@@ -1022,7 +1022,13 @@ open class  HadafHayomiManager
             if numberOfDaysToSelectedPage < 0 {
                 //  numberOfDaysToSelectedPage = HadafHayomiManager.sharedManager.numberOfDaysToCycleComplition() + selectedPageIndex
             }
-            let date = Date().addingTimeInterval(TimeInterval(24*60*60*numberOfDaysToSelectedPage))
+            // FIX: adding N x 24 hours breaks when the clock changes (winter / summer time):
+            // a day with 25 or 23 hours moved the date by one day, so two dafim got the same date
+            // (e.g. "דף לז – י״ד חשון" twice after the clock change on 25.10.2026).
+            // Count calendar days from today at noon instead.
+            let calendar = Calendar.current
+            let todayNoon = calendar.date(bySettingHour: 12, minute: 0, second: 0, of: Date()) ?? Date()
+            let date = calendar.date(byAdding: .day, value: numberOfDaysToSelectedPage, to: todayNoon) ?? todayNoon
             
             return date
         }

@@ -115,8 +115,12 @@ final class MicropediaService {
             let title = decodeEntities(stripTags(ns.substring(with: match.range(at: 3))))
                 .trimmingCharacters(in: .whitespacesAndNewlines)
             
+            // FIX: always open the entry by its plain address (…Dictionary.aspx?id=3&wordId=N).
+            // Links in "רשימת ערכים" carry extra parts (the browse tab / letter), so the site
+            // showed the whole list page and the entry could not be cut out of it.
             guard !title.isEmpty, !seen.contains(wordId),
-                  let url = URL(string: href, relativeTo: URL(string: "https://daf-yomi.com/"))?.absoluteURL else { continue }
+                  URL(string: href, relativeTo: URL(string: "https://daf-yomi.com/")) != nil,
+                  let url = URL(string: MicropediaService.baseURL + "&wordId=" + wordId) else { continue }
             seen.insert(wordId)
             entries.append(MicropediaEntry(title: title, url: url))
         }
@@ -638,7 +642,13 @@ final class MicropediaEntryViewController: UIViewController, WKNavigationDelegat
         // A link to another entry: load it and crop it the same way
         if url.host?.contains("daf-yomi.com") == true, url.absoluteString.contains("Dictionary.aspx") {
             decisionHandler(.cancel)
-            loadSitePage(url)
+            // same plain entry address as the lists use (keeps the #section to jump to)
+            if let wordId = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.first(where: { $0.name == "wordId" })?.value,
+               let plain = URL(string: MicropediaService.baseURL + "&wordId=" + wordId + (url.fragment.map { "#" + $0 } ?? "")) {
+                loadSitePage(plain)
+            } else {
+                loadSitePage(url)
+            }
             return
         }
         
