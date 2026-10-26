@@ -159,6 +159,8 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.noFavoriteMaggidShioursMessageLabel?.text = "st_add_Favorite_maggid_shiour_message".localize()
         
         self.noFavoriteMaggidShioursContentView.isHidden = true
+        
+        self.setupNewLessonsLayout()
     }
     
     func addBorderToView(_ view:UIView?) {
@@ -224,6 +226,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             self.lessonsPickerView.isHidden = false
             
             self.lessonsPickerView.addConstraint(NSLayoutConstraint(item: lessonsPickerView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: lessonsPickerView.frame.size.height))
+            
+            // New lessons list: starts with all masechtot closed
+            self.lessonsBrowser.rebuildRoot(force: true)
 
         }
         else if let playingLesson = LessonsManager.sharedManager.playingLesson
@@ -709,6 +714,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     //Mark: LessonsPickerView Delegate Methods
     func lessonsPickerViewDidChangeSelection()
     {
+        defer { self.lessonsBrowserIfLoaded?.reloadVisible() }
         self.playPauseButton.isSelected = false
         
         if let selectedMaschet = self.lessonsPickerView.selectedMaschet
@@ -904,6 +910,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         
         LessonsManager.sharedManager.isPlaying = false
         self.playPauseButton.isSelected = false
+        self.lessonsBrowserIfLoaded?.reloadVisible()
         
         if let tableView  = self.lastPlayedLessonsTableView
            ,let visibleCellsIndexes = tableView.indexPathsForVisibleRows {
@@ -915,6 +922,7 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         self.playPauseButton.isSelected = true
         
         LessonsManager.sharedManager.isPlaying = true
+        self.lessonsBrowserIfLoaded?.reloadVisible()
         
         if let tableView  = self.lastPlayedLessonsTableView
            ,let visibleCellsIndexes = tableView.indexPathsForVisibleRows {
@@ -1181,5 +1189,344 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
         }
                 
         return cell
+    }
+}
+
+// MARK: - New lessons layout: compact filters + masechet → daf → maggid shiur
+
+extension LessonsViewController: LessonsBrowserDataSource
+{
+    private static var browserKey = 0
+    private static var filterViewsKey = 0
+    
+    private final class FilterViews {
+        let container = UIView()
+        let stack = UIStackView()
+        let filterButton = UIButton(type: .system)
+        let summaryLabel = UILabel()
+        let todayButton = UIButton(type: .system)
+        let panel = UIStackView()
+        var sort = UISegmentedControl()
+        var which = UISegmentedControl()
+        var media = UISegmentedControl()
+    }
+    
+    private var filterViews:FilterViews {
+        if let views = objc_getAssociatedObject(self, &LessonsViewController.filterViewsKey) as? FilterViews { return views }
+        let views = FilterViews()
+        objc_setAssociatedObject(self, &LessonsViewController.filterViewsKey, views, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        return views
+    }
+    
+    var lessonsBrowserIfLoaded:LessonsBrowser? {
+        return objc_getAssociatedObject(self, &LessonsViewController.browserKey) as? LessonsBrowser
+    }
+    
+    var lessonsBrowser:LessonsBrowser {
+        if let browser = self.lessonsBrowserIfLoaded { return browser }
+        let browser = LessonsBrowser(source: self)
+        objc_setAssociatedObject(self, &LessonsViewController.browserKey, browser, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        return browser
+    }
+    
+    // MARK: Layout
+    
+    func setupNewLessonsLayout()
+    {
+        let v = self.filterViews
+        let burgundy = LessonsBrowserStyle.burgundy
+        
+        // Everything under the player: filter row, (filter panel), lessons list.
+        // It covers the old pickers / segments / search bar (they stay hidden underneath).
+        v.container.backgroundColor = LessonsBrowserStyle.parchment
+        v.container.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(v.container)
+        NSLayoutConstraint.activate([
+            v.container.topAnchor.constraint(equalTo: self.palyerPlaceHolderView.bottomAnchor),
+            v.container.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            v.container.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            v.container.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+        self.searchBar?.isHidden = true
+        
+        // Filter row: [סינון ▾ (n)]  summary  [לדף היומי]
+        let row = UIView()
+        row.semanticContentAttribute = .forceRightToLeft
+        row.translatesAutoresizingMaskIntoConstraints = false
+        row.heightAnchor.constraint(equalToConstant: 52).isActive = true
+        
+        v.filterButton.setTitle(" סינון", for: .normal)
+        v.filterButton.setImage(UIImage(systemName: "line.3.horizontal.decrease"), for: .normal)
+        v.filterButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        v.filterButton.tintColor = burgundy
+        v.filterButton.setTitleColor(burgundy, for: .normal)
+        v.filterButton.backgroundColor = .white
+        v.filterButton.layer.borderWidth = 1
+        v.filterButton.layer.borderColor = LessonsBrowserStyle.border.cgColor
+        v.filterButton.layer.cornerRadius = 3
+        v.filterButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        v.filterButton.semanticContentAttribute = .forceRightToLeft
+        v.filterButton.addTarget(self, action: #selector(newFilterButtonTapped), for: .touchUpInside)
+        v.filterButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        v.summaryLabel.font = UIFont.systemFont(ofSize: 12)
+        v.summaryLabel.textColor = LessonsBrowserStyle.secondaryText
+        v.summaryLabel.textAlignment = .right
+        v.summaryLabel.lineBreakMode = .byTruncatingTail
+        v.summaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        v.todayButton.setTitle("st_go_to_todays_page".localize(), for: .normal)
+        v.todayButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        v.todayButton.setTitleColor(burgundy, for: .normal)
+        v.todayButton.backgroundColor = .white
+        v.todayButton.layer.borderWidth = 1
+        v.todayButton.layer.borderColor = burgundy.cgColor
+        v.todayButton.layer.cornerRadius = 3
+        v.todayButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        v.todayButton.addTarget(self, action: #selector(newTodaysPageTapped), for: .touchUpInside)
+        v.todayButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let line = UIView()
+        line.backgroundColor = LessonsBrowserStyle.line
+        line.translatesAutoresizingMaskIntoConstraints = false
+        
+        // "לדף היומי" was removed from this row; the summary takes its place
+        row.addSubview(v.filterButton)
+        row.addSubview(v.summaryLabel)
+        row.addSubview(line)
+        NSLayoutConstraint.activate([
+            v.filterButton.rightAnchor.constraint(equalTo: row.rightAnchor, constant: -12),
+            v.filterButton.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            v.filterButton.heightAnchor.constraint(equalToConstant: 34),
+            v.summaryLabel.rightAnchor.constraint(equalTo: v.filterButton.leftAnchor, constant: -8),
+            v.summaryLabel.leftAnchor.constraint(equalTo: row.leftAnchor, constant: 12),
+            v.summaryLabel.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            line.leftAnchor.constraint(equalTo: row.leftAnchor),
+            line.rightAnchor.constraint(equalTo: row.rightAnchor),
+            line.bottomAnchor.constraint(equalTo: row.bottomAnchor),
+            line.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        
+        // Filter panel (closed until "סינון" is tapped) – same choices as before
+        func copySegments(_ old:UISegmentedControl?, action:Selector) -> UISegmentedControl {
+            var titles = [String]()
+            for i in 0 ..< (old?.numberOfSegments ?? 0) { titles.append(old?.titleForSegment(at: i) ?? "") }
+            let control = UISegmentedControl(items: titles)
+            control.selectedSegmentIndex = old?.selectedSegmentIndex ?? 0
+            control.selectedSegmentTintColor = .white
+            control.backgroundColor = UIColor(HexColor: "EBE2C4")
+            control.setTitleTextAttributes([.foregroundColor: burgundy, .font: UIFont.boldSystemFont(ofSize: 13)], for: .selected)
+            control.setTitleTextAttributes([.foregroundColor: UIColor(HexColor: "3D332B"), .font: UIFont.systemFont(ofSize: 13)], for: .normal)
+            control.semanticContentAttribute = .forceRightToLeft
+            control.addTarget(self, action: action, for: .valueChanged)
+            return control
+        }
+        v.sort = copySegments(self.sortSegmenterController, action: #selector(newSortChanged(_:)))
+        v.which = copySegments(self.lessonsFilterSegmentedController, action: #selector(newWhichChanged(_:)))
+        v.media = copySegments(self.mediaTypeSegmentedController, action: #selector(newMediaChanged(_:)))
+        
+        func caption(_ text:String) -> UILabel {
+            let label = UILabel()
+            label.text = text
+            label.font = UIFont.boldSystemFont(ofSize: 12)
+            label.textColor = LessonsBrowserStyle.secondaryText
+            label.textAlignment = .right
+            return label
+        }
+        for view in [caption("st_sort_by".localize()), v.sort, caption("שיעורים"), v.which, caption("סוג"), v.media] as [UIView] {
+            v.panel.addArrangedSubview(view)
+        }
+        v.panel.axis = .vertical
+        v.panel.spacing = 6
+        v.panel.isLayoutMarginsRelativeArrangement = true
+        v.panel.layoutMargins = UIEdgeInsets(top: 10, left: 12, bottom: 12, right: 12)
+        v.panel.backgroundColor = LessonsBrowserStyle.openBackground
+        v.panel.isHidden = true
+        
+        // The lessons list: its own navigation controller (daf → maggidei shiur slides in)
+        let nav = self.lessonsBrowser.navigationController
+        self.addChild(nav)
+        nav.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        v.stack.axis = .vertical
+        v.stack.translatesAutoresizingMaskIntoConstraints = false
+        v.stack.addArrangedSubview(row)
+        v.stack.addArrangedSubview(v.panel)
+        v.stack.addArrangedSubview(nav.view)
+        v.container.addSubview(v.stack)
+        NSLayoutConstraint.activate([
+            v.stack.topAnchor.constraint(equalTo: v.container.topAnchor),
+            v.stack.leftAnchor.constraint(equalTo: v.container.leftAnchor),
+            v.stack.rightAnchor.constraint(equalTo: v.container.rightAnchor),
+            v.stack.bottomAnchor.constraint(equalTo: v.container.bottomAnchor)
+        ])
+        nav.didMove(toParent: self)
+        
+        self.updateFilterSummary()
+    }
+    
+    private func setFilterPanel(open:Bool)
+    {
+        let v = self.filterViews
+        v.filterButton.layer.borderColor = (open ? LessonsBrowserStyle.burgundy : LessonsBrowserStyle.border).cgColor
+        v.filterButton.backgroundColor = open ? LessonsBrowserStyle.openBackground : .white
+        UIView.animate(withDuration: 0.25) {
+            v.panel.isHidden = !open
+            v.stack.layoutIfNeeded()
+        }
+    }
+    
+    @objc func newFilterButtonTapped()
+    {
+        self.setFilterPanel(open: self.filterViews.panel.isHidden)
+    }
+    
+    @objc func newTodaysPageTapped()
+    {
+        self.scrollToTodaysPage(selectDefaultMaggidShiour: false)
+        if self.browserSortOption != .Maschtot || self.browserShowsHistory {
+            // today's lessons are shown in the masechet list
+            self.filterViews.sort.selectedSegmentIndex = 0
+            self.newSortChanged(self.filterViews.sort)
+            if self.browserShowsHistory {
+                self.filterViews.which.selectedSegmentIndex = 0
+                self.newWhichChanged(self.filterViews.which)
+            }
+        }
+        self.lessonsBrowser.showTodaysPage()
+    }
+    
+    @objc func newSortChanged(_ sender:UISegmentedControl)
+    {
+        self.sortSegmenterController.selectedSegmentIndex = sender.selectedSegmentIndex
+        self.sortSegmentedControlloerValueChanged(self.sortSegmenterController)
+        self.filtersDidChange()
+    }
+    
+    @objc func newWhichChanged(_ sender:UISegmentedControl)
+    {
+        self.lessonsFilterSegmentedController.selectedSegmentIndex = sender.selectedSegmentIndex
+        self.lessonsFilterSegmentedControllerValueChanged(self.lessonsFilterSegmentedController)
+        self.filtersDidChange()
+    }
+    
+    @objc func newMediaChanged(_ sender:UISegmentedControl)
+    {
+        self.mediaTypeSegmentedController.selectedSegmentIndex = sender.selectedSegmentIndex
+        self.mediaTypeSegmentedControllerValueChanged(self.mediaTypeSegmentedController)
+        self.filtersDidChange()
+    }
+    
+    private func filtersDidChange()
+    {
+        self.updateFilterSummary()
+        self.lessonsBrowser.rebuildRoot(force: true)
+    }
+    
+    private func updateFilterSummary()
+    {
+        let v = self.filterViews
+        var parts = [String]()
+        var active = 0
+        for control in [v.sort, v.which, v.media] {
+            let index = control.selectedSegmentIndex
+            if index > 0 { active += 1 }
+            if index >= 0, let title = control.titleForSegment(at: index) { parts.append(title) }
+        }
+        v.summaryLabel.text = parts.joined(separator: " · ")
+        v.filterButton.setTitle(active > 0 ? " סינון (\(active))" : " סינון", for: .normal)
+    }
+    
+    // MARK: LessonsBrowserDataSource
+    
+    var browserSortOption:LessonsSortOption { return self.lessonsPickerView.lessonsSortOption }
+    var browserFilterOption:LessonsFilterOption { return self.lessonsPickerView.lessonsFilterOption }
+    var browserMediaOption:LessonsMediaTypeOption { return self.lessonsPickerView.lessonsMediaTypeOption }
+    var browserShowsHistory:Bool { return self.lessonsFilterSegmentedController.selectedSegmentIndex == 2 }
+    var browserMaggidShiurs:[MaggidShiur] { return self.lessonsPickerView.displayedMaggidShiours }
+    var browserCurrentLesson:Lesson? { return self.selectedLesson }
+    var browserIsPlaying:Bool { return self.audioPlayer?.isPlaying ?? false }
+    
+    func browserPlay(_ lesson:Lesson)
+    {
+        if self.audioPlayer?.lockButton.isSelected ?? false {
+            self.audioPlayer?.displayLockAlert()
+            return
+        }
+        let isCurrent = self.selectedLesson?.identifier != nil && self.selectedLesson?.identifier == lesson.identifier
+        
+        // Tapping the playing lesson pauses it
+        if isCurrent, self.audioPlayer?.isPlaying == true {
+            self.audioPlayer?.pause()
+            self.playPauseButton.isSelected = false
+            self.lessonsBrowser.reloadVisible()
+            return
+        }
+        
+        // Keep the (hidden) picker on this lesson: the player's next / previous use it
+        self.setPlayingLesson(lesson)
+        self.updateLastPlayedMaggidShiurs(selectedMaggidShiur: lesson.maggidShiur)
+        
+        if isCurrent {
+            self.audioPlayer?.play()
+        } else {
+            self.selectLesson(lesson, andStartAutomatically: true)
+        }
+        self.playPauseButton.isSelected = true
+        if let selected = self.selectedLesson, let player = self.audioPlayer {
+            LessonsManager.sharedManager.savePlayingLassonInfo(selected, duratoinInSeconds: player.timeNow())
+        }
+        self.lessonsBrowser.reloadVisible()
+    }
+    
+    func browserIsSaving(_ lesson:Lesson) -> Bool { return self.isSavingLessonInProgress(lesson: lesson) }
+    func browserDownloadProgress(_ lesson:Lesson) -> Float { return self.lessonDownloadPrecnetage(lesson: lesson) }
+    
+    func browserSave(_ lesson:Lesson)
+    {
+        guard let masechetName = lesson.masechet?.name, let maggidName = lesson.maggidShiur?.name, let pageSymbol = lesson.page?.symbol else { return }
+        let processKey = "\(masechetName)\(maggidName)\(pageSymbol)"
+        if self.savinglessonsActiveProcess[processKey] != nil { return }
+        
+        let saveLessonProcess = SaveLessonProcess()
+        self.savinglessonsActiveProcess[processKey] = saveLessonProcess
+        self.lessonsBrowser.reloadVisible()
+        
+        saveLessonProcess.executeWithObject(lesson, onStart: { () -> Void in
+        }, onProgress: { (object) -> Void in
+            self.lessonsBrowser.reloadVisible()
+        }, onComplete: { (object) -> Void in
+            self.savinglessonsActiveProcess.removeValue(forKey: processKey)
+            lesson.masechet.hasSavedLessons = true
+            lesson.maggidShiur.hasSavedLessons = true
+            self.lessonsPickerView.reloadData()
+            self.lessonsBrowser.reloadVisible()
+        }, onFaile: { (object, error) -> Void in
+            self.savinglessonsActiveProcess.removeValue(forKey: processKey)
+            self.lessonsPickerView.reloadData()
+            self.lessonsBrowser.reloadVisible()
+            self.presentErrorAlertWithError(error)
+        })
+    }
+    
+    func browserDelete(_ lesson:Lesson)
+    {
+        guard LessonsManager.sharedManager.isSavedLesson(lesson) else { return }
+        let alertTitle = "st_delete_lesson_alert_title".localize()
+        let alertMessage = String(format: "st_delete_lesson_alert_message".localize(), arguments: [lesson.maggidShiur.name ?? "", lesson.masechet.name ?? "", lesson.page?.symbol ?? ""])
+        let deleteTitle = "st_delete".localize()
+        let cancelTitle = "st_cancel".localize()
+        BTAlertView.show(title: alertTitle, message: alertMessage, buttonKeys: [deleteTitle, cancelTitle], onComplete:{ (dismissButtonKey) in
+            guard dismissButtonKey == deleteTitle else { return }
+            RemoveLessonProcess().executeWithObject(lesson, onStart: { () -> Void in
+            }, onComplete: { (object) -> Void in
+                self.lessonsPickerView.reloadData()
+                self.lessonsBrowser.rebuildRoot(force: self.browserFilterOption == .Saved)
+                self.lessonsBrowser.reloadVisible()
+            }, onFaile: { (object, error) -> Void in
+                self.lessonsPickerView.reloadData()
+                self.lessonsBrowser.reloadVisible()
+            })
+        })
     }
 }
