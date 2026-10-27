@@ -191,7 +191,6 @@
 		4A5B598A22539C6B00C1765D /* MSTableHeaderTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B598922539C6B00C1765D /* MSTableHeaderTitleCell.swift */; };
 		4A5E42B626F3FFC5006CC9E6 /* calculator_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E42B526F3FFC5006CC9E6 /* calculator_icon.png */; };
 		4A6349A7200C9794000428AA /* LessonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6349A6200C9794000428AA /* LessonsViewController.swift */; };
-		7C1E55A11F2B4C9D0A1B0002 /* LessonsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E55A01F2B4C9D0A1B0001 /* LessonsBrowser.swift */; };
 		4A6349A9200CA146000428AA /* LessonsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6349A8200CA146000428AA /* LessonsPickerView.swift */; };
 		4A65E1721FE7F970008BA62B /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A65E1711FE7F970008BA62B /* Venue.swift */; };
 		4A65E1761FE801F2008BA62B /* LessonVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A65E1751FE801F2008BA62B /* LessonVenue.swift */; };
@@ -668,6 +667,7 @@
 		4AFE3EF9204F3E140040BD24 /* Map_IPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE3EF8204F3E140040BD24 /* Map_IPadViewController.swift */; };
 		4AFE3EFB205463C20040BD24 /* LessonVenuesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE3EFA205463C20040BD24 /* LessonVenuesListViewController.swift */; };
 		4AFE3EFD20548A5A0040BD24 /* AddLessonVenueProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE3EFC20548A5A0040BD24 /* AddLessonVenueProcess.swift */; };
+		7C1E55A11F2B4C9D0A1B0002 /* LessonsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E55A01F2B4C9D0A1B0001 /* LessonsBrowser.swift */; };
 		9D94E04CC991DB934B1D0E4E /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 6528351A237EEC403B59AFDC /* OneSignalFramework */; };
 		ABA305112A63C3461B8F2391 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7D79FD228D91DBC70085A71A /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B0C3925363EDE6C5B24F5C12 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4A381300C2B847D28E2B1FD8 /* OneSignalExtension */; };
@@ -882,7 +882,6 @@
 		4A5B598922539C6B00C1765D /* MSTableHeaderTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSTableHeaderTitleCell.swift; sourceTree = "<group>"; };
 		4A5E42B526F3FFC5006CC9E6 /* calculator_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculator_icon.png; sourceTree = "<group>"; };
 		4A6349A6200C9794000428AA /* LessonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsViewController.swift; sourceTree = "<group>"; };
-		7C1E55A01F2B4C9D0A1B0001 /* LessonsBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsBrowser.swift; sourceTree = "<group>"; };
 		4A6349A8200CA146000428AA /* LessonsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPickerView.swift; sourceTree = "<group>"; };
 		4A65E1711FE7F970008BA62B /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		4A65E1751FE801F2008BA62B /* LessonVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonVenue.swift; sourceTree = "<group>"; };
@@ -1374,6 +1373,7 @@
 		4AFE3EFC20548A5A0040BD24 /* AddLessonVenueProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLessonVenueProcess.swift; sourceTree = "<group>"; };
 		6017FB69F28EE21852A84313 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		6AA8B2F71AE47CE60C92FE00 /* TalmudPageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalmudPageListView.swift; sourceTree = "<group>"; };
+		7C1E55A01F2B4C9D0A1B0001 /* LessonsBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsBrowser.swift; sourceTree = "<group>"; };
 		7D79FD228D91DBC70085A71A /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FE7A8EC6498CF377119121 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11D1E54F1712CA462637413 /* MicropediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicropediaViewController.swift; sourceTree = "<group>"; };
@@ -3844,7 +3844,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13.4;
+				MARKETING_VERSION = 13.5;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3875,7 +3875,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13.4;
+				MARKETING_VERSION = 13.5;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
