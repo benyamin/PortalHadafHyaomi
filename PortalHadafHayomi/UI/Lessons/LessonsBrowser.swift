@@ -136,6 +136,8 @@ final class LessonsBrowser: NSObject, UIGestureRecognizerDelegate
 {
     weak var source:LessonsBrowserDataSource?
     let navigationController:UINavigationController
+    /// the three-column picker (sort by masechet / maggid shiur); the navigation list is used for history
+    weak var columnsView:LessonsColumnsPickerView?
 
     init(source:LessonsBrowserDataSource) {
         self.source = source
@@ -181,6 +183,7 @@ final class LessonsBrowser: NSObject, UIGestureRecognizerDelegate
     /// Refresh what is on screen (download progress, playing mark, saved marks)
     func reloadVisible()
     {
+        columnsView?.refreshState()
         for vc in navigationController.viewControllers {
             (vc as? LessonsBrowserScreen)?.reloadScreen()
         }
@@ -968,5 +971,684 @@ final class LessonsHistoryViewController: UIViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         browser?.source?.browserPlay(lessons[indexPath.row])
+    }
+}
+
+
+// MARK: - Three-column lesson picker (like the original picker, as lists)
+//
+//  Sort by masechet:      [ masechtot ] [ dafim ] [ maggidei shiur ]   (right → left)
+//  Sort by maggid shiur:  [ maggidei shiur ] [ masechtot ] [ dafim ]
+//  Tap the last column to play (tap the playing lesson again to pause).
+//  Long-press a lesson: download / delete, add to / remove from favorites.
+
+final class LessonsColumnsPickerView: UIView, UITableViewDataSource, UITableViewDelegate
+{
+    weak var source:LessonsBrowserDataSource?
+
+    private let columns:[UITableView] = [UITableView(), UITableView(), UITableView()]
+    private var widthConstraints = [NSLayoutConstraint]()
+    private let emptyLabel = UILabel()
+
+    // data
+    private var masechtot = [Masechet]()
+    private var pages = [Page]()
+    private var maggidim = [MaggidShiur]()
+
+    // selection
+    private var selectedMasechet:Masechet?
+    private var selectedPage:Page?
+    private var selectedMaggid:MaggidShiur?
+
+    // durations of the lessons of the selected daf (lesson path -> "43:11")
+    private var durations = [String:String]()
+    private var durationsProcesses = [String:GetLessonsInfoProcess]()
+    private var durationsRequested = Set<String>()
+
+    /// FIX: the sort the columns were BUILT with. Reading the sort live made the tables ask for the
+    /// new sort's rows before they were rebuilt -> "Invalid update: invalid number of rows" crash.
+    private var displayedByMaggid = false
+    private var isByMaggid:Bool { return displayedByMaggid }
+
+    static let selectedBackground = LessonsBrowserStyle.burgundy   // as the chosen half of the sort switch
+    static let divider = UIColor(HexColor: "8C2A2A")
+
+    init(source:LessonsBrowserDataSource) {
+        self.source = source
+        super.init(frame: .zero)
+        backgroundColor = LessonsBrowserStyle.parchment
+        semanticContentAttribute = .forceRightToLeft
+
+        for (index, table) in columns.enumerated() {
+            table.tag = index
+            table.dataSource = self
+            table.delegate = self
+            table.backgroundColor = .clear
+            table.separatorStyle = .none
+            table.showsVerticalScrollIndicator = false
+            table.estimatedRowHeight = 0
+            table.estimatedSectionHeaderHeight = 0
+            table.estimatedSectionFooterHeight = 0
+            if #available(iOS 15.0, *) { table.sectionHeaderTopPadding = 0 }
+            table.register(LessonsColumnCell.self, forCellReuseIdentifier: LessonsColumnCell.reuseId)
+            table.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(table)
+        }
+        // right → left: column 0 is on the right
+        let c0 = columns[0], c1 = columns[1], c2 = columns[2]
+        widthConstraints = [
+            c0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.27),
+            c1.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.15)
+        ]
+        NSLayoutConstraint.activate(widthConstraints + [
+            c0.rightAnchor.constraint(equalTo: rightAnchor),
+            c1.rightAnchor.constraint(equalTo: c0.leftAnchor, constant: -4),
+            c2.rightAnchor.constraint(equalTo: c1.leftAnchor, constant: -4),
+            c2.leftAnchor.constraint(equalTo: leftAnchor)
+        ] + columns.flatMap { [ $0.topAnchor.constraint(equalTo: topAnchor), $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2) ] })
+
+        // the double lines between the columns and the line at the bottom
+        for leftOf in [c0, c1] {
+            for offset in [CGFloat(-1), CGFloat(-3)] {
+                let line = UIView()
+                line.backgroundColor = LessonsColumnsPickerView.divider
+                line.translatesAutoresizingMaskIntoConstraints = false
+                addSubview(line)
+                NSLayoutConstraint.activate([
+                    line.widthAnchor.constraint(equalToConstant: 1),
+                    line.rightAnchor.constraint(equalTo: leftOf.leftAnchor, constant: offset + 1),
+                    line.topAnchor.constraint(equalTo: topAnchor),
+                    line.bottomAnchor.constraint(equalTo: bottomAnchor)
+                ])
+            }
+        }
+        let bottomLine = UIView()
+        bottomLine.backgroundColor = LessonsColumnsPickerView.divider
+        bottomLine.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(bottomLine)
+        NSLayoutConstraint.activate([
+            bottomLine.leftAnchor.constraint(equalTo: leftAnchor),
+            bottomLine.rightAnchor.constraint(equalTo: rightAnchor),
+            bottomLine.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bottomLine.heightAnchor.constraint(equalToConstant: 2)
+        ])
+
+        emptyLabel.numberOfLines = 0
+        emptyLabel.textAlignment = .center
+        emptyLabel.textColor = LessonsBrowserStyle.secondaryText
+        emptyLabel.isHidden = true
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(emptyLabel)
+        NSLayoutConstraint.activate([
+            emptyLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            emptyLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24),
+            emptyLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -24)
+        ])
+    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    // MARK: Data
+
+    /// Filters / sort changed (or data arrived): rebuild all columns, keep the selection when possible
+    func reloadAll()
+    {
+        guard let source = source else { return }
+
+        displayedByMaggid = (source.browserSortOption != .Maschtot)
+        
+        // column widths for the sort
+        widthConstraints.forEach { $0.isActive = false }
+        let c0 = columns[0], c1 = columns[1]
+        widthConstraints = isByMaggid
+            ? [c0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.50), c1.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.26)]
+            : [c0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.27), c1.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.15)]
+        NSLayoutConstraint.activate(widthConstraints)
+
+        if isByMaggid {
+            maggidim = source.browserMaggidShiurs
+            selectedMaggid = maggidim.first(where: { $0.id == selectedMaggid?.id }) ?? maggidim.first
+            masechtot = selectedMaggid.map { LessonsBrowserData.masechtot(for: $0, source: source) } ?? []
+        } else {
+            masechtot = LessonsBrowserData.masechtot(for: nil, source: source)
+        }
+        selectedMasechet = masechtot.first(where: { $0.id == selectedMasechet?.id }) ?? masechtot.first
+        reloadPages()
+
+        let empty = (isByMaggid ? maggidim.isEmpty : masechtot.isEmpty)
+        emptyLabel.isHidden = !empty
+        emptyLabel.text = source.browserFilterOption == .Saved ? "st_saved_lessons_not_found".localize()
+            : (source.browserSortOption == .FavoirteMagidiShiour ? "st_add_Favorite_maggid_shiour_message".localize() : "")
+        columns.forEach { $0.isHidden = empty }
+
+        columns.forEach { $0.reloadData() }
+        scrollSelectionIntoView()
+    }
+
+    private func reloadPages()
+    {
+        guard let source = source else { return }
+        if let masechet = selectedMasechet {
+            pages = LessonsBrowserData.pages(masechet, maggid: isByMaggid ? selectedMaggid : nil, source: source)
+        } else {
+            pages = []
+        }
+        selectedPage = pages.first(where: { $0.index == selectedPage?.index }) ?? pages.first
+        reloadMaggidim()
+    }
+
+    private func reloadMaggidim()
+    {
+        guard let source = source, !isByMaggid else { return }
+        if let masechet = selectedMasechet, let page = selectedPage {
+            let all = LessonsBrowserData.maggidim(masechet, page: page, only: nil, source: source)
+            maggidim = all.filter { $0.isFavorite } + all.filter { !$0.isFavorite }
+            loadDurations(masechet: masechet, page: page)
+        } else {
+            maggidim = []
+        }
+    }
+
+    /// Durations of all the lessons of a daf (all maggidei shiur) – one request per daf, kept in a cache
+    private func loadDurations(masechet:Masechet, page:Page?)
+    {
+        guard let page = page else { return }
+        let key = "\(masechet.id ?? "")-\(page.index ?? -1)"
+        if durationsRequested.contains(key) { return }
+        durationsRequested.insert(key)
+
+        let lesson = Lesson()
+        lesson.masechet = masechet
+        lesson.page = page
+        let process = GetLessonsInfoProcess()
+        durationsProcesses[key] = process
+        process.executeWithObject(lesson, onStart: { }, onComplete: { [weak self] object in
+            guard let self = self else { return }
+            self.durationsProcesses[key] = nil
+            guard let mediaLessons = object as? [MediaLesson] else { return }
+            for mediaLesson in mediaLessons {
+                if let path = mediaLesson.path, let display = mediaLesson.durationDisplay { self.durations[path] = display }
+            }
+            self.columns[2].reloadData()
+        }, onFaile: { [weak self] _, _ in
+            // try again the next time the daf is shown
+            self?.durationsProcesses[key] = nil
+            self?.durationsRequested.remove(key)
+        })
+    }
+
+    /// Lessons data arrived after the picker was built: fill the empty columns
+    func reloadIfNeeded()
+    {
+        guard let source = source else { return }
+        let missing:Bool
+        if isByMaggid {
+            missing = maggidim.isEmpty && !source.browserMaggidShiurs.isEmpty
+        } else {
+            missing = masechtot.isEmpty
+                || (maggidim.isEmpty && selectedPage != nil && source.browserFilterOption == .All
+                    && !(selectedMasechet?.maggidShiurs.isEmpty ?? true))
+        }
+        if missing { reloadAll() }
+    }
+    
+    /// Selected / playing marks changed (play, pause, download progress)
+    func refreshState()
+    {
+        columns.forEach { table in
+            // FIX: if the rows changed since the last reload, reload everything (reloading only the
+            // visible rows of a table whose row count changed crashes)
+            if table.numberOfRows(inSection: 0) != self.tableView(table, numberOfRowsInSection: 0) {
+                table.reloadData()
+                return
+            }
+            guard let visible = table.indexPathsForVisibleRows, !visible.isEmpty else { return }
+            table.reloadRows(at: visible, with: .none)
+        }
+    }
+
+    /// "לדף היומי": select today's masechet and daf (in maggid sort: in the chosen maggid shiur's list)
+    func selectToday()
+    {
+        guard let todaysMasechet = HadafHayomiManager.sharedManager.todaysMaschet,
+              let todaysPage = HadafHayomiManager.sharedManager.todaysPage else { return }
+        guard let masechet = masechtot.first(where: { $0.id == todaysMasechet.id }) else {
+            // not in the list (filters / this maggid shiur): nothing to move to
+            return
+        }
+        selectedMasechet = masechet
+        selectedPage = todaysPage
+        reloadPages()
+        columns.forEach { $0.reloadData() }
+        scrollSelectionIntoView()
+    }
+    
+    /// Start on the playing / selected lesson, otherwise today's daf
+    func selectInitial()
+    {
+        guard let source = source else { return }
+        displayedByMaggid = (source.browserSortOption != .Maschtot)
+        if let lesson = source.browserCurrentLesson, lesson.masechet != nil {
+            if isByMaggid { selectedMaggid = lesson.maggidShiur }
+            selectedMasechet = lesson.masechet
+            selectedPage = lesson.page
+        } else if let masechet = HadafHayomiManager.sharedManager.todaysMaschet {
+            selectedMasechet = masechet
+            selectedPage = HadafHayomiManager.sharedManager.todaysPage
+        }
+        reloadAll()
+    }
+
+    /// skip: the column the user just tapped – it stays where it is
+    private func scrollSelectionIntoView(skip:Int? = nil)
+    {
+        layoutIfNeeded()
+        let rows:[Int?] = isByMaggid
+            ? [maggidim.firstIndex(where: { $0.id == selectedMaggid?.id }),
+               masechtot.firstIndex(where: { $0.id == selectedMasechet?.id }),
+               pages.firstIndex(where: { $0.index == selectedPage?.index })]
+            : [masechtot.firstIndex(where: { $0.id == selectedMasechet?.id }),
+               pages.firstIndex(where: { $0.index == selectedPage?.index }),
+               nil]
+        for (index, row) in rows.enumerated() where index != skip {
+            let table = columns[index]
+            if let row = row, row < table.numberOfRows(inSection: 0) {
+                table.scrollToRow(at: IndexPath(row: row, section: 0), at: .middle, animated: false)
+            } else {
+                table.setContentOffset(.zero, animated: false)
+            }
+        }
+    }
+
+    // MARK: What each column shows
+
+    private enum Kind { case masechet, page, maggid, lessonMaggid, lessonPage }
+
+    private func kind(of column:Int) -> Kind {
+        if isByMaggid { return [.maggid, .masechet, .lessonPage][column] }
+        return [.masechet, .page, .lessonMaggid][column]
+    }
+
+    private func lessonFor(row:Int, column:Int) -> Lesson? {
+        switch kind(of: column) {
+        case .lessonMaggid:
+            guard let masechet = selectedMasechet, let page = selectedPage, row < maggidim.count else { return nil }
+            return LessonsBrowserData.lesson(masechet, page: page, maggid: maggidim[row])
+        case .lessonPage:
+            guard let masechet = selectedMasechet, let maggid = selectedMaggid, row < pages.count else { return nil }
+            return LessonsBrowserData.lesson(masechet, page: pages[row], maggid: maggid)
+        default:
+            return nil
+        }
+    }
+
+    // MARK: Table
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch kind(of: tableView.tag) {
+        case .masechet: return masechtot.count
+        case .page, .lessonPage: return pages.count
+        case .maggid, .lessonMaggid: return maggidim.count
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return kind(of: tableView.tag) == .lessonMaggid || kind(of: tableView.tag) == .maggid ? 78 : 68
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: LessonsColumnCell.reuseId, for: indexPath) as! LessonsColumnCell
+        let row = indexPath.row
+        let source = self.source
+
+        switch kind(of: tableView.tag) {
+        case .masechet:
+            let masechet = masechtot[row]
+            cell.configure(title: masechet.name ?? "", subtitle: nil, centered: true,
+                           selected: masechet.id == selectedMasechet?.id,
+                           today: LessonsBrowserData.isToday(masechet), state: .none)
+        case .page:
+            let page = pages[row]
+            cell.configure(title: page.symbol ?? "", subtitle: nil, centered: true,
+                           selected: page.index == selectedPage?.index,
+                           today: selectedMasechet.map { LessonsBrowserData.isToday($0, page: page) } ?? false, state: .none)
+        case .maggid:
+            let maggid = maggidim[row]
+            // maggid sort: a star button to add / remove the maggid shiur from the favorites
+            cell.configure(title: maggid.name ?? "", subtitle: LessonsColumnCell.meta(for: maggid, duration: nil), centered: false,
+                           selected: maggid.id == selectedMaggid?.id, today: false, state: .none, favorite: maggid.isFavorite,
+                           onStar: { [weak self] in self?.toggleFavorite(maggid) })
+        case .lessonMaggid:
+            let maggid = maggidim[row]
+            let lesson = lessonFor(row: row, column: tableView.tag)
+            let path = lesson?.urlPath()?.replacingOccurrences(of: "http:", with: "https:")
+            cell.configure(title: maggid.name ?? "", subtitle: LessonsColumnCell.meta(for: maggid, duration: path.flatMap { durations[$0] } ?? "--:--"),
+                           centered: false, selected: false, today: false,
+                           state: LessonsColumnCell.state(for: lesson, source: source), favorite: maggid.isFavorite,
+                           onAction: saveAction(for: lesson))
+        case .lessonPage:
+            let page = pages[row]
+            let lesson = lessonFor(row: row, column: tableView.tag)
+            let path = lesson?.urlPath()?.replacingOccurrences(of: "http:", with: "https:")
+            // maggid sort: the lesson duration under the daf (asked for when the daf is shown)
+            if let masechet = selectedMasechet, path.flatMap({ durations[$0] }) == nil {
+                loadDurations(masechet: masechet, page: page)
+            }
+            cell.configure(title: page.symbol ?? "", subtitle: path.flatMap { durations[$0] } ?? "--:--", centered: true, selected: false,
+                           today: selectedMasechet.map { LessonsBrowserData.isToday($0, page: page) } ?? false,
+                           state: LessonsColumnCell.state(for: lesson, source: source),
+                           onAction: saveAction(for: lesson))
+        }
+
+        return cell
+    }
+
+    private func toggleFavorite(_ maggid:MaggidShiur) {
+        maggid.isFavorite = !maggid.isFavorite
+        if source?.browserSortOption == .FavoirteMagidiShiour {
+            // the list shows only favorites: rebuild it
+            reloadAll()
+        } else {
+            if !isByMaggid { reloadMaggidim() }
+            columns.forEach { $0.reloadData() }
+        }
+    }
+
+    /// The download / delete button of a lesson cell
+    private func saveAction(for lesson:Lesson?) -> (() -> Void)? {
+        guard let lesson = lesson else { return nil }
+        return { [weak self] in
+            guard let source = self?.source, !source.browserIsSaving(lesson) else { return }
+            if LessonsManager.sharedManager.isSavedLesson(lesson) {
+                source.browserDelete(lesson)
+            } else {
+                source.browserSave(lesson)
+            }
+            self?.refreshState()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        switch kind(of: tableView.tag) {
+        case .masechet:
+            selectedMasechet = masechtot[row]
+            selectedPage = nil
+            reloadPages()
+            if let today = selectedMasechet, LessonsBrowserData.isToday(today) {
+                selectedPage = pages.first(where: { LessonsBrowserData.isToday(today, page: $0) }) ?? selectedPage
+                reloadMaggidim()
+            }
+            columns.forEach { $0.reloadData() }
+            scrollSelectionIntoView(skip: tableView.tag)
+        case .page:
+            selectedPage = pages[row]
+            reloadMaggidim()
+            columns[1].reloadData()
+            columns[2].reloadData()
+            columns[2].setContentOffset(.zero, animated: false)
+        case .maggid:
+            selectedMaggid = maggidim[row]
+            if let source = source { masechtot = LessonsBrowserData.masechtot(for: selectedMaggid, source: source) }
+            selectedMasechet = masechtot.first(where: { $0.id == selectedMasechet?.id }) ?? masechtot.first
+            reloadPages()
+            columns.forEach { $0.reloadData() }
+            scrollSelectionIntoView(skip: tableView.tag)
+        case .lessonMaggid, .lessonPage:
+            if let lesson = lessonFor(row: row, column: tableView.tag) {
+                source?.browserPlay(lesson)
+            }
+        }
+    }
+
+    // MARK: Long press menu
+
+    func tableView(_ table: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let kind = self.kind(of: table.tag)
+        let row = indexPath.row
+
+        var maggid:MaggidShiur?
+        if kind == .maggid || kind == .lessonMaggid { maggid = row < maggidim.count ? maggidim[row] : nil }
+        if kind == .lessonPage { maggid = selectedMaggid }
+        let lesson = lessonFor(row: row, column: table.tag)
+        guard maggid != nil || lesson != nil else { return nil }
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            var actions = [UIAction]()
+            if let lesson = lesson, let source = self?.source, !source.browserIsSaving(lesson) {
+                if LessonsManager.sharedManager.isSavedLesson(lesson) {
+                    actions.append(UIAction(title: "מחק את השיעור השמור", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in source.browserDelete(lesson) })
+                } else {
+                    actions.append(UIAction(title: "הורד את השיעור", image: UIImage(systemName: "arrow.down.to.line")) { _ in source.browserSave(lesson) })
+                }
+            }
+            if let maggid = maggid {
+                let isFavorite = maggid.isFavorite
+                actions.append(UIAction(title: isFavorite ? "הסר מהמועדפים" : "הוסף למועדפים", image: UIImage(systemName: isFavorite ? "star.slash" : "star")) { _ in
+                    maggid.isFavorite = !isFavorite
+                    if self?.isByMaggid == false { self?.reloadMaggidim() }
+                    self?.columns.forEach { $0.reloadData() }
+                })
+            }
+            return UIMenu(title: maggid?.name ?? "", children: actions)
+        }
+    }
+}
+
+/// A cell of the column picker
+final class LessonsColumnCell: UITableViewCell
+{
+    static let reuseId = "LessonsColumnCell"
+    enum State { case none, selected, playing, saved, downloading(Int) }
+
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    private let stateIcon = UIImageView()
+    private let actionButton = UIButton(type: .system)   // download / delete (lessons that are not the current one)
+    private var onAction:(() -> Void)?
+    private var subtitleRight:NSLayoutConstraint!
+    private var subtitleCentered:NSLayoutConstraint!
+    private let todayDot = UIView()
+    private let line = UIView()
+    private var titleRight:NSLayoutConstraint!
+    private var titleLeftForText:NSLayoutConstraint!
+    private var titleLeftCentered:NSLayoutConstraint!
+
+    static func meta(for maggid:MaggidShiur, duration:String?) -> String {
+        var parts = [String]()
+        if let language = maggid.language, !language.isEmpty { parts.append(language) }
+        switch maggid.mediaType {
+        case .Audio: parts.append("שמע")
+        case .Video: parts.append("וידאו")
+        case .All: break
+        }
+        if let duration = duration { parts.append(duration) }
+        // FIX: the language text can already include the media type ("עברית | שמע"),
+        // so it showed twice. Split everything and keep each part once.
+        var unique = [String]()
+        for part in parts.flatMap({ $0.components(separatedBy: "|") }) {
+            let clean = part.trimmingCharacters(in: .whitespaces)
+            if !clean.isEmpty && !unique.contains(clean) { unique.append(clean) }
+        }
+        return unique.joined(separator: " | ")
+    }
+
+    static func state(for lesson:Lesson?, source:LessonsBrowserDataSource?) -> State {
+        guard let lesson = lesson, let source = source else { return .none }
+        if source.browserIsSaving(lesson) { return .downloading(Int(source.browserDownloadProgress(lesson) * 100)) }
+        if source.browserCurrentLesson?.identifier == lesson.identifier {
+            return source.browserIsPlaying ? .playing : .selected
+        }
+        return LessonsManager.sharedManager.isSavedLesson(lesson) ? .saved : .none
+    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
+        backgroundColor = .clear
+        contentView.semanticContentAttribute = .forceRightToLeft
+
+        titleLabel.textColor = LessonsBrowserStyle.text
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.6
+        titleLabel.numberOfLines = 1
+        titleLabel.lineBreakMode = .byClipping
+        subtitleLabel.font = UIFont.systemFont(ofSize: 13)
+        subtitleLabel.textColor = LessonsBrowserStyle.text
+        subtitleLabel.textAlignment = .right
+        subtitleLabel.adjustsFontSizeToFitWidth = true
+        subtitleLabel.minimumScaleFactor = 0.6
+        subtitleLabel.numberOfLines = 1
+        stateIcon.contentMode = .scaleAspectFit
+        stateIcon.tintColor = LessonsBrowserStyle.burgundy
+        todayDot.backgroundColor = LessonsBrowserStyle.gold
+        todayDot.layer.cornerRadius = 4
+        line.backgroundColor = LessonsBrowserStyle.line
+
+        actionButton.addTarget(self, action: #selector(actionTapped), for: .touchUpInside)
+        actionButton.isHidden = true
+        for v in [titleLabel, subtitleLabel, stateIcon, actionButton, todayDot, line] as [UIView] {
+            v.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(v)
+        }
+        titleRight = titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16)
+        // room for the state icon on the left of a maggid shiur name; centered names use the whole width
+        titleLeftForText = titleLabel.leftAnchor.constraint(greaterThanOrEqualTo: actionButton.rightAnchor, constant: 6)
+        titleLeftCentered = titleLabel.leftAnchor.constraint(greaterThanOrEqualTo: contentView.leftAnchor, constant: 4)
+        subtitleRight = subtitleLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor)
+        subtitleCentered = subtitleLabel.centerXAnchor.constraint(equalTo: titleLabel.centerXAnchor)
+        NSLayoutConstraint.activate([
+            titleRight,
+            titleLeftForText,
+            subtitleRight,
+            actionButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 4),
+            actionButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            actionButton.widthAnchor.constraint(equalToConstant: 24),
+            actionButton.heightAnchor.constraint(equalToConstant: 44),
+            // 6pt between the text and the play / download button; longer text shrinks
+            subtitleLabel.leftAnchor.constraint(greaterThanOrEqualTo: actionButton.rightAnchor, constant: 6),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
+            stateIcon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6),
+            stateIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            stateIcon.widthAnchor.constraint(equalToConstant: 18),
+            stateIcon.heightAnchor.constraint(equalToConstant: 18),
+            todayDot.widthAnchor.constraint(equalToConstant: 8),
+            todayDot.heightAnchor.constraint(equalToConstant: 8),
+            todayDot.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
+            todayDot.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            line.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            line.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            line.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            line.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    @objc private func actionTapped() { onAction?() }
+
+    private var centerYConstraint:NSLayoutConstraint?
+    private var centerXConstraint:NSLayoutConstraint?
+
+    func configure(title:String, subtitle:String?, centered:Bool, selected:Bool, today:Bool, state:State, favorite:Bool = false,
+                   onAction:(() -> Void)? = nil, onStar:(() -> Void)? = nil)
+    {
+        self.onAction = onAction ?? onStar
+        titleLabel.text = title
+        subtitleLabel.text = subtitle
+        subtitleLabel.isHidden = subtitle == nil
+        titleLabel.font = centered ? LessonsBrowserStyle.nameFont(19) : UIFont.systemFont(ofSize: 19)
+        titleLabel.textAlignment = centered ? .center : .right
+        todayDot.isHidden = !today
+
+        // centered names (masechet / daf) vs. a maggid shiur name with details under it
+        centerYConstraint?.isActive = false
+        centerXConstraint?.isActive = false
+        if subtitle == nil {
+            centerYConstraint = titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        } else {
+            centerYConstraint = titleLabel.bottomAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 2)
+        }
+        centerYConstraint?.isActive = true
+        titleRight.isActive = !centered
+        titleLeftForText.isActive = !centered
+        titleLeftCentered.isActive = centered
+        subtitleRight.isActive = !centered
+        subtitleCentered.isActive = centered
+        subtitleLabel.textAlignment = centered ? .center : .right
+        if centered {
+            centerXConstraint = titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: onAction != nil ? 14 : 0)
+            centerXConstraint?.isActive = true
+        }
+
+        var background:UIColor = .clear
+        if selected {
+            background = LessonsColumnsPickerView.selectedBackground
+            contentView.layer.borderWidth = 2
+            contentView.layer.borderColor = LessonsColumnsPickerView.divider.withAlphaComponent(0.6).cgColor
+        } else {
+            contentView.layer.borderWidth = 0
+        }
+
+        switch state {
+        case .none:
+            stateIcon.image = favorite ? UIImage(systemName: "star.fill") : nil
+            stateIcon.tintColor = LessonsBrowserStyle.gold
+        case .saved:
+            stateIcon.image = UIImage(systemName: "arrow.down.circle.fill")
+            stateIcon.tintColor = LessonsBrowserStyle.savedBlue
+        case .downloading(let percent):
+            stateIcon.image = UIImage(systemName: "arrow.down.circle")
+            stateIcon.tintColor = LessonsBrowserStyle.savedBlue
+            subtitleLabel.text = (subtitle.map { $0 + " | " } ?? "") + "\(percent)%"
+            subtitleLabel.isHidden = false
+        case .selected:
+            background = LessonsColumnsPickerView.selectedBackground
+            stateIcon.image = UIImage(systemName: "play.fill")
+            stateIcon.tintColor = LessonsBrowserStyle.parchment
+        case .playing:
+            background = LessonsColumnsPickerView.selectedBackground
+            stateIcon.image = UIImage(systemName: "pause.fill")
+            stateIcon.tintColor = LessonsBrowserStyle.parchment
+        }
+        contentView.backgroundColor = background
+
+        // a lesson that is not the current one: a download / delete button instead of the icon
+        var showAction = false
+        if onAction != nil {
+            switch state {
+            case .none, .saved: showAction = true
+            default: break
+            }
+        }
+        if onStar != nil { showAction = true }
+        actionButton.isHidden = !showAction
+        if onStar != nil {
+            stateIcon.image = nil
+            let config = UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold)
+            actionButton.setImage(UIImage(systemName: favorite ? "star.fill" : "star", withConfiguration: config), for: .normal)
+            actionButton.tintColor = LessonsBrowserStyle.gold
+            actionButton.accessibilityLabel = favorite ? "הסר מהמועדפים" : "הוסף למועדפים"
+        } else if showAction {
+            stateIcon.image = nil
+            let saved:Bool
+            if case .saved = state { saved = true } else { saved = false }
+            let config = UIImage.SymbolConfiguration(pointSize: 17, weight: .semibold)
+            actionButton.setImage(UIImage(systemName: saved ? "trash" : "arrow.down.circle", withConfiguration: config), for: .normal)
+            actionButton.tintColor = saved ? LessonsBrowserStyle.secondaryText : LessonsBrowserStyle.burgundy
+            actionButton.accessibilityLabel = saved ? "מחק את השיעור השמור" : "הורד את השיעור"
+        }
+        
+        // Selected / playing: light text (the color of the normal cell background) on the burgundy
+        var isOnBurgundy = selected
+        if case .playing = state { isOnBurgundy = true }
+        if case .selected = state { isOnBurgundy = true }
+        titleLabel.textColor = isOnBurgundy ? LessonsBrowserStyle.parchment : LessonsBrowserStyle.text
+        subtitleLabel.textColor = isOnBurgundy ? LessonsBrowserStyle.parchment : LessonsBrowserStyle.text
+
+        var label = title
+        if let subtitle = subtitleLabel.text, !subtitleLabel.isHidden { label += ", " + subtitle }
+        if today { label += ", הדף היומי" }
+        if case .playing = state { label += ", מתנגן" }
+        accessibilityLabel = label
+        accessibilityTraits = selected ? [.button, .selected] : .button
     }
 }

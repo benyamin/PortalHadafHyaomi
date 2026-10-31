@@ -227,8 +227,9 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
             
             self.lessonsPickerView.addConstraint(NSLayoutConstraint(item: lessonsPickerView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: lessonsPickerView.frame.size.height))
             
-            // New lessons list: starts with all masechtot closed
+            // New lessons list: history list + the three-column picker on the playing / today's lesson
             self.lessonsBrowser.rebuildRoot(force: true)
+            self.lessonsColumnsIfLoaded?.selectInitial()
 
         }
         else if let playingLesson = LessonsManager.sharedManager.playingLesson
@@ -714,7 +715,10 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
     //Mark: LessonsPickerView Delegate Methods
     func lessonsPickerViewDidChangeSelection()
     {
-        defer { self.lessonsBrowserIfLoaded?.reloadVisible() }
+        defer {
+            self.lessonsColumnsIfLoaded?.reloadIfNeeded()
+            self.lessonsBrowserIfLoaded?.reloadVisible()
+        }
         self.playPauseButton.isSelected = false
         
         if let selectedMaschet = self.lessonsPickerView.selectedMaschet
@@ -1197,6 +1201,18 @@ class LessonsViewController: MSBaseViewController, BTPlayerViewDelegate, Lessons
 extension LessonsViewController: LessonsBrowserDataSource
 {
     private static var browserKey = 0
+    private static var columnsKey = 0
+    
+    var lessonsColumnsIfLoaded:LessonsColumnsPickerView? {
+        return objc_getAssociatedObject(self, &LessonsViewController.columnsKey) as? LessonsColumnsPickerView
+    }
+    
+    func updateLessonsContentVisibility()
+    {
+        let history = self.browserShowsHistory
+        self.lessonsColumnsIfLoaded?.isHidden = history
+        self.lessonsBrowser.navigationController.view.isHidden = !history
+    }
     private static var filterViewsKey = 0
     
     private final class FilterViews {
@@ -1209,6 +1225,7 @@ extension LessonsViewController: LessonsBrowserDataSource
         var sort = UISegmentedControl()
         var which = UISegmentedControl()
         var media = UISegmentedControl()
+        let sortSwitch = UISegmentedControl(items: ["מיין לפי מסכתות", "מיין לפי מגידי שיעור"])
     }
     
     private var filterViews:FilterViews {
@@ -1264,23 +1281,42 @@ extension LessonsViewController: LessonsBrowserDataSource
         v.filterButton.layer.borderWidth = 1
         v.filterButton.layer.borderColor = LessonsBrowserStyle.border.cgColor
         v.filterButton.layer.cornerRadius = 3
-        v.filterButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        v.filterButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 26, bottom: 0, right: 8)   // narrower; left room for the arrow
+        let filterChevron = UIImageView(image: UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 12, weight: .bold)))
+        filterChevron.tag = 9500
+        filterChevron.tintColor = burgundy
+        filterChevron.contentMode = .center
+        filterChevron.isUserInteractionEnabled = false
+        filterChevron.translatesAutoresizingMaskIntoConstraints = false
+        v.filterButton.addSubview(filterChevron)
+        NSLayoutConstraint.activate([
+            filterChevron.leftAnchor.constraint(equalTo: v.filterButton.leftAnchor, constant: 8),
+            filterChevron.centerYAnchor.constraint(equalTo: v.filterButton.centerYAnchor),
+            filterChevron.widthAnchor.constraint(equalToConstant: 14),
+            filterChevron.heightAnchor.constraint(equalToConstant: 14)
+        ])
         v.filterButton.semanticContentAttribute = .forceRightToLeft
         v.filterButton.addTarget(self, action: #selector(newFilterButtonTapped), for: .touchUpInside)
         v.filterButton.translatesAutoresizingMaskIntoConstraints = false
         
-        v.summaryLabel.font = UIFont.systemFont(ofSize: 12)
+        v.summaryLabel.font = UIFont.systemFont(ofSize: 14)
         v.summaryLabel.textColor = LessonsBrowserStyle.secondaryText
         v.summaryLabel.textAlignment = .right
         v.summaryLabel.lineBreakMode = .byTruncatingTail
+        // the buttons keep their own width; the text takes what is left
+        v.summaryLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        v.summaryLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        v.todayButton.setContentHuggingPriority(.required, for: .horizontal)
+        v.filterButton.setContentHuggingPriority(.required, for: .horizontal)
         v.summaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        // next to the button: only which lessons are shown (all / saved / history)
         
         v.todayButton.setTitle("st_go_to_todays_page".localize(), for: .normal)
         v.todayButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         v.todayButton.setTitleColor(burgundy, for: .normal)
         v.todayButton.backgroundColor = .white
         v.todayButton.layer.borderWidth = 1
-        v.todayButton.layer.borderColor = burgundy.cgColor
+        v.todayButton.layer.borderColor = LessonsBrowserStyle.border.cgColor
         v.todayButton.layer.cornerRadius = 3
         v.todayButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         v.todayButton.addTarget(self, action: #selector(newTodaysPageTapped), for: .touchUpInside)
@@ -1291,11 +1327,16 @@ extension LessonsViewController: LessonsBrowserDataSource
         line.translatesAutoresizingMaskIntoConstraints = false
         
         // "לדף היומי" was removed from this row; the summary takes its place
+        // right to left: [לדף היומי] [סינון] summary
+        row.addSubview(v.todayButton)
         row.addSubview(v.filterButton)
         row.addSubview(v.summaryLabel)
         row.addSubview(line)
         NSLayoutConstraint.activate([
-            v.filterButton.rightAnchor.constraint(equalTo: row.rightAnchor, constant: -12),
+            v.todayButton.rightAnchor.constraint(equalTo: row.rightAnchor, constant: -12),
+            v.todayButton.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            v.todayButton.heightAnchor.constraint(equalToConstant: 34),
+            v.filterButton.rightAnchor.constraint(equalTo: v.todayButton.leftAnchor, constant: -8),
             v.filterButton.centerYAnchor.constraint(equalTo: row.centerYAnchor),
             v.filterButton.heightAnchor.constraint(equalToConstant: 34),
             v.summaryLabel.rightAnchor.constraint(equalTo: v.filterButton.leftAnchor, constant: -8),
@@ -1352,7 +1393,62 @@ extension LessonsViewController: LessonsBrowserDataSource
         v.stack.translatesAutoresizingMaskIntoConstraints = false
         v.stack.addArrangedSubview(row)
         v.stack.addArrangedSubview(v.panel)
-        v.stack.addArrangedSubview(nav.view)
+        // Sort by masechet / maggid shiur: three-column picker. History: the list (navigation)
+        let columns = LessonsColumnsPickerView(source: self)
+        self.lessonsBrowser.columnsView = columns
+        objc_setAssociatedObject(self, &LessonsViewController.columnsKey, columns, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        let content = UIView()
+        for view in [columns, nav.view!] as [UIView] {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            content.addSubview(view)
+            NSLayoutConstraint.activate([
+                view.topAnchor.constraint(equalTo: content.topAnchor),
+                view.leftAnchor.constraint(equalTo: content.leftAnchor),
+                view.rightAnchor.constraint(equalTo: content.rightAnchor),
+                view.bottomAnchor.constraint(equalTo: content.bottomAnchor)
+            ])
+        }
+        // Switch on top of the picker: by masechet / by maggid shiur.
+        // A full-width bar with two halves (no rounded segmented control); the chosen half has a
+        // burgundy line under it. v.sortSwitch only keeps the chosen index.
+        let switchRow = UIStackView()
+        switchRow.axis = .horizontal
+        switchRow.distribution = .fillEqually
+        switchRow.spacing = 0
+        switchRow.semanticContentAttribute = .forceRightToLeft
+        switchRow.backgroundColor = .clear
+        switchRow.translatesAutoresizingMaskIntoConstraints = false
+        switchRow.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        v.sortSwitch.selectedSegmentIndex = (self.sortSegmenterController.selectedSegmentIndex == 0) ? 0 : 1
+        for index in 0 ..< 2 {
+            let button = UIButton(type: .custom)
+            button.tag = 9300 + index
+            button.setTitle(v.sortSwitch.titleForSegment(at: index), for: .normal)
+            // the app's main burgundy (as the player) with the light cell color for the text
+            button.setTitleColor(LessonsBrowserStyle.parchment, for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            button.backgroundColor = burgundy
+            button.addTarget(self, action: #selector(newSortSwitchButtonTapped(_:)), for: .touchUpInside)
+            let underline = UIView()
+            underline.tag = 9400
+            underline.backgroundColor = LessonsBrowserStyle.parchment
+            underline.isUserInteractionEnabled = false
+            underline.translatesAutoresizingMaskIntoConstraints = false
+            button.addSubview(underline)
+            NSLayoutConstraint.activate([
+                underline.leftAnchor.constraint(equalTo: button.leftAnchor),
+                underline.rightAnchor.constraint(equalTo: button.rightAnchor),
+                underline.bottomAnchor.constraint(equalTo: button.bottomAnchor),
+                underline.heightAnchor.constraint(equalToConstant: 5)
+            ])
+            switchRow.addArrangedSubview(button)
+        }
+        self.sortSwitchBar = switchRow
+        v.stack.addArrangedSubview(switchRow)
+        self.updateSortSwitchBar()
+        
+        v.stack.addArrangedSubview(content)
+        self.updateLessonsContentVisibility()
         v.container.addSubview(v.stack)
         NSLayoutConstraint.activate([
             v.stack.topAnchor.constraint(equalTo: v.container.topAnchor),
@@ -1370,7 +1466,9 @@ extension LessonsViewController: LessonsBrowserDataSource
         let v = self.filterViews
         v.filterButton.layer.borderColor = (open ? LessonsBrowserStyle.burgundy : LessonsBrowserStyle.border).cgColor
         v.filterButton.backgroundColor = open ? LessonsBrowserStyle.openBackground : .white
+        let chevron = v.filterButton.viewWithTag(9500)
         UIView.animate(withDuration: 0.25) {
+            chevron?.transform = open ? CGAffineTransform(rotationAngle: .pi) : .identity
             v.panel.isHidden = !open
             v.stack.layoutIfNeeded()
         }
@@ -1383,21 +1481,57 @@ extension LessonsViewController: LessonsBrowserDataSource
     
     @objc func newTodaysPageTapped()
     {
-        self.scrollToTodaysPage(selectDefaultMaggidShiour: false)
-        if self.browserSortOption != .Maschtot || self.browserShowsHistory {
-            // today's lessons are shown in the masechet list
-            self.filterViews.sort.selectedSegmentIndex = 0
-            self.newSortChanged(self.filterViews.sort)
-            if self.browserShowsHistory {
-                self.filterViews.which.selectedSegmentIndex = 0
-                self.newWhichChanged(self.filterViews.which)
-            }
+        // Move the picker to today's daf (the player keeps its lesson)
+        if self.browserShowsHistory {
+            self.filterViews.which.selectedSegmentIndex = 0
+            self.newWhichChanged(self.filterViews.which)
         }
-        self.lessonsBrowser.showTodaysPage()
+        self.lessonsColumnsIfLoaded?.selectToday()
+    }
+    
+    private static var sortSwitchBarKey = 0
+    private var sortSwitchBar:UIStackView? {
+        get { return objc_getAssociatedObject(self, &LessonsViewController.sortSwitchBarKey) as? UIStackView }
+        set { objc_setAssociatedObject(self, &LessonsViewController.sortSwitchBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+    
+    private func updateSortSwitchBar()
+    {
+        let selected = self.filterViews.sortSwitch.selectedSegmentIndex
+        for case let button as UIButton in self.sortSwitchBar?.arrangedSubviews ?? [] {
+            let isSelected = (button.tag - 9300) == selected
+            // no underline, so both halves keep the same height
+            button.viewWithTag(9400)?.isHidden = true
+            // not selected: lighter burgundy background and half-strength text
+            button.backgroundColor = LessonsBrowserStyle.burgundy.withAlphaComponent(isSelected ? 1.0 : 0.6)
+            button.setTitleColor(LessonsBrowserStyle.parchment.withAlphaComponent(isSelected ? 1.0 : 0.5), for: .normal)
+            button.alpha = 1.0
+            button.accessibilityTraits = isSelected ? [.button, .selected] : .button
+        }
+    }
+    
+    @objc func newSortSwitchButtonTapped(_ sender:UIButton)
+    {
+        let v = self.filterViews
+        v.sortSwitch.selectedSegmentIndex = sender.tag - 9300
+        self.newSortSwitchChanged(v.sortSwitch)
+        self.updateSortSwitchBar()
+    }
+    
+    /// Top switch: 0 = by masechet, 1 = by maggid shiur (all maggidei shiur)
+    @objc func newSortSwitchChanged(_ sender:UISegmentedControl)
+    {
+        let v = self.filterViews
+        // keep "favorite maggidei shiur" if it is chosen in the filter and the switch is on maggid shiur
+        if sender.selectedSegmentIndex == 1 && v.sort.selectedSegmentIndex == 2 { return }
+        v.sort.selectedSegmentIndex = sender.selectedSegmentIndex == 0 ? 0 : 1
+        self.newSortChanged(v.sort)
     }
     
     @objc func newSortChanged(_ sender:UISegmentedControl)
     {
+        self.filterViews.sortSwitch.selectedSegmentIndex = sender.selectedSegmentIndex == 0 ? 0 : 1
+        self.updateSortSwitchBar()
         self.sortSegmenterController.selectedSegmentIndex = sender.selectedSegmentIndex
         self.sortSegmentedControlloerValueChanged(self.sortSegmenterController)
         self.filtersDidChange()
@@ -1421,6 +1555,8 @@ extension LessonsViewController: LessonsBrowserDataSource
     {
         self.updateFilterSummary()
         self.lessonsBrowser.rebuildRoot(force: true)
+        self.lessonsColumnsIfLoaded?.reloadAll()
+        self.updateLessonsContentVisibility()
     }
     
     private func updateFilterSummary()
@@ -1433,7 +1569,8 @@ extension LessonsViewController: LessonsBrowserDataSource
             if index > 0 { active += 1 }
             if index >= 0, let title = control.titleForSegment(at: index) { parts.append(title) }
         }
-        v.summaryLabel.text = parts.joined(separator: " · ")
+        let whichIndex = v.which.selectedSegmentIndex
+        v.summaryLabel.text = whichIndex >= 0 ? v.which.titleForSegment(at: whichIndex) : nil
         v.filterButton.setTitle(active > 0 ? " סינון (\(active))" : " סינון", for: .normal)
     }
     
