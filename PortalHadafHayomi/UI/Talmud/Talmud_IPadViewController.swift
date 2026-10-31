@@ -30,7 +30,7 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
     
     var firstAppearance = true
     
-     let explantionOptoins = ["חברותא", "שטיינזלץ"]
+     let explantionOptoins = ["חברותא", "שטיינזלץ", "שפה ברורה"]
     
      var secondaryPageDisplayType:TalmudDisplayType?
     
@@ -180,6 +180,10 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         if  self.secondaryPageDisplayType == .Chavruta
         {
             selectedOption = "חברותא"
+        }
+        if  self.secondaryPageDisplayType == .SafaBrura
+        {
+            selectedOption = "שפה ברורה"
         }
         tablePopUpView.reloadWithOptions(tableOptions, title:popupTitle, selectedOption: selectedOption)
         
@@ -408,6 +412,11 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         {
             self.displayExplantionButton.isSelected = true
             self.secondaryPageDisplayType = .Chavruta
+        }
+        else if option == "שפה ברורה"
+        {
+            self.displayExplantionButton.isSelected = true
+            self.secondaryPageDisplayType = .SafaBrura
         }
         else if option == "שטיינזלץ"
         {

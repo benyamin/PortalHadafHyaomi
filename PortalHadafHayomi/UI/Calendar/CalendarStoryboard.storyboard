@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +16,7 @@
         <!--Calendar View Controller-->
         <scene sceneID="CaR-GS-CaP">
             <objects>
-                <viewController storyboardIdentifier="CalendarViewController" id="12e-gE-gDg" customClass="CalendarViewController" customModule="DafYomiCalendar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" id="12e-gE-gDg" customClass="CalendarViewController" customModule="PortalHadafHayomi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8u4-zR-qOm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +46,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JewishCallCollectionCell" id="PsY-tI-XqN" customClass="JewishCallCollectionCell" customModule="DafYomiCalendar" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JewishCallCollectionCell" id="PsY-tI-XqN" customClass="JewishCallCollectionCell" customModule="PortalHadafHayomi" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="54" width="61" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -119,7 +120,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JewishCallCollectionHeaderView" id="KVr-6V-no8" customClass="JewishCallCollectionHeaderView" customModule="DafYomiCalendar" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JewishCallCollectionHeaderView" id="KVr-6V-no8" customClass="JewishCallCollectionHeaderView" customModule="PortalHadafHayomi" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -337,7 +338,7 @@
                                             <constraint firstItem="ARJ-Yv-eQ4" firstAttribute="leading" secondItem="1um-xU-U7e" secondAttribute="trailing" constant="16" id="sJm-G9-Ncr"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTW-Hu-gM5" customClass="TalmudPagePickerView" customModule="DafYomiCalendar" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTW-Hu-gM5" customClass="TalmudPagePickerView" customModule="PortalHadafHayomi" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="61" width="375" height="239"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.94901960780000005" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
@@ -413,31 +414,32 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-hv-KrU">
-                                        <rect key="frame" x="142" y="41" width="91" height="26"/>
+                                        <rect key="frame" x="142" y="37" width="91" height="26"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="24"/>
                                         <color key="textColor" red="0.4718933105" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVX-yU-jN3">
-                                        <rect key="frame" x="343" y="39" width="24" height="24"/>
+                                        <rect key="frame" x="323" y="25" width="36" height="36"/>
                                         <color key="backgroundColor" red="0.86274509799999999" green="0.45231119790000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="8Oi-ZQ-GEM"/>
-                                            <constraint firstAttribute="height" constant="24" id="oEf-vi-uKs"/>
+                                            <constraint firstAttribute="width" constant="36" id="8Oi-ZQ-GEM"/>
+                                            <constraint firstAttribute="height" constant="36" id="oEf-vi-uKs"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="4" minY="2" maxX="4" maxY="4"/>
                                         <state key="normal" image="Calender_icon_empty.png"/>
                                         <connections>
                                             <action selector="dateSelectionDisplayButtonClicked:" destination="12e-gE-gDg" eventType="touchUpInside" id="N9n-ad-Oz0"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wi7-jj-x60">
-                                        <rect key="frame" x="351.5" y="47" width="7" height="14.5"/>
+                                        <rect key="frame" x="337.5" y="38" width="7" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.47450980390000003" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmV-lL-5mb">
-                                        <rect key="frame" x="293" y="32" width="34" height="37"/>
+                                        <rect key="frame" x="273" y="26" width="34" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="KQY-yf-3xK"/>
                                             <constraint firstAttribute="width" constant="34" id="geF-Gg-VJI"/>
@@ -451,21 +453,21 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="5DZ-gV-lXj" secondAttribute="trailing" id="0Dd-0Q-UhQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="YQw-hv-KrU" secondAttribute="bottom" constant="13" id="3lQ-dv-Nms"/>
+                                    <constraint firstAttribute="bottom" secondItem="YQw-hv-KrU" secondAttribute="bottom" constant="17" id="3lQ-dv-Nms"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YQw-hv-KrU" secondAttribute="trailing" constant="16" id="5z6-94-1Dp"/>
                                     <constraint firstItem="YQw-hv-KrU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PmV-xR-pEg" secondAttribute="leading" constant="16" id="Ev0-Vd-XMl"/>
                                     <constraint firstAttribute="height" constant="80" id="G7a-B6-ec6"/>
                                     <constraint firstItem="5DZ-gV-lXj" firstAttribute="leading" secondItem="PmV-xR-pEg" secondAttribute="leading" id="H9W-Ir-F2a"/>
-                                    <constraint firstAttribute="bottom" secondItem="hmV-lL-5mb" secondAttribute="bottom" constant="11" id="R1c-DA-jgf"/>
+                                    <constraint firstAttribute="bottom" secondItem="hmV-lL-5mb" secondAttribute="bottom" constant="17" id="R1c-DA-jgf"/>
                                     <constraint firstItem="Wi7-jj-x60" firstAttribute="centerX" secondItem="eVX-yU-jN3" secondAttribute="centerX" id="Wgb-To-dOO"/>
-                                    <constraint firstAttribute="bottom" secondItem="eVX-yU-jN3" secondAttribute="bottom" constant="17" id="YMm-BJ-xoy"/>
+                                    <constraint firstAttribute="bottom" secondItem="eVX-yU-jN3" secondAttribute="bottom" constant="19" id="YMm-BJ-xoy"/>
                                     <constraint firstItem="YQw-hv-KrU" firstAttribute="centerX" secondItem="PmV-xR-pEg" secondAttribute="centerX" id="ZM4-fs-K36"/>
                                     <constraint firstItem="YQw-hv-KrU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PmV-xR-pEg" secondAttribute="top" id="Zgr-wk-iwy"/>
-                                    <constraint firstItem="Wi7-jj-x60" firstAttribute="centerY" secondItem="eVX-yU-jN3" secondAttribute="centerY" constant="3" id="hsT-Wa-Xxa"/>
+                                    <constraint firstItem="Wi7-jj-x60" firstAttribute="centerY" secondItem="eVX-yU-jN3" secondAttribute="centerY" constant="2" id="hsT-Wa-Xxa"/>
                                     <constraint firstItem="5DZ-gV-lXj" firstAttribute="top" secondItem="PmV-xR-pEg" secondAttribute="top" id="iGn-7j-s3O"/>
                                     <constraint firstItem="eVX-yU-jN3" firstAttribute="leading" secondItem="hmV-lL-5mb" secondAttribute="trailing" constant="16" id="lS9-bX-0ya"/>
                                     <constraint firstAttribute="bottom" secondItem="5DZ-gV-lXj" secondAttribute="bottom" id="pZ2-NT-4L4"/>
-                                    <constraint firstAttribute="trailing" secondItem="eVX-yU-jN3" secondAttribute="trailing" constant="8" id="wVH-zM-Xhy"/>
+                                    <constraint firstAttribute="trailing" secondItem="eVX-yU-jN3" secondAttribute="trailing" constant="16" id="wVH-zM-Xhy"/>
                                 </constraints>
                             </view>
                         </subviews>

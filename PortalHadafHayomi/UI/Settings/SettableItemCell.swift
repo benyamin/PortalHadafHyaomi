@@ -155,6 +155,8 @@ class SettableItemCell: MSBaseTableViewCell, BTTablePopUpViewDelegate
                 break
             case .Chavruta: talmudDisplayTypes.append("חברותא")
                 break
+            case .SafaBrura: talmudDisplayTypes.append("שפה ברורה")
+                break
             case .Steinsaltz: talmudDisplayTypes.append("שטיינזלץ")
                 break
             case .Meorot: break

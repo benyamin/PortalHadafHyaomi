@@ -542,6 +542,27 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
         }
     }
     
+    /// FIX: a present() while another screen is still being presented / dismissed is ignored by
+    /// UIKit ("Attempt to present ... while a presentation is in progress"), so the tap did nothing.
+    /// Wait for the running transition to end, then present.
+    func presentWhenReady(_ viewController:UIViewController, animated:Bool, completion:(() -> Void)?, attempt:Int = 0)
+    {
+        if viewController.presentingViewController != nil { completion?(); return }   // already shown
+        if let coordinator = self.transitionCoordinator {
+            coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+                self?.presentWhenReady(viewController, animated: animated, completion: completion, attempt: attempt + 1)
+            }
+            return
+        }
+        if let presented = self.presentedViewController, (presented.isBeingDismissed || presented.isBeingPresented), attempt < 20 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                self?.presentWhenReady(viewController, animated: animated, completion: completion, attempt: attempt + 1)
+            }
+            return
+        }
+        self.present(viewController, animated: animated, completion: completion)
+    }
+    
     @objc func didSelectItem(_ menuItem:MenuItem)
     {
         self.bottomMenuView.isHidden = true
@@ -566,7 +587,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             break
             
         case "AudioLessons":
-            self.present(self.lessonsNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.lessonsNavigationController, animated: false, completion: nil)
             break
             
         case "Talmud":
@@ -579,22 +600,22 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             break
             
         case "Contents":
-             self.present(self.articalesNavigationController, animated: false, completion: nil)
+             self.presentWhenReady(self.articalesNavigationController, animated: false, completion: nil)
             break
             
         case "Forum":
             break
             
         case "Calendar":
-           self.present(self.calendarNavigationController, animated: false, completion: nil)
+           self.presentWhenReady(self.calendarNavigationController, animated: false, completion: nil)
             break
             
         case "Accessories":
-            self.present(self.accessoriesListNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.accessoriesListNavigationController, animated: false, completion: nil)
             break
             
         case "AramicDictoianry":
-             self.present(self.aramicDictionaryNavigationController, animated: false, completion: nil)
+             self.presentWhenReady(self.aramicDictionaryNavigationController, animated: false, completion: nil)
             break
             
         case "StudyHealpers":
@@ -612,10 +633,10 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
                     mainViewController.mapViewController.lessonVenuesListViewController = self.lessonVenuesListViewController
                 }
                 
-                self.present(self.lessonVenuesListViewController, animated: false, completion: nil)
+                self.presentWhenReady(self.lessonVenuesListViewController, animated: false, completion: nil)
             }
             else{
-                self.present(self.mapViewNavigationController, animated: false, completion: nil)
+                self.presentWhenReady(self.mapViewNavigationController, animated: false, completion: nil)
             }
             break
             
@@ -627,37 +648,37 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             break
             
         case "TheDafYomiProject":
-             self.present(self.hadafHayomiProjectNavigationController, animated: false, completion: nil)
+             self.presentWhenReady(self.hadafHayomiProjectNavigationController, animated: false, completion: nil)
             break
             
         case "PagesSummary":
-            self.present(self.pagesSummaryNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.pagesSummaryNavigationController, animated: false, completion: nil)
             break
             
         case "About":
-            self.present(self.aboutNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.aboutNavigationController, animated: false, completion: nil)
             break
             
         case "Maschet_Complition":
-            self.present(self.siyumMasechetNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.siyumMasechetNavigationController, animated: false, completion: nil)
             break
             
         case "Q&A":
-            self.present(self.QndANavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.QndANavigationController, animated: false, completion: nil)
             break
             
         case "Search":
-           self.present(self.SearchTalmudNavigationController, animated: false, completion: nil)
+           self.presentWhenReady(self.SearchTalmudNavigationController, animated: false, completion: nil)
             
             break
             
         case "Chavrusa":
-            self.present(self.FindChavrusaNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.FindChavrusaNavigationController, animated: false, completion: nil)
             
             break
             
         case "Forums":
-            self.present(self.ForumsNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.ForumsNavigationController, animated: false, completion: nil)
             
             break
             
@@ -666,7 +687,7 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
             break
             
         case "Calculator":
-            self.present(self.ForumsNavigationController, animated: false, completion: nil)
+            self.presentWhenReady(self.ForumsNavigationController, animated: false, completion: nil)
             break
             
         case "DafQuestions":
@@ -848,6 +869,8 @@ class HomeViewController: MSBaseViewController,UICollectionViewDelegate, UIColle
     {
         if collectionView == menuCollectoinView
         {
+            // FIX: the menu cell stayed selected, so tapping the same item again was ignored
+            collectionView.deselectItem(at: indexPath, animated: false)
             let selectedMenuItem = self.menuItems[indexPath.row]
             
             self.willSelectItem(selectedMenuItem)

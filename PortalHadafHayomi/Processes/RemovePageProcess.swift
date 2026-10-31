@@ -41,7 +41,7 @@ class RemovePageProcess: MSBaseProcess//, LessonDownLoaderDelegate, UIAlertViewD
         }
         let fileExtension: String
         switch displayType {
-        case .Vagshal, .Chavruta:
+        case .Vagshal, .Chavruta, .SafaBrura:
             fileExtension = "pdf"
         default:
             fileExtension = "html"
@@ -91,7 +91,7 @@ class RemovePageProcess: MSBaseProcess//, LessonDownLoaderDelegate, UIAlertViewD
             }
             let fileExtension: String
             switch displayType {
-            case .Vagshal, .Chavruta:
+            case .Vagshal, .Chavruta, .SafaBrura:
                 fileExtension = "pdf"
             default:
                 fileExtension = "html"

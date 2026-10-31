@@ -16,6 +16,7 @@ enum TalmudDisplayType: String {
     case Meorot = "Meorot"
     case EN = "EN"
     case Chavruta = "Chavruta"
+    case SafaBrura = "SafaBrura"   // ביאור "שפה ברורה" (PDF per page, like חברותא)
     case Steinsaltz = "Steinsaltz"
     
     func localizedString() -> String {
@@ -127,7 +128,7 @@ open class  HadafHayomiManager
     
     lazy var avalibleDisplayTypes:[TalmudDisplayType] = {
         
-        return  [.Vagshal, .Text, .TextWithScore, .TextWithCommentators, .Chavruta, .Steinsaltz, .EN]
+        return  [.Vagshal, .Text, .TextWithScore, .TextWithCommentators, .Chavruta, .Steinsaltz, .SafaBrura, .EN]
     }()
     
     func getUserSettingByKey(_ key:String) -> SetableItem?
@@ -918,7 +919,7 @@ open class  HadafHayomiManager
 
         let fileExtension: String
         switch type! {
-        case .Vagshal, .Chavruta:
+        case .Vagshal, .Chavruta, .SafaBrura:
             fileExtension = "pdf"
         default:
             fileExtension = "html"
@@ -963,6 +964,8 @@ open class  HadafHayomiManager
             return nil
         case .Chavruta:
             return "http://files.daf-yomi.com/files/app/chavruta/\(pageIndex).pdf"
+        case .SafaBrura:
+            return "https://files.daf-yomi.com/files/app/safa-brura/\(pageIndex).pdf"
         case .Steinsaltz:
             return nil
         }
@@ -983,7 +986,7 @@ open class  HadafHayomiManager
             return "MeorotTextSize"
         case .EN:
             return "SteinsaltzENTextSize"
-        case .Chavruta:
+        case .Chavruta, .SafaBrura:
             return "SteinsaltzENTextSize"
         case .Steinsaltz:
             return "SteinsaltzENTextSize"

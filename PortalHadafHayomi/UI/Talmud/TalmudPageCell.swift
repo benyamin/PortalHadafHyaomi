@@ -168,17 +168,17 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                     urlString = ("https://app.daf-yomi.com/mobile/textrashi.aspx?massechet=\(maschentNumber)&page=\(pageIndex!)")
                 }
             }
-            else if displayType == .Chavruta
+            else if displayType == .Chavruta || displayType == .SafaBrura
             {
                 self.pagPDFView?.isHidden = false
                 self.pageWebView.isHidden = true
                 
-                if let savedPageFilePath = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex:self.pageIndex, type: TalmudDisplayType.Chavruta)
+                if let savedPageFilePath = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex:self.pageIndex, type: displayType)
                 {
                     self.pageWebView.load(URLRequest(url: URL(fileURLWithPath: savedPageFilePath)))
                 }
                 else{
-                    urlString = "http://files.daf-yomi.com/files/app/chavruta/\(pageIndex!).pdf"
+                    urlString = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageIndex!, displayType: displayType) ?? ""
                 }
             }
             

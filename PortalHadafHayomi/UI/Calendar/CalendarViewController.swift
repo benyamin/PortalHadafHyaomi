@@ -144,6 +144,27 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
         self.displayAllPagesButton.backgroundColor = UIColor.white
     }
     
+    /// FIX: the top bar is 80pt from the top of the screen, so on iPhones with a Dynamic Island its
+    /// buttons sat inside the status bar, where iOS takes most of the taps (the date button needed
+    /// several taps). Grow the bar so its buttons start under the status bar.
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        self.updateTopBarHeight()
+    }
+    
+    private func updateTopBarHeight()
+    {
+        guard let topBar = self.topBarView,
+              let height = topBar.constraints.first(where: { $0.firstAttribute == .height && $0.secondItem == nil })
+        else { return }
+        // the buttons are pinned to the bottom of the bar (about 50pt of content)
+        let needed = max(80, self.view.safeAreaInsets.top + 52)
+        if height.constant != needed {
+            height.constant = needed
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -172,7 +193,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
             
             self.jewishCallCollectionView.isHidden = false
             
-            self.datePickerTypeSegmentedController.selectedSegmentIndex = 0 //Mesechtot
+            self.datePickerTypeSegmentedController.selectedSegmentIndex = self.displayByGregorianCalendar ? 1 : 0
             self.datePickerTypeSegmentedControllerValueChanged( self.datePickerTypeSegmentedController)
         }
         
@@ -279,16 +300,18 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
     
     @IBAction func datePickerTypeSegmentedControllerValueChanged(_ sedner:AnyObject)
     {
-        if self.displayByHebrewCalendar
+        // FIX: this checked the calendar display type (masechtot / Hebrew / Gregorian) instead of the
+        // picker's own switch, so "תאריכים לועזיים" kept showing Hebrew dates
+        let pickerType = self.datePickerTypeSegmentedController.selectedSegmentIndex
+        if pickerType == 0
          {
             self.datePicker.calendar = Calendar.hebrew
             self.datePicker.locale = Locale(identifier: "he_IL")
             
             //self.datePicker.semanticContentAttribute = .forceRightToLeft
         }
-        else if self.displayByGregorianCalendar
+        else if pickerType == 1
          {
-            self.filterPagesBaseView.isHidden = true
             self.datePicker.calendar = Calendar.gregorian
             self.datePicker.locale = Locale(identifier: "en_US")
         }
@@ -332,8 +355,11 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
     
     @IBAction func dateSelectionDisplayButtonClicked(_ sender:AnyObject)
     {
-        //If date picker is hidden
-        if self.dateSelectionViewTopConstraint.constant != 0 {
+        // FIX: the button only opened the picker; when it was open, tapping did nothing.
+        // Now it opens and closes it.
+        if self.isDatePickerOpen {
+            self.hideDatePicker()
+        } else {
             self.showDatePicker()
         }
     }
@@ -350,6 +376,10 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
          self.hideDatePicker()
     }
 
+    private var isDatePickerOpen:Bool {
+        return self.dateSelectionViewTopConstraint.constant == 0
+    }
+    
     func showDatePicker()
     {
          self.dateSelectionViewTopConstraint.constant = 0
@@ -364,7 +394,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
     
     func hideDatePicker()
     {
-        self.dateSelectionViewTopConstraint.constant = -1 * self.dateSelectionView.frame.size.height
+        self.view.layoutIfNeeded()
+        self.dateSelectionViewTopConstraint.constant = -1 * max(self.dateSelectionView.frame.size.height, 1)
         
         UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
@@ -441,9 +472,9 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, Jewish
                     self.datePicker.setDate(month!.startDayDate, animated: false)
                 }
                 
-                self.dateSelectionViewTopConstraint.constant != 0
-                ? self.showDatePicker()
-                : self.hideDatePicker()
+                self.isDatePickerOpen
+                ? self.hideDatePicker()
+                : self.showDatePicker()
             }
             if displayByMasechtot {
                 reusableHeaderview.reloadWithMasechet(self.masechtot[indexPath.section])

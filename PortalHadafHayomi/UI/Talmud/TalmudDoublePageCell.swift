@@ -149,7 +149,7 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
         {
             self.setSteinsaltzPageDispaly()
         }
-        else if secondaryPageDisplayType == .Chavruta
+        else if secondaryPageDisplayType == .Chavruta || secondaryPageDisplayType == .SafaBrura
         {
             self.setExplanationPageDispaly()
         }
@@ -302,7 +302,8 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
     
     func setExplanationPageDispaly()//Chavrota
     {
-        let urlString = "http://files.daf-yomi.com/files/app/chavruta/\(self.pageIndex!).pdf"
+        // חברותא / שפה ברורה
+        let urlString = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: self.pageIndex!, displayType: self.secondaryPageDisplayType) ?? ""
         
          self.creaditView?.isHidden = true
         

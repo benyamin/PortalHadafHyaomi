@@ -37,7 +37,7 @@ open class SavePageProcess: MSBaseProcess, URLSessionTaskDelegate, URLSessionDow
         case .Meorot:
             self.saveMeorotPage(pageInfo)
             return
-        case .Vagshal, .Chavruta:
+        case .Vagshal, .Chavruta, .SafaBrura:
             break
         }
         

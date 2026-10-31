@@ -122,7 +122,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             }
             
             switch selectedDisplayType {
-            case .Vagshal, .Meorot, .Chavruta:
+            case .Vagshal, .Meorot, .Chavruta, .SafaBrura:
                 self.increaseTextSizeButton.isHidden = true
                 self.dicreaseTextSizeButton.isHidden = true
                 break
@@ -191,6 +191,10 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         self.showPlayerButton?.layer.shadowOffset = CGSize(width: -1.0, height: -1.0)
         self.showPlayerButton?.layer.shadowRadius = 1.0
         self.showPlayerButton?.imageView?.contentMode = .scaleAspectFit
+        // the player is opened from the toolbar button now; the old one only keeps its place in the layout
+        self.showPlayerButton?.alpha = 0
+        self.showPlayerButton?.isUserInteractionEnabled = false
+        self.updateToolbarPlayerButton()
         
         self.creaditView?.layer.shadowColor = UIColor.darkGray.cgColor
         self.creaditView?.layer.shadowOpacity = 0.5
@@ -265,6 +269,10 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             else if selectedTalmudDisplayType == "חברותא"
             {
                 selectedDisplayType = .Chavruta
+            }
+            else if selectedTalmudDisplayType == "שפה ברורה"
+            {
+                selectedDisplayType = .SafaBrura
             }
             else if selectedTalmudDisplayType == "שטיינזלץ"
             {
@@ -460,6 +468,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     @IBAction func showPlayerButtonClicked(_ sender:UIButton)
     {
         self.showPlayerButton?.isSelected = !self.showPlayerButton!.isSelected
+        self.updateToolbarPlayerButton()
         
         UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.allowUserInteraction, animations:
             {
@@ -668,7 +677,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     
     // MARK: - Page toolbar (44pt under the tabs): search · display / ביאור ▾ · arrows
     
-    let biurTypes:[TalmudDisplayType] = [.Chavruta, .Steinsaltz, .EN]
+    let biurTypes:[TalmudDisplayType] = [.Chavruta, .Steinsaltz, .SafaBrura, .EN]
     var isBiurMode = false
     private var displayTypeBeforeBiur:TalmudDisplayType = .Vagshal
     
@@ -716,6 +725,61 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
     lazy var toolbarPrevButton:UIButton = self.makeToolbarIconButton("chevron.right", label: "העמוד הקודם", action: #selector(toolbarPrevTapped), bordered: true)
     lazy var toolbarNextButton:UIButton = self.makeToolbarIconButton("chevron.left", label: "העמוד הבא", action: #selector(toolbarNextTapped), bordered: true)
     
+    /// Shows / hides the audio player (replaces the floating button at the bottom right)
+    lazy var toolbarPlayerButton:UIButton = {
+        let burgundy = UIColor(HexColor: "781F24")
+        let button = UIButton(type: .system)
+        button.tintColor = burgundy
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(HexColor: "DCCFAE").cgColor
+        button.layer.cornerRadius = 3
+        button.accessibilityLabel = "נגן"
+        let chevron = UIImageView()
+        chevron.tag = 7301
+        chevron.tintColor = burgundy
+        chevron.contentMode = .center
+        chevron.isUserInteractionEnabled = false
+        chevron.translatesAutoresizingMaskIntoConstraints = false
+        // the image sizes set the button width: 8 | arrow | 6 | headphones | 8
+        chevron.image = UIImage(systemName: "chevron.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: 11, weight: .bold))
+        chevron.setContentHuggingPriority(.required, for: .horizontal)
+        let icon = UIImageView(image: UIImage(systemName: "headphones", withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)))
+        icon.tintColor = burgundy
+        icon.isUserInteractionEnabled = false
+        icon.setContentHuggingPriority(.required, for: .horizontal)
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        button.addSubview(chevron)
+        button.addSubview(icon)
+        NSLayoutConstraint.activate([
+            chevron.leftAnchor.constraint(equalTo: button.leftAnchor, constant: 8),
+            chevron.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            icon.leftAnchor.constraint(equalTo: chevron.rightAnchor, constant: 6),
+            icon.rightAnchor.constraint(equalTo: button.rightAnchor, constant: -8),
+            icon.centerYAnchor.constraint(equalTo: button.centerYAnchor)
+        ])
+        button.addTarget(self, action: #selector(toolbarPlayerTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    @objc func toolbarPlayerTapped()
+    {
+        guard let button = self.showPlayerButton else { return }
+        self.showPlayerButtonClicked(button)
+    }
+
+    /// ▲ = open the player, ▼ = close it
+    func updateToolbarPlayerButton()
+    {
+        let open = self.showPlayerButton?.isSelected ?? false
+        let chevron = self.toolbarPlayerButton.viewWithTag(7301) as? UIImageView
+        chevron?.image = UIImage(systemName: open ? "chevron.down" : "chevron.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: 11, weight: .bold))
+        self.toolbarPlayerButton.layer.borderColor = UIColor(HexColor: open ? "781F24" : "DCCFAE").cgColor
+        self.toolbarPlayerButton.backgroundColor = open ? UIColor(HexColor: "FFF6E0") : .white
+        self.toolbarPlayerButton.accessibilityValue = open ? "פתוח" : "סגור"
+    }
+
     lazy var toolbarMenuButton:UIButton = {
         let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -745,7 +809,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         line.backgroundColor = UIColor(HexColor: "DCCFAE")
         line.translatesAutoresizingMaskIntoConstraints = false
         
-        for v in [self.toolbarSearchButton, self.toolbarMenuButton, self.toolbarPrevButton, self.toolbarNextButton, line] {
+        for v in [self.toolbarSearchButton, self.toolbarPlayerButton, self.toolbarMenuButton, self.toolbarPrevButton, self.toolbarNextButton, line] {
             bar.addSubview(v)
         }
         NSLayoutConstraint.activate([
@@ -754,6 +818,10 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             self.toolbarSearchButton.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
             self.toolbarSearchButton.widthAnchor.constraint(equalToConstant: 36),
             self.toolbarSearchButton.heightAnchor.constraint(equalToConstant: 34),
+            // player (open / close) next to the search
+            self.toolbarPlayerButton.leadingAnchor.constraint(equalTo: self.toolbarSearchButton.trailingAnchor, constant: 18),
+            self.toolbarPlayerButton.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
+            self.toolbarPlayerButton.heightAnchor.constraint(equalToConstant: 34),
             // current display / ביאור in the middle
             self.toolbarMenuButton.centerXAnchor.constraint(equalTo: bar.centerXAnchor),
             self.toolbarMenuButton.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
@@ -1957,7 +2025,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             return
         }
         
-        let options = ["חברותא", "שטיינזלץ", "Steinsaltz"]
+        let options = ["חברותא", "שטיינזלץ", "שפה ברורה", "Steinsaltz"]
         var titles = options
         if self.landscapeBiurType != nil {
             titles.append("st_hide_explanation".localize())
@@ -1966,6 +2034,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             switch self.landscapeBiurType {
             case .some(.Chavruta): return "חברותא"
             case .some(.Steinsaltz): return "שטיינזלץ"
+            case .some(.SafaBrura): return "שפה ברורה"
             case .some(.EN): return "Steinsaltz"
             default: return nil
             }
@@ -1989,6 +2058,7 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
         switch option {
         case "חברותא": self.landscapeBiurType = .Chavruta
         case "שטיינזלץ": self.landscapeBiurType = .Steinsaltz
+        case "שפה ברורה": self.landscapeBiurType = .SafaBrura
         case "Steinsaltz": self.landscapeBiurType = .EN
         default: self.landscapeBiurType = nil
         }
@@ -2215,6 +2285,9 @@ class TalmudViewController: MSBaseViewController, UICollectionViewDelegate, UICo
             case .Chavruta:
                 pikerLabel.text = "חברותא"
                 break
+            case .SafaBrura:
+                pikerLabel.text = "שפה ברורה"
+                break
             case .Steinsaltz:
                  pikerLabel.text = "שטיינזלץ"
             }
@@ -2352,17 +2425,18 @@ final class TalmudBiurSideView: UIView
         spinner.startAnimating()
         bringSubviewToFront(spinner)
         
-        if type == .Chavruta {
+        if type == .Chavruta || type == .SafaBrura {
             pdfView.isHidden = false
             webView.isHidden = true
             pdfView.document = nil
-            if let saved = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: .Chavruta),
+            if let saved = HadafHayomiManager.sharedManager.savedPageFilePath(pageIndex: pageIndex, type: type),
                let document = PDFDocument(url: URL(fileURLWithPath: saved)) {
                 pdfView.document = document
                 spinner.stopAnimating()
                 return
             }
-            guard let url = URL(string: "http://files.daf-yomi.com/files/app/chavruta/\(pageIndex).pdf") else { return }
+            guard let path = HadafHayomiManager.sharedManager.UrlPathForPage(pageIndex: pageIndex, displayType: type),
+                  let url = URL(string: path) else { return }
             dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
                 DispatchQueue.main.async {
                     guard let self = self, self.shown?.pageIndex == pageIndex, self.shown?.type == type else { return }
