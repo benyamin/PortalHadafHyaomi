@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import WebKit
 
-class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
+// FIX (long-press crash on iPad): the pages were shown in the old UIWebView, whose PDF text
+// selection crashes inside iOS (UIPDFViewTouchHandler showMenu). Now WKWebView.
+class TalmudDoublePageCell: MSBaseCollectionViewCell, WKNavigationDelegate
 {
-    @IBOutlet weak var pageWebView:UIWebView!
-    @IBOutlet weak var secondaryPageWebView:UIWebView?
+    @IBOutlet weak var pageWebView:WKWebView!
+    @IBOutlet weak var secondaryPageWebView:WKWebView?
     
     @IBOutlet weak var loadingView:UIView!
     @IBOutlet weak var loadingMessgaeView:UIView!
@@ -51,6 +54,8 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
         super.awakeFromNib()
         
         self.pageWebView.scrollView.bounces = false;
+        self.pageWebView.navigationDelegate = self
+        self.secondaryPageWebView?.navigationDelegate = self
         
         self.loadingMessgaeView.layer.cornerRadius = 5.0
     }
@@ -65,7 +70,7 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
         }
         
         //clear web view
-        self.pageWebView.loadRequest(URLRequest.init(url: URL.init(string: "about:blank")!))
+        self.pageWebView.load(URLRequest.init(url: URL.init(string: "about:blank")!))
         
         self.showLoadingView()
         
@@ -85,7 +90,8 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
             
             if FileManager.default.fileExists(atPath: path)
             {
-                self.pageWebView.loadRequest(URLRequest(url: URL(fileURLWithPath: path)))
+                let fileUrl = URL(fileURLWithPath: path)
+                self.pageWebView.loadFileURL(fileUrl, allowingReadAccessTo: fileUrl)
             }
             else{
                 urlString = ("https://app.daf-yomi.com/Data/UploadedFiles/DY_Page/\(pageIndex!).pdf")
@@ -115,7 +121,7 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
             {
                 self.pageWebView.stopLoading()
             }
-            self.pageWebView.loadRequest(requestObj)
+            self.pageWebView.load(requestObj)
         }
     }
     
@@ -175,7 +181,11 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
                  self.pageWebView.loadHTMLString("<font size=\"25\">\(pageText)</font>", baseURL: nil)
             }
             else if let pageURL = object as? URL {
-                 self.pageWebView.loadRequest(URLRequest.init(url: pageURL))
+                 if pageURL.isFileURL {
+                     self.pageWebView.loadFileURL(pageURL, allowingReadAccessTo: pageURL)
+                 } else {
+                     self.pageWebView.load(URLRequest.init(url: pageURL))
+                 }
             }
             
         },onFaile: { (object, error) -> Void in
@@ -215,9 +225,9 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
         self.loadingIndicatorView.startAnimating()
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
-        if webView.request?.url?.absoluteString == "about:blank"
+        if webView.url?.absoluteString == "about:blank"
         {
             return
         }
@@ -225,9 +235,9 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
         self.loadingIndicatorView.stopAnimating()
     }
     
-    open func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         
-        if webView.request?.url?.absoluteString == "about:blank"
+        if webView.url?.absoluteString == "about:blank"
         {
             return
         }
@@ -312,7 +322,7 @@ class TalmudDoublePageCell: MSBaseCollectionViewCell, UIWebViewDelegate
             self.secondaryPageWebView?.isHidden = false
             
             let requestObj = URLRequest(url: url)
-            self.secondaryPageWebView?.loadRequest(requestObj)
+            self.secondaryPageWebView?.load(requestObj)
         }
         else{
             self.secondaryPageWebView?.isHidden = true

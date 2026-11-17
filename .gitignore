@@ -13,3 +13,6 @@ xcuserdata/
 *.history
 
 .DS_Store
+
+# Files the Claude desktop app saves from chats
+Claude outputs/

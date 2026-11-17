@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25098" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25073"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e3S-8u-bB1">
-                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="169" width="375" height="498"/>
                                 <color key="backgroundColor" red="0.33639153838157654" green="0.36453667283058167" blue="0.38126468658447266" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="8Qw-st-Rmc">
                                     <size key="itemSize" width="375" height="593"/>
@@ -36,7 +36,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TalmudPageCell" id="b2h-cO-jdY" customClass="TalmudPageCell" customModule="PortalHadafHayomi">
-                                        <rect key="frame" x="0.0" y="-25.5" width="375" height="593"/>
+                                        <rect key="frame" x="0.0" y="-47.5" width="375" height="593"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
@@ -297,7 +297,7 @@
                                 </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxP-Kk-WIo">
-                                <rect key="frame" x="0.0" y="90" width="93" height="35"/>
+                                <rect key="frame" x="188" y="90" width="93" height="35"/>
                                 <color key="backgroundColor" red="0.55294117647058827" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="AEB-0h-0qq"/>
@@ -311,7 +311,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVD-0l-dn5">
-                                <rect key="frame" x="94" y="90" width="93" height="35"/>
+                                <rect key="frame" x="0.0" y="90" width="93" height="35"/>
                                 <color key="backgroundColor" red="0.55294117647058827" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="cSw-za-Dge"/>
@@ -325,7 +325,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tw4-s9-hff">
-                                <rect key="frame" x="188" y="90" width="93" height="35"/>
+                                <rect key="frame" x="94" y="90" width="93" height="35"/>
                                 <color key="backgroundColor" red="0.55310791729999997" green="0.26482543349999998" blue="0.26384231450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="fLY-KO-JyT"/>
@@ -418,13 +418,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="לא נמצאו דפים שנשמרו" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7U8-c5-LCe">
-                                        <rect key="frame" x="119.5" y="160" width="136" height="19.5"/>
+                                        <rect key="frame" x="119.5" y="260" width="136" height="19.5"/>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="18"/>
                                         <color key="textColor" red="0.55294117649999996" green="0.1213988736" blue="0.14087414740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMx-fR-eGv">
-                                        <rect key="frame" x="16" y="153" width="34" height="34"/>
+                                        <rect key="frame" x="16" y="253" width="34" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="34" id="12f-Sj-uck"/>
                                             <constraint firstAttribute="height" constant="34" id="HUT-mI-xXf"/>
@@ -657,10 +657,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TeH-jA-h55" customClass="TalmudPagePickerView" customModule="PortalHadafHayomi" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="70" width="375" height="640"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="630"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPC-UK-6Pf">
-                                        <rect key="frame" x="325" y="303" width="34" height="34"/>
+                                        <rect key="frame" x="325" y="298" width="34" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="BId-tG-sdD"/>
                                             <constraint firstAttribute="width" constant="34" id="C5D-9L-qIE"/>
@@ -725,9 +725,9 @@
                             <constraint firstItem="Bwo-Na-8HY" firstAttribute="top" secondItem="TPQ-wS-3EY" secondAttribute="top" id="Hym-Bc-OsE"/>
                             <constraint firstAttribute="trailing" secondItem="TeH-jA-h55" secondAttribute="trailing" id="JjG-hz-8KH"/>
                             <constraint firstItem="TeH-jA-h55" firstAttribute="top" secondItem="Bwo-Na-8HY" secondAttribute="bottom" id="VXF-lo-T7g"/>
-                            <constraint firstItem="lyu-Cv-Lqf" firstAttribute="top" secondItem="TeH-jA-h55" secondAttribute="bottom" id="pkB-tm-F1l"/>
                             <constraint firstAttribute="trailing" secondItem="Bwo-Na-8HY" secondAttribute="trailing" id="irv-on-055"/>
                             <constraint firstItem="Bwo-Na-8HY" firstAttribute="leading" secondItem="TPQ-wS-3EY" secondAttribute="leading" id="ob7-eR-feS"/>
+                            <constraint firstItem="lyu-Cv-Lqf" firstAttribute="top" secondItem="TeH-jA-h55" secondAttribute="bottom" id="pkB-tm-F1l"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="375" height="700"/>
@@ -815,20 +815,22 @@
                                                         <constraint firstAttribute="width" constant="2" id="2eH-rh-YS0"/>
                                                     </constraints>
                                                 </view>
-                                                <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpO-A3-SBx">
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpO-A3-SBx">
                                                     <rect key="frame" x="0.0" y="0.0" width="317" height="550"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="tGX-B5-2PK" id="u0K-t3-SFm"/>
-                                                    </connections>
-                                                </webView>
-                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cX-yY-AEo">
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cX-yY-AEo">
                                                     <rect key="frame" x="319" y="0.0" width="335" height="550"/>
                                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="tGX-B5-2PK" id="jsI-Qf-h6P"/>
-                                                    </connections>
-                                                </webView>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWa-B3-eq5">
                                                     <rect key="frame" x="319" y="515" width="335" height="35"/>
                                                     <subviews>
@@ -914,11 +916,11 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhN-Qm-dVX">
-                                        <rect key="frame" x="8" y="34" width="100" height="22"/>
+                                        <rect key="frame" x="8" y="21" width="100" height="33"/>
                                         <color key="backgroundColor" red="0.97723382709999995" green="0.95447605849999995" blue="0.85833317040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="4Tr-br-CwC"/>
-                                            <constraint firstAttribute="height" constant="22" id="S3s-rf-udI"/>
+                                            <constraint firstAttribute="height" constant="33" id="S3s-rf-udI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="BroshMF" family="BroshMF" pointSize="17"/>
                                         <state key="normal" title="לדף היומי">
@@ -1038,6 +1040,18 @@
                                             <action selector="bookmarkButtonButtonClicked:" destination="hrG-X4-g6i" eventType="touchUpInside" id="d36-UD-shI"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6A6-JU-HRP">
+                                        <rect key="frame" x="472.5" y="21" width="33" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="8aK-bz-H0y"/>
+                                            <constraint firstAttribute="width" constant="33" id="OqN-73-McD"/>
+                                        </constraints>
+                                        <state key="normal" image="bookSelection.png"/>
+                                        <state key="selected" image="removeBookmark.png"/>
+                                        <connections>
+                                            <action selector="selectPageButtonClicked:" destination="hrG-X4-g6i" eventType="touchUpInside" id="Q3j-no-eBc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1048,6 +1062,7 @@
                                     <constraint firstAttribute="bottom" secondItem="7T5-XX-r7P" secondAttribute="bottom" constant="15" id="7zQ-3e-ont"/>
                                     <constraint firstItem="UVw-2u-1hR" firstAttribute="top" secondItem="vFx-BO-hpM" secondAttribute="top" id="Ik0-Z6-Edg"/>
                                     <constraint firstItem="OYi-6C-ADx" firstAttribute="leading" secondItem="vFx-BO-hpM" secondAttribute="leading" id="J1T-PV-5GV"/>
+                                    <constraint firstAttribute="bottom" secondItem="6A6-JU-HRP" secondAttribute="bottom" constant="9" id="Kcw-a2-Fgn"/>
                                     <constraint firstAttribute="bottom" secondItem="0h9-SM-5R9" secondAttribute="bottom" constant="14" id="MxO-Zm-AG6"/>
                                     <constraint firstAttribute="height" constant="70" id="N2d-7o-Nac"/>
                                     <constraint firstAttribute="trailing" secondItem="VLs-6Y-4WT" secondAttribute="trailing" constant="8" id="PQ7-1L-c5Z"/>
@@ -1056,9 +1071,10 @@
                                     <constraint firstAttribute="bottom" secondItem="UVw-2u-1hR" secondAttribute="bottom" constant="20" id="b6a-ga-Osr"/>
                                     <constraint firstAttribute="bottom" secondItem="VLs-6Y-4WT" secondAttribute="bottom" constant="10" id="gou-Tc-ftn"/>
                                     <constraint firstAttribute="bottom" secondItem="bV1-CE-RKc" secondAttribute="bottom" constant="14" id="oXI-LX-d1Y"/>
+                                    <constraint firstItem="6A6-JU-HRP" firstAttribute="leading" secondItem="bV1-CE-RKc" secondAttribute="trailing" constant="8" id="oyJ-5h-saK"/>
                                     <constraint firstAttribute="bottom" secondItem="OYi-6C-ADx" secondAttribute="bottom" id="q8R-yt-WVj"/>
                                     <constraint firstItem="7T5-XX-r7P" firstAttribute="leading" secondItem="UVw-2u-1hR" secondAttribute="trailing" constant="8" id="sdq-km-gps"/>
-                                    <constraint firstAttribute="bottom" secondItem="OhN-Qm-dVX" secondAttribute="bottom" constant="14" id="uLD-4z-qQX"/>
+                                    <constraint firstAttribute="bottom" secondItem="OhN-Qm-dVX" secondAttribute="bottom" constant="16" id="uLD-4z-qQX"/>
                                     <constraint firstItem="OYi-6C-ADx" firstAttribute="top" secondItem="vFx-BO-hpM" secondAttribute="top" id="xPz-XY-L4h"/>
                                     <constraint firstItem="OhN-Qm-dVX" firstAttribute="leading" secondItem="vFx-BO-hpM" secondAttribute="leading" constant="8" id="xzV-oU-HTE"/>
                                 </constraints>
@@ -1097,6 +1113,7 @@
                         <outlet property="screenDivisionDisplayBaseView" destination="gW5-3k-SsL" id="Pfh-Of-3Zb"/>
                         <outlet property="searchBar" destination="sCi-De-DtD" id="wZ9-NB-6x7"/>
                         <outlet property="searchBarTopConstraint" destination="NkB-kL-LRH" id="BGs-In-YPm"/>
+                        <outlet property="selectPageButton" destination="6A6-JU-HRP" id="inT-zM-7CL"/>
                         <outlet property="showTodaysPageButton" destination="OhN-Qm-dVX" id="IE5-WR-Yhw"/>
                         <outlet property="topBarTitleLabel" destination="VLs-6Y-4WT" id="rAR-LY-Eur"/>
                         <outlet property="topBarView" destination="vFx-BO-hpM" id="02Z-yy-8kg"/>
@@ -1233,6 +1250,7 @@
         <image name="addBookmark.png" width="120" height="120"/>
         <image name="arrowLeft.png" width="99" height="99"/>
         <image name="backButton.png" width="99" height="99"/>
+        <image name="bookSelection.png" width="280" height="280"/>
         <image name="menuIcon.png" width="176" height="176"/>
         <image name="move_center.png" width="36" height="33"/>
         <image name="move_left.png" width="36" height="33"/>

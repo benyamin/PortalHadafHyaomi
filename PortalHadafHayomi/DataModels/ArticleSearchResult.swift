@@ -73,7 +73,8 @@ class ArticleSearchResult:DataObject
                 }
           
                 
-                self.articleUrlPath = fullPath.stringByReplacingFirstOccurrenceOfString(target: "DYItemDetails.aspx?itemId", withString: "mobile/DYItem.aspx?itemId")
+                // FIX: also when the link is on www.daf-yomi.com or in other letter case
+                self.articleUrlPath = BTWebViewController.mobileItemUrlPath(fullPath)
             }
         }
         

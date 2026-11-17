@@ -45,5 +45,7 @@ class Article:DataObject
             }
             
         }
+        // FIX: a link to the desktop item page opens the mobile text page
+        self.link = BTWebViewController.mobileItemUrlPath(self.link)
     }
 }

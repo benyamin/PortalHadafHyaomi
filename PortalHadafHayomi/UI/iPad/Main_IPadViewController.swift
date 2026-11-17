@@ -101,7 +101,7 @@ class Main_IPadViewController: UIViewController, HomeViewControllerDelegate
         {
             if let topBar = viewController.topBarView
             {
-                self.topBarButtonsContentViewTopConstraint.constant = topBar.frame.size.height/2 - 15
+                self.topBarButtonsContentViewTopConstraint.constant = topBar.frame.size.height/2
             }
             self.mainContainerView.bringSubviewToFront(self.topBarButtonsContentView)
         }

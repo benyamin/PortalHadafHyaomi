@@ -8,13 +8,14 @@
 
 import UIKit
 
-class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TalmudPagePickerViewControllerDelegate, BTTablePopUpViewDelegate
+class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TalmudPagePickerViewControllerDelegate, BTTablePopUpViewDelegate, UIPopoverPresentationControllerDelegate
 {
     @IBOutlet weak var pagesCollectionView:UICollectionView!
     @IBOutlet weak var showTodaysPageButton:UIButton!
     
     @IBOutlet weak var displayTranslationButton:UIButton!
     @IBOutlet weak var bookmarkButton:UIButton!
+    @IBOutlet weak var selectPageButton:UIButton!
     
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var searchBarTopConstraint:NSLayoutConstraint!
@@ -55,8 +56,72 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         }
     }
     
+    // Pages run right to left, like a book: the first amud is the LAST row (far right), so the
+    // next amud is on the left. The collection view stays left to right; only the order is reversed.
+    func row(forPageIndex pageIndex:Int) -> Int { return self.talmudNumberOfPages - pageIndex }
+    func pageIndex(forRow row:Int) -> Int { return self.talmudNumberOfPages - row }
+    
+    // MARK: - Previous / next page arrows, on the left side of the title
+    
+    lazy var prevPageArrowButton:UIButton = self.makePageArrowButton("chevron.right", label: "העמוד הקודם", action: #selector(prevPageArrowTapped))
+    lazy var nextPageArrowButton:UIButton = self.makePageArrowButton("chevron.left", label: "העמוד הבא", action: #selector(nextPageArrowTapped))
+    
+    private func makePageArrowButton(_ systemName:String, label:String, action:Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: systemName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold)), for: .normal)
+        button.tintColor = UIColor(HexColor: "781F24")
+        button.backgroundColor = .clear
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(HexColor: "781F24").cgColor
+        button.layer.cornerRadius = 3
+        button.accessibilityLabel = label
+        button.addTarget(self, action: action, for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }
+    
+    private func addPageArrows()
+    {
+        guard let title = self.topBarTitleLabel, let bar = title.superview else { return }
+        bar.addSubview(self.prevPageArrowButton)
+        bar.addSubview(self.nextPageArrowButton)
+        NSLayoutConstraint.activate([
+            // right to left: title · › previous · ‹ next
+            self.prevPageArrowButton.rightAnchor.constraint(equalTo: title.leftAnchor, constant: -16),
+            self.prevPageArrowButton.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -15),
+            self.prevPageArrowButton.widthAnchor.constraint(equalToConstant: 33),
+            self.prevPageArrowButton.heightAnchor.constraint(equalToConstant: 33),
+            self.nextPageArrowButton.rightAnchor.constraint(equalTo: self.prevPageArrowButton.leftAnchor, constant: -8),
+            self.nextPageArrowButton.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -15),
+            self.nextPageArrowButton.widthAnchor.constraint(equalToConstant: 33),
+            self.nextPageArrowButton.heightAnchor.constraint(equalToConstant: 33)
+        ])
+    }
+    
+    @objc func prevPageArrowTapped() { self.movePage(by: -1) }
+    @objc func nextPageArrowTapped() { self.movePage(by: 1) }
+    
+    /// One amud back / forward (rows are the amudim of the whole Talmud in order)
+    private func movePage(by step:Int)
+    {
+        guard let collectionView = self.pagesCollectionView else { return }
+        // next amud = one row to the left (rows are in reverse order)
+        let row = collectionView.centerRowIndex() - step
+        guard row >= 0, row < collectionView.numberOfItems(inSection: 0) else { return }
+        collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    
+    /// The arrows scroll with an animation: update the title and the picker when it ends
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        if scrollView === self.pagesCollectionView {
+            self.updateDisplay(shouldUpdateTalmudPagePicker: true)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.addPageArrows()
         
         showTodaysPageButton.layer.borderWidth = 1.0
         showTodaysPageButton.layer.borderColor = UIColor(HexColor:"6A2423").cgColor
@@ -68,8 +133,8 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
         
         self.searchBar.isHidden = true
       
-        
         self.searchBarTopConstraint.constant = -1*(self.searchBar.frame.size.height)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,6 +192,44 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
             (cell as? TalmudDoublePageCell)?.bookmarkView.isHidden = !(self.bookmarkButton.isSelected)
             UserDefaults.standard.setValue(self.bookmarkButton.isSelected, forKey:"displayDafBookMark")
             UserDefaults.standard.synchronize()
+        }
+    }
+    
+    /// The page picker opened from selectPageButton (portrait – the side menu with the picker is hidden)
+    private weak var pagePickerPopover:TalmudPagePickerViewController?
+    
+    /// Opens the daf picker (with "לדף היומי" on top) in a popover, on the daf shown now
+    @IBAction func selectPageButtonClicked(_ sender:UIButton){
+        let storyboard = UIStoryboard(name: "TalmudStoryboard", bundle: nil)
+        guard let picker = storyboard.instantiateViewController(withIdentifier: "TalmudPagePickerViewController") as? TalmudPagePickerViewController else { return }
+        picker.delegate = self
+        if let masechet = self.selectedMaschet, let page = self.selectedPage {
+            picker.initialPage = (masechet, page, 0)
+        }
+        picker.modalPresentationStyle = .popover
+        picker.preferredContentSize = CGSize(width: 380, height: min(680, self.view.bounds.height - 160))
+        if let popover = picker.popoverPresentationController {
+            popover.sourceView = sender
+            popover.sourceRect = sender.bounds
+            popover.permittedArrowDirections = [.up, .down]
+            popover.delegate = self
+        }
+        self.pagePickerPopover = picker
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none   // stay a popover
+    }
+    
+    /// selectPageButton only in portrait (in landscape the side menu has the picker)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let screen = self.view.window?.bounds.size ?? UIScreen.main.bounds.size
+        let isPortrait = screen.height > screen.width
+        self.selectPageButton?.isHidden = !isPortrait
+        if !isPortrait, let popover = self.pagePickerPopover, popover.presentingViewController != nil {
+            popover.dismiss(animated: false, completion: nil)
         }
     }
     
@@ -283,7 +386,7 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
             UserDefaults.standard.set(selectedPageInfo, forKey: "selectedPageInfo")
             UserDefaults.standard.synchronize()
             
-            let indexPath = IndexPath(row:pageIndex-1, section: 0)
+            let indexPath = IndexPath(row: self.row(forPageIndex: pageIndex), section: 0)
             
             if self.pagesCollectionView != nil {
                 self.pagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
@@ -329,7 +432,7 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
 
         }
         
-        cell.reloadWithObject(indexPath.row + 1)
+        cell.reloadWithObject(self.pageIndex(forRow: indexPath.row))
         
         return cell
     }
@@ -368,9 +471,10 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
     
     func updateDisplay(shouldUpdateTalmudPagePicker:Bool)
     {
-        let pageIndex = self.pagesCollectionView.centerRowIndex()
+        let centerRow = self.pagesCollectionView.centerRowIndex()
+        if centerRow < 0 { return }
         
-        let pageInfo = HadafHayomiManager.pageInfoForIndexInTalmud(pageIndex + 1)
+        let pageInfo = HadafHayomiManager.pageInfoForIndexInTalmud(self.pageIndex(forRow: centerRow))
         
         let maschet = pageInfo["maschet"] as! Masechet
         let page = pageInfo["page"] as! Page
@@ -401,6 +505,10 @@ class Talmud_IPadViewController: MSBaseViewController, UICollectionViewDelegate,
             , let pageSide = talmudPagePickerViewController.selectedPageSide
         {
            self.scrollToMaschet(masechet, page: page, pageSide: pageSide, animated: true)
+        }
+        // chosen in the popover: close it
+        if talmudPagePickerViewController === self.pagePickerPopover {
+            talmudPagePickerViewController.dismiss(animated: true, completion: nil)
         }
     }
     

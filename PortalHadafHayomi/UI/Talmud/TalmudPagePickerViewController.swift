@@ -40,6 +40,9 @@ class TalmudPagePickerViewController: MSBaseViewController,TalmudPagePickerViewD
     
     @IBOutlet weak var saveMultiplePageButton:UIButton?
     
+    /// When set, the picker opens on this page instead of today's page (iPad portrait popover)
+    var initialPage:(masechet:Masechet, page:Page, pageSide:Int)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +56,11 @@ class TalmudPagePickerViewController: MSBaseViewController,TalmudPagePickerViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-         self.scrollToTodaysPage()
+        if let initial = self.initialPage {
+            self.talmudPagePickerView.scrollToMasechet(initial.masechet, page: initial.page, pageSide: initial.pageSide, animated: false)
+        } else {
+            self.scrollToTodaysPage()
+        }
         
         self.talmudPagePickerView.shouldHighlightSavedPages = true
     }

@@ -185,6 +185,8 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
             if let url = URL(string: urlString)
             {
                 if pagPDFView?.isHidden == false {
+                        let requestedPage = self.pageIndex
+                        let requestedType = self.displayType
                         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) {
                             (data, response, error) -> Void in
 
@@ -201,6 +203,8 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
                             if let actualData = data {
                                 
                                 DispatchQueue.main.async {
+                                    // FIX: the cell may have been reused for another page while downloading
+                                    guard self.pageIndex == requestedPage, self.displayType == requestedType else { return }
                                     self.loadingView.isHidden = true
                                     self.loadingIndicatorView.stopAnimating()
                                     self.pagPDFView?.document = PDFDocument(data: actualData)
@@ -246,13 +250,18 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         //let highlightText = "Â‡"
         //let highlightText = " ̇"
     
+        // FIX (long-press crash): changing annotations while a word is selected, or removing an
+        // annotation from a page it is not on, can crash PDFKit
+        if pagPDFView?.currentSelection != nil { return }
+        
         for annotation in self.heightLightedAnnotatoins {
-            pagPDFView?.currentPage?.removeAnnotation(annotation)
+            annotation.page?.removeAnnotation(annotation)
         }
         
         self.heightLightedAnnotatoins.removeAll()
         
         let highlightText = self.searchText
+        if highlightText.isEmpty { return }
         let selections = pagPDFView?.document?.findString(highlightText, withOptions: .caseInsensitive)
 
         // Loop through the selections and add a highlight annotation for each one
@@ -281,7 +290,7 @@ class TalmudPageCell: MSBaseCollectionViewCell, WKNavigationDelegate, WKUIDelega
         }
         else{
             for annotation in self.heightLightedAnnotatoins {
-                pagPDFView?.currentPage?.removeAnnotation(annotation)
+                annotation.page?.removeAnnotation(annotation)
             }
             self.heightLightedAnnotatoins.removeAll()
         }

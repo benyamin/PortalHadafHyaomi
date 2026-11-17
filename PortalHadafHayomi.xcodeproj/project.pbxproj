@@ -54,6 +54,7 @@
 		227B64C829EB34FF004B74B9 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B64C729EB34FF004B74B9 /* BookmarkView.swift */; };
 		2283944C2985DF0A003B7239 /* GetSubtitlesProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */; };
 		2283944E2985E54B003B7239 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2283944D2985E54B003B7239 /* whatsapp.png */; };
+		228B1D1230AD048000EDB414 /* bookSelection.png in Resources */ = {isa = PBXBuildFile; fileRef = 228B1D1130AD048000EDB414 /* bookSelection.png */; };
 		229390D42E035F1B009A12C4 /* StripR.png in Resources */ = {isa = PBXBuildFile; fileRef = 229390CE2E035F1B009A12C4 /* StripR.png */; };
 		229390D62E035F1B009A12C4 /* Strip_RG_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 229390C82E035F1B009A12C4 /* Strip_RG_L.png */; };
 		229390DA2E035F1B009A12C4 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 229390C42E035F1B009A12C4 /* note.png */; };
@@ -751,6 +752,7 @@
 		227B64C729EB34FF004B74B9 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		2283944B2985DF0A003B7239 /* GetSubtitlesProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubtitlesProcess.swift; sourceTree = "<group>"; };
 		2283944D2985E54B003B7239 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
+		228B1D1130AD048000EDB414 /* bookSelection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookSelection.png; sourceTree = "<group>"; };
 		229390C42E035F1B009A12C4 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = note.png; sourceTree = "<group>"; };
 		229390C52E035F1B009A12C4 /* Strip_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Strip_L.png; sourceTree = "<group>"; };
 		229390C62E035F1B009A12C4 /* Strip_Red_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Strip_Red_L.png; sourceTree = "<group>"; };
@@ -2119,6 +2121,7 @@
 				4ABFB4C8235290FF0079D68B /* reka120.png */,
 				4ABFB4C9235290FF0079D68B /* FullPage_Off.png */,
 				4ABFB4CA235290FF0079D68B /* map_marker_off@2x.png */,
+				228B1D1130AD048000EDB414 /* bookSelection.png */,
 				4ABFB4CB235290FF0079D68B /* sefira1.png */,
 				4ABFB4CC235290FF0079D68B /* V_1ArowUp.png */,
 				4ABFB4CD235290FF0079D68B /* trachIcon.png */,
@@ -2950,6 +2953,7 @@
 				4ABFB77E235291000079D68B /* Icon-App-40x40@3x.png in Resources */,
 				4ABFB6CB235290FF0079D68B /* sipurim_icon_and_text.png in Resources */,
 				4ABFB705235291000079D68B /* move_right@3x.png in Resources */,
+				228B1D1230AD048000EDB414 /* bookSelection.png in Resources */,
 				4ABFB748235291000079D68B /* about_icon.png in Resources */,
 				221482AE2EB6D04E00EC9BC6 /* hamburgerIcon.png in Resources */,
 				4A2C76A51FD48D380074A0CC /* player-background.png in Resources */,
@@ -3844,7 +3848,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13.6;
+				MARKETING_VERSION = 13.7;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3875,7 +3879,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13.6;
+				MARKETING_VERSION = 13.7;
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mishour.portalDafHyomi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

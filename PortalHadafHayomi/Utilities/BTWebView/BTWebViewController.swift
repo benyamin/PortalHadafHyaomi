@@ -110,10 +110,22 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
           NotificationCenter.default.removeObserver(self)
     }
     
+    /// Content items ("תכנים") must open in the mobile text page:
+    /// …/DYItemDetails.aspx?itemId=N (any host) → https://app.daf-yomi.com/mobile/DYItem.aspx?itemId=N
+    static func mobileItemUrlPath(_ urlPath:String) -> String
+    {
+        guard urlPath.range(of: "DYItemDetails.aspx", options: .caseInsensitive) != nil,
+              let components = URLComponents(string: urlPath),
+              let itemId = components.queryItems?.first(where: { $0.name.lowercased() == "itemid" })?.value,
+              !itemId.isEmpty
+        else { return urlPath }
+        return "https://app.daf-yomi.com/mobile/DYItem.aspx?itemId=\(itemId)"
+    }
+    
     // Load url to webview
     open func loadUrl(_ urlString : String, title:String?)
     {
-        var urlPath = urlString//.lowercased()
+        var urlPath = BTWebViewController.mobileItemUrlPath(urlString)
         urlPath = urlPath.replacingOccurrences(of: "questionary", with: "mobile/questionary")
         urlPath = urlPath.replacingOccurrences(of: "mobile/mobile/questionary", with: "mobile/questionary")
         
@@ -288,6 +300,17 @@ class BTWebViewController: MSBaseViewController, WKNavigationDelegate, WKUIDeleg
         
         if let urlPath = navigationAction.request.url?.absoluteString
         {
+            // a link inside a page to the desktop item page → open the mobile text page instead
+            let mobilePath = BTWebViewController.mobileItemUrlPath(urlPath)
+            if mobilePath != urlPath, navigationAction.targetFrame?.isMainFrame != false, let mobileUrl = URL(string: mobilePath)
+            {
+                decisionHandler(.cancel)
+                var request = URLRequest(url: mobileUrl)
+                request.addValue("https://app.daf-yomi.com", forHTTPHeaderField: "Referer")
+                webView.load(request)
+                return
+            }
+            
             if urlPath.hasPrefix("https://www.jgive")
                 || urlPath.hasPrefix("https://www.paypal")
             {

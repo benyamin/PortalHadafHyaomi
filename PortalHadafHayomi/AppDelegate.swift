@@ -255,7 +255,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Request push notification permission
         OneSignal.Notifications.requestPermission({ accepted in
             print("OneSignal notification permission accepted: \(accepted)")
-        }, fallbackToSettings: true)
+        }, fallbackToSettings: false)   // no "Open Settings" pop-up when notifications are off
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
